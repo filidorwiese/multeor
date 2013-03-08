@@ -1,0 +1,45 @@
+html, body {
+    overflow:hidden;
+    background-color:#bbb;
+}
+
+#background-layer {
+    position:absolute;
+    left:50%;
+    top:50%;
+    z-index:10;
+    margin-left:-500px;
+    margin-top:-400px;
+    width:1000px;
+    height:800px;
+    background:url(/images/spooks_bg.png) 0 0 repeat-x;
+}
+
+canvas#spook {
+    position:absolute;
+    left:50%;
+    top:50%;
+    z-index:100;
+    margin-left:-500px;
+    margin-top:-400px;
+    width:1000px;
+    height:800px;
+}
+
+#mist-layer {
+    position:absolute;
+    left:50%;
+    top:50%;
+    z-index:110;
+    margin-left:-500px;
+    margin-top:-400px;
+    width:1000px;
+    height:800px;
+    background:url(/images/spooks_mist.png) 0 0 repeat-x;
+    -webkit-transform:translate3d(0,0,0);
+}
+
+
+#debug {
+    color:red;
+}
