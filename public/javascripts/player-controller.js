@@ -1,10 +1,6 @@
 var socket = io.connect();
 var touchEnabled = "ontouchend" in document;
 
-// TODO: joystick
-// TODO: audio soundjs
-// TODO: color chooser?
-
 $(document).ready(function(){
     var viewportWidth = $(window).width();
     var viewportHeight = $(window).height();
@@ -13,55 +9,87 @@ $(document).ready(function(){
         x: 0,
         y: 0,
         z: 20,
-        maxSpeed: 20,
+        maxSpeedX: 20,
+        maxSpeedY: 10,
         maxFriction: 50,
         speedX: 0,
-        speedY: 0
+        speedY: 0,
+        joined: false,
+        waiting: true,
+        score: 0
     };
     var radialCounter = 0;
+
+    var playerWaitingtoJoin = function() {
+        //if (!player.waiting) { return false; }
+        var waitingInterval = setInterval(function(){
+            //console.log('emit i-am-player');
+            socket.emit('i-am-player');
+            player.waiting = false;
+        }, 1500);
+        
+        socket.on('game-joined', function(data){
+            //console.log('game-joined');
+            player.joined = true;
+            clearInterval(waitingInterval);
+            playerUpdate();
+        });
+        
+        socket.on('game-end', function(data){
+            console.log('game-end');
+            // TODO: audio effect, update DOM
+            player.score = data;
+
+            setTimeout(function(){
+                player.joined = false;
+                player.waiting = true;
+                player.score = 0;
+            });
+        });
+        
+        socket.on('update-score', function(data){
+            console.log('update-score');
+            // TODO: audio effect, update DOM
+            player.score = data;
+        });
+    }
     
     var playerUpdate = function() {
-        if (fresh) {
-            
-            //var maxSpeed = ((player.maxSpeed / 100) * (player.z * .5));
-            player.speedX = (((player.maxSpeed / 100) * player.x) / 100) * player.z;
-            player.speedY = (((player.maxSpeed / 100) * player.y) / 100) * player.z;
+        if (!player.joined) {
+            playerWaitingtoJoin();
+            return false;
+        }
 
-            //console.log(maxSpeed);
+        //console.log('player-update');
+        if (fresh) {
+
+            // X/Y en Z besturing
+            //player.z += 20;
+            player.speedX = (((player.maxSpeedX / 100) * player.x) / 100) * player.z;
+            player.speedY = (((player.maxSpeedY / 100) * player.y) / 100) * player.z;
+            
+            // X is gelijk aan Z besturing
+            //player.x = player.z;
+            //player.speedX = ((player.maxSpeedX / 100) * player.x) - (player.maxSpeedX / 2);
+            //player.speedY = ((player.maxSpeedY / 100) * player.y);
+            
             console.log({x: player.speedX, y: player.speedY, z: player.z});
             
-            //fresh = false;
         } else {
             var maxFriction = (player.maxFriction / 100) * player.z;
             player.speedX -= maxFriction / player.z;
-            //console.log(maxFriction + ' ' + player.speedX);
-            //player.speedY -= (player.friction / 100 * player.y);
         }
         
-            
-            socket.emit('player-update', {x: player.speedX, y: player.speedY, z: player.z});
-        /*
-        if (fresh) {
-            
-            socket.emit('player-update', {x: player.x, y: player.y, z: player.z});
-            fresh = false;
-        } else {
-            if (player.x > 0) {
-                player.x -= 1;
-            }
-
-            radialCounter += .2;
-            if (radialCounter > 360) { radialCounter = 0; }
-            player.y += (Math.cos(radialCounter));
-
-            $('#debug').html(player.y);
-
-            socket.emit('player-update', {x: player.x, y: player.y, z: player.z});
-
-        }*/
+        socket.emit('player-update', {x: player.speedX, y: player.speedY, z: player.z});
+        
         setTimeout(playerUpdate, 60);
     };
 
+    /*
+    $('body').on('touchstart mousedown', function(event) {
+        playerWaitingtoJoin();
+    });*/
+    
     $('#compass').on('touchmove mousemove', function(event) {
         event.preventDefault();
         if (touchEnabled) {
@@ -70,7 +98,6 @@ $(document).ready(function(){
         } else {
             player.x = Math.floor((event.offsetX / $(this).width()) * 200) - 100;
             player.y = Math.floor((event.offsetY / $(this).height()) * 200) - 100;
-            //console.log(player.x + ', ' + player.y);
         }
         fresh = true;
     });
@@ -86,9 +113,8 @@ $(document).ready(function(){
             player.z = 100 - Math.floor((event.offsetY / $(this).height()) * 100);
         }
         player.z += 20;
-        console.log(player.z);
         fresh = true;
     });
 
-    playerUpdate();
+    playerWaitingtoJoin();
 });

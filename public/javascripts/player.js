@@ -10,7 +10,8 @@ var Player = function(viewportWidth, viewportHeight){
         minZ: 20,
         maxZ: 120,
         color: [],
-        lastMoves: []
+        lastMoves: [],
+        score: 0
     };
 }
 
@@ -61,4 +62,8 @@ Player.prototype.updateProps = function(x, y, z) {
     
     this.props.lastMoves.push([this.props.x, this.props.y]); //, playerProps.z
     if (this.props.lastMoves.length > 10) { this.props.lastMoves.shift(); }
+}
+
+Player.prototype.updateScore = function(points) {
+    player.score += points;
 }

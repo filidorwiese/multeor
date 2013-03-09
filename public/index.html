@@ -1,16 +1,26 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Spooky</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title>Vlammen</title>
+    <link rel='stylesheet' href='/stylesheets/player-controller.css' />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1">
 </head>
 
 <body>
-
-    <h1>Title screen</h1>
-
-    <a href="/game/"><button>Game view</button></a>
-    <a href="/player/"><button>Controller</button></a>
+    <div id="controller">
+        <div id="left">
+            <div id="compass"></div>
+        </div>
+        <div id="right">
+            <div id="slider"></div>
+        </div>
+    </div>
+    
+    <script src="/socket.io/socket.io.js" type="text/javascript"></script>
+    <script src="/javascripts/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="/javascripts/requestAnimationFrame.js" type="text/javascript"></script>
+    <script src="/javascripts/player-controller.js" type="text/javascript"></script>
     
 </body>
 </html>
