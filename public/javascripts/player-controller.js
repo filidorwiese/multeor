@@ -15,17 +15,15 @@ $(document).ready(function(){
         speedX: 0,
         speedY: 0,
         joined: false,
-        waiting: true,
         score: 0
     };
     var radialCounter = 0;
 
     var playerWaitingtoJoin = function() {
-        //if (!player.waiting) { return false; }
         var waitingInterval = setInterval(function(){
             //console.log('emit i-am-player');
             socket.emit('i-am-player');
-            player.waiting = false;
+            $('#score').html('Waiting to join game');
         }, 1500);
         
         socket.on('game-joined', function(data){
@@ -33,6 +31,7 @@ $(document).ready(function(){
             player.joined = true;
             clearInterval(waitingInterval);
             playerUpdate();
+            $('#score').html(0);
         });
         
         socket.on('game-end', function(data){
@@ -40,11 +39,8 @@ $(document).ready(function(){
             // TODO: audio effect, update DOM
             player.score = data;
 
-            setTimeout(function(){
-                player.joined = false;
-                player.waiting = true;
-                player.score = 0;
-            });
+            player.joined = false;
+            player.score = 0;
         });
         
         socket.on('update-score', function(data){
@@ -59,8 +55,6 @@ $(document).ready(function(){
             playerWaitingtoJoin();
             return false;
         }
-
-        //console.log('player-update');
         if (fresh) {
 
             // X/Y en Z besturing
@@ -73,7 +67,7 @@ $(document).ready(function(){
             //player.speedX = ((player.maxSpeedX / 100) * player.x) - (player.maxSpeedX / 2);
             //player.speedY = ((player.maxSpeedY / 100) * player.y);
             
-            console.log({x: player.speedX, y: player.speedY, z: player.z});
+            //console.log({x: player.speedX, y: player.speedY, z: player.z});
             
         } else {
             var maxFriction = (player.maxFriction / 100) * player.z;
@@ -85,36 +79,81 @@ $(document).ready(function(){
         setTimeout(playerUpdate, 60);
     };
 
-    /*
-    $('body').on('touchstart mousedown', function(event) {
-        playerWaitingtoJoin();
-    });*/
-    
-    $('#compass').on('touchmove mousemove', function(event) {
+    $('#leftControls').on('touchmove mousemove', function(event) {
         event.preventDefault();
+        
+		var controls = $(this);
+		var radius = controls.width()/2;
+        
         if (touchEnabled) {
             player.x = Math.floor(((event.originalEvent.targetTouches[0].clientX - $(this).offset().left) / $(this).width()) * 200) - 100;
             player.y = Math.floor(((event.originalEvent.targetTouches[0].clientY - $(this).offset().top) / $(this).height()) * 200) - 100;
+            
+            var Jx = (event.originalEvent.targetTouches[0].clientX - $(this).offset().left);
+            var Jy = (event.originalEvent.targetTouches[0].clientY - $(this).offset().top);
         } else {
             player.x = Math.floor((event.offsetX / $(this).width()) * 200) - 100;
             player.y = Math.floor((event.offsetY / $(this).height()) * 200) - 100;
+            
+            var Jx = event.pageX - controls.offset().left;
+            var Jy = event.pageY - controls.offset().top;
         }
+        
+		var degrees = toDegrees(Jx, Jy, radius);
+		$('#joystick').width(degrees.length).css('-webkit-transform', 'rotate('+degrees.deg+'deg)');
+        
         fresh = true;
     });
-    $('#compass').on('touchend mouseup', function(event) {
+    $('#leftControls').on('touchend mouseup', function(event) {
+		var controls = $(this);
+		
+		$('#joystick').animate({'width': 5}, 400);
         fresh = false;
     });
-    $('#slider').on('touchmove mousedown', function(event) {
+    $('#rightControls').on('touchmove mousedown', function(event) {
         event.preventDefault();
+
+        var controls = $(this);
         
         if (touchEnabled) {
             player.z = 100 - Math.floor(((event.originalEvent.targetTouches[0].clientY - $(this).offset().top) / $(this).height()) * 100);
+            var Jy = (event.originalEvent.targetTouches[0].clientY - $(this).offset().top);
         } else {
             player.z = 100 - Math.floor((event.offsetY / $(this).height()) * 100);
+            var Jy = event.pageY - controls.offset().top;
         }
         player.z += 20;
+        
+		if(Jy < 22) { Jy = 22 }
+		if(Jy > 128) { Jy = 128 }
+		$('#slider').css('top', Jy+'px');
         fresh = true;
     });
 
     playerWaitingtoJoin();
 });
+
+
+
+function toDegrees(x, y, radius){
+	
+	var degrees = 0;
+	var overstaand = y - radius;
+	var aanliggend = x -radius;
+	var schuin = Math.sqrt(Math.pow(overstaand,2) + Math.pow(aanliggend,2));
+	var sinJ = overstaand/schuin;
+	var cosJ = aanliggend/schuin;
+
+	degrees = Math.asin(sinJ)*180/Math.PI;
+	if(aanliggend < 0) {
+		degrees = 180 - degrees;
+	}
+
+	if(schuin > radius) {
+		schuin = radius;
+		overstaand = cosJ * radius;
+		aanliggend = sinJ * radius;
+	}
+
+	return {'deg': degrees, 'length': schuin};
+}

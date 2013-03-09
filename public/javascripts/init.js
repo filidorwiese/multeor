@@ -7,6 +7,7 @@ var fpsCounter = 0;
 var previousTimer = 0;
 var players = [];
 var game = new Game();
+var getReadyInterval = false;
     
 $(document).ready(function(){
 
@@ -20,6 +21,7 @@ $(document).ready(function(){
     });
 
     socket.on('removed-player', function(data){
+        if (typeof data.number == 'undefined') { return false; }
         console.log('player ' + data.number + ' left the game');
         delete players[data.number];
     });
@@ -35,7 +37,7 @@ $(document).ready(function(){
         console.log('game-start');
         var countDown = 10;
         game.started = true;
-        var getReadyInterval = setInterval(function(){
+        getReadyInterval = setInterval(function(){
             if (!game.started) { clearInterval(getReadyInterval); return false; }
             
             if (countDown < 1) {
@@ -55,18 +57,19 @@ $(document).ready(function(){
     socket.on('game-end', function(data){
         game.message('Game ended!');
         game.started = false;
+        clearInterval(getReadyInterval);
         
         // TODO: update scores to players
         
         // TODO: restart game
         setTimeout(function(){
             game.message('');
-            game.message('Go to http://10.0.0.10 on open Vlammen WiFi to join');
+            game.message('Go to http://10.0.0.10 on "Vlammen" WiFi to join');
         }, 10000);
     });
 
     // TODO: message "go to http://10.0.0.10 to join"
-    game.message('Go to http://10.0.0.10 on open Vlammen WiFi to join');
+    game.message('Go to http://10.0.0.10 on "Vlammen" WiFi to join');
     
     var previousTime = 0;
     (function animloop(time){

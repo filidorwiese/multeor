@@ -8,55 +8,67 @@
     font-weight: normal;
     font-style: normal;
 }
-
 html, body {
-    width:100%;
-    height:100%;
-    overflow:hidden;
+    background: #364a4a;
     padding:0;
     margin:0;
 }
 
-#left {
-    position:absolute;
-    background-color:yellow;
-    width:66%;
-    height:100%;
+#controller {
+    position: absolute;
+    text-align: center;
+    width: 100%;
 }
 
-#compass {
-    position:absolute;
-    top:25%;
-    left:25%;
-    width:50%;
-    height:50%;
-    border:1px solid lime;
+@media screen and (orientation: portrait) {
+    #controller {
+        display:none;
+    }
 }
 
-#right {
-    position:absolute;
-    background-color:pink;
-    right:0;
-    width:34%;
-    height:100%;
+#leftControls {
+    width: 297px;
+    height: 297px;
+    background: url(../images/controller_compasroos.png) center center no-repeat;
+    float: left;
+    position: relative;
+    margin-top:-40px;
+}
+
+#joystick {
+    width: 130px;
+    height: 41px;
+    background: url(../images/controller_compaspijl.png) right top no-repeat;
+    position: absolute;
+    top: 129px;
+    left: 149px;
+    -webkit-transform: rotate(180deg); /* Safari and Chrome */
+    -webkit-transform-origin:0% 50%; /* Safari and Chrome */
+}
+
+#rightControls {
+    width: 69px;
+    height: 218px;
+    float: right;
+    background: url(../images/controller_diepteslider.png) left top no-repeat;
+    margin-right: 50px;
+    margin-top: 20px;
+    position: relative;
 }
 
 #slider {
-    position:absolute;
-    top:25%;
-    left:25%;
-    width:50%;
-    height:50%;
-    border:1px solid lime;
+    width: 69px;
+    height: 21px;
+    position: absolute;
+    top: 22px;
+    background: url(../images/controller_dieptesliderknop.png) left top no-repeat;  
 }
 
-#debug {
-    display:none;
-    z-index:100;
-    position:absolute;
-    top:10%;
-    left:10%;
-    color:lime;
-    width:200px;
-    height:200px;
+#score {
+    display: block;
+    font-family: 'ablas_altbold';
+    font-size: 2em;
+    color: white;
+    margin-top:10px;
+    margin-left:100px;
 }
