@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="us">
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style>
+	#grid {
+		height:600px;
+		position:relative;
+		width:1000px;
+		background-color:#DDD;
+		background-repeat:no-repeat;
+		float:left;
+	}
+	
+	#output {
+		float:left;
+		height:600px;
+		margin-left:4px;
+		width:200px;
+	}
+	</style>
+</head>
+<body>
+<div>
+	<label for="backgrounds">Backgrounds:</label>
+	<select id="backgrounds">
+	</select>
+	<input id="setBackground" type="button" value="set" />
+	|
+	<label for="sprites">Sprites:</label>
+	<select id="sprites">
+	</select>
+	<input id="addSprite" type="button" value="add" />
+	|
+	<input id="prevTile" type="button" value="prev tile" />
+	<input id="nextTile" type="button" value="next tile" />
+	|
+	<input id="export" type="button" value="export" />
+	<input id="import" type="button" value="import" />
+<div>
+	<div id="grid"></div>
+	<textarea id="output"></textarea>
+</div>
+<script src="js/jquery-1.9.1.js"></script>
+<script src="js/jquery-ui-1.10.1.custom.js"></script>
+<script>
+
+$.fn.moveUp = function() {
+    $.each(this, function() {
+         $(this).after($(this).prev());   
+    });
+};
+
+$.fn.moveDown = function() {
+    $.each(this, function() {
+         $(this).before($(this).next());   
+    });
+};
+
+var sprites = [];
+var selectedSprite;
+var tiles = [ { sprites: []  } ];
+var currentTileIndex = 0;
+
+function setBackground(path) {
+	$('#grid').css('background-image', 'url(' + path + ')');
+	tiles[currentTileIndex].background = path;
+	$('#backgrounds').val(path);
+}
+
+function dragSpriteStop(event, ui) {
+	var id = $(event.target).data('id');
+	
+	tiles[currentTileIndex].sprites[id] = {
+		path: tiles[currentTileIndex].sprites[id].path,
+		top: ui.position.top,
+		left: ui.position.left
+	};
+}
+
+function dragSpriteStart(event, ui) {
+	selectedSprite = $(event.target);
+}
+
+function getOutput() {
+	var resultTiles = [];
+	
+	for (tile in tiles) {
+		var resultSprites = [];
+		
+		for (sprite in tiles[tile].sprites) {
+			resultSprites.push({
+				path: tiles[tile].sprites[sprite].path,
+				top: tiles[tile].sprites[sprite].top,
+				left: tiles[tile].sprites[sprite].left,
+			});
+		}
+		
+		resultTiles.push({
+			background: tiles[tile].background,
+			sprites: resultSprites
+		});
+	}
+	
+	return JSON.stringify(resultTiles);
+}
+
+function removeSprite(sprite) {
+	delete tiles[currentTileIndex].sprites[sprite.id];
+	sprite.remove();
+}
+
+function addSprite(id, path, top, left) {
+	var img = new Image();
+	var sprite = $('<div style="position:absolute;top:' + top + ';left:' + left + ';"></div>')
+		.data('id', id)
+		.data('path', path);
+		
+	img.onload = function() {
+		sprite.width(img.width/2).height(img.height)
+			.css('background-image', 'url(' + img.src + ')')
+			.css('top', top)
+			.css('left', left);
+	};
+	
+	img.src = path;
+	
+	tiles[currentTileIndex].sprites[id] = {
+		path: path,
+		top: top,
+		left: left
+	};
+	
+	sprite.draggable( { start: dragSpriteStart, stop: dragSpriteStop } ).appendTo($('#grid'));
+}
+
+$('#setBackground').on('click', function(event) {
+	setBackground($('#backgrounds').val());
+});
+
+$('#export').on('click', function(event) {
+	$('#output').val(getOutput());
+});
+
+$('#import').on('click', function(event) {
+	tiles = [];
+
+	var resultTiles = JSON.parse($('#output').val());
+	
+	for	(tile in resultTiles) {
+		var sprites = [];
+		
+		for(sprite in resultTiles[tile].sprites) {
+			sprites[Math.random()] = {
+				path: resultTiles[tile].sprites[sprite].path,
+				top: resultTiles[tile].sprites[sprite].top,
+				left: resultTiles[tile].sprites[sprite].left,
+			};
+		}
+		
+		tiles.push({
+			background: resultTiles[tile].background,
+			sprites: sprites
+		});
+	}
+	
+	currentTileIndex = 0;
+	
+	if(tiles.length == 0) {
+		tiles.push( { sprites: []  } );
+	}
+	
+	renderTile(tiles[currentTileIndex]);
+});
+
+function renderTile(tile) {
+	$('#grid').children().remove();
+	setBackground(tile.background);
+	
+	for(sprite in tile.sprites) {
+		addSprite(sprite, tile.sprites[sprite].path, tile.sprites[sprite].top, tile.sprites[sprite].left);
+	}
+}
+
+$('#nextTile').on('click', function(event) {
+	currentTileIndex++;
+	
+	if(tiles.length == currentTileIndex) {
+		tiles.push( { sprites: []  } );
+	}
+	
+	renderTile(tiles[currentTileIndex]);
+});
+
+$('#prevTile').on('click', function(event) {
+	if (currentTileIndex > 0) {
+		currentTileIndex--;
+		
+		renderTile(tiles[currentTileIndex]);
+	}
+});
+
+$('#addSprite').on('click', function(event){
+	var id = Math.random();
+	var path = $('#sprites').val();
+	
+	addSprite(id, path, 0, 0);
+});
+
+function setSprites() {
+	tiles[currentTileIndex].sprites = [];
+
+	$.each($('#grid').children(), function(key, object) {
+		var sprite = $(object);
+	
+		tiles[currentTileIndex].sprites[sprite.data('id')] = {
+			path: sprite.data('path'),
+			top: sprite.css('top'),
+			left: sprite.css('left')
+		};
+	});
+}
+
+$('body').on('keydown', function (event) {
+	if (selectedSprite) {
+		if (event.which == 109) { // -
+			selectedSprite.moveDown();
+			setSprites();
+		}
+		else if (event.which == 107) { // +
+			selectedSprite.moveUp();
+			setSprites();
+		}
+		else if (event.which == 46) { // Del
+			removeSprite(selectedSprite);
+		}
+	}
+});
+
+$(document).ready(function() {
+	for(i = 1; i <= 19; i++) {
+		var path = '/images/sprites/gebouw-0' + i + '.png';
+	
+		$('#sprites').append('<option value="' + path + '">' + path + '</option>');
+	}
+	
+	for(i = 1; i <= 19; i++) {
+		var path1 = '/images/maps/map-0' + i + '.png';
+		var path2 = '/images/maps/map_plaatsen-0' + i + '.png';
+	
+		$('#backgrounds').append('<option value="' + path1 + '">' + path1 + '</option>');
+		$('#backgrounds').append('<option value="' + path2 + '">' + path2 + '</option>');
+	}
+	
+
+
+	setBackground($('#backgrounds').val());
+});
+
+</script>
+</body>
+</html>

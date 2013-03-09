@@ -29,7 +29,7 @@ html, body {
 #leftControls {
     width: 297px;
     height: 297px;
-    background: url(../images/controller_compasroos.png) center center no-repeat;
+    background: url(../images/assets/controller_compasroos.png) center center no-repeat;
     float: left;
     position: relative;
     margin-top:-40px;
@@ -38,7 +38,7 @@ html, body {
 #joystick {
     width: 130px;
     height: 41px;
-    background: url(../images/controller_compaspijl.png) right top no-repeat;
+    background: url(../images/assets/controller_compaspijl.png) right top no-repeat;
     position: absolute;
     top: 129px;
     left: 149px;
@@ -50,7 +50,7 @@ html, body {
     width: 69px;
     height: 218px;
     float: right;
-    background: url(../images/controller_diepteslider.png) left top no-repeat;
+    background: url(../images/assets/controller_diepteslider.png) left top no-repeat;
     margin-right: 50px;
     margin-top: 20px;
     position: relative;
@@ -61,7 +61,7 @@ html, body {
     height: 21px;
     position: absolute;
     top: 22px;
-    background: url(../images/controller_dieptesliderknop.png) left top no-repeat;  
+    background: url(../images/assets/controller_dieptesliderknop.png) left top no-repeat;  
 }
 
 #score {
