@@ -1,8 +1,14 @@
-var Player = function(){
+var Player = function(viewportWidth, viewportHeight){
     this.props = {
-        x: 280,
-        y: 230,
+        x: 0,
+        y: 0,
         z: 0,
+        minX: 60,
+        maxX: viewportWidth - 180,
+        minY: 60,
+        maxY: viewportHeight - 60,
+        minZ: 20,
+        maxZ: 120,
         color: [],
         lastMoves: []
     };
@@ -35,3 +41,24 @@ Player.prototype.draw = function(context) {
         // TODO: emotie sprite inladen, tekenen en schalen
     }    
 };
+
+Player.prototype.updateProps = function(x, y, z) {
+    //console.log(x + ' ' + y + ' ' + z);
+    this.props.x += x;
+    if (this.props.x > this.props.maxX) { this.props.x = this.props.maxX; }
+    if (this.props.x < this.props.minX) { this.props.x = this.props.minX; }
+
+    this.props.y += y;
+    if (this.props.y > this.props.maxY) { this.props.y = this.props.maxY; }
+    if (this.props.y < this.props.minY) { this.props.y = this.props.minY; }
+
+    this.props.z = z;
+    if (this.props.z > this.props.maxZ) { this.props.z = this.props.maxZ; }
+    if (this.props.z < this.props.minZ) { this.props.z = this.props.minZ; }
+
+
+    //console.log(this.props.x + ' ' + this.props.y + ' ' + this.props.z);
+    
+    this.props.lastMoves.push([this.props.x, this.props.y]); //, playerProps.z
+    if (this.props.lastMoves.length > 10) { this.props.lastMoves.shift(); }
+}

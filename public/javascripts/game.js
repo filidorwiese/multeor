@@ -1,7 +1,7 @@
 var socket = io.connect();
 var canvas = document.getElementById('spook');
     canvas.width = 1000;
-    canvas.height = 800;
+    canvas.height = 600;
 var context = document.getElementById('spook').getContext('2d');
 var fpsCounter = 0;
 var previousTimer = 0;
@@ -19,15 +19,16 @@ function render(time){
 
 
     // Clear scherm
-    context.clearRect(0,0, 1000, 800);
+    context.clearRect(0,0, 1000, 600);
 
     // Herorder entities op basis van diepte
     var entities = [];
+    /*
     for (key in houses) {
         if (houses[key].props.loaded) {
             entities[houses[key].props.z] = houses[key];
         }
-    }
+    }*/
     for(key in players) {
         var newKey = players[key].props.z;
         if (typeof entities[newKey] != 'undefined') { newKey++; }
@@ -69,7 +70,7 @@ $(document).ready(function(){
     
     socket.on('new-player', function(data){
         console.log('player ' + data.number + ' entered game');
-        players[data.number] = new Player();
+        players[data.number] = new Player(canvas.width, canvas.height);
         var playerProps = players[data.number].props;
         playerProps.color = data.color;
     });
@@ -83,17 +84,11 @@ $(document).ready(function(){
         if (typeof players[data.number] == 'undefined') {
             return;
         }
-        var playerProps = players[data.number].props;
-        playerProps.x = (canvas.width / 100) * data.x;
-        playerProps.y = (canvas.height / 100) * data.y;
-        playerProps.z = data.z + 20;
-        
-        playerProps.lastMoves.push([playerProps.x, playerProps.y]); //, playerProps.z
-        if (playerProps.lastMoves.length > 10) { playerProps.lastMoves.shift(); }
+        players[data.number].updateProps(data.x, data.y, data.z);
     });
 
     // Huis laden
-    houses.push(new House('/images/gebouwlos_groot.png'));
+    //houses.push(new House('/images/gebouwlos_groot.png'));
     
     
     var previousTime = 0;
@@ -101,16 +96,6 @@ $(document).ready(function(){
     (function animloop(time){
         requestAnimationFrame(animloop);
         render(time);
-
-
-        // Mist
-        /*
-        if (time - previousTime > 50) {
-            mistPositionX -= 5;
-            if (mistPositionX < -5048) { mistPositionX = 0 }
-            $('#mist-layer').css({ backgroundPosition: mistPositionX + 'px 0' });
-            previousTime = time;
-        }*/
     })();
 
 });

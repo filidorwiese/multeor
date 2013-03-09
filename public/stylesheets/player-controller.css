@@ -9,16 +9,34 @@ html, body {
 #left {
     position:absolute;
     background-color:yellow;
-    width:50%;
+    width:66%;
     height:100%;
+}
+
+#compass {
+    position:absolute;
+    top:25%;
+    left:25%;
+    width:50%;
+    height:50%;
+    border:1px solid lime;
 }
 
 #right {
     position:absolute;
     background-color:pink;
     right:0;
-    width:50%;
+    width:34%;
     height:100%;
+}
+
+#slider {
+    position:absolute;
+    top:25%;
+    left:25%;
+    width:50%;
+    height:50%;
+    border:1px solid lime;
 }
 
 #debug {

@@ -9,10 +9,11 @@ html, body {
     top:50%;
     z-index:10;
     margin-left:-500px;
-    margin-top:-400px;
+    margin-top:-300px;
     width:1000px;
-    height:800px;
-    background:url(/images/spooks_bg.png) 0 0 repeat-x;
+    height:600px;
+    /*background:url(/images/spooks_bg.png) 0 0 repeat-x;*/
+    background-color:#000;
 }
 
 canvas#spook {
@@ -21,20 +22,21 @@ canvas#spook {
     top:50%;
     z-index:100;
     margin-left:-500px;
-    margin-top:-400px;
+    margin-top:-300px;
     width:1000px;
-    height:800px;
+    height:600px;
 }
 
 #mist-layer {
+    display:none;
     position:absolute;
     left:50%;
     top:50%;
     z-index:110;
     margin-left:-500px;
-    margin-top:-400px;
+    margin-top:-300px;
     width:1000px;
-    height:800px;
+    height:600px;
     background:url(/images/spooks_mist.png) 0 0 repeat-x;
     -webkit-transform:translate3d(0,0,0);
 }
