@@ -37,62 +37,17 @@ $(document).ready(function(){
 
     socket.on('game-countdown', function(data){
         console.log('game-countdown');
-        var countDown = 10;
-        getReadyInterval = setInterval(function(){
-            //if (game.props.started) { clearInterval(getReadyInterval); return false; }
-            
-            if (countDown < 1) {
-                game.message('GO!');
-                setTimeout(function(){
-                    game.message('');
-                    game.props.started = true;
-                }, 1000);
-                clearInterval(getReadyInterval);
-            } else {
-                game.message('Game starting in ' + countDown + ' seconds, get ready...');
-                countDown--;
-            }
-        }, 1000);
+        game.startGame();
     });
     
-    socket.on('game-start', function(data){
-        console.log('game-start');
-        
-    });
-
     socket.on('game-end', function(data){
-        game.message('Game ended!');
-        game.props.started = false;
-        clearInterval(getReadyInterval);
-        
-        // TODO: update scores to players
-        
-        // TODO: restart game
-        setTimeout(function(){
-            game.message('');
-            game.message('Go to http://10.0.0.10 on "Vlammen" WiFi to join');
-        }, 10000);
+        game.endGame();
     });
     
-    game.message('Go to http://10.0.0.10 on "Vlammen" WiFi to join');
-
     var previousTime = 0;
     (function animloop(time){
 
-        if (!game.props.started) {
-            if (game.props.imagesLoaded) {
-                //game.message('Go to http://10.0.0.10 on "Vlammen" WiFi to join');
-            } else {
-                game.message('Loading');
-            }
-        }
-        
         requestAnimationFrame(animloop);
         if (game) { game.tick(time); }
     })();
-
-
-    var world = [
-        []
-    ];
 });

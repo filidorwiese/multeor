@@ -10,8 +10,8 @@ $(document).ready(function(){
         y: 0,
         z: 20,
         maxSpeedX: 20,
-        maxSpeedY: 10,
-        maxFriction: 50,
+        maxSpeedY: 30,
+        maxFriction: 80,
         speedX: 0,
         speedY: 0,
         joined: false,
@@ -39,14 +39,18 @@ $(document).ready(function(){
             // TODO: audio effect, update DOM
             player.score = data;
 
-            player.joined = false;
-            player.score = 0;
+            setTimeout(function(){
+                player.joined = false;
+                player.score = 0;
+            }, 5000);
         });
         
         socket.on('update-score', function(data){
             console.log('update-score');
             // TODO: audio effect, update DOM
-            player.score = data;
+            $(window).trigger('destroy');
+            player.score += data.points;
+            $('#score').html(player.score);
         });
     }
     

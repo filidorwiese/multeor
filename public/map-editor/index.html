@@ -34,6 +34,7 @@
 	<input id="addSprite" type="button" value="add" />
 	|
 	<input id="prevTile" type="button" value="prev tile" />
+    <span id="tileIndexLabel">1</span>
 	<input id="nextTile" type="button" value="next tile" />
 	|
 	<input id="export" type="button" value="export" />
@@ -90,7 +91,14 @@ function getOutput() {
 		var resultSprites = [];
 		
 		for (sprite in tiles[tile].sprites) {
+            
+            var id = 'xxxxxxxxxxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+                return v.toString(16);
+            });
+            
 			resultSprites.push({
+				id: id,
 				path: tiles[tile].sprites[sprite].path,
 				top: tiles[tile].sprites[sprite].top,
 				left: tiles[tile].sprites[sprite].left,
@@ -184,19 +192,23 @@ function renderTile(tile) {
 }
 
 $('#nextTile').on('click', function(event) {
-	currentTileIndex++;
-	
-	if(tiles.length == currentTileIndex) {
+    if (currentTileIndex < 59) {
+        currentTileIndex++;
+        $('#tileIndexLabel').html(currentTileIndex+1);
+
+        if(tiles.length == currentTileIndex) {
 		tiles.push( { sprites: []  } );
 	}
 	
-	renderTile(tiles[currentTileIndex]);
+        renderTile(tiles[currentTileIndex]);
+    }
+	
 });
 
 $('#prevTile').on('click', function(event) {
 	if (currentTileIndex > 0) {
 		currentTileIndex--;
-		
+		$('#tileIndexLabel').html(currentTileIndex+1);
 		renderTile(tiles[currentTileIndex]);
 	}
 });
@@ -240,14 +252,18 @@ $('body').on('keydown', function (event) {
 
 $(document).ready(function() {
 	for(i = 1; i <= 19; i++) {
-		var path = '/images/sprites/gebouw-0' + i + '.png';
+        var str = '';
+        if(i < 10) { str = '0' };
+		var path = '/images/sprites/gebouw-' +str+ i + '.png';
 	
 		$('#sprites').append('<option value="' + path + '">' + path + '</option>');
 	}
 	
-	for(i = 1; i <= 19; i++) {
-		var path1 = '/images/maps/map-0' + i + '.png';
-		var path2 = '/images/maps/map_plaatsen-0' + i + '.png';
+	for(i = 1; i <= 60; i++) {
+        str = '';
+        if(i < 10) { str = '0' };
+		var path1 = '/images/maps/map-' +str+ i + '.png';
+		var path2 = '/images/maps/map_plaats-' +str+ i + '.png';
 	
 		$('#backgrounds').append('<option value="' + path1 + '">' + path1 + '</option>');
 		$('#backgrounds').append('<option value="' + path2 + '">' + path2 + '</option>');
