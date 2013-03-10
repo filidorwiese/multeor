@@ -58,7 +58,7 @@ Player.prototype.updateProps = function(x, y, z) {
     if (this.props.z < this.props.minZ) { this.props.z = this.props.minZ; }
 
 
-    //console.log(this.props.x + ' ' + this.props.y + ' ' + this.props.z);
+    console.log(this.props.x + ' ' + this.props.y + ' ' + this.props.z);
     
     this.props.lastMoves.push([this.props.x, this.props.y]); //, playerProps.z
     if (this.props.lastMoves.length > 10) { this.props.lastMoves.shift(); }

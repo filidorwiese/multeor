@@ -5,52 +5,69 @@ $(document).ready(function(){
     var viewportWidth = $(window).width();
     var viewportHeight = $(window).height();
     var fresh = true;
+    var waitingInterval = false;
     var player = {
         x: 0,
         y: 0,
         z: 20,
         maxSpeedX: 20,
-        maxSpeedY: 30,
+        maxSpeedY: 15,
         maxFriction: 80,
         speedX: 0,
         speedY: 0,
         joined: false,
         score: 0
     };
-    var radialCounter = 0;
-
-    var playerWaitingtoJoin = function() {
-        var waitingInterval = setInterval(function(){
-            //console.log('emit i-am-player');
-            socket.emit('i-am-player');
-            $('#score').html('Waiting to join game');
-        }, 1500);
-        
-        socket.on('game-joined', function(data){
-            //console.log('game-joined');
-            player.joined = true;
+    
+    socket.on('game-joined', function(data){
+        player.joined = true;
+        if (waitingInterval) {
             clearInterval(waitingInterval);
-            playerUpdate();
-            $('#score').html(0);
-        });
-        
-        socket.on('game-end', function(data){
-            console.log('game-end');
-            // TODO: audio effect, update DOM
-            player.score = data;
+        }
+        playerUpdate();
+        $('#score').html('Waiting for other players');
+    });
 
-            setTimeout(function(){
-                player.joined = false;
-                player.score = 0;
-            }, 5000);
-        });
+    socket.on('game-full', function(data){
+        $('#score').html('Unable to join');
+        if (waitingInterval) {
+            clearInterval(waitingInterval);
+        }
+    });
+    
+    socket.on('game-start', function(data){
+        console.log('game-start');
+        $('#score').html(0);
+    });
+    
+    socket.on('game-end', function(data){
+        console.log('game-end');
         
-        socket.on('update-score', function(data){
-            console.log('update-score');
-            // TODO: audio effect, update DOM
-            $(window).trigger('destroy');
-            player.score += data.points;
-            $('#score').html(player.score);
+        player.joined = false;
+
+        setTimeout(function(){
+            window.location.reload();
+        }, 5000);
+    });
+    
+    socket.on('update-score', function(data){
+        console.log('update-score');
+
+        // TODO: audio effect
+        $(window).trigger('destroy');
+        
+        player.score += data.points;
+        $('#score').html(player.score);
+    });
+    
+    var playerWaitingtoJoin = function() {
+        $('#score').html('Click to join game');
+        $('body').on('click touchstart', function(){
+            if (player.joined) { return false; }
+            waitingInterval = setInterval(function(){
+                console.log('emit i-am-player');
+                socket.emit('i-am-player');
+            }, 1500);
         });
     }
     
@@ -126,7 +143,7 @@ $(document).ready(function(){
             player.z = 100 - Math.floor((event.offsetY / $(this).height()) * 100);
             var Jy = event.pageY - controls.offset().top;
         }
-        player.z += 20;
+        //player.z += 10;
         
 		if(Jy < 22) { Jy = 22 }
 		if(Jy > 128) { Jy = 128 }

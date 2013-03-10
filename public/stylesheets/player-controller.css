@@ -21,6 +21,11 @@ html, body {
 }
 
 @media screen and (orientation: portrait) {
+    html, body {
+        width:100%; 
+        height:100%;
+        background:#364a4a url(../images/assets/controller_roteer1.png) center center no-repeat;
+    }
     #controller {
         display:none;
     }

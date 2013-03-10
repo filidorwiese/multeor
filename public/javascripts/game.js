@@ -180,6 +180,7 @@ Game.prototype.resetGame = function() {
     this.props.worldX = 0;
     this.props.started = false;
     this.message(this.props.defaultText);
+    this.props.destroyed = [];
 }
 
 Game.prototype.endGame = function(){
@@ -187,8 +188,6 @@ Game.prototype.endGame = function(){
     self.message('Game ended!');
     socket.emit('game-end');
     //clearInterval(getReadyInterval);
-    
-    // TODO: update scores to players
     
     setTimeout(function(){
         self.resetGame();
