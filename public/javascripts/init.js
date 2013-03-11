@@ -37,6 +37,7 @@ $(document).ready(function(){
 
     socket.on('game-countdown', function(data){
         console.log('game-countdown');
+        $(window).trigger('game-audio-start');
         game.startGame();
     });
     

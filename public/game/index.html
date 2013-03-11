@@ -11,7 +11,14 @@
         <canvas id="canvas"></canvas>
         <div id="debug"></div>
     </div>
-
+    <audio id="level" preload="auto">
+        <source src="/audio/level1.ogg">
+        <source src="/audio/level1.mp3">
+    </audio>
+    <audio id="explosion" preload="auto">
+        <source src="/audio/explosion.ogg">
+        <source src="/audio/explosion.mp3">
+    </audio>
     <script src="/socket.io/socket.io.js" type="text/javascript"></script>
     <script src="/javascripts/jquery-1.9.1.min.js" type="text/javascript"></script>
     <script src="/javascripts/requestAnimationFrame.js" type="text/javascript"></script>
@@ -19,6 +26,31 @@
     <script src="/javascripts/destroyable.js" type="text/javascript"></script>
     <script src="/javascripts/game.js" type="text/javascript"></script>
     <script src="/javascripts/init.js" type="text/javascript"></script>
+    <script>
+
+        $(document).ready(function(){
+            var song = document.getElementById('level');
+
+            $(window).on('game-audio-start', function(e){
+                var song = document.getElementById('level');
+                if(song.paused || song.currenTime == 0){
+                    song.play();        
+                }
+            });
+
+            /*$(window).on('audio-destroy', function(e){
+                var song = document.getElementById('explosion');
+                if(song.paused) {
+                    song.currentTime = 0;
+                    song.play();
+                } else {
+                    song.pause();
+                }
+                
+            });*/
+        });
+
+    </script>
     
 </body>
 </html>

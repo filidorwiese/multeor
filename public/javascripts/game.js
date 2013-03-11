@@ -184,6 +184,7 @@ Game.prototype.resetGame = function() {
 }
 
 Game.prototype.endGame = function(){
+    if (!this.props.started) return false;
     var self = this;
     self.message('Game ended!');
     socket.emit('game-end');

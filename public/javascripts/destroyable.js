@@ -26,25 +26,29 @@ Destroyable.prototype.draw = function(context, bgModulus) {
 };
 
 Destroyable.prototype.collides = function(players, bgModulus) {
+    if (this.props.destroyed) { return true; }
+     
+    var weirdnessOffset = 100;
+    var playerYPadding = 10;
+    var playerXPadding = 10;
+    var houseLeft = (this.props.tile == 1 ? this.props.x - bgModulus : this.props.x + bgModulus - 1000);
+    var houseRight = houseLeft + (this.props.image.width/2);
+    var houseTop = this.props.y;
+    var houseBottom = houseTop + this.props.image.height;
+    
     for(player in players) {
-        //FIXME: + players[player].props.z ?
-        //if (players[player].props.z < 120) {
-            if (this.props.tile == 1) {
-                if ((players[player].props.x > this.props.x - bgModulus -this.props.image.width) && (players[player].props.x < this.props.x - bgModulus + (this.props.image.width/2))) { // 
-                    if ((players[player].props.y < this.props.y+this.props.image.height) && (players[player].props.y > this.props.y)) {
-                        socket.emit('update-score', { player: player, points: 1});
-                        return true;
-                    }
-                }
-            } else {
-                if ((players[player].props.x > this.props.x + (bgModulus - 1000 - this.props.image.width)) && (players[player].props.x < (this.props.x + 1000 - bgModulus) + (this.props.image.width/2))) { // 
-                    if ((players[player].props.y < this.props.y+this.props.image.height) && (players[player].props.y > this.props.y)) {
-                        socket.emit('update-score', { player: player, points: 1});
-                        return true;
-                    }
-                }
+        var playerRight = players[player].props.x - playerXPadding;
+        var playerLeft = players[player].props.x + playerXPadding;
+        var playerTop = players[player].props.y + playerYPadding;
+        var playerBottom = players[player].props.y - playerYPadding;
+        
+        if (playerRight + weirdnessOffset >= houseLeft && playerLeft <= houseRight) {
+            if (playerTop >= houseTop && playerBottom <= houseBottom) {
+                socket.emit('update-score', { player: player, points: 1});
+                $(window).trigger('audio-destroy');
+                return true;
             }
-        //}
+        }
     }
     
     return false;

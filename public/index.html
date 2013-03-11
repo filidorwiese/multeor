@@ -19,35 +19,37 @@
         </div>
     </div>
     
-    
+    <!--
     <audio id="destroyAudio" preload="auto">
          <source src="audio/score.wav" type="audio/x-wav">
         <source src="audio/score.mp3" type='audio/mpeg; codecs="mp3"'>
-    </audio>
+    </audio>-->
 
 
     <script src="/socket.io/socket.io.js" type="text/javascript"></script>
     <script src="/javascripts/jquery-1.9.1.min.js" type="text/javascript"></script>
     <script src="/javascripts/requestAnimationFrame.js" type="text/javascript"></script>
     <script src="/javascripts/player-controller.js" type="text/javascript"></script>
-
+<!--
     <script>
 
         $(document).ready(function(){
 
             $(window).on('destroy', function(e){
                 var song = document.getElementById('destroyAudio');
-                console.log(song.ended);
-                 if(song.ended || song.currentTime == 0){
-                     song.play();    
-                 }
+                
+                //console.log('songEnded' + song.ended + 'currentTime: ' +song.currentTime == 0);
+                
+                if(song.ended || song.currentTime == 0){
+                    song.play();    
+                }
                 //$('#playBtn').trigger('click');
 
             });
             
         });
 
-        </script>
+        </script>-->
     
 </body>
 </html>

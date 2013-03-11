@@ -7,11 +7,12 @@ var Player = function(viewportWidth, viewportHeight){
         maxX: viewportWidth - 180,
         minY: 60,
         maxY: viewportHeight - 60,
-        minZ: 20,
+        minZ: 40,
         maxZ: 120,
         color: [],
         lastMoves: [],
-        score: 0
+        score: 0,
+        angle: 0
     };
 }
 
@@ -39,7 +40,22 @@ Player.prototype.draw = function(context) {
         context.bezierCurveTo(control1X, control1Y, control2X, control2Y, headX, headY);
         context.stroke();
 
-        // TODO: emotie sprite inladen, tekenen en schalen
+        // meteoor
+        var weirdnessOffset = 100;
+        var playerYPadding = 10;
+        var playerXPadding = 10;
+        var playerRight = players[player].props.x - playerXPadding;
+        var playerLeft = players[player].props.x + playerXPadding;
+        var playerTop = players[player].props.y + playerYPadding;
+        var playerBottom = players[player].props.y - playerYPadding;
+        context.save();
+        context.fillStyle = 'rgba(0,0,0,.6)';
+        context.translate(headX , headY );
+        this.props.angle++;
+        context.rotate((Math.PI / 180) * this.props.angle);
+        context.fillRect(10, 10, playerRight-playerLeft, playerBottom-playerTop);
+        context.restore();
+
     }    
 };
 
@@ -58,7 +74,7 @@ Player.prototype.updateProps = function(x, y, z) {
     if (this.props.z < this.props.minZ) { this.props.z = this.props.minZ; }
 
 
-    console.log(this.props.x + ' ' + this.props.y + ' ' + this.props.z);
+    //console.log(this.props.x + ' ' + this.props.y + ' ' + this.props.z);
     
     this.props.lastMoves.push([this.props.x, this.props.y]); //, playerProps.z
     if (this.props.lastMoves.length > 10) { this.props.lastMoves.shift(); }
