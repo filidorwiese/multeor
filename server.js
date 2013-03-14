@@ -18,7 +18,7 @@ var server = http.createServer(function(request, response) {
         filePath = 'public' + request.url;
     }
 
-    var absPath = './' + filePath;
+    var absPath = path.dirname(require.main.filename) + '/' + filePath;
     serveStatic(response, cache, absPath);
 });
 server.listen(80, function(){

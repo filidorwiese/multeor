@@ -17,19 +17,15 @@ indent_mode=2
 name=Vlammen
 base_path=/home/fili/Project/vlammen
 description=
+file_patterns=
 
 [long line marker]
 long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=4
-FILE_NAME_0=3774;Javascript;0;16;0;1;0;%2Fhome%2Ffili%2FProject%2Fvlammen%2Fpublic%2Fjavascripts%2Fgame.js;0;4
-FILE_NAME_1=205;Javascript;0;16;0;1;0;%2Fhome%2Ffili%2FProject%2Fvlammen%2Fpublic%2Fjavascripts%2Fdestroyable.js;0;4
-FILE_NAME_2=334;Javascript;0;16;0;1;0;%2Fhome%2Ffili%2FProject%2Fvlammen%2Fpublic%2Fjavascripts%2Fplayer.js;0;4
-FILE_NAME_3=2595;Javascript;0;16;0;1;0;%2Fhome%2Ffili%2FProject%2Fvlammen%2Flib%2Fgame-server.js;0;4
-FILE_NAME_4=2801;Javascript;0;16;0;1;0;%2Fhome%2Ffili%2FProject%2Fvlammen%2Fpublic%2Fjavascripts%2Fplayer-controller.js;0;4
-FILE_NAME_5=1773;HTML;0;16;0;1;0;%2Fhome%2Ffili%2FProject%2Fvlammen%2Fpublic%2Fgame%2Findex.html;0;4
+current_page=0
+FILE_NAME_0=0;Javascript;0;16;0;1;0;/home/fili/Project/vlammen/server.js;0;4
 
 [VTE]
 last_dir=/home/fili/Project/heinekeninternational.com
