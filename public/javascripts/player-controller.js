@@ -17,6 +17,12 @@ $(document).ready(function(){
         joined: false,
         score: 0
     };
+    var playerId = Math.floor((Math.random() * 100000) + 100000);
+    var gameCode = parseInt(sessionStorage.getItem('game-code'), 10);
+    if (isNaN(gameCode) || gameCode < 100000 || gameCode > 999999) {
+        sessionStorage.setItem('game-code', '');
+        document.location = '/';
+    }
     
     socket.on('game-joined', function(data){
         player.joined = true;
@@ -59,8 +65,8 @@ $(document).ready(function(){
         $('body').on('click touchstart', function(){
             var wait = function(){
                 if (player.joined) { return false; }
-                console.log('emit i-am-player');
-                socket.emit('i-am-player');
+                console.log('emit new-player');
+                socket.emit('new-player', {playerId: playerId, gameRoom: gameCode});
                 setTimeout(wait, 1500);
             };
             wait();

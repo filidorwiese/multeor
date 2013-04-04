@@ -1,3 +1,5 @@
+// FIXME: test if sessionStorage/canvas/websockets is supported?
+
 var socket = io.connect();
 var canvas = document.getElementById('canvas');
     canvas.width = 1000;
@@ -9,11 +11,15 @@ var players = [];
 var getReadyInterval = false;
 var game = false;
 
+// Set viewerId
+var viewerId = sessionStorage.getItem('viewer-id') || Math.floor((Math.random() * 100000) + 100000);
+sessionStorage.setItem('viewer-id', viewerId);
+
 $(document).ready(function(){
-
-    var game = new Game('/javascripts/world.json');
-
-    socket.emit('i-am-viewer');
+    
+    var game = new Game('/javascripts/world.json', viewerId);
+    
+    socket.emit('new-viewer', {gameRoom: viewerId});
     
     socket.on('new-player', function(data){
         console.log('player ' + data.number + ' entered game');
@@ -52,3 +58,4 @@ $(document).ready(function(){
         if (game) { game.tick(time); }
     })();
 });
+

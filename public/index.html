@@ -2,54 +2,45 @@
 <html lang="en">
 <head>
     <title>Vlammen</title>
-    <link rel='stylesheet' href='/stylesheets/player-controller.css' />
+    <link rel='stylesheet' href='/stylesheets/title-screen.css' />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1">
 </head>
 
 <body>
-    <div id="controller">
-        <div id="message"></div>
-        <div id="score"><span></span></div>
-        <div id="leftControls">
-            <div id="joystick"></div>
-        </div>
-        <div id="rightControls">
-            <div id="slider"></div>
-        </div>
+
+    <div id="desktop-container">
+        <h1>Title screen</h1>
+        <a href="/game/"><button>Start new game</button></a>
+        <a href="/controller/"><button>Join game as controller</button></a> <!-- Only on touch devices -->
+    </div>
+
+    <div id="mobile-container">
+        <h1>Title screen</h1>
+        <form action="/controller/">
+            <p><label>Insert code: <input type="number" name="game" value="" maxlength="6" placeholder="eg. 654321" /></label></p>
+            <p><button type="submit">Join Game</button></p>
+        </form>
+        <p>Tip: for best experience, put your browser in fullscreen mode or use the 'Add to home screen' feature</p>
     </div>
     
-    <!--
-    <audio id="destroyAudio" preload="auto">
-         <source src="audio/score.wav" type="audio/x-wav">
-        <source src="audio/score.mp3" type='audio/mpeg; codecs="mp3"'>
-    </audio>-->
-
-
-    <script src="/socket.io/socket.io.js" type="text/javascript"></script>
     <script src="/javascripts/jquery-1.9.1.min.js" type="text/javascript"></script>
-    <script src="/javascripts/requestAnimationFrame.js" type="text/javascript"></script>
-    <script src="/javascripts/player-controller.js" type="text/javascript"></script>
-<!--
     <script>
-
         $(document).ready(function(){
-
-            $(window).on('destroy', function(e){
-                var song = document.getElementById('destroyAudio');
-                
-                //console.log('songEnded' + song.ended + 'currentTime: ' +song.currentTime == 0);
-                
-                if(song.ended || song.currentTime == 0){
-                    song.play();    
+            $('form').on('submit', function(event){
+                event.preventDefault();
+                var gameCodeInput = $(this).find('input');
+                var gameCode = parseInt(gameCodeInput.val(), 10);
+                if (isNaN(gameCode) || gameCode < 100000 || gameCode > 999999) {
+                    alert('Not a valid code');
+                    gameCodeInput.val('').focus();
+                } else {
+                    sessionStorage.setItem('game-code', gameCode);
+                    document.location = '/controller/';
                 }
-                //$('#playBtn').trigger('click');
-
             });
-            
         });
-
-        </script>-->
+    </script>
     
 </body>
 </html>

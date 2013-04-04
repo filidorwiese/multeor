@@ -1,9 +1,9 @@
-var Game = function(worldFile){
+var Game = function(worldFile, code){
     var self = this;
     self.props = {
         started: false,
         message: false,
-        defaultText: 'Go to http://10.0.0.10 on "Vlammen" WiFi to join',
+        defaultText: 'Go to http://vlammen.fili.nl on your mobile and enter code ' + code + ' to join',
         imagesLoaded: false,
         preloadImages: [],
         images: [],
@@ -12,9 +12,8 @@ var Game = function(worldFile){
         worldSpeed: 10,
         destroyed: []
     };
-
-    $.ajaxSetup({ cache: true });
     
+    $.ajaxSetup({ cache: true });
     $.getJSON(worldFile, function(world){
         //console.log(world);
         self.props.world = world;
@@ -127,10 +126,15 @@ Game.prototype.tick = function(time) {
         context.font = '30px ablas_altbold';
         context.fillStyle = '#FFFFFF';
 
-        var metrics = context.measureText(this.props.message);
-        var _x = (canvas.width / 2) - (metrics.width / 2);
-        var _y = (canvas.height / 2);
-        context.fillText(this.props.message, _x, _y);
+        var _maxWidth = canvas.width / 1.7;
+        var _x = (canvas.width - _maxWidth) / 2;
+        var _y = (canvas.height / 2.2);
+        this.drawMessage(context, this.props.message, _x, _y, _maxWidth, 35);
+        
+        //var metrics = context.measureText(this.props.message);
+        //var _x = (canvas.width / 2) - (metrics.width / 2);
+        //var _y = (canvas.height / 2);
+        //context.fillText(this.props.message, _x, _y);
         context.restore();
     }
     
@@ -211,4 +215,25 @@ Game.prototype.startGame = function(){
             countDown--;
         }
     }, 1000);
+}
+
+Game.prototype.drawMessage = function(context, text, x, y, maxWidth, lineHeight) {
+    var words = text.split(' ');
+    var line = '';
+
+    for(var n = 0; n < words.length; n++) {
+      var testLine = line + words[n] + ' ';
+      var metrics = context.measureText(testLine);
+      var testWidth = metrics.width;
+      if(testWidth > maxWidth) {
+        context.fillText(line, x, y);
+        line = words[n] + ' ';
+        y += lineHeight;
+      }
+      else {
+        x = (canvas.width / 2) - (testWidth / 2);
+        line = testLine;
+      }
+    }
+    context.fillText(line, x, y);
 }
