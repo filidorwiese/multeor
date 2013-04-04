@@ -3,7 +3,7 @@ var Game = function(worldFile, code){
     self.props = {
         started: false,
         message: false,
-        defaultText: 'Go to http://vlammen.fili.nl on your mobile and enter code ' + code + ' to join',
+        defaultText: 'Go to http://www.multeor.com on your mobile and enter code ' + code + ' to join',
         imagesLoaded: false,
         preloadImages: [],
         images: [],

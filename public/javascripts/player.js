@@ -1,4 +1,4 @@
-var Player = function(viewportWidth, viewportHeight){
+var Player = function(viewportWidth, viewportHeight, color){
     this.props = {
         x: 0,
         y: 0,
@@ -9,7 +9,7 @@ var Player = function(viewportWidth, viewportHeight){
         maxY: viewportHeight - 60,
         minZ: 40,
         maxZ: 120,
-        color: [],
+        color: color,
         lastMoves: [],
         score: 0,
         angle: 0
@@ -29,7 +29,7 @@ Player.prototype.draw = function(context) {
         context.lineWidth = this.props.z;
         
         var lingrad2 = context.createLinearGradient(0,0, (headX - context.lineWidth / 2),0);
-        lingrad2.addColorStop(1, 'rgba(' + this.props.color[0] + ',' + this.props.color[1] + ',' + this.props.color[2] + ',0.8)');
+        lingrad2.addColorStop(1, this.props.color);
         lingrad2.addColorStop(0, 'rgba(0,0,0,0)');
         context.strokeStyle = lingrad2;
         //context.strokeStyle = 'rgba('+this.props.color[0]+','+this.props.color[1]+','+this.props.color[2]+', 1)';

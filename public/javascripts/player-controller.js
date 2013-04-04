@@ -1,4 +1,4 @@
-var socket = io.connect();
+var socket = io.connect(window.location.hostname + ':3333');
 var touchEnabled = "ontouchend" in document;
 
 $(document).ready(function(){
@@ -17,23 +17,14 @@ $(document).ready(function(){
         joined: false,
         score: 0
     };
-    var playerId = Math.floor((Math.random() * 100000) + 100000);
-    var gameCode = parseInt(sessionStorage.getItem('game-code'), 10);
-    if (isNaN(gameCode) || gameCode < 100000 || gameCode > 999999) {
-        sessionStorage.setItem('game-code', '');
-        document.location = '/';
-    }
-    
-    socket.on('game-joined', function(data){
-        player.joined = true;
-        playerUpdate();
-        $('#score').html('Waiting for other players');
-    });
+    var playerId = sessionStorage.getItem('player-id') || Math.floor((Math.random() * 10000) + 10000);
+    sessionStorage.setItem('player-id', playerId);
+    var gameRoom = parseInt(sessionStorage.getItem('game-room'), 10);
 
-    socket.on('game-full', function(data){
-        $('#score').html('Unable to join');
-    });
+    // Verify gameRoom
+    socket.emit('verify-game-room', {gameRoom: gameRoom});
     
+    /*
     socket.on('game-start', function(data){
         console.log('game-start');
         $('#score').html(0);
@@ -58,26 +49,43 @@ $(document).ready(function(){
         
         player.score += data.points;
         $('#score').html(player.score);
-    });
-    
+    });*/
+
+    //var joinTimeout = false;
     var playerWaitingtoJoin = function() {
+        player.joined = false;
         $('#score').html('Click to join game');
         $('body').on('click touchstart', function(){
-            var wait = function(){
-                if (player.joined) { return false; }
-                console.log('emit new-player');
-                socket.emit('new-player', {playerId: playerId, gameRoom: gameCode});
-                setTimeout(wait, 1500);
-            };
-            wait();
+            $('body').off('click touchstart');
+            socket.emit('new-player', {playerId: playerId, gameRoom: gameRoom});
         });
     }
+    playerWaitingtoJoin();
+    
+    socket.on('game-invalid', function(data){
+        sessionStorage.setItem('player-id', '');
+        sessionStorage.setItem('game-room', '');
+        alert('Sorry, this game ended');
+        document.location = '/';
+    });
+
+    socket.on('game-full', function(data){
+        $('#score').html('Too many players');
+    });
+
+    socket.on('player-joined', function(data){
+        player.joined = true;
+        playerUpdate();
+        $('#score').html('Waiting for other players');
+    });
+
+    socket.on('game-reset', function(data){
+        playerWaitingtoJoin();
+    });
+
     
     var playerUpdate = function() {
-        if (!player.joined) {
-            playerWaitingtoJoin();
-            return false;
-        }
+        if (!player.joined) { return false; }
         if (fresh) {
 
             // X/Y en Z besturing
@@ -153,7 +161,6 @@ $(document).ready(function(){
         fresh = true;
     });
 
-    playerWaitingtoJoin();
 });
 
 

@@ -1,7 +1,7 @@
 {
-    "name": "Spooky",
-    "version": "0.0.1",
-    "description": "Spooky test",
+    "name": "Multeor",
+    "version": "0.0.9",
+    "description": "Multeor",
     "dependencies": {
         "socket.io": "~0.9.6",
         "mime": "~1.2.7"
