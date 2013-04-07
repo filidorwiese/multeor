@@ -109,7 +109,7 @@ Game.prototype.tick = function(time) {
         entitiesOffset += tile2.sprites.length + 1;
     }
     
-    for(player in players) {
+    for (player in players) {
         var newKey = entitiesOffset + players[player].props.z;
         if (typeof entities[newKey] != 'undefined') { newKey++; }
         entities[newKey] = players[player];
@@ -185,36 +185,46 @@ Game.prototype.resetGame = function() {
     this.props.started = false;
     this.message(this.props.defaultText);
     this.props.destroyed = [];
+    
+    clearInterval(getReadyInterval);
 }
 
 Game.prototype.endGame = function(){
     if (!this.props.started) return false;
     var self = this;
     self.message('Game ended!');
-    socket.emit('game-end');
-    //clearInterval(getReadyInterval);
+    socket.emit('game-end', {viewerId: viewerId, gameRoom: gameRoom});
     
     setTimeout(function(){
         self.resetGame();
     }, 8000);
 }
 
-Game.prototype.startGame = function(){
+Game.prototype.getReady = function(){
     var self = this;
+    socket.emit('game-get-ready', {viewerId: viewerId, gameRoom: gameRoom});
+
     var countDown = 10;
     var getReadyInterval = setInterval(function(){
         if (countDown < 1) {
             self.message('GO!');
+            clearInterval(getReadyInterval);
             setTimeout(function(){
                 self.message('');
-                self.props.started = true;
+                self.startGame();
             }, 1000);
-            clearInterval(getReadyInterval);
         } else {
             self.message('Game starting in ' + countDown + ' seconds, get ready...');
             countDown--;
         }
     }, 1000);
+}
+
+Game.prototype.startGame = function(){
+    var self = this;
+
+    self.props.started = true;
+    socket.emit('game-start', {viewerId: viewerId, gameRoom: gameRoom});
 }
 
 Game.prototype.drawMessage = function(context, text, x, y, maxWidth, lineHeight) {

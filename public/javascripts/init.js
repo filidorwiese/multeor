@@ -10,9 +10,15 @@ var previousTimer = 0;
 var players = {};
 var getReadyInterval = false;
 var game = false;
-var playerColors = [ 'rgba(255,0,89,0.8)', 'rgba(255,255,255,0.8)',  'rgba(255,240,0,0.8)', 'rgba(204,0,255,0.8)',
-                     'rgba(0,255,105,0.8)', 'rgba(0,179,255,0.8)', 'rgba(255,144,0,0.8)' ];
-playerColors = shuffle(playerColors);
+var playerColors = shuffle([
+                    'rgba(255,0,89,0.8)',
+                    'rgba(255,255,255,0.8)',
+                    'rgba(255,240,0,0.8)',
+                    'rgba(204,0,255,0.8)',
+                    'rgba(0,255,105,0.8)',
+                    'rgba(0,179,255,0.8)',
+                    'rgba(255,144,0,0.8)'
+                    ]);
 
 // Set gameRoom
 var gameRoom = sessionStorage.getItem('game-room') || Math.floor((Math.random() * 10000) + 10000);
@@ -27,38 +33,11 @@ $(document).ready(function(){
     var game = new Game('/javascripts/world.json', gameRoom);
     
     socket.emit('new-viewer', {viewerId: viewerId, gameRoom: gameRoom});
-
-    /*
-    socket.on('new-player', function(data){
-        console.log('player ' + data.number + ' entered game');
-        players[data.number] = new Player(canvas.width, canvas.height);
-        var playerProps = players[data.number].props;
-        playerProps.color = data.color;
-    });
-
-    socket.on('removed-player', function(data){
-        if (typeof data != 'object') { return false; }
-        console.log('player ' + data.number + ' left the game');
-        delete players[data.number];
-    });
-    
-    socket.on('player-update', function(data){
-        if (typeof players[data.number] == 'undefined') {
-            return false;
-        }
-        players[data.number].updateProps(data.x, data.y, data.z);
-    });
-
-    socket.on('game-countdown', function(data){
-        console.log('game-countdown');
-        $(window).trigger('game-audio-start');
-        game.startGame();
-    });
     
     socket.on('game-end', function(data){
         game.endGame();
-    });*/
-
+    });
+    
     socket.on('game-invalid', function(data){
         sessionStorage.setItem('viewer-id', '');
         sessionStorage.setItem('game-room', '');
@@ -66,22 +45,47 @@ $(document).ready(function(){
         document.location = '/';
     });
 
+    socket.on('game-reset', function(data){
+        //document.location.reload();
+    });
+    
     socket.on('update-game-state', function(data){
         console.log(data);
 
         // Start countdown on first joined player
         var playerCount = 0;
-        for (var ii in data.joinedPlayers) { playerCount++; }
+        for (var ii in data.players) { playerCount++; }
         if (playerCount === 1) {
-            game.startGame();
+            game.getReady();
         }
         
         // Add player to players array
-        for (var ii in data.joinedPlayers) {
-            if (typeof players[ii] == 'undefined') {
-                players[ii] = new Player(canvas.width, canvas.height, playerColors.splice(0, 1)[0]);
+        for (var ii in data.players) {
+            var playerId = data.players[ii];
+            if (typeof players[playerId] == 'undefined') {
+                players[playerId] = new Player(canvas.width, canvas.height, playerColors.splice(0, 1)[0]);
             }
         }
+
+        // Check for deleted players
+        for (var oo in players) {
+            var playerStillExists = false;
+            for (var ii in data.players) {
+                if (data.players[ii] == oo) {
+                    playerStillExists = true;
+                }
+            }
+            if (!playerStillExists) {
+                delete players[oo];
+            }
+        }
+    });
+
+    socket.on('player-update', function(data){
+        if (typeof players[data.playerId] == 'undefined') {
+            return false;
+        }
+        players[data.playerId].updateProps(data.x, data.y, data.z);
     });
     
     var previousTime = 0;

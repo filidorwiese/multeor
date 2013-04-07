@@ -23,33 +23,6 @@ $(document).ready(function(){
 
     // Verify gameRoom
     socket.emit('verify-game-room', {gameRoom: gameRoom});
-    
-    /*
-    socket.on('game-start', function(data){
-        console.log('game-start');
-        $('#score').html(0);
-    });
-    
-    socket.on('game-end', function(data){
-        console.log('game-end');
-        
-        $('#score').html(player.score);
-
-        setTimeout(function(){
-            player.joined = false;
-            window.location.reload();
-        }, 10000);
-    });
-    
-    socket.on('update-score', function(data){
-        console.log('update-score');
-
-        // TODO: audio effect
-        //$(window).trigger('destroy');
-        
-        player.score += data.points;
-        $('#score').html(player.score);
-    });*/
 
     //var joinTimeout = false;
     var playerWaitingtoJoin = function() {
@@ -61,11 +34,14 @@ $(document).ready(function(){
         });
     }
     playerWaitingtoJoin();
+
+    socket.on('disconnect', function(){
+        document.location = '/';
+    });
     
     socket.on('game-invalid', function(data){
         sessionStorage.setItem('player-id', '');
         sessionStorage.setItem('game-room', '');
-        alert('Sorry, this game ended');
         document.location = '/';
     });
 
@@ -81,6 +57,37 @@ $(document).ready(function(){
 
     socket.on('game-reset', function(data){
         playerWaitingtoJoin();
+    });
+
+    socket.on('game-get-ready', function(data){
+        console.log('game-get-ready');
+        $('#score').html('Get ready');
+    });
+    
+    socket.on('game-start', function(data){
+        console.log('game-start');
+        $('#score').html(0);
+    });
+    
+    socket.on('game-end', function(data){
+        console.log('game-end');
+        
+        $('#score').html(player.score);
+        player.joined = false;
+
+        /*setTimeout(function(){
+            window.location.reload();
+        }, 10000);*/
+    });
+    
+    socket.on('update-score', function(data){
+        console.log('update-score');
+
+        // TODO: audio effect
+        //$(window).trigger('destroy');
+        
+        player.score += data.points;
+        $('#score').html(player.score);
     });
 
     
@@ -105,7 +112,7 @@ $(document).ready(function(){
             player.speedX -= maxFriction / player.z;
         }
         
-        socket.emit('player-update', {x: player.speedX, y: player.speedY, z: player.z});
+        socket.emit('player-update', {playerId: playerId, gameRoom: gameRoom, x: player.speedX, y: player.speedY, z: player.z});
         
         setTimeout(playerUpdate, 25);
     };
