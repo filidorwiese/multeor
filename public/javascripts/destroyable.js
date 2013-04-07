@@ -1,37 +1,28 @@
-var Destroyable = function(id, image, x, y, tile, destroyed){
+var Destroyable = function(id, image, x, y, destroyed){
     this.props = {
         id: id,
         image: image,
         x: x,
         y: y,
-        tile: tile,
         destroyed: destroyed
     };
 }
 
 Destroyable.prototype.draw = function(context, bgModulus) {
     if (this.props.destroyed) {
-        if (this.props.tile == 1) {
-            context.drawImage(this.props.image, this.props.image.width/2, 0, this.props.image.width/2, this.props.image.height, this.props.x - bgModulus, this.props.y, this.props.image.width/2, this.props.image.height);
-        } else {
-            context.drawImage(this.props.image, this.props.image.width/2, 0, this.props.image.width/2, this.props.image.height, (canvas.width - bgModulus) + this.props.x, this.props.y, this.props.image.width/2, this.props.image.height);
-        }
+		context.drawImage(this.props.image, this.props.image.width/2, 0, this.props.image.width/2, this.props.image.height, this.props.x, this.props.y, this.props.image.width/2, this.props.image.height);
     } else {
-        if (this.props.tile == 1) {
-            context.drawImage(this.props.image, 0, 0, this.props.image.width/2, this.props.image.height, this.props.x - bgModulus, this.props.y, this.props.image.width/2, this.props.image.height);
-        } else {
-            context.drawImage(this.props.image, 0, 0, this.props.image.width/2, this.props.image.height, (canvas.width - bgModulus) + this.props.x, this.props.y, this.props.image.width/2, this.props.image.height);
-        }
+		context.drawImage(this.props.image, 0, 0, this.props.image.width/2, this.props.image.height, this.props.x, this.props.y, this.props.image.width/2, this.props.image.height);
     }
 };
 
 Destroyable.prototype.collides = function(players, bgModulus) {
-    if (this.props.destroyed) { return true; }
+    if (this.props.destroyed) { return false; }
      
     var weirdnessOffset = 100;
     var playerYPadding = 10;
     var playerXPadding = 10;
-    var houseLeft = (this.props.tile == 1 ? this.props.x - bgModulus : this.props.x + bgModulus - 1000);
+    var houseLeft = this.props.x;
     var houseRight = houseLeft + (this.props.image.width/2);
     var houseTop = this.props.y;
     var houseBottom = houseTop + this.props.image.height;
@@ -44,7 +35,7 @@ Destroyable.prototype.collides = function(players, bgModulus) {
         
         if (playerRight + weirdnessOffset >= houseLeft && playerLeft <= houseRight) {
             if (playerTop >= houseTop && playerBottom <= houseBottom) {
-                return true;
+                return player;
             }
         }
     }

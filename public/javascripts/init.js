@@ -2,7 +2,7 @@
 
 var socket = io.connect(window.location.hostname + ':3333');
 var canvas = document.getElementById('canvas');
-    canvas.width = 1000;
+    canvas.width = $(window).width();
     canvas.height = 600;
 var context = canvas.getContext('2d');
 var fpsCounter = 0;
@@ -101,3 +101,4 @@ function shuffle(o){
     for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
     return o;
 };
+

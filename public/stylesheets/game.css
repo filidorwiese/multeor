@@ -12,15 +12,15 @@
 html, body {
     overflow:hidden;
     background-color:#324444;
+    padding:0;
+    margin:0;
 }
 
 #container {
     position:absolute;
-    left:50%;
     top:50%;
-    margin-left:-500px;
     margin-top:-300px;
-    width:1000px;
+    width:100%;
     height:600px;
 }
 

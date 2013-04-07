@@ -9,7 +9,7 @@ var Game = function(worldFile, code){
         preloadImages: [],
         images: [],
         world: false,
-        worldX: 50000,
+        worldX: 0,
         worldSpeed: 10,
         destroyed: []
     };
@@ -46,80 +46,83 @@ var Game = function(worldFile, code){
 
 Game.prototype.tick = function(time) {
     if (!this.props.imagesLoaded) { return false; }
-    //console.log(this.props.destroyables);
     
     // Clear scherm
     context.clearRect(0,0, canvas.width, canvas.height);
     
     // Update worldX if game started
     if (this.props.started) {
-        if (this.props.worldX < ((this.props.world.length * canvas.width) - canvas.width)) {
+        if (this.props.worldX < ((this.props.world.length * 1000) - canvas.width)) {
             this.props.worldX += this.props.worldSpeed;
         } else {
             this.endGame();
         }
     }
-
-    // Teken achtergrond1 op basis van WorldX
-    var bgModulus = this.props.worldX % 1000;
+	
+	// Draw background tiles
+	var numberOfTiles = Math.ceil(canvas.width / 1000);
     var bgBase = Math.floor(this.props.worldX / 1000);
-
-    //console.log(this.getImage(this.props.world[bgBase].background));
-    var tile1 = this.props.world[bgBase];
-    var background1 = this.getImage(tile1.background);
-    context.drawImage(background1, bgModulus, 0, canvas.width - bgModulus, canvas.height, 0, 0, canvas.width - bgModulus, canvas.height);
-
-    var tile2 = this.props.world[bgBase + 1];
-    if (typeof tile2 != 'undefined') {
-        var background2 = this.getImage(tile2.background);
-        context.drawImage(background2, 0, 0, bgModulus, canvas.height, canvas.width - bgModulus, 0, bgModulus, canvas.height);
-    }
-
-    // Herorder entities op basis van diepte
+    var bgModulus = this.props.worldX % 1000;
+    
+	for (var ii = 0; ii <= numberOfTiles; ii++) {
+		var tile = this.props.world[bgBase + ii];
+		if (typeof tile == 'undefined') { continue; }
+		var bgImage = this.getImage(tile.background);
+		
+		var x = (ii * 1000) - bgModulus;
+		var sx = 0;
+		var sw = 1000;
+		
+		if (x < 0) {
+			x = 0;
+			sx = bgModulus;
+			sw = 1000 - bgModulus;
+		}
+		if (x + 1000 > canvas.width) {
+			sw = canvas.width - x;
+		}
+		
+		// image, sx, sy, sw, sh, x, y, w, h
+		context.drawImage(bgImage, sx, 0, sw, canvas.height, x, 0, sw, canvas.height);
+	}
+	
+    // Entities bijhouden
     var entities = [];
     var entitiesOffset = 0;
     
-    // Teken destroyables
-    if (tile1.sprites.length) {
-        for (sprite in tile1.sprites) {
-            //if (tile1.sprites[sprite].left > bgModulus) {
-                var spriteObject = tile1.sprites[sprite];
-                var destroyed = (typeof this.props.destroyed[spriteObject.id] != 'undefined') ? true : false;
-                entities[entitiesOffset + sprite] = new Destroyable(spriteObject.id, this.getImage(spriteObject.path), spriteObject.left, spriteObject.top, 1, destroyed);
-                if (!destroyed && entities[entitiesOffset + sprite].collides(players, bgModulus)) {
-				//var playerCollidedId = entities[entitiesOffset + sprite].collides(players, bgModulus);
-				//if (playerCollidedId !== false) {
-					//players[playerCollidedId].updateScore(1);
-					this.props.destroyed[spriteObject.id] = spriteObject.id;
+    // Destroyables tekenen en collisions detecten
+    for (var ii = 0; ii <= numberOfTiles; ii++) {
+		var tile = this.props.world[bgBase + ii];
+		if (typeof tile == 'undefined') { continue; }
+		
+		for (sprite in tile.sprites) {
+            var spriteObject = tile.sprites[sprite];
+			var destroyed = ($.inArray(spriteObject.id, this.props.destroyed) > -1 ? true : false);
+			var x = (ii * 1000) - bgModulus + spriteObject.left;
+			var y = spriteObject.top;
+			
+            entities[entitiesOffset] = new Destroyable(spriteObject.id, this.getImage(spriteObject.path), x, y, destroyed);
+            
+			if (!destroyed) {
+				var playerCollidedId = entities[entitiesOffset].collides(players, bgModulus);
+				if (playerCollidedId !== false) {
+					players[playerCollidedId].updateScore(1);
+					this.props.destroyed.push(spriteObject.id);
 				}
-            //}
-        }
-    }
-    entitiesOffset += tile1.sprites.length + 1;
-    
-    if (typeof tile2 != 'undefined') {
-        if (tile2.sprites.length) {
-            for (sprite in tile2.sprites) {
-                //if (tile2.sprites[sprite].left < canvas.width - bgModulus) {
-                    var spriteObject = tile2.sprites[sprite];
-                    var destroyed = (typeof this.props.destroyed[spriteObject.id] != 'undefined') ? true : false;
-                    entities[entitiesOffset + sprite] = new Destroyable(spriteObject.id, this.getImage(spriteObject.path), spriteObject.left, spriteObject.top, 2, destroyed);
-					if (!destroyed && entities[entitiesOffset + sprite].collides(players, bgModulus)) {
-						this.props.destroyed[spriteObject.id] = spriteObject.id;
-					}
-                //}
-            }
-        }
-        entitiesOffset += tile2.sprites.length + 1;
-    }
-    
+			}
+			
+            entitiesOffset++;
+		}
+	}
+
+	// Players tekenen
     for (player in players) {
         var newKey = entitiesOffset + players[player].props.z;
         if (typeof entities[newKey] != 'undefined') { newKey++; }
         entities[newKey] = players[player];
     }
     
-    // Teken entities op canvas
+    // Alle entities op canvas tekenen
     for (key in entities) {
         entities[key].draw(context, bgModulus);
     }
@@ -134,11 +137,6 @@ Game.prototype.tick = function(time) {
         var _x = (canvas.width - _maxWidth) / 2;
         var _y = (canvas.height / 2.2);
         this.drawMessage(context, this.props.message, _x, _y, _maxWidth, 35);
-        
-        //var metrics = context.measureText(this.props.message);
-        //var _x = (canvas.width / 2) - (metrics.width / 2);
-        //var _y = (canvas.height / 2);
-        //context.fillText(this.props.message, _x, _y);
         context.restore();
     }
     
