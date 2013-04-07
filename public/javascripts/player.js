@@ -1,8 +1,10 @@
-var Player = function(viewportWidth, viewportHeight, color){
+var Player = function(playerId, viewportWidth, viewportHeight, color){
     this.props = {
+		playerId: playerId,
         x: 0,
         y: 0,
         z: 0,
+        vector: [0, 0, 0], // Angle, length, depth
         minX: 60,
         maxX: viewportWidth - 180,
         minY: 60,
@@ -17,6 +19,9 @@ var Player = function(viewportWidth, viewportHeight, color){
 }
 
 Player.prototype.draw = function(context) {
+	
+	this.updatePosition();
+	
     if (this.props.lastMoves.length > 9) {
         var tailX = 0;
         var tailY = this.props.lastMoves[0][1];
@@ -55,31 +60,36 @@ Player.prototype.draw = function(context) {
         context.rotate((Math.PI / 180) * this.props.angle);
         context.fillRect(10, 10, playerRight-playerLeft, playerBottom-playerTop);
         context.restore();
-
     }    
 };
 
-Player.prototype.updateProps = function(x, y, z) {
-    //console.log(x + ' ' + y + ' ' + z);
-    this.props.x += x;
-    if (this.props.x > this.props.maxX) { this.props.x = this.props.maxX; }
+Player.prototype.updatePosition = function() {
+	var xySpeed = .1;
+	var radians = this.props.vector[0] * (Math.PI / 180);
+	
+	this.props.x += ((Math.cos(radians) * this.props.vector[1]) * xySpeed);
+	if (this.props.x > this.props.maxX) { this.props.x = this.props.maxX; }
     if (this.props.x < this.props.minX) { this.props.x = this.props.minX; }
-
-    this.props.y += y;
-    if (this.props.y > this.props.maxY) { this.props.y = this.props.maxY; }
-    if (this.props.y < this.props.minY) { this.props.y = this.props.minY; }
-
-    this.props.z = z;
-    if (this.props.z > this.props.maxZ) { this.props.z = this.props.maxZ; }
-    if (this.props.z < this.props.minZ) { this.props.z = this.props.minZ; }
-
-
-    //console.log(this.props.x + ' ' + this.props.y + ' ' + this.props.z);
     
+    this.props.y += ((Math.sin(radians) * this.props.vector[1]) * xySpeed);
+	if (this.props.y > this.props.maxY) { this.props.y = this.props.maxY; }
+    if (this.props.y < this.props.minY) { this.props.y = this.props.minY; }
+	
+	var zSpeed = 3;
+	if (this.props.z > this.props.vector[2]) {
+		this.props.z -= zSpeed;
+	} else {
+		this.props.z += zSpeed;
+	}
+	if (this.props.z > this.props.maxZ) { this.props.z = this.props.maxZ; }
+	if (this.props.z < this.props.minZ) { this.props.z = this.props.minZ; }
+	
     this.props.lastMoves.push([this.props.x, this.props.y]); //, playerProps.z
     if (this.props.lastMoves.length > 10) { this.props.lastMoves.shift(); }
 }
 
 Player.prototype.updateScore = function(points) {
-    player.score += points;
+    this.props.score += points;
+	socket.emit('update-score', {viewerId: viewerId, gameRoom: gameRoom, playerId: this.props.playerId, score: this.props.score});
+	$(window).trigger('audio-destroy');
 }

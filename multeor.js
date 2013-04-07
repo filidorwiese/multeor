@@ -19,27 +19,32 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('verify-game-room', function(data){
-        if (!verifyGameRoom(data.gameRoom)) { kickClient(socket); return false; }
+        if (!verifyGameRoom(data.gameRoom)) {
+			console.log('verify-game-room: kickPlayer');
+			kickClient(socket); return false;
+		}
     });
     
     socket.on('player-update', function(data){
-        console.log('player-update: ' + JSON.stringify(data));
-
+        //console.log('player-update: ' + JSON.stringify(data));
+		
         // Verify if gameRoom exists
-        if (!(verifyGameRoom(data.gameRoom))) {
+        if (!(verifyGameRoom(data.gr))) {
+			console.log('player-update: kickPlayer');
             kickClient(socket);
             return false;
         }
         
         // Check if player is joined in gameRoom
-        if (currentGames[data.gameRoom].players[socket.id] != data.playerId) {
+        if (currentGames[data.gr].players[socket.id] != data.pid) {
             //kickClient(socket);
             return false;
         }
         
         // Emit player-update to viewer
-        io.sockets.socket(currentGames[data.gameRoom].viewer).emit('player-update', data);
+        io.sockets.socket(currentGames[data.gr].viewer).emit('player-update', data);
         
+        // Packets fps counter
         var time = new Date();
         if (time - previousTimer > 1000) {
             previousTimer = time;
@@ -51,13 +56,20 @@ io.sockets.on('connection', function(socket) {
     
     socket.on('update-score', function(data){
         console.log('update-score: ' + JSON.stringify(data));
-        /*
-        //console.log(data.player + ' ' + data.points);
-        for (player in players) {
-            if (players[player].number == data.player) {
-                io.sockets.socket(player).emit('update-score', {points: data.points});
-            }
-        }*/
+        
+        // Verify if this viewer is authorative for this gameRoom and that is exists
+        if (!(verifyGameRoom(data.gameRoom, data.viewerId))) {
+			console.log('game-start: kickPlayer');
+            kickClient(socket);
+            return false;
+        }
+        
+        // Lookup player and emit update-score
+        for (var ii in currentGames[data.gameRoom].players) {
+			if (currentGames[data.gameRoom].players[ii] == data.playerId) {
+				io.sockets.socket(ii).emit('update-score', data);
+			}
+		}
     });
     
     socket.on('game-start', function(data){
@@ -65,6 +77,7 @@ io.sockets.on('connection', function(socket) {
 
         // Verify if this viewer is authorative for this gameRoom and that is exists
         if (!(verifyGameRoom(data.gameRoom, data.viewerId))) {
+			console.log('game-start: kickPlayer');
             kickClient(socket);
             return false;
         }
@@ -80,6 +93,7 @@ io.sockets.on('connection', function(socket) {
 
         // Verify if this viewer is authorative for this gameRoom and that is exists
         if (!(verifyGameRoom(data.gameRoom, data.viewerId))) {
+			console.log('game-get-ready: kickPlayer');
             kickClient(socket);
             return false;
         }
@@ -93,12 +107,30 @@ io.sockets.on('connection', function(socket) {
 
         // Verify if this viewer is authorative for this gameRoom and that is exists
         if (!(verifyGameRoom(data.gameRoom, data.viewerId))) {
+			console.log('game-end: kickPlayer');
             kickClient(socket);
             return false;
         }
 
-        // unjoin players and make them leave the room
+        // Emit Game-end to players
         for (var ii in currentGames[data.gameRoom].players) {
+			io.sockets.socket(ii).emit('game-end');
+        }
+    });
+
+    socket.on('game-reset', function(data){
+        console.log('game-reset: ' + JSON.stringify(data));
+
+        // Verify if this viewer is authorative for this gameRoom and that is exists
+        if (!(verifyGameRoom(data.gameRoom, data.viewerId))) {
+			console.log('game-reset: kickPlayer');
+            kickClient(socket);
+            return false;
+        }
+
+        // Unjoin players and make them leave the room
+        for (var ii in currentGames[data.gameRoom].players) {
+			io.sockets.socket(ii).emit('game-reset');
             io.sockets.socket(ii).leave('room-' + data.gameRoom);
         }
         currentGames[data.gameRoom].players = {};
@@ -153,7 +185,10 @@ function assignNewPlayer(socket, playerId, gameRoom) {
     console.log('New player entered game ' + socket.id + ' using playerId ' + playerId + ' and gameRoom ' + gameRoom);
     
     // Check if gameRoom exists
-    if (!verifyGameRoom(gameRoom)) { kickClient(socket); return; }
+    if (!verifyGameRoom(gameRoom)) {
+		console.log('assignNewPlayer: kickPlayer');
+		kickClient(socket); return;
+	}
 
     // If player already exists, return
     if (typeof currentGames[gameRoom].players[socket.id] != 'undefined') {
@@ -162,6 +197,8 @@ function assignNewPlayer(socket, playerId, gameRoom) {
 
     // Game already started
     if (currentGames[gameRoom].started) {
+		// FIXME
+        io.sockets.socket(socket.id).emit('game-has-started');
         return false;
     }
     
@@ -192,6 +229,7 @@ function assignNewViewer(socket, viewerId, gameRoom) {
     // Create gameRoom if it doesn't exist
     if (verifyGameRoom(gameRoom)) {
         if (viewerId != currentGames[gameRoom].viewerId)  {
+			console.log('assignNewViewer: kickPlayer');
             kickClient(socket);
             return false;
         }

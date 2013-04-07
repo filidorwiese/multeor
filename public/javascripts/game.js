@@ -2,13 +2,14 @@ var Game = function(worldFile, code){
     var self = this;
     self.props = {
         started: false,
+        getReady: false,
         message: false,
-        defaultText: 'Go to http://www.multeor.com on your mobile and enter code ' + code + ' to join',
+        defaultText: 'Go to http://game.multeor.com on your mobile and enter code ' + code + ' to join',
         imagesLoaded: false,
         preloadImages: [],
         images: [],
         world: false,
-        worldX: 0,
+        worldX: 50000,
         worldSpeed: 10,
         destroyed: []
     };
@@ -86,8 +87,11 @@ Game.prototype.tick = function(time) {
                 var destroyed = (typeof this.props.destroyed[spriteObject.id] != 'undefined') ? true : false;
                 entities[entitiesOffset + sprite] = new Destroyable(spriteObject.id, this.getImage(spriteObject.path), spriteObject.left, spriteObject.top, 1, destroyed);
                 if (!destroyed && entities[entitiesOffset + sprite].collides(players, bgModulus)) {
-                    this.props.destroyed[spriteObject.id] = spriteObject.id;
-                }
+				//var playerCollidedId = entities[entitiesOffset + sprite].collides(players, bgModulus);
+				//if (playerCollidedId !== false) {
+					//players[playerCollidedId].updateScore(1);
+					this.props.destroyed[spriteObject.id] = spriteObject.id;
+				}
             //}
         }
     }
@@ -100,9 +104,9 @@ Game.prototype.tick = function(time) {
                     var spriteObject = tile2.sprites[sprite];
                     var destroyed = (typeof this.props.destroyed[spriteObject.id] != 'undefined') ? true : false;
                     entities[entitiesOffset + sprite] = new Destroyable(spriteObject.id, this.getImage(spriteObject.path), spriteObject.left, spriteObject.top, 2, destroyed);
-                    if (!destroyed && entities[entitiesOffset + sprite].collides(players, bgModulus)) {
-                        this.props.destroyed.push(spriteObject.id);
-                    }
+					if (!destroyed && entities[entitiesOffset + sprite].collides(players, bgModulus)) {
+						this.props.destroyed[spriteObject.id] = spriteObject.id;
+					}
                 //}
             }
         }
@@ -186,14 +190,17 @@ Game.prototype.resetGame = function() {
     this.message(this.props.defaultText);
     this.props.destroyed = [];
     
+    socket.emit('game-reset', {viewerId: viewerId, gameRoom: gameRoom});
     clearInterval(getReadyInterval);
 }
 
 Game.prototype.endGame = function(){
     if (!this.props.started) return false;
     var self = this;
+    self.props.started = false;
     self.message('Game ended!');
     socket.emit('game-end', {viewerId: viewerId, gameRoom: gameRoom});
+    players = {};
     
     setTimeout(function(){
         self.resetGame();
@@ -202,14 +209,17 @@ Game.prototype.endGame = function(){
 
 Game.prototype.getReady = function(){
     var self = this;
+    if (self.props.getReady || self.props.started) { return false; }
+    
+	self.props.getReady = true;
     socket.emit('game-get-ready', {viewerId: viewerId, gameRoom: gameRoom});
-
     var countDown = 10;
     var getReadyInterval = setInterval(function(){
         if (countDown < 1) {
             self.message('GO!');
             clearInterval(getReadyInterval);
             setTimeout(function(){
+				self.props.getReady = false;
                 self.message('');
                 self.startGame();
             }, 1000);

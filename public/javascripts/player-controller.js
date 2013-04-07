@@ -1,14 +1,14 @@
 var socket = io.connect(window.location.hostname + ':3333');
-var touchEnabled = "ontouchend" in document;
 
 $(document).ready(function(){
     var viewportWidth = $(window).width();
     var viewportHeight = $(window).height();
     var fresh = true;
     var player = {
-        x: 0,
-        y: 0,
-        z: 20,
+		id: sessionStorage.getItem('player-id') || Math.floor((Math.random() * 10000) + 10000),
+        angle: 0,
+        length: 0,
+        depth: 0,
         maxSpeedX: 50,
         maxSpeedY: 70,
         maxFriction: 80,
@@ -17,20 +17,18 @@ $(document).ready(function(){
         joined: false,
         score: 0
     };
-    var playerId = sessionStorage.getItem('player-id') || Math.floor((Math.random() * 10000) + 10000);
-    sessionStorage.setItem('player-id', playerId);
+    sessionStorage.setItem('player-id', player.id);
     var gameRoom = parseInt(sessionStorage.getItem('game-room'), 10);
 
     // Verify gameRoom
     socket.emit('verify-game-room', {gameRoom: gameRoom});
 
-    //var joinTimeout = false;
     var playerWaitingtoJoin = function() {
         player.joined = false;
         $('#score').html('Click to join game');
         $('body').on('click touchstart', function(){
             $('body').off('click touchstart');
-            socket.emit('new-player', {playerId: playerId, gameRoom: gameRoom});
+            socket.emit('new-player', {playerId: player.id, gameRoom: gameRoom});
         });
     }
     playerWaitingtoJoin();
@@ -45,6 +43,10 @@ $(document).ready(function(){
         document.location = '/';
     });
 
+	socket.on('game-has-started', function(data){
+        $('#score').html('Sorry, game already started');
+    });
+    
     socket.on('game-full', function(data){
         $('#score').html('Too many players');
     });
@@ -86,15 +88,16 @@ $(document).ready(function(){
         // TODO: audio effect
         //$(window).trigger('destroy');
         
-        player.score += data.points;
+		player.score = data.score;
         $('#score').html(player.score);
     });
 
     
     var playerUpdate = function() {
         if (!player.joined) { return false; }
+        
+        /*
         if (fresh) {
-
             // X/Y en Z besturing
             //player.z += 20;
             player.speedX = (((player.maxSpeedX / 100) * player.x) / 100) * player.z;
@@ -110,61 +113,48 @@ $(document).ready(function(){
         } else {
             var maxFriction = (player.maxFriction / 100) * player.z;
             player.speedX -= maxFriction / player.z;
-        }
+        }*/
         
-        socket.emit('player-update', {playerId: playerId, gameRoom: gameRoom, x: player.speedX, y: player.speedY, z: player.z});
+        //socket.emit('player-update', {playerId: player.id, gameRoom: gameRoom, x: player.speedX, y: player.speedY, z: player.z});
+        socket.emit('player-update', {
+			pid: player.id,
+			gr: gameRoom,
+			v: [Math.floor(player.angle), Math.floor(player.length), player.depth]
+		});
         
-        setTimeout(playerUpdate, 25);
+        setTimeout(playerUpdate, 40);
     };
 
-    $('#leftControls').on('touchmove mousemove', function(event) {
+    $('#leftControls').on('touchmove', function(event) {
         event.preventDefault();
         
-		var controls = $(this);
-		var radius = controls.width()/2;
-        
-        if (touchEnabled) {
-            player.x = Math.floor(((event.originalEvent.targetTouches[0].clientX - $(this).offset().left) / $(this).width()) * 200) - 100;
-            player.y = Math.floor(((event.originalEvent.targetTouches[0].clientY - $(this).offset().top) / $(this).height()) * 200) - 100;
-            
-            var Jx = (event.originalEvent.targetTouches[0].clientX - $(this).offset().left);
-            var Jy = (event.originalEvent.targetTouches[0].clientY - $(this).offset().top);
-        } else {
-            player.x = Math.floor((event.offsetX / $(this).width()) * 200) - 100;
-            player.y = Math.floor((event.offsetY / $(this).height()) * 200) - 100;
-            
-            var Jx = event.pageX - controls.offset().left;
-            var Jy = event.pageY - controls.offset().top;
-        }
-        
-		var degrees = toDegrees(Jx, Jy, radius);
-		$('#joystick').width(degrees.length).css('-webkit-transform', 'rotate('+degrees.deg+'deg)');
+		var radius = $(this).width()/3;
+		
+		var x = (event.originalEvent.targetTouches[0].clientX - $(this).offset().left);
+		var y = (event.originalEvent.targetTouches[0].clientY - $(this).offset().top);
+		var vector = toDegrees(x, y, radius);
+		
+		player.angle = vector.deg;
+		player.length = vector.length;
+		
+		$('#joystick').width(vector.length).css('-webkit-transform', 'rotate(' + vector.deg + 'deg)');
         
         fresh = true;
     });
-    $('#leftControls').on('touchend mouseup', function(event) {
-		var controls = $(this);
-		
+    $('#leftControls').on('touchend', function(event) {
 		$('#joystick').animate({'width': 5}, 400);
         fresh = false;
     });
-    $('#rightControls').on('touchmove mousedown', function(event) {
+    $('#rightControls').on('touchmove', function(event) {
         event.preventDefault();
-
-        var controls = $(this);
         
-        if (touchEnabled) {
-            player.z = 100 - Math.floor(((event.originalEvent.targetTouches[0].clientY - $(this).offset().top) / $(this).height()) * 100);
-            var Jy = (event.originalEvent.targetTouches[0].clientY - $(this).offset().top);
-        } else {
-            player.z = 100 - Math.floor((event.offsetY / $(this).height()) * 100);
-            var Jy = event.pageY - controls.offset().top;
-        }
-        player.z += 20;
-    
-		if(Jy < 22) { Jy = 22 }
-		if(Jy > 128) { Jy = 128 }
-		$('#slider').css('top', Jy+'px');
+		var y = (event.originalEvent.targetTouches[0].clientY - $(this).offset().top);
+		if(y < 22) { y = 22; }
+		if(y > 128) { y = 128; }
+		
+		player.depth = y;
+		
+		$('#slider').css('top', player.depth + 'px');
         fresh = true;
     });
 
@@ -173,10 +163,9 @@ $(document).ready(function(){
 
 
 function toDegrees(x, y, radius){
-	
 	var degrees = 0;
 	var overstaand = y - radius;
-	var aanliggend = x -radius;
+	var aanliggend = x - radius;
 	var schuin = Math.sqrt(Math.pow(overstaand,2) + Math.pow(aanliggend,2));
 	var sinJ = overstaand/schuin;
 	var cosJ = aanliggend/schuin;

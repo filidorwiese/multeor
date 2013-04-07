@@ -44,8 +44,6 @@ Destroyable.prototype.collides = function(players, bgModulus) {
         
         if (playerRight + weirdnessOffset >= houseLeft && playerLeft <= houseRight) {
             if (playerTop >= houseTop && playerBottom <= houseBottom) {
-                socket.emit('update-score', { player: player, points: 1});
-                $(window).trigger('audio-destroy');
                 return true;
             }
         }

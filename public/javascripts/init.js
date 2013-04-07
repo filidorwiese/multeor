@@ -63,7 +63,7 @@ $(document).ready(function(){
         for (var ii in data.players) {
             var playerId = data.players[ii];
             if (typeof players[playerId] == 'undefined') {
-                players[playerId] = new Player(canvas.width, canvas.height, playerColors.splice(0, 1)[0]);
+                players[playerId] = new Player(playerId, canvas.width, canvas.height, playerColors.splice(0, 1)[0]);
             }
         }
 
@@ -82,17 +82,18 @@ $(document).ready(function(){
     });
 
     socket.on('player-update', function(data){
-        if (typeof players[data.playerId] == 'undefined') {
+        if (typeof players[data.pid] == 'undefined') {
             return false;
         }
-        players[data.playerId].updateProps(data.x, data.y, data.z);
+        
+        players[data.pid].props.vector = data.v;
     });
     
     var previousTime = 0;
     (function animloop(time){
-
-        requestAnimationFrame(animloop);
-        if (game) { game.tick(time); }
+	
+		requestAnimationFrame(animloop);
+		if (game) { game.tick(time); }
     })();
 });
 
