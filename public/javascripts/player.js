@@ -76,9 +76,9 @@ Player.prototype.updatePosition = function() {
     if (this.props.y < this.props.minY) { this.props.y = this.props.minY; }
 	
 	var zSpeed = 3;
-	if (this.props.z > this.props.vector[2]) {
+	if (this.props.z - zSpeed > this.props.vector[2]) {
 		this.props.z -= zSpeed;
-	} else {
+	} else if (this.props.z + zSpeed < this.props.vector[2]) {
 		this.props.z += zSpeed;
 	}
 	if (this.props.z > this.props.maxZ) { this.props.z = this.props.maxZ; }
