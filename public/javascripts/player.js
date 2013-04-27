@@ -73,26 +73,29 @@ Player.prototype.draw = function(context) {
 Player.prototype.updatePosition = function() {
     if (this.props.lock) {
         // Adjust player to endX / endY / endZ
-        var xyStep = 3;
-        var zStep = 1;
-        if (this.props.x < this.props.endX) { this.props.x += xyStep; }
-        if (this.props.y < this.props.endY) { this.props.y += xyStep; }
-        if (this.props.z < this.props.endZ) { this.props.z += zStep; }
-        if (this.props.x > this.props.endX) { this.props.x -= xyStep; }
-        if (this.props.y > this.props.endY) { this.props.y -= xyStep; }
-        if (this.props.z > this.props.endZ) { this.props.z -= zStep; }
+        var xyStep = 2;
+        var zStep = .5;
+        if (this.props.x + xyStep < this.props.endX) { this.props.x += xyStep; }
+        if (this.props.y + xyStep < this.props.endY) { this.props.y += xyStep; }
+        if (this.props.z + zStep < this.props.endZ) { this.props.z += zStep; }
+
+        if (this.props.x - xyStep > this.props.endX) { this.props.x -= xyStep; }
+        if (this.props.y - xyStep > this.props.endY) { this.props.y -= xyStep; }
+        if (this.props.z - zStep > this.props.endZ) { this.props.z -= zStep; }
         //console.log(this.props.playerId + ': ' + this.props.x + ', ' + this.props.y + ', ' + this.props.z);
 
     } else {
         // Adjust to player input
-    	var xySpeed = .1;
+        var xSpeed = ySpeed = .1;
     	var radians = this.props.vector[0] * (Math.PI / 180);
-    	
-    	this.props.x += ((Math.cos(radians) * this.props.vector[1]) * xySpeed);
+        //console.log(this.props.vector[0]);
+
+        if (this.props.vector[0] > 90 && this.props.vector[0] < 270) { xSpeed *= 2; } // If direction is backwards, double speed
+    	this.props.x += ((Math.cos(radians) * this.props.vector[1]) * xSpeed);
     	if (this.props.x > this.props.maxX) { this.props.x = this.props.maxX; }
         if (this.props.x < this.props.minX) { this.props.x = this.props.minX; }
         
-        this.props.y += ((Math.sin(radians) * this.props.vector[1]) * xySpeed);
+        this.props.y += ((Math.sin(radians) * this.props.vector[1]) * ySpeed);
     	if (this.props.y > this.props.maxY) { this.props.y = this.props.maxY; }
         if (this.props.y < this.props.minY) { this.props.y = this.props.minY; }
     	

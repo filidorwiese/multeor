@@ -11,13 +11,14 @@ var players = {};
 var getReadyInterval = false;
 var game = false;
 var playerColors = shuffle([
-                    'rgba(255,0,89,0.8)',
-                    'rgba(255,255,255,0.8)',
-                    'rgba(255,240,0,0.8)',
-                    'rgba(204,0,255,0.8)',
-                    'rgba(0,255,105,0.8)',
-                    'rgba(0,179,255,0.8)',
-                    'rgba(255,144,0,0.8)'
+                    'rgba(255, 0, 36, 0.8)',
+                    'rgba(8, 103, 255, 0.8)',
+                    'rgba(255,110, 221, 0.8)',
+                    'rgba(255, 255, 0, 0.8)',
+                    'rgba(110, 8, 157, 0.8)',
+                    'rgba(0, 255, 247, 0.8)',
+                    'rgba(16, 230, 34, 0.8)',
+                    'rgba(255, 174, 26, 0.8)'
                     ]);
 
 // Set gameRoom
@@ -35,7 +36,7 @@ $(document).ready(function(){
     socket.emit('new-viewer', {viewerId: viewerId, gameRoom: gameRoom});
     
     socket.on('game-end', function(data){
-        game.endGame();
+        game.abortGame();
     });
     
     socket.on('game-invalid', function(data){
@@ -44,14 +45,8 @@ $(document).ready(function(){
         alert('Sorry, no game hijacking');
         document.location = '/';
     });
-
-    socket.on('game-reset', function(data){
-        //document.location.reload();
-    });
     
     socket.on('update-game-state', function(data){
-        console.log(data);
-
         // Start countdown on first joined player
         var playerCount = 0;
         for (var ii in data.players) { playerCount++; }

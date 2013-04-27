@@ -87,7 +87,7 @@ $(document).ready(function(){
         console.log('update-score');
 
         // TODO: audio effect
-        //$(window).trigger('destroy');
+        $(window).trigger('audio-destroy');
         
         $('html,body').css({ backgroundColor: '#FFF' });
         setTimeout(function(){
