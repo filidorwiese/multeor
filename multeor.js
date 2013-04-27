@@ -24,7 +24,8 @@ io.sockets.on('connection', function(socket) {
 			kickClient(socket); return false;
 		}
     });
-    
+
+    // Controller broadcasting user-input to viewer
     socket.on('player-update', function(data){
         //console.log('player-update: ' + JSON.stringify(data));
 		
@@ -70,6 +71,24 @@ io.sockets.on('connection', function(socket) {
 				io.sockets.socket(ii).emit('update-score', data);
 			}
 		}
+    });
+    
+    socket.on('update-player-color', function(data){
+        console.log('update-player-color: ' + JSON.stringify(data));
+
+        // Verify if this viewer is authorative for this gameRoom and that is exists
+        if (!(verifyGameRoom(data.gameRoom, data.viewerId))) {
+            console.log('game-start: kickPlayer');
+            kickClient(socket);
+            return false;
+        }
+        
+        // Lookup player and emit update-score
+        for (var ii in currentGames[data.gameRoom].players) {
+            if (currentGames[data.gameRoom].players[ii] == data.playerId) {
+                io.sockets.socket(ii).emit('update-player-color', data);
+            }
+        }
     });
     
     socket.on('game-start', function(data){

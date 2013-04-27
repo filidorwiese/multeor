@@ -1,5 +1,7 @@
-var Player = function(playerId, viewportWidth, viewportHeight, color){
-    this.props = {
+var Player = function(playerId, viewportWidth, viewportHeight, playerColor, playerNumber){
+
+    var self = this;
+    self.props = {
 		playerId: playerId,
         x: 0,
         y: 0,
@@ -11,15 +13,20 @@ var Player = function(playerId, viewportWidth, viewportHeight, color){
         maxY: viewportHeight - 60,
         minZ: 40,
         maxZ: 120,
-        color: color,
+        color: playerColor,
         lastMoves: [],
         score: 0,
-        angle: 0
+        angle: 0,
+        locked: false,
+        endX: 0,
+        endY: 0,
+        endZ: 40
     };
+    
+    self.props.y = (playerNumber * (self.props.minZ + 18));
 }
 
 Player.prototype.draw = function(context) {
-	
 	this.updatePosition();
 	
     if (this.props.lastMoves.length > 9) {
@@ -64,26 +71,41 @@ Player.prototype.draw = function(context) {
 };
 
 Player.prototype.updatePosition = function() {
-	var xySpeed = .1;
-	var radians = this.props.vector[0] * (Math.PI / 180);
-	
-	this.props.x += ((Math.cos(radians) * this.props.vector[1]) * xySpeed);
-	if (this.props.x > this.props.maxX) { this.props.x = this.props.maxX; }
-    if (this.props.x < this.props.minX) { this.props.x = this.props.minX; }
-    
-    this.props.y += ((Math.sin(radians) * this.props.vector[1]) * xySpeed);
-	if (this.props.y > this.props.maxY) { this.props.y = this.props.maxY; }
-    if (this.props.y < this.props.minY) { this.props.y = this.props.minY; }
-	
-	var zSpeed = 3;
-	if (this.props.z - zSpeed > this.props.vector[2]) {
-		this.props.z -= zSpeed;
-	} else if (this.props.z + zSpeed < this.props.vector[2]) {
-		this.props.z += zSpeed;
-	}
-	if (this.props.z > this.props.maxZ) { this.props.z = this.props.maxZ; }
-	if (this.props.z < this.props.minZ) { this.props.z = this.props.minZ; }
-	
+    if (this.props.lock) {
+        // Adjust player to endX / endY / endZ
+        var xyStep = 3;
+        var zStep = 1;
+        if (this.props.x < this.props.endX) { this.props.x += xyStep; }
+        if (this.props.y < this.props.endY) { this.props.y += xyStep; }
+        if (this.props.z < this.props.endZ) { this.props.z += zStep; }
+        if (this.props.x > this.props.endX) { this.props.x -= xyStep; }
+        if (this.props.y > this.props.endY) { this.props.y -= xyStep; }
+        if (this.props.z > this.props.endZ) { this.props.z -= zStep; }
+        //console.log(this.props.playerId + ': ' + this.props.x + ', ' + this.props.y + ', ' + this.props.z);
+
+    } else {
+        // Adjust to player input
+    	var xySpeed = .1;
+    	var radians = this.props.vector[0] * (Math.PI / 180);
+    	
+    	this.props.x += ((Math.cos(radians) * this.props.vector[1]) * xySpeed);
+    	if (this.props.x > this.props.maxX) { this.props.x = this.props.maxX; }
+        if (this.props.x < this.props.minX) { this.props.x = this.props.minX; }
+        
+        this.props.y += ((Math.sin(radians) * this.props.vector[1]) * xySpeed);
+    	if (this.props.y > this.props.maxY) { this.props.y = this.props.maxY; }
+        if (this.props.y < this.props.minY) { this.props.y = this.props.minY; }
+    	
+    	var zSpeed = 3;
+    	if (this.props.z - zSpeed > this.props.vector[2]) {
+    		this.props.z -= zSpeed;
+    	} else if (this.props.z + zSpeed < this.props.vector[2]) {
+    		this.props.z += zSpeed;
+    	}
+    	if (this.props.z > this.props.maxZ) { this.props.z = this.props.maxZ; }
+    	if (this.props.z < this.props.minZ) { this.props.z = this.props.minZ; }
+    }
+
     this.props.lastMoves.push([this.props.x, this.props.y]); //, playerProps.z
     if (this.props.lastMoves.length > 10) { this.props.lastMoves.shift(); }
 }
@@ -92,4 +114,8 @@ Player.prototype.updateScore = function(points) {
     this.props.score += points;
 	socket.emit('update-score', {viewerId: viewerId, gameRoom: gameRoom, playerId: this.props.playerId, score: this.props.score});
 	$(window).trigger('audio-destroy');
+}
+
+Player.prototype.lockPlayer = function() {
+    this.props.lock = true;
 }

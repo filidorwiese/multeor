@@ -11,7 +11,7 @@
 
     <div id="desktop-container">
         <h1>Title screen</h1>
-        <a href="/game/"><button>Start new game</button></a>
+        <a href="/viewer/"><button>Start new game</button></a>
     </div>
 
     <div id="mobile-container">
@@ -26,6 +26,11 @@
     <script src="/javascripts/jquery-1.9.1.min.js" type="text/javascript"></script>
     <script>
         $(document).ready(function(){
+
+            // tijdelijk voor debugging
+            $('form input[name=game]').val(sessionStorage.getItem('game-room'));
+
+            // 
             $('form').on('submit', function(event){
                 event.preventDefault();
                 var gameRoomInput = $(this).find('input');

@@ -30,7 +30,7 @@ sessionStorage.setItem('viewer-id', viewerId);
     
 $(document).ready(function(){
     
-    var game = new Game('/javascripts/world.json', gameRoom);
+    var game = new Game('/levels/forest', gameRoom);
     
     socket.emit('new-viewer', {viewerId: viewerId, gameRoom: gameRoom});
     
@@ -60,10 +60,14 @@ $(document).ready(function(){
         }
         
         // Add player to players array
+        var numberOfPlayers = 0;
         for (var ii in data.players) {
             var playerId = data.players[ii];
+            numberOfPlayers++;
             if (typeof players[playerId] == 'undefined') {
-                players[playerId] = new Player(playerId, canvas.width, canvas.height, playerColors.splice(0, 1)[0]);
+                var playerColor = playerColors.splice(0, 1)[0];
+                players[playerId] = new Player(playerId, canvas.width, canvas.height, playerColor, numberOfPlayers);
+                socket.emit('update-player-color', {viewerId: viewerId, gameRoom: gameRoom, playerId: playerId, playerColor: playerColor});
             }
         }
 
@@ -94,6 +98,7 @@ $(document).ready(function(){
 	
 		requestAnimationFrame(animloop);
 		if (game) { game.tick(time); }
+        
     })();
 });
 

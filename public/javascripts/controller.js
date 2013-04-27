@@ -15,7 +15,8 @@ $(document).ready(function(){
         speedX: 0,
         speedY: 0,
         joined: false,
-        score: 0
+        score: 0,
+        color: '',
     };
     sessionStorage.setItem('player-id', player.id);
     var gameRoom = parseInt(sessionStorage.getItem('game-room'), 10);
@@ -88,10 +89,19 @@ $(document).ready(function(){
         // TODO: audio effect
         //$(window).trigger('destroy');
         
+        $('html,body').css({ backgroundColor: '#FFF' });
+        setTimeout(function(){
+            $('html,body').css({ backgroundColor: player.color });
+        }, 250);
+
 		player.score = data.score;
         $('#score').html(player.score);
     });
 
+    socket.on('update-player-color', function(data){
+        player.color = data.playerColor;
+        $('html, body').css({ backgroundColor: player.color });
+    });
     
     var playerUpdate = function() {
         if (!player.joined) { return false; }

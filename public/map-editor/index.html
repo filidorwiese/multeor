@@ -63,9 +63,10 @@ var sprites = [];
 var selectedSprite;
 var tiles = [ { sprites: []  } ];
 var currentTileIndex = 0;
+var levelPath = '/levels/forest';
 
 function setBackground(path) {
-	$('#grid').css('background-image', 'url(' + path + ')');
+	$('#grid').css('background-image', 'url(' + levelPath + path + ')');
 	tiles[currentTileIndex].background = path;
 	$('#backgrounds').val(path);
 }
@@ -132,7 +133,7 @@ function addSprite(id, path, top, left) {
 			.css('left', left);
 	};
 	
-	img.src = path;
+	img.src = levelPath + path;
 	
 	tiles[currentTileIndex].sprites[id] = {
 		path: path,
@@ -192,7 +193,7 @@ function renderTile(tile) {
 }
 
 $('#nextTile').on('click', function(event) {
-    if (currentTileIndex < 59) {
+    if (currentTileIndex < 64) {
         currentTileIndex++;
         $('#tileIndexLabel').html(currentTileIndex+1);
 
@@ -259,7 +260,7 @@ $(document).ready(function() {
 		$('#sprites').append('<option value="' + path + '">' + path + '</option>');
 	}
 	
-	for(i = 1; i <= 60; i++) {
+	for(i = 1; i <= 65; i++) {
         str = '';
         if(i < 10) { str = '0' };
 		var path1 = '/images/maps/map-' +str+ i + '.png';
