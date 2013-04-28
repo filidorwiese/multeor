@@ -3,6 +3,7 @@ var Player = function(playerId, viewportWidth, viewportHeight, playerColor, play
     var self = this;
     self.props = {
 		playerId: playerId,
+        playerNumber: playerNumber,
         x: 0,
         y: 0,
         z: 0,
@@ -20,7 +21,8 @@ var Player = function(playerId, viewportWidth, viewportHeight, playerColor, play
         locked: false,
         endX: 0,
         endY: 0,
-        endZ: 40
+        endZ: 40,
+        layer: 1
     };
     
     self.props.y = (playerNumber * (self.props.minZ + 18));
@@ -116,7 +118,6 @@ Player.prototype.updatePosition = function() {
 Player.prototype.updateScore = function(points) {
     this.props.score += points;
 	socket.emit('update-score', {viewerId: viewerId, gameRoom: gameRoom, playerId: this.props.playerId, score: this.props.score});
-	$(window).trigger('audio-destroy');
 }
 
 Player.prototype.lockPlayer = function() {

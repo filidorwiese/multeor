@@ -5,6 +5,7 @@ var Game = function(levelPath, code){
         message: false,
         defaultText: 'Go to http://game.multeor.com on your mobile and enter code ' + code + ' to join',
         preloadImages: [],
+        audio: {},
         images: [],
         world: false,
         worldX: 0,
@@ -15,36 +16,95 @@ var Game = function(levelPath, code){
     
     $.ajaxSetup({ cache: true });
     $.getJSON(self.props.levelPath + '/level.json', function(world){
+        self.message('Loading');
+
         self.props.world = world;
         for (var i=0; i < world.length; i++) {
             if (typeof world[i].background != 'undefined') { self.props.preloadImages.push(world[i].background); }
-            if (typeof world[i].background2 != 'undefined') { self.props.preloadImages.push(world[i].background2); }
             
             if (world[i].sprites.length) {
                 for (var j=0; j< world[i].sprites.length; j++) {
                     var spriteObject = world[i].sprites[j];
                     if (typeof spriteObject.path != 'undefined') {
-                        self.props.preloadImages.push(spriteObject.path);
+                        if ($.inArray(spriteObject.path, self.props.preloadImages) === -1) {
+                            self.props.preloadImages.push(spriteObject.path);
+                        }
+                    }
+                    if (typeof spriteObject.audio != 'undefined') {
+                        if (typeof self.props.audio[spriteObject.audio] == 'undefined' && spriteObject.audio != 'none') {
+                            self.props.audio[spriteObject.audio] = null;
+                        }
                     }
                 }
             }
         }
+
+        // Preload images
         console.log('Preloading: ' + self.props.preloadImages);
-        self.message('Loading');
-        
         for (var t=0; t<self.props.preloadImages.length; t++) {
             self.loadImage(self.props.preloadImages[t]);
         }
+
+        // Attach audio
+        self.loadAudio();
+
     }).fail(function(jqxhr, settings, exception){
         throw exception;
     });
 }
 
+Game.prototype.loadAudio = function() {
+    var self = this;
+    
+    // Load soundtrack
+    var soundtrack = new Howl({
+        urls: [self.props.levelPath + '/audio/level.mp3', self.props.levelPath + '/audio/level.ogg'],
+        loop: true
+    });
+    $(window).off('game-audio-start').on('game-audio-start', function(e){
+        var audio = { volume: 0 };
+        soundtrack.volume(audio.volume);
+        soundtrack.play();
+        $(audio).animate({
+            volume: 1
+        }, {
+            easing: 'linear',
+            duration: 5000,
+            step: function(now, tween){
+                soundtrack.volume(now);
+            }
+        });
+    });
+
+    $(window).off('game-audio-stop').on('game-audio-stop', function(e){
+        var audio = { volume: 1 };
+        $(audio).animate({
+            volume: 0
+        }, {
+            easing: 'linear',
+            duration: 5000,
+            step: function(now, tween){
+                soundtrack.volume(now);
+            },
+            complete:function(){
+                soundtrack.stop();
+            }
+        });
+    });
+
+    // Load and attach effects
+    for (var i in self.props.audio) {
+        self.props.audio[i] = new Howl({
+            urls: [self.props.levelPath + '/audio/sprites/' + i + '.mp3', self.props.levelPath + '/audio/sprites/' + i + '.ogg']
+        });
+    }
+}
+
 Game.prototype.tick = function(time) {
-    if (this.props.state == 'LOADING') { return false; }// || this.props.state == 'ABORTED'
+    if (this.props.state == 'LOADING') { return false; }
     
     // Clear scherm
-    context.clearRect(0,0, canvas.width, canvas.height);
+    context.clearRect(0, 0, canvas.width, canvas.height);
     
     // Leaderboard
     if (this.props.state == 'STARTED' && this.props.worldX > ((this.props.world.length * 1000) - 7000)) {
@@ -127,14 +187,29 @@ Game.prototype.tick = function(time) {
 			var destroyed = ($.inArray(spriteObject.id, this.props.destroyed) > -1 ? true : false);
 			var x = (ii * 1000) - bgModulus + spriteObject.left;
 			var y = spriteObject.top;
-			
-            entities[entitiesOffset] = new Destroyable(spriteObject.id, this.getImage(spriteObject.path), x, y, destroyed);
+            var zIndex =  entitiesOffset + (spriteObject.layer * 1000);
+
+            // Parallax fx
+            spriteObject.left -= (spriteObject.layer - 1) * 2;
+
+            // Draw entity
+            entities[zIndex] = new Destroyable(spriteObject.id, this.getImage(spriteObject.path), x, y, destroyed);
             
-			if (!destroyed) {
-				var playerCollidedId = entities[entitiesOffset].collides(players, bgModulus);
+			if (!destroyed && spriteObject.destroyable) {
+				var playerCollidedId = entities[zIndex].collides(players, bgModulus);
 				if (playerCollidedId !== false) {
-					players[playerCollidedId].updateScore(1);
-					this.props.destroyed.push(spriteObject.id);
+                    // Remember destroyed state
+                    this.props.destroyed.push(spriteObject.id);
+
+                    // Update playerScore
+                    if (spriteObject.score > 0) {
+					   players[playerCollidedId].updateScore(spriteObject.score);
+
+                        // Play audio effect
+                        if (spriteObject.audio && spriteObject.audio != 'none') {
+                            this.props.audio[spriteObject.audio].volume(.2).play();
+                        }
+                    }
 				}
 			}
 			
@@ -144,9 +219,8 @@ Game.prototype.tick = function(time) {
 
 	// Players tekenen
     for (player in players) {
-        var newKey = entitiesOffset + players[player].props.z;
-        if (typeof entities[newKey] != 'undefined') { newKey++; }
-        entities[newKey] = players[player];
+        var zIndex = (players[player].props.layer * 1000) + 900 + players[player].props.playerNumber;
+        entities[zIndex] = players[player];
     }
     
     // Alle entities op canvas tekenen
@@ -184,11 +258,10 @@ Game.prototype.tick = function(time) {
     // fps canvas meten
     if (time - previousTimer > 1000) {
         previousTimer = time;
-        $('#debug').html(fpsCounter);
+        //$('#debug').html(fpsCounter);
         fpsCounter = 0;
     }
     fpsCounter++;
-
 }
 
 Game.prototype.message = function(message) {
