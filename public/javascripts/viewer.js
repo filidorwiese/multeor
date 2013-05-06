@@ -5,21 +5,20 @@ var canvas = document.getElementById('canvas');
     canvas.width = $(window).width();
     canvas.height = 600;
 var context = canvas.getContext('2d');
-var fpsCounter = 0;
-var previousTimer = 0;
 var players = {};
 var getReadyInterval = false;
 var game = false;
-var playerColors = shuffle([
-                    'rgba(255, 0, 36, 0.8)',
-                    'rgba(8, 103, 255, 0.8)',
-                    'rgba(255,110, 221, 0.8)',
-                    'rgba(255, 255, 0, 0.8)',
-                    'rgba(110, 8, 157, 0.8)',
-                    'rgba(0, 255, 247, 0.8)',
-                    'rgba(16, 230, 34, 0.8)',
-                    'rgba(255, 174, 26, 0.8)'
-                    ]);
+var playerColors = [
+                    'rgba(255,0,36,0.8)',
+                    'rgba(8,103,255,0.8)',
+                    'rgba(255,110,221,0.8)',
+                    'rgba(255,255,0,0.8)',
+                    'rgba(110,8,157,0.8)',
+                    'rgba(0,255,247,0.8)',
+                    'rgba(16,230,34,0.8)',
+                    'rgba(255,174,26,0.8)'
+                    ];
+var playerColorsShuffled = shuffle(playerColors.slice(0)); // Clone it and shuffle
 
 // Set gameRoom
 var gameRoom = sessionStorage.getItem('game-room') || Math.floor((Math.random() * 10000) + 10000);
@@ -30,7 +29,6 @@ var viewerId = sessionStorage.getItem('viewer-id') || Math.floor((Math.random() 
 sessionStorage.setItem('viewer-id', viewerId);
     
 $(document).ready(function(){
-    
     var game = new Game('/levels/forest', gameRoom);
     
     socket.emit('new-viewer', {viewerId: viewerId, gameRoom: gameRoom});
@@ -44,6 +42,7 @@ $(document).ready(function(){
         sessionStorage.setItem('game-room', '');
         alert('Sorry, no game hijacking');
         document.location = '/';
+        logGAEvent('Room hijacking?');
     });
     
     socket.on('update-game-state', function(data){
@@ -60,7 +59,7 @@ $(document).ready(function(){
             var playerId = data.players[ii];
             numberOfPlayers++;
             if (typeof players[playerId] == 'undefined') {
-                var playerColor = playerColors.splice(0, 1)[0];
+                var playerColor = playerColorsShuffled.splice(0, 1)[0];
                 players[playerId] = new Player(playerId, canvas.width, canvas.height, playerColor, numberOfPlayers);
                 socket.emit('update-player-color', {viewerId: viewerId, gameRoom: gameRoom, playerId: playerId, playerColor: playerColor});
             }
@@ -88,12 +87,18 @@ $(document).ready(function(){
         players[data.pid].props.vector = data.v;
     });
     
-    var previousTime = 0;
+    //var previousTime = 0;
+    //var fps = 60;
+
     (function animloop(time){
 	
 		requestAnimationFrame(animloop);
-		if (game) { game.tick(time); }
         
+        //if (time - previousTime > 1000 / fps) {
+            if (game) { game.tick(time); }
+            //previousTime = time;
+        //}
+
     })();
 });
 
@@ -102,3 +107,13 @@ function shuffle(o){
     return o;
 };
 
+function logGAEvent(action, label, value) {
+    if (typeof _gaq !== 'undefined') {
+        if (typeof label !== 'undefined' && typeof value !== 'undefined') {
+            console.log('Viewer, ' + action + ', ' + label + ', ' + value);
+            _gaq.push(['_trackEvent', 'Viewer', action, label, value]);        
+        } else {
+            _gaq.push(['_trackEvent', 'Viewer', action]);
+        }
+    }
+}   

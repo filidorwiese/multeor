@@ -21,6 +21,9 @@
 		background-color:#DDD;
 		background-repeat:no-repeat;
 		float:left;
+		overflow:hidden;
+		border:1px solid #000;
+		margin-top:10px;
 	}
 	
 	#output {
@@ -179,17 +182,32 @@ function updateSprite() {
 		score: sprite.data('score'),
 		audio: sprite.data('audio')
 	};
+
+	if (sprite.data('destroyable')) {
+		sprite.width(sprite.data('orig-width') / 9);
+	} else {
+		sprite.width(sprite.data('orig-width'));
+	}
+
+	sprite.css({ zIndex: sprite.data('layer') });
+
+	// Update bij iedere sprite update ook de sprite defaults om versneld
+	// overeenkomstige sprites te kunnen plaatsen
+	spriteDefault.layer = sprite.data('layer');
+	spriteDefault.destroyable = sprite.data('destroyable');
+	spriteDefault.score = sprite.data('score');
+	spriteDefault.audio = sprite.data('audio');
 }
 
 function selectSprite(sprite) {
 	deselectSprite();
-	$(sprite).addClass('sprite--selected');
+	var sprite = $(sprite).addClass('sprite--selected');
 
 	$('#spriteProps').addClass('selected');
-	$('#spriteProps #layer').val($('.sprite--selected').data('layer'));
-	$('#spriteProps #destroyable').prop('checked', $('.sprite--selected').data('destroyable'));
-	$('#spriteProps #score').val($('.sprite--selected').data('score'));
-	$('#spriteProps #audio').val($('.sprite--selected').data('audio'));
+	$('#spriteProps #layer').val(sprite.data('layer'));
+	$('#spriteProps #destroyable').prop('checked', sprite.data('destroyable'));
+	$('#spriteProps #score').val(sprite.data('score'));
+	$('#spriteProps #audio').val(sprite.data('audio'));
 }
 
 function deselectSprite() {
@@ -255,10 +273,17 @@ function addSprite(id, path, top, left, layer, destroyable, score, audio) {
 		.data('audio', audio);
 			
 	img.onload = function() {
-		sprite.width(img.width/2).height(img.height)
+		sprite.data('orig-width', img.width).data('orig-height', img.height);
+		sprite.width(img.width).height(img.height)
 			.css('background-image', 'url(' + img.src + ')')
 			.css('top', top)
 			.css('left', left);
+
+		if (sprite.data('destroyable')) {
+			sprite.width(sprite.data('orig-width') / 9);
+		} else {
+			sprite.width(sprite.data('orig-width'));
+		}
 	};
 	
 	img.src = levelPath + path;
@@ -273,7 +298,7 @@ function addSprite(id, path, top, left, layer, destroyable, score, audio) {
 		audio: audio
 	};
 	
-	sprite.draggable( { containment: 'parent', distance: 10, stop: updateSprite } ).appendTo($('#grid'));
+	sprite.draggable({ containment: 'parent', distance: 10, stop: updateSprite } ).appendTo($('#grid'));
 }
 
 $('#setBackground').on('click', function(event) {

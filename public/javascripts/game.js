@@ -10,7 +10,7 @@ var Game = function(levelPath, code){
         world: false,
         worldX: 0,
         worldSpeed: 10,
-        destroyed: [],
+        destroyed: {},
         levelPath: levelPath
     };
     
@@ -119,7 +119,8 @@ Game.prototype.tick = function(time) {
             leaderboardPositions.push([players[player], players[player].props.score]);
         }
         leaderboardPositions.sort(function(a, b) {return b[1] - a[1] });
-        
+        logGAEvent('Ended', 'Highest score', highestScore);
+
         // Calculate player leaderboard position
         var numberOfPlayer = 0;
         var headerHeight = 70;
@@ -184,7 +185,7 @@ Game.prototype.tick = function(time) {
 		
 		for (sprite in tile.sprites) {
             var spriteObject = tile.sprites[sprite];
-			var destroyed = ($.inArray(spriteObject.id, this.props.destroyed) > -1 ? true : false);
+			var destroyedByColorIndex = this.props.destroyed[spriteObject.id] || false;
 			var x = (ii * 1000) - bgModulus + spriteObject.left;
 			var y = spriteObject.top;
             var zIndex =  entitiesOffset + (spriteObject.layer * 1000);
@@ -193,13 +194,16 @@ Game.prototype.tick = function(time) {
             spriteObject.left -= (spriteObject.layer - 1) * 2;
 
             // Draw entity
-            entities[zIndex] = new Destroyable(spriteObject.id, this.getImage(spriteObject.path), x, y, destroyed);
+            entities[zIndex] = new Destroyable(spriteObject.id, this.getImage(spriteObject.path), x, y, spriteObject.destroyable, destroyedByColorIndex);
             
-			if (!destroyed && spriteObject.destroyable) {
+            // Do collision detection
+			if (spriteObject.destroyable && !destroyedByColorIndex) {
 				var playerCollidedId = entities[zIndex].collides(players, bgModulus);
 				if (playerCollidedId !== false) {
                     // Remember destroyed state
-                    this.props.destroyed.push(spriteObject.id);
+                    var playerCollidedColor = players[playerCollidedId].props.color;
+                    var playerCollidedColorIndex = $.inArray(playerCollidedColor, playerColors) + 1;
+                    this.props.destroyed[spriteObject.id] = playerCollidedColorIndex;
 
                     // Update playerScore
                     if (spriteObject.score > 0) {
@@ -255,13 +259,6 @@ Game.prototype.tick = function(time) {
         }
     }
     
-    // fps canvas meten
-    if (time - previousTimer > 1000) {
-        previousTimer = time;
-        //$('#debug').html(fpsCounter);
-        fpsCounter = 0;
-    }
-    fpsCounter++;
 }
 
 Game.prototype.message = function(message) {
@@ -315,6 +312,8 @@ Game.prototype.abortGame = function() {
     $(window).trigger('game-audio-stop');
     self.message('Game aborted!');
 
+    logGAEvent('Aborted');
+
     setTimeout(function(){
         self.resetGame();
     }, 2000);
@@ -363,6 +362,10 @@ Game.prototype.startGame = function(){
 
     self.props.state = 'STARTED';
     socket.emit('game-start', {viewerId: viewerId, gameRoom: gameRoom});
+
+    var numberOfPlayers = 0;
+    for (var ii in players) { numberOfPlayers++; }
+    logGAEvent('Started', 'Players', numberOfPlayers);
 }
 
 Game.prototype.drawMessage = function(context, text, x, y, maxWidth, lineHeight, center) {
