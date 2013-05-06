@@ -18,7 +18,7 @@ var playerColors = [
                     'rgba(16,230,34,0.8)',
                     'rgba(255,174,26,0.8)'
                     ];
-var playerColorsShuffled = shuffle(playerColors.slice(0)); // Clone it and shuffle
+var playerColorsShuffled = shuffleArray(playerColors.slice(0)); // Clone it and shuffle
 
 // Set gameRoom
 var gameRoom = sessionStorage.getItem('game-room') || Math.floor((Math.random() * 10000) + 10000);
@@ -87,22 +87,15 @@ $(document).ready(function(){
         players[data.pid].props.vector = data.v;
     });
     
-    //var previousTime = 0;
-    //var fps = 60;
-
     (function animloop(time){
 	
 		requestAnimationFrame(animloop);
-        
-        //if (time - previousTime > 1000 / fps) {
-            if (game) { game.tick(time); }
-            //previousTime = time;
-        //}
+        if (game) { game.tick(time); }
 
     })();
 });
 
-function shuffle(o){
+function shuffleArray(o){
     for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
     return o;
 };

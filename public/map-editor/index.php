@@ -1,9 +1,26 @@
 <?php
+	error_reporting(E_ALL);
+	ini_set(display_errors,1);
 
-	$levelPath = '../levels/forest';
+	$levelBasePath = '../levels';
+	$levelPath = false;
+	if (count($_POST)) {
+		//var_dump($_POST);die;
+		$load = (isset($_POST['loadlevelsubmit']) ? true : false);
+		$level = ($load ? $_POST['loadlevel'] : $_POST['newlevel']);
+		
+		if (strstr($level, '.') !== false || strstr($level, '/') !== false) {
+			die('403');
+		}
+		$levelPath = $levelBasePath . '/' . $level;
+		if (!is_dir($levelPath)) { die('Level not found' . $levelPath); }
 
+		$levelJson = '';
+		if ($load) {
+			$levelJson = file_get_contents($levelPath . '/level.json');
+		}
+	}
 ?>
-
 <!doctype html>
 <html lang="us">
 <head>
@@ -13,7 +30,15 @@
 	h3 {
 		margin-bottom:5px;
 	}
+
+	fieldset {
+		display:inline-block;
+		margin-top:30px;
+	}
 	
+	#grid-and-settings {
+		width:1220px;
+	}
 	#grid {
 		height:600px;
 		position:relative;
@@ -23,11 +48,11 @@
 		float:left;
 		overflow:hidden;
 		border:1px solid #000;
-		margin-top:10px;
+		margin:10px 0;
 	}
 	
 	#output {
-		height:380px;
+		height:300px;
 		width:200px;
 	}
 
@@ -62,430 +87,135 @@
 		background-color:orange;
 		opacity:.5;
 	}
+
+	#log {
+		clear:both;
+		float:left;
+		width:800px;
+	}
+
+	#prev-next-tile {
+		float:right;
+		margin-right:220px;
+	}
+
+
 	</style>
 </head>
-<body>
-<div>
-	<label for="backgrounds">Backgrounds:</label>
-	<select id="backgrounds">
-		<?php 
-			foreach (glob($levelPath . "/images/maps/*.png") as $file) {
-				echo '<option>' . str_replace($levelPath, '', $file) . '</option>';
-			}
-		?>
-	</select>
-	<input id="setBackground" type="button" value="set" />
-	|
-	<label for="sprites">Sprites:</label>
-	<select id="sprites">
-		<?php 
-			foreach (glob($levelPath . "/images/sprites/*.png") as $file) {
-				echo '<option>' . str_replace($levelPath, '', $file) . '</option>';
-			}
-		?>
-	</select>
-	<input id="addSprite" type="button" value="add" />
-	|
-	<input id="prevTile" type="button" value="prev tile" />
-    <span id="tileIndexLabel">1</span>
-	<input id="nextTile" type="button" value="next tile" />
-	|
-	<input id="export" type="button" value="export" />
-	<input id="import" type="button" value="import" />
-<div>
-	<div id="grid"></div>
-	<div id="settings">
-		<h3>Sprite properties:</h3>
-		<div id="spriteProps">
-			<div class="prop">
-				<label for="layer">Layer</label>
-				<select id="layer">
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-				</select>
-			</div>
-			<div class="prop">
-				<label>Destroyable</label>
-				<input id="destroyable" type="checkbox" />
-			</div>
-			<div class="prop">
-				<label for="audio">Audio on hit</label>
-				<select id="audio">
-					<?php
-						foreach (glob($levelPath . "/audio/sprites/*.ogg") as $file) {
-							echo '<option>' . str_replace('.ogg', '', basename($file)) . '</option>';
+
+<? if (!$levelPath): ?>
+	<body>
+	<h3>Multeor - map editor</h3>
+	<div id="loadlevel">
+		<form action="?" method="post">
+			<fieldset>
+				<legend>New level</legend>
+				Choose an existing level for it's assets
+				<select name="newlevel">
+					<?php 
+						foreach (glob($levelBasePath . "/*", GLOB_ONLYDIR) as $dir) {
+							echo '<option>' . basename($dir) . '</option>';
 						}
 					?>
-					<option>none</option>
 				</select>
+				<input type="submit" name="newlevelsubmit" value="Continue" />
+			</fieldset>
+			<br />
+			<fieldset>
+				<legend>Load level</legend>
+				Load an existing level
+				<select name="loadlevel">
+					<?php 
+						foreach (glob($levelBasePath . "/*", GLOB_ONLYDIR) as $dir) {
+							echo '<option>' . basename($dir) . '</option>';
+						}
+					?>
+				</select>
+				<input type="submit" name="loadlevelsubmit" value="Continue" />
+			</fieldset>
+		</form>
+	</div>
+
+<? else: ?>
+	<body data-level-path="<?= $levelPath; ?>">
+	<h3>Multeor - map editor</h3>
+	<div id="assets">
+		<label for="backgrounds">Backgrounds:</label>
+		<select id="backgrounds">
+			<?php 
+				foreach (glob($levelPath . "/images/maps/*.png") as $file) {
+					echo '<option>' . str_replace($levelPath, '', $file) . '</option>';
+				}
+			?>
+		</select>
+		<input id="setBackground" type="button" value="set" />
+		|
+		<label for="sprites">Sprites:</label>
+		<select id="sprites">
+			<?php 
+				foreach (glob($levelPath . "/images/sprites/*.png") as $file) {
+					echo '<option>' . str_replace($levelPath, '', $file) . '</option>';
+				}
+			?>
+		</select>
+		<input id="addSprite" type="button" value="add" />
+	</div>
+
+	<div id="grid-and-settings">
+		<div id="grid"></div>
+		<div id="settings">
+			<h3>Sprite properties:</h3>
+			<div id="spriteProps">
+				<div class="prop">
+					<label for="layer">Layer</label>
+					<select id="layer">
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+					</select>
+				</div>
+				<div class="prop">
+					<label>Destroyable</label>
+					<input id="destroyable" type="checkbox" />
+				</div>
+				<div class="prop">
+					<label for="audio">Audio on hit</label>
+					<select id="audio">
+						<?php
+							foreach (glob($levelPath . "/audio/sprites/*.ogg") as $file) {
+								echo '<option>' . str_replace('.ogg', '', basename($file)) . '</option>';
+							}
+						?>
+						<option>none</option>
+					</select>
+				</div>
+				<div class="prop">
+					<label for="score">Score:</label>
+					<input id="score" type="text" value="0" />
+				</div>
 			</div>
-			<div class="prop">
-				<label for="score">Score:</label>
-				<input id="score" type="text" value="0" />
+			<h3>JSON</h3>
+			<div>
+				<textarea id="output"><?= $levelJson; ?></textarea><br />
+				<input id="export" type="button" value="export" />
+				<input id="import" type="button" value="import" />
+
+				<input id="start-over" type="button" value="start over" />
 			</div>
 		</div>
-		<h3>JSON</h3>
-		<div>
-			<textarea id="output"></textarea>
+		<div id="log"></div>
+		<div id="prev-next-tile">
+			<input id="prevTile" type="button" value="prev tile" />
+		    <span id="tileIndexLabel">1</span>
+			<input id="nextTile" type="button" value="next tile" />
 		</div>
 	</div>
+
+	<script src="js/jquery-1.9.1.js"></script>
+	<script src="js/jquery-ui-1.10.1.custom.js"></script>
+	<script src="js/map-editor.js"></script>
 	
-</div>
-<script src="js/jquery-1.9.1.js"></script>
-<script src="js/jquery-ui-1.10.1.custom.js"></script>
-<script>
+<? endif; ?>
 
-$.fn.moveUp = function() {
-    $.each(this, function() {
-         $(this).after($(this).prev());   
-    });
-};
-
-$.fn.moveDown = function() {
-    $.each(this, function() {
-         $(this).before($(this).next());   
-    });
-};
-
-var tiles = [ { sprites: []  } ];
-var sprites = [];
-var spriteDefault = {
-	top: 0,
-	left: 0,
-	layer: 1,
-	destroyable: true,
-	score: 1,
-	audio: 'none'
-};
-var currentTileIndex = 0;
-var levelPath = '/levels/forest';
-
-function setBackground(path) {
-	if (typeof path == 'undefined') { $('#grid').css('background-image', 'none'); return false; }
-	$('#grid').css('background-image', 'url(' + levelPath + path + ')');
-	tiles[currentTileIndex].background = path;
-	$('#backgrounds').val(path);
-}
-
-function updateSprite() {
-	var sprite = $('.sprite--selected');
-	if (sprite.size() < 1) { return false; }
-	var id = sprite.data('id');
-
-	tiles[currentTileIndex].sprites[id] = {
-		path: tiles[currentTileIndex].sprites[id].path,
-		top: parseInt(sprite.offset().top, 10),
-		left: parseInt(sprite.offset().left, 10),
-		layer: sprite.data('layer'),
-		destroyable: sprite.data('destroyable'),
-		score: sprite.data('score'),
-		audio: sprite.data('audio')
-	};
-
-	if (sprite.data('destroyable')) {
-		sprite.width(sprite.data('orig-width') / 9);
-	} else {
-		sprite.width(sprite.data('orig-width'));
-	}
-
-	sprite.css({ zIndex: sprite.data('layer') });
-
-	// Update bij iedere sprite update ook de sprite defaults om versneld
-	// overeenkomstige sprites te kunnen plaatsen
-	spriteDefault.layer = sprite.data('layer');
-	spriteDefault.destroyable = sprite.data('destroyable');
-	spriteDefault.score = sprite.data('score');
-	spriteDefault.audio = sprite.data('audio');
-}
-
-function selectSprite(sprite) {
-	deselectSprite();
-	var sprite = $(sprite).addClass('sprite--selected');
-
-	$('#spriteProps').addClass('selected');
-	$('#spriteProps #layer').val(sprite.data('layer'));
-	$('#spriteProps #destroyable').prop('checked', sprite.data('destroyable'));
-	$('#spriteProps #score').val(sprite.data('score'));
-	$('#spriteProps #audio').val(sprite.data('audio'));
-}
-
-function deselectSprite() {
-	$('#spriteProps').removeClass('selected');
-	$('.sprite--selected').removeClass('sprite--selected');
-}
-
-function getOutput() {
-	var resultTiles = [];
-	
-	for (tile in tiles) {
-		var resultSprites = [];
-		
-		for (sprite in tiles[tile].sprites) {
-            
-            var id = 'xxxxxxxxxxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-                var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-                return v.toString(16);
-            });
-            
-			resultSprites.push({
-				id: id,
-				path: tiles[tile].sprites[sprite].path,
-				top: parseInt(tiles[tile].sprites[sprite].top, 10),
-				left: parseInt(tiles[tile].sprites[sprite].left, 10),
-				layer: tiles[tile].sprites[sprite].layer,
-				destroyable: tiles[tile].sprites[sprite].destroyable,
-				score: tiles[tile].sprites[sprite].score,
-				audio: tiles[tile].sprites[sprite].audio
-			});
-		}
-		
-		resultTiles.push({
-			background: tiles[tile].background,
-			sprites: resultSprites
-		});
-	}
-	
-	return JSON.stringify(resultTiles);
-}
-
-function removeSprite(sprite) {
-	delete tiles[currentTileIndex].sprites[sprite.id];
-	sprite.remove();
-	deselectSprite();
-}
-	
-function addSprite(id, path, top, left, layer, destroyable, score, audio) {
-	if (typeof top == 'undefined') top = spriteDefault.top;
-	if (typeof left == 'undefined') left = spriteDefault.left;
-	if (typeof layer == 'undefined') layer = spriteDefault.layer;
-	if (typeof destroyable == 'undefined') destroyable = spriteDefault.destroyable;
-	if (typeof score == 'undefined') score = spriteDefault.score;
-	if (typeof audio == 'undefined') audio = spriteDefault.audio;
-
-	var img = new Image();
-	var sprite = $('<div style="position:absolute;top:' + top + ';left:' + left + ';"></div>')
-		.data('id', id)
-		.data('path', path)
-		.data('layer', layer)
-		.data('destroyable', destroyable)
-		.data('score', score)
-		.data('audio', audio);
-			
-	img.onload = function() {
-		sprite.data('orig-width', img.width).data('orig-height', img.height);
-		sprite.width(img.width).height(img.height)
-			.css('background-image', 'url(' + img.src + ')')
-			.css('top', top)
-			.css('left', left);
-
-		if (sprite.data('destroyable')) {
-			sprite.width(sprite.data('orig-width') / 9);
-		} else {
-			sprite.width(sprite.data('orig-width'));
-		}
-	};
-	
-	img.src = levelPath + path;
-	
-	tiles[currentTileIndex].sprites[id] = {
-		path: path,	
-		top: top,
-		left: left,
-		layer: layer,
-		destroyable: destroyable,
-		score: score,
-		audio: audio
-	};
-	
-	sprite.draggable({ containment: 'parent', distance: 10, stop: updateSprite } ).appendTo($('#grid'));
-}
-
-$('#setBackground').on('click', function(event) {
-	deselectSprite();
-	setBackground($('#backgrounds').val());
-});
-
-$('#export').on('click', function(event) {
-	deselectSprite();
-	$('#output').val(getOutput());
-});
-
-$('#import').on('click', function(event) {
-	deselectSprite();
-	tiles = [];
-
-	var resultTiles = JSON.parse($('#output').val());
-	
-	for	(tile in resultTiles) {
-		var sprites = [];
-		
-		for(sprite in resultTiles[tile].sprites) {
-			if (typeof resultTiles[tile].sprites[sprite].path == 'undefined') throw 'Undefined path in sprite';
-			if (typeof resultTiles[tile].sprites[sprite].top == 'undefined') resultTiles[tile].sprites[sprite].top = spriteDefault.top;
-			if (typeof resultTiles[tile].sprites[sprite].left == 'undefined') resultTiles[tile].sprites[sprite].left = spriteDefault.left;
-			if (typeof resultTiles[tile].sprites[sprite].layer == 'undefined') resultTiles[tile].sprites[sprite].layer = spriteDefault.layer;
-			if (typeof resultTiles[tile].sprites[sprite].destroyable == 'undefined') resultTiles[tile].sprites[sprite].destroyable = spriteDefault.destroyable;
-			if (typeof resultTiles[tile].sprites[sprite].score == 'undefined') resultTiles[tile].sprites[sprite].score = spriteDefault.score;
-			if (typeof resultTiles[tile].sprites[sprite].audio == 'undefined') resultTiles[tile].sprites[sprite].audio = spriteDefault.audio;
-
-			sprites[Math.random()] = {
-				path: resultTiles[tile].sprites[sprite].path,
-				top: resultTiles[tile].sprites[sprite].top,
-				left: resultTiles[tile].sprites[sprite].left,
-				layer: resultTiles[tile].sprites[sprite].layer,
-				destroyable: resultTiles[tile].sprites[sprite].destroyable,
-				score: resultTiles[tile].sprites[sprite].score,
-				audio: resultTiles[tile].sprites[sprite].audio
-			};
-		}
-		
-		tiles.push({
-			background: resultTiles[tile].background,
-			sprites: sprites
-		});
-	}
-	
-	currentTileIndex = 0;
-	
-	if(tiles.length == 0) {
-		tiles.push( { sprites: []  } );
-	}
-	
-	renderTile(tiles[currentTileIndex]);
-	$('#output').val('');
-	alert('Import complete');
-});
-
-function renderTile(tile) {
-	$('#grid').children().remove();
-	setBackground(tile.background);
-	
-	for(sprite in tile.sprites) {
-		addSprite(
-			sprite,
-			tile.sprites[sprite].path,
-			tile.sprites[sprite].top,
-			tile.sprites[sprite].left,
-			tile.sprites[sprite].layer,
-			tile.sprites[sprite].destroyable,
-			tile.sprites[sprite].score,
-			tile.sprites[sprite].audio
-			);
-	}
-}
-
-$('#nextTile').on('click', function(event) {
-	deselectSprite();
-    currentTileIndex++;
-    $('#tileIndexLabel').html(currentTileIndex+1);
-
-    if(tiles.length == currentTileIndex) {
-		tiles.push( { sprites: []  } );
-    }
-
-    renderTile(tiles[currentTileIndex]);
-});
-
-$('#prevTile').on('click', function(event) {
-	deselectSprite();
-	if (currentTileIndex > 0) {
-		currentTileIndex--;
-		$('#tileIndexLabel').html(currentTileIndex+1);
-		renderTile(tiles[currentTileIndex]);
-	}
-});
-
-$('#addSprite').on('click', function(event){
-	var id = Math.random();
-	var path = $('#sprites').val();
-	
-	addSprite(id, path);
-});
-
-function setSprites() {
-	tiles[currentTileIndex].sprites = [];
-
-	$.each($('#grid').children(), function(key, object) {
-		var sprite = $(object);
-	
-		tiles[currentTileIndex].sprites[sprite.data('id')] = {
-			path: sprite.data('path'),
-			top: sprite.offset().top,
-			left: sprite.offset().left,
-			layer: sprite.data('layer'),
-			destroyable: sprite.data('destroyable'),
-			score: 	sprite.data('score'),
-			audio: 	sprite.data('audio')
-		};
-	});
-}
-
-$('body').on('keydown', function (event) {
-	var selectedSprite = $('.sprite--selected');
-	if (selectedSprite) {
-		if (event.which == 187) { // -
-			event.preventDefault();
-			selectedSprite.moveDown();
-			setSprites();
-		}
-		else if (event.which == 189) { // +
-			event.preventDefault();
-			selectedSprite.moveUp();
-			setSprites();
-		}
-		else if (event.which == 46) { // Del
-			event.preventDefault();
-			removeSprite(selectedSprite);
-		}
-		else if (event.which == 38) { // Up
-			event.preventDefault();
-			selectedSprite.css({ top: '-=1' });
-		}
-		else if (event.which == 40) { // Down
-			event.preventDefault();
-			selectedSprite.css({ top: '+=1' });
-		}
-		else if (event.which == 37) { // Left
-			event.preventDefault();
-			selectedSprite.css({ left: '-=1' });
-		}
-		else if (event.which == 39) { // Right
-			event.preventDefault();
-			selectedSprite.css({ left: '+=1' });
-		}
-		else if (event.which == 27) { // Esc
-			event.preventDefault();
-			deselectSprite();
-		}
-	}
-
-	//console.log(event.which);
-});
-
-$(document).ready(function() {
-	$('#grid').on('mouseup', function(event){
-		if ($(event.target).attr('id') == 'grid') {
-			deselectSprite();
-		}
-	});
-	
-	$('#spriteProps :input').on('change', function(){
-		$('.sprite--selected').data('layer', $('#spriteProps #layer').val())
-		.data('destroyable', ($('#spriteProps #destroyable').is(':checked') ? true : false))
-		.data('score', parseInt($('#spriteProps #score').val(), 10) || 1)
-		.data('audio', $('#spriteProps #audio').val());
-		updateSprite();
-	});
-
-	$('#grid').on('mousedown', 'div.ui-draggable', function(event){
-		event.preventDefault();
-		event.stopPropagation();
-		selectSprite($(this));
-	})
-	setBackground($('#backgrounds').val());
-});
-
-</script>
 </body>
 </html>
