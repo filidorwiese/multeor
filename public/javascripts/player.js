@@ -12,7 +12,7 @@ var Player = function(playerId, viewportWidth, viewportHeight, playerColor, play
         maxX: viewportWidth - 180,
         minY: 60,
         maxY: viewportHeight - 60,
-        minZ: 40,
+        minZ: 60,
         maxZ: 120,
         color: playerColor,
         lastMoves: [],
@@ -21,7 +21,7 @@ var Player = function(playerId, viewportWidth, viewportHeight, playerColor, play
         locked: false,
         endX: 0,
         endY: 0,
-        endZ: 40,
+        endZ: 60,
         layer: 1
     };
     

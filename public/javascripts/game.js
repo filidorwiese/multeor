@@ -11,7 +11,10 @@ var Game = function(levelPath, code){
         worldX: 0,
         worldSpeed: 10,
         destroyed: {},
-        levelPath: levelPath
+        levelPath: levelPath,
+        spriteAnimationDirection: 'forwards',
+        spriteAnimationStep: .1,
+        spriteAnimationFrame: 1
     };
     
     $.ajaxSetup({ cache: true });
@@ -106,36 +109,6 @@ Game.prototype.tick = function(time) {
     // Clear scherm
     context.clearRect(0, 0, canvas.width, canvas.height);
     
-    // Leaderboard
-    if (this.props.state == 'STARTED' && this.props.worldX > ((this.props.world.length * 1000) - 7000)) {
-        this.props.state = 'LEADERBOARD';
-
-        // Prevent player input and determine leaderboard position
-        var highestScore = 0;
-        var leaderboardPositions = [];
-        for (player in players) {
-            players[player].lockPlayer();
-            if (players[player].props.score > highestScore) { highestScore = players[player].props.score; }
-            leaderboardPositions.push([players[player], players[player].props.score]);
-        }
-        leaderboardPositions.sort(function(a, b) {return b[1] - a[1] });
-        logGAEvent('Ended', 'Highest score', highestScore);
-
-        // Calculate player leaderboard position
-        var numberOfPlayer = 0;
-        var headerHeight = 70;
-        var leaderboardWidth = canvas.width / 4;
-        for (player in leaderboardPositions) {
-            var thePlayer = leaderboardPositions[player][0];
-            numberOfPlayer++;
-            thePlayer.props.endX = Math.floor((thePlayer.props.score / highestScore) * ((canvas.width / 2) + leaderboardWidth));
-            if (thePlayer.props.endX < (canvas.width / 2) - leaderboardWidth) {
-                thePlayer.props.endX = (canvas.width / 2) - leaderboardWidth;
-            }
-            thePlayer.props.endY = Math.floor((numberOfPlayer * (thePlayer.props.minZ + 30)) + headerHeight);
-        }
-    }
-
     // Update worldX
     if (this.props.state == 'STARTED' || this.props.state == 'LEADERBOARD') {
         if (this.props.worldX < ((this.props.world.length * 1000) - canvas.width)) {
@@ -145,61 +118,104 @@ Game.prototype.tick = function(time) {
         }
     }
 
-	// Draw background tiles
-	var numberOfTiles = Math.ceil(canvas.width / 1000);
+    var numberOfTiles = Math.ceil(canvas.width / 1000);
     var bgBase = Math.floor(this.props.worldX / 1000);
     var bgModulus = this.props.worldX % 1000;
     
-	for (var ii = 0; ii <= numberOfTiles; ii++) {
-		var tile = this.props.world[bgBase + ii];
-		if (typeof tile == 'undefined') { continue; }
-		var bgImage = this.getImage(tile.background);
-		
-		var x = (ii * 1000) - bgModulus;
-		var sx = 0;
-		var sw = 1000;
-		
-		if (x < 0) {
-			x = 0;
-			sx = bgModulus;
-			sw = 1000 - bgModulus;
-		}
-		if (x + 1000 > canvas.width) {
-			sw = canvas.width - x;
-		}
-		
-		// image, sx, sy, sw, sh, x, y, w, height
-        if (typeof bgImage != 'undefined') {
-   		   context.drawImage(bgImage, sx, 0, sw, canvas.height, x, 0, sw, canvas.height);
+	// Draw background tiles
+    this.renderBackgrounds(numberOfTiles, bgBase, bgModulus);
+
+    // Draw entities, destroyables and players	
+    this.renderEntities(numberOfTiles, bgBase, bgModulus);
+
+    // Draw on screen text
+    if (this.props.message.length) {
+        this.renderText();
+    }
+
+    // If near the end of the world, take over control and render to leaderboard positions
+    if (this.props.state == 'STARTED' && this.props.worldX > ((this.props.world.length * 1000) - 7000)) {
+        this.props.state = 'LEADERBOARD';
+        this.renderToLeaderboard();
+    }
+
+    // Draw Leaderbord
+    if (this.props.state == 'ENDED' || this.props.state == 'LEADERBOARD') {
+        this.renderLeaderboard();
+    }    
+}
+
+
+Game.prototype.renderBackgrounds = function(numberOfTiles, bgBase, bgModulus) {
+    for (var ii = 0; ii <= numberOfTiles; ii++) {
+        var tile = this.props.world[bgBase + ii];
+        if (typeof tile == 'undefined') { continue; }
+        var bgImage = this.getImage(tile.background);
+        
+        var x = (ii * 1000) - bgModulus;
+        var sx = 0;
+        var sw = 1000;
+        
+        if (x < 0) {
+            x = 0;
+            sx = bgModulus;
+            sw = 1000 - bgModulus;
         }
-	}
-	
+        if (x + 1000 > canvas.width) {
+            sw = canvas.width - x;
+        }
+        
+        // image, sx, sy, sw, sh, x, y, w, height
+        if (typeof bgImage != 'undefined') {
+           context.drawImage(bgImage, sx, 0, sw, canvas.height, x, 0, sw, canvas.height);
+        }
+    }
+}
+
+Game.prototype.renderEntities = function(numberOfTiles, bgBase, bgModulus) {
     // Entities bijhouden
     var entities = [];
     var entitiesOffset = 0;
-    
+
+    // Globally update destroyable spriteAnimationFram
+    if (this.props.spriteAnimationDirection === 'forwards') {
+        if (this.props.spriteAnimationFrame < 9 - this.props.spriteAnimationStep) {
+            this.props.spriteAnimationFrame += this.props.spriteAnimationStep;
+        } else {
+            this.props.spriteAnimationDirection = 'backwards';
+        }
+    } else {
+        if (this.props.spriteAnimationFrame > 1 + this.props.spriteAnimationStep) {
+            this.props.spriteAnimationFrame -= this.props.spriteAnimationStep;
+        } else {
+            this.props.spriteAnimationDirection = 'forwards';
+        }
+    }
+    var currentSpriteFrame = Math.floor(this.props.spriteAnimationFrame);
+
+
     // Destroyables tekenen en collisions detecten
     for (var ii = 0; ii <= numberOfTiles; ii++) {
-		var tile = this.props.world[bgBase + ii];
-		if (typeof tile == 'undefined') { continue; }
-		
-		for (sprite in tile.sprites) {
+        var tile = this.props.world[bgBase + ii];
+        if (typeof tile == 'undefined') { continue; }
+        
+        for (sprite in tile.sprites) {
             var spriteObject = tile.sprites[sprite];
-			var destroyedByColorIndex = this.props.destroyed[spriteObject.id] || false;
-			var x = (ii * 1000) - bgModulus + spriteObject.left;
-			var y = spriteObject.top;
+            var destroyedColorIndex = this.props.destroyed[spriteObject.id] || false;
+            var x = (ii * 1000) - bgModulus + spriteObject.left;
+            var y = spriteObject.top;
             var zIndex =  entitiesOffset + (spriteObject.layer * 1000);
 
             // Parallax fx
             spriteObject.left -= (spriteObject.layer - 1) * 2;
 
             // Draw entity
-            entities[zIndex] = new Destroyable(spriteObject.id, this.getImage(spriteObject.path), x, y, spriteObject.destroyable, destroyedByColorIndex);
+            entities[zIndex] = new Destroyable(spriteObject.id, this.getImage(spriteObject.path), x, y, spriteObject.destroyable, destroyedColorIndex, currentSpriteFrame);
             
             // Do collision detection
-			if (spriteObject.destroyable && !destroyedByColorIndex) {
-				var playerCollidedId = entities[zIndex].collides(players, bgModulus);
-				if (playerCollidedId !== false) {
+            if (spriteObject.destroyable && !destroyedColorIndex) {
+                var playerCollidedId = entities[zIndex].collides(players, bgModulus);
+                if (playerCollidedId !== false) {
                     // Remember destroyed state
                     var playerCollidedColor = players[playerCollidedId].props.color;
                     var playerCollidedColorIndex = $.inArray(playerCollidedColor, playerColors) + 1;
@@ -207,21 +223,21 @@ Game.prototype.tick = function(time) {
 
                     // Update playerScore
                     if (spriteObject.score > 0) {
-					   players[playerCollidedId].updateScore(spriteObject.score);
+                       players[playerCollidedId].updateScore(spriteObject.score);
 
                         // Play audio effect
                         if (spriteObject.audio && spriteObject.audio != 'none') {
                             this.props.audio[spriteObject.audio].volume(.2).play();
                         }
                     }
-				}
-			}
-			
+                }
+            }
+            
             entitiesOffset++;
-		}
-	}
+        }
+    }
 
-	// Players tekenen
+    // Players tekenen
     for (player in players) {
         var zIndex = (players[player].props.layer * 1000) + 900 + players[player].props.playerNumber;
         entities[zIndex] = players[player];
@@ -231,34 +247,58 @@ Game.prototype.tick = function(time) {
     for (key in entities) {
         entities[key].draw(context, bgModulus);
     }
+}
 
-    // Text plaatsen
-    if (this.props.message.length) {
-        var maxWidth = canvas.width / 2;
-        var x = (canvas.width - maxWidth) / 2;
-        var y = (canvas.height / 2.2);
-        this.drawMessage(context, this.props.message, x, y, maxWidth, 35, true);
+Game.prototype.renderText = function() {
+    var maxWidth = canvas.width / 2;
+    var x = (canvas.width - maxWidth) / 2;
+    var y = (canvas.height / 2.2);
+    this.drawMessage(context, this.props.message, x, y, maxWidth, 35, true);
+}
+
+Game.prototype.renderToLeaderboard = function() {
+    // Prevent player input and determine leaderboard position
+    var highestScore = 0;
+    var leaderboardPositions = [];
+    for (player in players) {
+        players[player].lockPlayer();
+        if (players[player].props.score > highestScore) { highestScore = players[player].props.score; }
+        leaderboardPositions.push([players[player], players[player].props.score]);
     }
+    leaderboardPositions.sort(function(a, b) {return b[1] - a[1] });
+    logGAEvent('Ended', 'Highest score', highestScore);
 
-    // Draw Leaderbord
-    if (this.props.state == 'ENDED' || this.props.state == 'LEADERBOARD') {
-        // Draw leaderboard header
-        var maxWidth = canvas.width / 2;
-        var x = (canvas.width - maxWidth) / 2;
-        var y = 70;
-        this.drawMessage(context, 'SCORES', x, y, maxWidth, 35, true);
+    // Calculate player leaderboard position
+    var numberOfPlayer = 0;
+    var headerHeight = 70;
+    var leaderboardWidth = canvas.width / 4;
+    for (player in leaderboardPositions) {
+        var thePlayer = leaderboardPositions[player][0];
+        numberOfPlayer++;
+        thePlayer.props.endX = Math.floor((thePlayer.props.score / highestScore) * ((canvas.width / 2) + leaderboardWidth));
+        if (thePlayer.props.endX < (canvas.width / 2) - leaderboardWidth) {
+            thePlayer.props.endX = (canvas.width / 2) - leaderboardWidth;
+        }
+        thePlayer.props.endY = Math.floor((numberOfPlayer * (thePlayer.props.minZ + 30)) + headerHeight);
+    }
+}
 
-        // Draw score
-        var fuzzyNumber = 10;
-        for (player in players) {
-            if (players[player].props.x < players[player].props.endX + fuzzyNumber && players[player].props.x > players[player].props.endX - fuzzyNumber) {
-                if (players[player].props.y < players[player].props.endY + fuzzyNumber && players[player].props.y > players[player].props.endY - fuzzyNumber) {
-                    this.drawMessage(context, players[player].props.score, players[player].props.endX + 130, players[player].props.endY + 9, maxWidth, 35, false);
-                }
+Game.prototype.renderLeaderboard = function() {
+    // Draw leaderboard header
+    var maxWidth = canvas.width / 2;
+    var x = (canvas.width - maxWidth) / 2;
+    var y = 70;
+    this.drawMessage(context, 'SCORES', x, y, maxWidth, 35, true);
+
+    // Draw score
+    var fuzzyNumber = 10;
+    for (player in players) {
+        if (players[player].props.x < players[player].props.endX + fuzzyNumber && players[player].props.x > players[player].props.endX - fuzzyNumber) {
+            if (players[player].props.y < players[player].props.endY + fuzzyNumber && players[player].props.y > players[player].props.endY - fuzzyNumber) {
+                this.drawMessage(context, players[player].props.score, players[player].props.endX + 130, players[player].props.endY + 9, maxWidth, 35, false);
             }
         }
     }
-    
 }
 
 Game.prototype.message = function(message) {

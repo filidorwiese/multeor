@@ -48,9 +48,11 @@ function updateSprite() {
 	};
 
 	if (sprite.data('destroyable')) {
-		sprite.width(sprite.data('orig-width') / 9);
+		sprite.width(sprite.data('orig-width') / 8);
+		sprite.height(sprite.data('orig-height') / 2);
 	} else {
 		sprite.width(sprite.data('orig-width'));
+		sprite.height(sprite.data('orig-height'));
 	}
 
 	sprite.css({ zIndex: sprite.data('layer') });
@@ -153,9 +155,11 @@ function addSprite(id, path, top, left, layer, destroyable, score, audio) {
 			.css('left', left);
 
 		if (sprite.data('destroyable')) {
-			sprite.width(sprite.data('orig-width') / 9);
+			sprite.width(sprite.data('orig-width') / 8);
+			sprite.height(sprite.data('orig-height') / 2);
 		} else {
 			sprite.width(sprite.data('orig-width'));
+			sprite.height(sprite.data('orig-height'));
 		}
 	};
 	
@@ -232,9 +236,18 @@ $('#import').on('click', function(event) {
 	}
 	
 	renderTile(tiles[currentTileIndex]);
+
+    updateTileCounter();
+    
 	$('#output').val('');
 	Log('Import complete');
 });
+
+function updateTileCounter() {
+	var numberOfTiles = 0;
+    for (var ii in tiles) { numberOfTiles++; }
+    $('#tileIndexLabel').html(currentTileIndex+1 + ' / ' + numberOfTiles);
+}
 
 function renderTile(tile) {
 	$('#grid').children().remove();
@@ -254,25 +267,46 @@ function renderTile(tile) {
 	}
 }
 
+
+$('#firstTile').on('click', function(event) {
+	deselectSprite();
+	
+	currentTileIndex=0;
+	renderTile(tiles[currentTileIndex]);
+
+    updateTileCounter();
+});
+
 $('#nextTile').on('click', function(event) {
 	deselectSprite();
     currentTileIndex++;
-    $('#tileIndexLabel').html(currentTileIndex+1);
 
     if(tiles.length == currentTileIndex) {
 		tiles.push( { sprites: []  } );
     }
 
     renderTile(tiles[currentTileIndex]);
+    
+    updateTileCounter();
 });
 
 $('#prevTile').on('click', function(event) {
 	deselectSprite();
 	if (currentTileIndex > 0) {
 		currentTileIndex--;
-		$('#tileIndexLabel').html(currentTileIndex+1);
 		renderTile(tiles[currentTileIndex]);
 	}
+
+    updateTileCounter();
+});
+
+$('#lastTile').on('click', function(event) {
+	deselectSprite();
+
+	currentTileIndex=tiles.length-1;
+	renderTile(tiles[currentTileIndex]);
+
+    updateTileCounter();
 });
 
 $('#addSprite').on('click', function(event){

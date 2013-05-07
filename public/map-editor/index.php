@@ -91,7 +91,7 @@
 	#log {
 		clear:both;
 		float:left;
-		width:800px;
+		width:600px;
 	}
 
 	#prev-next-tile {
@@ -205,9 +205,11 @@
 		</div>
 		<div id="log"></div>
 		<div id="prev-next-tile">
+			<input id="firstTile" type="button" value="first tile" />
 			<input id="prevTile" type="button" value="prev tile" />
-		    <span id="tileIndexLabel">1</span>
+		    <span id="tileIndexLabel">1 / 1</span>
 			<input id="nextTile" type="button" value="next tile" />
+			<input id="lastTile" type="button" value="last tile" />
 		</div>
 	</div>
 
