@@ -4,6 +4,7 @@ var Player = function(playerId, viewportWidth, viewportHeight, playerColor, play
     self.props = {
 		playerId: playerId,
         playerNumber: playerNumber,
+        score: 0,
         x: 0,
         y: 0,
         z: 0,
@@ -65,7 +66,6 @@ Player.prototype.draw = function(context) {
         this.props.meteorHeadAngle++;
         context.rotate((Math.PI / 180) * this.props.meteorHeadAngle);
         context.fillRect(playerXPadding, playerYPadding, playerRight - playerLeft, playerBottom - playerTop);
-        //context.fillRect(10, 10, playerRight-playerLeft, playerBottom-playerTop);
         context.restore();
     }    
 };

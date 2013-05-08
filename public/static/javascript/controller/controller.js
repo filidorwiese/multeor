@@ -107,12 +107,16 @@ $(document).ready(function(){
         
         setTimeout(playerUpdate, 40);
     };
+    
+    /* Fixes pinch-zoom? */
     $('html, body').on('touchstart', function(event) {
         event.preventDefault();
     });
     $('html, body').on('touchmove', function(event) {
         event.preventDefault();
     });
+    /* */
+
     $('#leftControls').on('touchstart', function(event) {
         event.preventDefault();
     });

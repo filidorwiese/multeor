@@ -14,6 +14,7 @@ Upon.require({
 		'viewer.min.js'
 	],
 	'viewer-development': [
+		'viewer/profiler.js',
 		'viewer/game.js',
 		'viewer/player.js',
 		'viewer/destroyable.js',

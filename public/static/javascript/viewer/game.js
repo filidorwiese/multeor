@@ -12,7 +12,8 @@ var Game = function(levelPath, code){
         worldSpeed: 10,
         destroyed: {},
         levelPath: levelPath,
-        spriteAnimationFrame: 1
+        spriteAnimationFrame: 1,
+        tmpImage: false
     };
     
     $.ajaxSetup({ cache: true });
@@ -105,7 +106,7 @@ Game.prototype.tick = function(time) {
     if (this.props.state == 'LOADING') { return false; }
     
     // Clear scherm
-    context.clearRect(0, 0, canvas.width, canvas.height);
+    //context.clearRect(0, 0, canvas.width, canvas.height);
     
     // Update worldX
     if (this.props.state == 'STARTED' || this.props.state == 'LEADERBOARD') {
@@ -119,6 +120,7 @@ Game.prototype.tick = function(time) {
     var numberOfTiles = Math.ceil(canvas.width / 1000);
     var bgBase = Math.floor(this.props.worldX / 1000);
     var bgModulus = this.props.worldX % 1000;
+    //Upon.log(numberOfTiles + ', ' + bgBase + ', ' + bgModulus);
     
 	// Draw background tiles
     this.renderBackgrounds(numberOfTiles, bgBase, bgModulus);
@@ -143,14 +145,14 @@ Game.prototype.tick = function(time) {
     }    
 }
 
-
 Game.prototype.renderBackgrounds = function(numberOfTiles, bgBase, bgModulus) {
     for (var ii = 0; ii <= numberOfTiles; ii++) {
         var tile = this.props.world[bgBase + ii];
         if (typeof tile == 'undefined') { continue; }
-        var bgImage = this.getImage(tile.background);
         
         var x = (ii * 1000) - bgModulus;
+        if (x > canvas.width) { continue; }
+
         var sx = 0;
         var sw = 1000;
         
@@ -164,8 +166,12 @@ Game.prototype.renderBackgrounds = function(numberOfTiles, bgBase, bgModulus) {
         }
         
         // image, sx, sy, sw, sh, x, y, w, height
-        if (typeof bgImage != 'undefined') {
-           context.drawImage(bgImage, sx, 0, sw, canvas.height, x, 0, sw, canvas.height);
+        var bgImage = this.getImage(tile.background);
+        //var bgImage = this.props.tmpImage.image;
+        if (bgImage) {
+            //Upon.log(tile.background + ', '+ sx + ', 0, ' + sw + ', ' + canvas.height + ', ' + x + ', 0, ' + sw + ', ' + canvas.height);
+            //context.drawImage(bgImage, sx, 0, sw, canvas.height, x + (ii * 5), 0, sw, canvas.height);
+            context.drawImage(bgImage, sx, 0, sw, canvas.height, x, 0, sw, canvas.height);
         }
     }
 }
@@ -307,6 +313,7 @@ Game.prototype.loadImage = function(imageSrc) {
                 height: this.height,
                 image: this
             }
+            //self.props.tmpImage = self.props.images[imageSrc];
             if (self.props.preloadImages.length >= self.props.images.length) {
                 self.props.state = 'WAITING';
                 self.message(self.props.defaultText);
@@ -319,9 +326,10 @@ Game.prototype.loadImage = function(imageSrc) {
 }
 
 Game.prototype.getImage = function(imageSrc) {
-    if (typeof this.props.images[imageSrc] != 'undefined') {
+    if (typeof this.props.images[imageSrc] !== 'undefined') {
         return this.props.images[imageSrc].image;
     }
+    return false;
 }
 
 Game.prototype.resetGame = function() {

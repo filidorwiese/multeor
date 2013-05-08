@@ -1,8 +1,22 @@
 // FIXME: test if sessionStorage/canvas/websockets is supported?
 
+
+// Setup canvas
+var mainCanvas = document.getElementById('canvas');
+var mainContext = mainCanvas.getContext('2d');
+    mainCanvas.width = $(window).width();
+    mainCanvas.height = 600;
+var offscreenCanvas = document.createElement("canvas");
+var offscreenContext = offscreenCanvas.getContext('2d');
+    offscreenCanvas.width = mainCanvas.width;
+    offscreenCanvas.height = mainCanvas.height
+//var context = offscreenContext;
+var context = mainContext;
+
+// Setup socket.io
 var socket = io.connect(window.location.hostname + ':3333');
-var canvas = document.getElementById('canvas');
-var context = canvas.getContext('2d');
+
+// Setup game globals
 var players = {};
 var getReadyInterval = false;
 var game = false;
@@ -27,9 +41,6 @@ var viewerId = sessionStorage.getItem('viewer-id') || Math.floor((Math.random() 
 sessionStorage.setItem('viewer-id', viewerId);
 
 $(document).ready(function(){
-    canvas.width = $(window).width();
-    canvas.height = 600;
-
     var game = new Game('/levels/forest', gameRoom);
     
     socket.emit('new-viewer', {viewerId: viewerId, gameRoom: gameRoom});
@@ -88,10 +99,19 @@ $(document).ready(function(){
         players[data.pid].props.vector = data.v;
     });
     
+    
+    profiler.start(context, 12, 245, 120, 1);
+
     (function animloop(time){
 	
 		requestAnimationFrame(animloop);
+        
         if (game) { game.tick(time); }
+
+        profiler.tick();
+
+        //mainContext.clearRect(0, 0, canvas.width, canvas.height);
+        mainContext.drawImage(offscreenCanvas, 0, 0);
 
     })();
 });
@@ -139,4 +159,3 @@ function shuffleArray(o){
             clearTimeout(id);
         };
 }());
-
