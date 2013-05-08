@@ -1,0 +1,25 @@
+@import "compass/reset";
+@import "compass/css3";
+@import "_font";
+
+html, body {
+    background: #324444;
+    padding:0;
+    margin:0;
+}
+
+#desktop-container {
+    display:block;
+}
+#mobile-container {
+    /*display:none;*/
+}
+
+@media screen and (max-device-width: 960px) {
+    #desktop-container {
+        display:none;
+    }
+    #mobile-container {
+        display:block;
+    }
+}

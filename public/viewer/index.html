@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <title>Multeor</title>
-    <link rel='stylesheet' href='/stylesheets/viewer.css' />
+    <link rel='stylesheet' href='/static/css/viewer.css' />
     <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-40099645-1']);
@@ -13,22 +13,14 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
+    <script src="/static/javascript/Upon.min.js" data-debug="true" data-config="/static/javascript/Upon.config.js" data-set="third-party viewer-development"></script>
 </head>
 
 <body>
 
     <div id="container">
         <canvas id="canvas"></canvas>
-        <div id="debug"></div>
     </div>
 
-    <script src="http://game.multeor.com:3333/socket.io/socket.io.js" type="text/javascript"></script>
-    <script src="/javascripts/jquery-1.9.1.min.js" type="text/javascript"></script>
-    <script src="/javascripts/requestAnimationFrame.js" type="text/javascript"></script>
-    <script src="/javascripts/player.js" type="text/javascript"></script>
-    <script src="/javascripts/destroyable.js" type="text/javascript"></script>
-    <script src="/javascripts/game.js" type="text/javascript"></script>
-    <script src="/javascripts/viewer.js" type="text/javascript"></script>
-    <script src="/javascripts/howler.min.js" type="text/javascript"></script>
 </body>
 </html>
