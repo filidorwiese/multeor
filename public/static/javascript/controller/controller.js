@@ -8,7 +8,7 @@ $(document).ready(function(){
 		id: sessionStorage.getItem('player-id') || Math.floor((Math.random() * 10000) + 10000),
         angle: 0,
         length: 0,
-        depth: 0,
+        layer: 1,
         maxSpeedX: 50,
         maxSpeedY: 70,
         maxFriction: 80,
@@ -63,32 +63,25 @@ $(document).ready(function(){
     });
 
     socket.on('game-get-ready', function(data){
-        console.log('game-get-ready');
+        Upon.log('game-get-ready');
         $('#score').html('Get ready');
     });
     
     socket.on('game-start', function(data){
-        console.log('game-start');
+        Upon.log('game-start');
         $('#score').html(0);
     });
     
     socket.on('game-end', function(data){
-        console.log('game-end');
+        Upon.log('game-end');
         
         $('#score').html(player.score);
         player.joined = false;
-
-        /*setTimeout(function(){
-            window.location.reload();
-        }, 10000);*/
     });
     
     socket.on('update-score', function(data){
-        console.log('update-score');
-
-        // TODO: audio effect
-        $(window).trigger('audio-destroy');
-        
+        Upon.log('update-score');
+ 
         $('html,body').css({ backgroundColor: '#FFF' });
         setTimeout(function(){
             $('html,body').css({ backgroundColor: player.color });
@@ -106,35 +99,23 @@ $(document).ready(function(){
     var playerUpdate = function() {
         if (!player.joined) { return false; }
         
-        /*
-        if (fresh) {
-            // X/Y en Z besturing
-            //player.z += 20;
-            player.speedX = (((player.maxSpeedX / 100) * player.x) / 100) * player.z;
-            player.speedY = (((player.maxSpeedY / 100) * player.y) / 100) * player.z;
-            
-            // X is gelijk aan Z besturing
-            //player.x = player.z;
-            //player.speedX = ((player.maxSpeedX / 100) * player.x) - (player.maxSpeedX / 2);
-            //player.speedY = ((player.maxSpeedY / 100) * player.y);
-            
-            //console.log({x: player.speedX, y: player.speedY, z: player.z});
-            
-        } else {
-            var maxFriction = (player.maxFriction / 100) * player.z;
-            player.speedX -= maxFriction / player.z;
-        }*/
-        
-        //socket.emit('player-update', {playerId: player.id, gameRoom: gameRoom, x: player.speedX, y: player.speedY, z: player.z});
         socket.emit('player-update', {
 			pid: player.id,
 			gr: gameRoom,
-			v: [Math.floor(player.angle), Math.floor(player.length), player.depth]
+			v: [Math.floor(player.angle), Math.floor(player.length), player.layer]
 		});
         
         setTimeout(playerUpdate, 40);
     };
-
+    $('html, body').on('touchstart', function(event) {
+        event.preventDefault();
+    });
+    $('html, body').on('touchmove', function(event) {
+        event.preventDefault();
+    });
+    $('#leftControls').on('touchstart', function(event) {
+        event.preventDefault();
+    });
     $('#leftControls').on('touchmove', function(event) {
         event.preventDefault();
         
@@ -148,26 +129,20 @@ $(document).ready(function(){
 		player.length = vector.length;
 		
 		$('#joystick').width(vector.length).css('-webkit-transform', 'rotate(' + vector.deg + 'deg)');
-        
         fresh = true;
     });
     $('#leftControls').on('touchend', function(event) {
 		$('#joystick').animate({'width': 5}, 400);
         fresh = false;
     });
-    $('#rightControls').on('touchmove', function(event) {
-        event.preventDefault();
-        
-		var y = (event.originalEvent.targetTouches[0].clientY - $(this).offset().top);
-		if(y < 22) { y = 22; }
-		if(y > 128) { y = 128; }
-		
-		player.depth = y;
-		
-		$('#slider').css('top', player.depth + 'px');
-        fresh = true;
+    $('#rightControls #button').on('touchstart', function(event) {
+        player.layer = 3;
+        $(this).toggleClass('pressed');
     });
-
+    $('#rightControls #button').on('touchend', function(event) {
+        player.layer = 1;
+        $(this).toggleClass('pressed');
+    });
 });
 
 

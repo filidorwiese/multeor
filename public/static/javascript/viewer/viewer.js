@@ -2,8 +2,6 @@
 
 var socket = io.connect(window.location.hostname + ':3333');
 var canvas = document.getElementById('canvas');
-    canvas.width = $(window).width();
-    canvas.height = 600;
 var context = canvas.getContext('2d');
 var players = {};
 var getReadyInterval = false;
@@ -27,8 +25,11 @@ sessionStorage.setItem('game-room', gameRoom);
 // Set viewerId
 var viewerId = sessionStorage.getItem('viewer-id') || Math.floor((Math.random() * 10000) + 10000);
 sessionStorage.setItem('viewer-id', viewerId);
-    
+
 $(document).ready(function(){
+    canvas.width = $(window).width();
+    canvas.height = 600;
+
     var game = new Game('/levels/forest', gameRoom);
     
     socket.emit('new-viewer', {viewerId: viewerId, gameRoom: gameRoom});
@@ -98,13 +99,10 @@ $(document).ready(function(){
 
 
 /** Some useful tools **/
-function log(logline) {
-}
-
 function logGAEvent(action, label, value) {
     if (typeof _gaq !== 'undefined') {
         if (typeof label !== 'undefined' && typeof value !== 'undefined') {
-            console.log('Viewer, ' + action + ', ' + label + ', ' + value);
+            Upon.log('Viewer, ' + action + ', ' + label + ', ' + value);
             _gaq.push(['_trackEvent', 'Viewer', action, label, value]);        
         } else {
             _gaq.push(['_trackEvent', 'Viewer', action]);

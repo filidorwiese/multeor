@@ -3,31 +3,33 @@
 @import "_font";
 
 html, body {
-    background: #324444;
+    background-color: #324444;
     padding:0;
     margin:0;
-    -webkit-transition:all 250ms ease-out;
-    -ms-transition:all 250ms ease-out;
-    -moz-transition:all 250ms ease-out;
-    transition:all 250ms ease-out;
-}
+    @include transition(all 250ms ease-out);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none; 
+    }
 
 #controller {
     position: absolute;
     text-align: center;
     width: 100%;
-}
+    }
 
 @media screen and (orientation: portrait) {
     html, body {
         width:100%; 
         height:100%;
-        background:url(../images/controller_roteer1.png) center center no-repeat;
-    }
+        background:#324444 url(../images/controller_roteer1.png) center center no-repeat;
+        }
     #controller {
         display:none;
+        }
     }
-}
 
 #leftControls {
     width: 297px;
@@ -36,19 +38,41 @@ html, body {
     float: left;
     position: relative;
     margin-top:-40px;
-}
 
-#joystick {
-    width: 130px;
-    height: 41px;
-    background: url(../images/controller_compaspijl.png) right top no-repeat;
-    position: absolute;
-    top: 129px;
-    left: 149px;
-    -webkit-transform: rotate(180deg); /* Safari and Chrome */
-    -webkit-transform-origin:0% 50%; /* Safari and Chrome */
-}
+    #joystick {
+        width: 130px;
+        height: 41px;
+        background: url(../images/controller_compaspijl.png) right top no-repeat;
+        position: absolute;
+        top: 129px;
+        left: 149px;
+        -webkit-transform: rotate(180deg); /* Safari and Chrome */
+        -webkit-transform-origin:0% 50%; /* Safari and Chrome */
+        }
+    }
 
+
+
+#rightControls {
+    position: relative;
+    float: right;
+    width:100px;
+    height:100px;
+    margin-right:50px;
+    margin-top:50px;
+    
+    #button {
+        width:100px;
+        height:100px;
+        border:1px solid orange;
+        
+        &.pressed {
+            border-color:lime;
+            }
+        }
+    }
+
+/*
 #rightControls {
     width: 69px;
     height: 218px;
@@ -57,15 +81,15 @@ html, body {
     margin-right: 50px;
     margin-top: 20px;
     position: relative;
-}
 
-#slider {
-    width: 69px;
-    height: 21px;
-    position: absolute;
-    top: 22px;
-    background: url(../images/controller_dieptesliderknop.png) left top no-repeat;  
-}
+    #slider {
+        width: 69px;
+        height: 21px;
+        position: absolute;
+        top: 22px;
+        background: url(../images/controller_dieptesliderknop.png) left top no-repeat;  
+        }
+    }*/
 
 #score {
     display: block;
@@ -74,4 +98,4 @@ html, body {
     color: white;
     margin-top:10px;
     margin-left:100px;
-}
+    }

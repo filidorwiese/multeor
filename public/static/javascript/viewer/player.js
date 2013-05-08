@@ -7,22 +7,20 @@ var Player = function(playerId, viewportWidth, viewportHeight, playerColor, play
         x: 0,
         y: 0,
         z: 0,
-        vector: [0, 0, 0], // Angle, length, depth
+        vector: [0, 0, 0], // Angle, length, layer
         minX: 60,
         maxX: viewportWidth - 180,
-        minY: 60,
-        maxY: viewportHeight - 60,
-        minZ: 60,
-        maxZ: 120,
+        minY: 0,
+        maxY: viewportHeight,
+        minZ: 50,
+        maxZ: 150,
         color: playerColor,
         lastMoves: [],
-        score: 0,
-        angle: 0,
+        meteorHeadAngle: 0,
         locked: false,
         endX: 0,
         endY: 0,
-        endZ: 60,
-        layer: 1
+        endZ: 60
     };
     
     self.props.y = (playerNumber * (self.props.minZ + 18));
@@ -54,26 +52,26 @@ Player.prototype.draw = function(context) {
         context.bezierCurveTo(control1X, control1Y, control2X, control2Y, headX, headY);
         context.stroke();
 
-        // meteoor
-        var weirdnessOffset = 100;
-        var playerYPadding = 10;
-        var playerXPadding = 10;
-        var playerRight = players[player].props.x - playerXPadding;
-        var playerLeft = players[player].props.x + playerXPadding;
-        var playerTop = players[player].props.y + playerYPadding;
-        var playerBottom = players[player].props.y - playerYPadding;
+        // meteor head
+        var playerYPadding = this.props.z * .2;
+        var playerXPadding = this.props.z * .2;
+        var playerRight = this.props.x - playerXPadding;
+        var playerLeft = this.props.x + playerXPadding;
+        var playerTop = this.props.y + playerYPadding;
+        var playerBottom = this.props.y - playerYPadding;
         context.save();
         context.fillStyle = 'rgba(0,0,0,.6)';
-        context.translate(headX , headY );
-        this.props.angle++;
-        context.rotate((Math.PI / 180) * this.props.angle);
-        context.fillRect(10, 10, playerRight-playerLeft, playerBottom-playerTop);
+        context.translate(headX , headY);
+        this.props.meteorHeadAngle++;
+        context.rotate((Math.PI / 180) * this.props.meteorHeadAngle);
+        context.fillRect(playerXPadding, playerYPadding, playerRight - playerLeft, playerBottom - playerTop);
+        //context.fillRect(10, 10, playerRight-playerLeft, playerBottom-playerTop);
         context.restore();
     }    
 };
 
 Player.prototype.updatePosition = function() {
-    if (this.props.lock) {
+    if (this.props.locked) {
         // Adjust player to endX / endY / endZ
         var xyStep = 2;
         var zStep = .5;
@@ -84,31 +82,33 @@ Player.prototype.updatePosition = function() {
         if (this.props.x - xyStep > this.props.endX) { this.props.x -= xyStep; }
         if (this.props.y - xyStep > this.props.endY) { this.props.y -= xyStep; }
         if (this.props.z - zStep > this.props.endZ) { this.props.z -= zStep; }
-        //console.log(this.props.playerId + ': ' + this.props.x + ', ' + this.props.y + ', ' + this.props.z);
+        //Upon.log(this.props.playerId + ': ' + this.props.x + ', ' + this.props.y + ', ' + this.props.z);
 
     } else {
         // Adjust to player input
         var xSpeed = ySpeed = .1;
     	var radians = this.props.vector[0] * (Math.PI / 180);
-        //console.log(this.props.vector[0]);
+        //Upon.log(this.props.vector[0]);
 
-        if (this.props.vector[0] > 90 && this.props.vector[0] < 270) { xSpeed *= 2; } // If direction is backwards, double speed
-    	this.props.x += ((Math.cos(radians) * this.props.vector[1]) * xSpeed);
-    	if (this.props.x > this.props.maxX) { this.props.x = this.props.maxX; }
-        if (this.props.x < this.props.minX) { this.props.x = this.props.minX; }
-        
-        this.props.y += ((Math.sin(radians) * this.props.vector[1]) * ySpeed);
-    	if (this.props.y > this.props.maxY) { this.props.y = this.props.maxY; }
-        if (this.props.y < this.props.minY) { this.props.y = this.props.minY; }
-    	
     	var zSpeed = 3;
-    	if (this.props.z - zSpeed > this.props.vector[2]) {
+    	if (this.props.z - zSpeed > (this.props.vector[2] * 50)) {
     		this.props.z -= zSpeed;
-    	} else if (this.props.z + zSpeed < this.props.vector[2]) {
+    	} else if (this.props.z + zSpeed < (this.props.vector[2] * 50)) {
     		this.props.z += zSpeed;
     	}
     	if (this.props.z > this.props.maxZ) { this.props.z = this.props.maxZ; }
     	if (this.props.z < this.props.minZ) { this.props.z = this.props.minZ; }
+
+
+        if (this.props.vector[0] > 90 && this.props.vector[0] < 270) { xSpeed *= 2; } // If direction is backwards, double speed
+        this.props.x += ((Math.cos(radians) * this.props.vector[1]) * xSpeed);
+        if (this.props.x > this.props.maxX) { this.props.x = this.props.maxX; }
+        if (this.props.x < this.props.minX) { this.props.x = this.props.minX; }
+        
+        var halfHeight = this.props.z / 2;
+        this.props.y += ((Math.sin(radians) * this.props.vector[1]) * ySpeed);
+        if (this.props.y > this.props.maxY - halfHeight) { this.props.y = this.props.maxY - halfHeight; }
+        if (this.props.y < this.props.minY + halfHeight) { this.props.y = this.props.minY + halfHeight; }
     }
 
     this.props.lastMoves.push([this.props.x, this.props.y]); //, playerProps.z
@@ -121,5 +121,5 @@ Player.prototype.updateScore = function(points) {
 }
 
 Player.prototype.lockPlayer = function() {
-    this.props.lock = true;
+    this.props.locked = true;
 }

@@ -1,9 +1,10 @@
-var Destroyable = function(id, image, x, y, destroyable, destroyedColorIndex, currentSpriteFrame){
+var Destroyable = function(id, image, x, y, z, destroyable, destroyedColorIndex, currentSpriteFrame){
     this.props = {
         id: id,
         image: image,
         x: x,
         y: y,
+        z: z,
         frameWidth: (destroyable ? image.width / 8 : image.width),
         frameHeight: (destroyable ? image.height / 2 : image.height),
         destroyable: destroyable,
@@ -24,29 +25,34 @@ Destroyable.prototype.draw = function(context, bgModulus) {
 };
 
 Destroyable.prototype.collides = function(players, bgModulus) {
-    var weirdnessOffset = 80;
-    var playerYPadding = 10;
-    var playerXPadding = 10;
+    var weirdnessOffset = 100;
     var houseLeft = this.props.x;
     var houseRight = houseLeft + this.props.frameWidth;
     var houseTop = this.props.y;
     var houseBottom = houseTop + this.props.frameHeight;
+    var houseZmin = this.props.z - 20;
+    var houseZmax = this.props.z + 20;
 
     // Uncomment to debug collision detection
-    context.fillRect(houseLeft, houseTop, houseRight - houseLeft, houseBottom - houseTop);
+    //context.fillRect(houseLeft, houseTop, houseRight - houseLeft, houseBottom - houseTop);
     
     for(player in players) {
-        var playerRight = players[player].props.x - playerXPadding + weirdnessOffset;
+        var playerYPadding = players[player].props.z * .2;
+        var playerXPadding = players[player].props.z * .2;
         var playerLeft = players[player].props.x + playerXPadding + weirdnessOffset;
+        var playerRight = players[player].props.x - playerXPadding + weirdnessOffset;
         var playerTop = players[player].props.y + playerYPadding;
         var playerBottom = players[player].props.y - playerYPadding;
+        var playerZ = players[player].props.z;
         
         // Uncomment to debug collision detection
-        context.fillRect(playerLeft, playerTop, playerRight - playerLeft, playerBottom - playerTop);
-
-        if (playerRight >= houseLeft && playerLeft <= houseRight) {
-            if (playerTop >= houseTop && playerBottom <= houseBottom) {
-                return player;
+        //context.fillRect(playerLeft, playerTop, playerRight - playerLeft, playerBottom - playerTop);
+        
+        if (playerZ >= houseZmin && playerZ <= houseZmax) {
+            if (playerRight >= houseLeft && playerLeft <= houseRight) {
+                if (playerTop >= houseTop && playerBottom <= houseBottom) {
+                    return player;
+                }
             }
         }
     }

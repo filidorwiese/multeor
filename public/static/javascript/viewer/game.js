@@ -12,8 +12,6 @@ var Game = function(levelPath, code){
         worldSpeed: 10,
         destroyed: {},
         levelPath: levelPath,
-        spriteAnimationDirection: 'forwards',
-        spriteAnimationStep: .1,
         spriteAnimationFrame: 1
     };
     
@@ -43,7 +41,7 @@ var Game = function(levelPath, code){
         }
 
         // Preload images
-        console.log('Preloading: ' + self.props.preloadImages);
+        Upon.log('Preloading: ' + self.props.preloadImages);
         for (var t=0; t<self.props.preloadImages.length; t++) {
             self.loadImage(self.props.preloadImages[t]);
         }
@@ -177,22 +175,14 @@ Game.prototype.renderEntities = function(numberOfTiles, bgBase, bgModulus) {
     var entities = [];
     var entitiesOffset = 0;
 
-    // Globally update destroyable spriteAnimationFram
-    if (this.props.spriteAnimationDirection === 'forwards') {
-        if (this.props.spriteAnimationFrame < 9 - this.props.spriteAnimationStep) {
-            this.props.spriteAnimationFrame += this.props.spriteAnimationStep;
-        } else {
-            this.props.spriteAnimationDirection = 'backwards';
-        }
+    // Globally update destroyable spriteAnimationFrame
+    var spriteAnimationStep = .1;
+    if (this.props.spriteAnimationFrame < 9 - spriteAnimationStep) {
+        this.props.spriteAnimationFrame += spriteAnimationStep;
     } else {
-        if (this.props.spriteAnimationFrame > 1 + this.props.spriteAnimationStep) {
-            this.props.spriteAnimationFrame -= this.props.spriteAnimationStep;
-        } else {
-            this.props.spriteAnimationDirection = 'forwards';
-        }
+        this.props.spriteAnimationFrame = 1;
     }
     var currentSpriteFrame = Math.floor(this.props.spriteAnimationFrame);
-
 
     // Destroyables tekenen en collisions detecten
     for (var ii = 0; ii <= numberOfTiles; ii++) {
@@ -204,13 +194,14 @@ Game.prototype.renderEntities = function(numberOfTiles, bgBase, bgModulus) {
             var destroyedColorIndex = this.props.destroyed[spriteObject.id] || false;
             var x = (ii * 1000) - bgModulus + spriteObject.left;
             var y = spriteObject.top;
+            var z = spriteObject.layer * 50;
             var zIndex =  entitiesOffset + (spriteObject.layer * 1000);
 
             // Parallax fx
             spriteObject.left -= (spriteObject.layer - 1) * 2;
 
             // Draw entity
-            entities[zIndex] = new Destroyable(spriteObject.id, this.getImage(spriteObject.path), x, y, spriteObject.destroyable, destroyedColorIndex, currentSpriteFrame);
+            entities[zIndex] = new Destroyable(spriteObject.id, this.getImage(spriteObject.path), x, y, z, spriteObject.destroyable, destroyedColorIndex, currentSpriteFrame);
             
             // Do collision detection
             if (spriteObject.destroyable && !destroyedColorIndex) {
