@@ -42,8 +42,8 @@ Player.prototype.draw = function(context) {
         context.lineWidth = this.props.z;
         
         var lingrad2 = context.createLinearGradient(0,0, (headX - context.lineWidth / 2),0);
-        lingrad2.addColorStop(1, this.props.color);
-        lingrad2.addColorStop(0, 'rgba(0,0,0,0)');
+        lingrad2.addColorStop(1, 'rgba(' + this.props.color + ',.8)');
+        lingrad2.addColorStop(0, 'rgba(' + this.props.color + ',0)');
         context.strokeStyle = lingrad2;
         //context.strokeStyle = 'rgba('+this.props.color[0]+','+this.props.color[1]+','+this.props.color[2]+', 1)';
         context.lineCap = 'round';
@@ -88,7 +88,6 @@ Player.prototype.updatePosition = function() {
         // Adjust to player input
         var xSpeed = ySpeed = .1;
     	var radians = this.props.vector[0] * (Math.PI / 180);
-        //Upon.log(this.props.vector[0]);
 
     	var zSpeed = 3;
     	if (this.props.z - zSpeed > (this.props.vector[2] * 50)) {
@@ -98,7 +97,6 @@ Player.prototype.updatePosition = function() {
     	}
     	if (this.props.z > this.props.maxZ) { this.props.z = this.props.maxZ; }
     	if (this.props.z < this.props.minZ) { this.props.z = this.props.minZ; }
-
 
         if (this.props.vector[0] > 90 && this.props.vector[0] < 270) { xSpeed *= 2; } // If direction is backwards, double speed
         this.props.x += ((Math.cos(radians) * this.props.vector[1]) * xSpeed);

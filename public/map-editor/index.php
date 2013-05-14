@@ -179,6 +179,10 @@
 					<input id="destroyable" type="checkbox" />
 				</div>
 				<div class="prop">
+					<label>Animate</label>
+					<input id="animate" type="checkbox" />
+				</div>
+				<div class="prop">
 					<label for="audio">Audio on hit</label>
 					<select id="audio">
 						<?php

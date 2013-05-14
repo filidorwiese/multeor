@@ -16,7 +16,8 @@ var spriteDefault = {
 	top: 0,
 	left: 0,
 	layer: 1,
-	destroyable: true,
+	destroyable: false,
+	animate: false,
 	score: 1,
 	audio: 'none'
 };
@@ -28,8 +29,6 @@ function setBackground(path) {
 	$('#grid').css('background-image', 'url(' + levelPath + path + ')');
 	tiles[currentTileIndex].background = path;
 	$('#backgrounds').val(path);
-
-	Log('Background set');
 }
 
 function updateSprite() {
@@ -43,13 +42,17 @@ function updateSprite() {
 		left: parseInt(sprite.offset().left, 10),
 		layer: sprite.data('layer'),
 		destroyable: sprite.data('destroyable'),
+		animate: sprite.data('animate'),
 		score: sprite.data('score'),
 		audio: sprite.data('audio')
 	};
-
+	
 	if (sprite.data('destroyable')) {
 		sprite.width(sprite.data('orig-width') / 8);
 		sprite.height(sprite.data('orig-height') / 2);
+	} else if (sprite.data('animate')) {
+		sprite.width(sprite.data('orig-width') / 8);
+		sprite.height(sprite.data('orig-height'));
 	} else {
 		sprite.width(sprite.data('orig-width'));
 		sprite.height(sprite.data('orig-height'));
@@ -61,6 +64,7 @@ function updateSprite() {
 	// overeenkomstige sprites te kunnen plaatsen
 	spriteDefault.layer = sprite.data('layer');
 	spriteDefault.destroyable = sprite.data('destroyable');
+	spriteDefault.animate = sprite.data('animate');
 	spriteDefault.score = sprite.data('score');
 	spriteDefault.audio = sprite.data('audio');
 
@@ -74,6 +78,7 @@ function selectSprite(sprite) {
 	$('#spriteProps').addClass('selected');
 	$('#spriteProps #layer').val(sprite.data('layer'));
 	$('#spriteProps #destroyable').prop('checked', sprite.data('destroyable'));
+	$('#spriteProps #animate').prop('checked', sprite.data('animate'));
 	$('#spriteProps #score').val(sprite.data('score'));
 	$('#spriteProps #audio').val(sprite.data('audio'));
 }
@@ -107,6 +112,7 @@ function getOutput() {
 				left: parseInt(tiles[tile].sprites[sprite].left, 10),
 				layer: tiles[tile].sprites[sprite].layer,
 				destroyable: tiles[tile].sprites[sprite].destroyable,
+				animate: tiles[tile].sprites[sprite].animate,
 				score: tiles[tile].sprites[sprite].score,
 				audio: tiles[tile].sprites[sprite].audio
 			});
@@ -130,11 +136,12 @@ function removeSprite(sprite) {
 	Log('Sprite removed');
 }
 	
-function addSprite(id, path, top, left, layer, destroyable, score, audio) {
+function addSprite(id, path, top, left, layer, destroyable, animate, score, audio) {
 	if (typeof top == 'undefined') top = spriteDefault.top;
 	if (typeof left == 'undefined') left = spriteDefault.left;
 	if (typeof layer == 'undefined') layer = spriteDefault.layer;
 	if (typeof destroyable == 'undefined') destroyable = spriteDefault.destroyable;
+	if (typeof animate == 'undefined') animate = spriteDefault.animate;
 	if (typeof score == 'undefined') score = spriteDefault.score;
 	if (typeof audio == 'undefined') audio = spriteDefault.audio;
 
@@ -144,6 +151,7 @@ function addSprite(id, path, top, left, layer, destroyable, score, audio) {
 		.data('path', path)
 		.data('layer', layer)
 		.data('destroyable', destroyable)
+		.data('animate', animate)
 		.data('score', score)
 		.data('audio', audio);
 			
@@ -157,6 +165,9 @@ function addSprite(id, path, top, left, layer, destroyable, score, audio) {
 		if (sprite.data('destroyable')) {
 			sprite.width(sprite.data('orig-width') / 8);
 			sprite.height(sprite.data('orig-height') / 2);
+		} else if (sprite.data('animate')) {
+			sprite.width(sprite.data('orig-width') / 8);
+			sprite.height(sprite.data('orig-height'));
 		} else {
 			sprite.width(sprite.data('orig-width'));
 			sprite.height(sprite.data('orig-height'));
@@ -171,12 +182,12 @@ function addSprite(id, path, top, left, layer, destroyable, score, audio) {
 		left: left,
 		layer: layer,
 		destroyable: destroyable,
+		animate: animate,
 		score: score,
 		audio: audio
 	};
 	
 	sprite.draggable({ containment: 'parent', distance: 10, stop: updateSprite } ).appendTo($('#grid'));
-	Log('Sprite added');
 }
 
 $('#setBackground').on('click', function(event) {
@@ -209,6 +220,7 @@ $('#import').on('click', function(event) {
 			if (typeof resultTiles[tile].sprites[sprite].left == 'undefined') resultTiles[tile].sprites[sprite].left = spriteDefault.left;
 			if (typeof resultTiles[tile].sprites[sprite].layer == 'undefined') resultTiles[tile].sprites[sprite].layer = spriteDefault.layer;
 			if (typeof resultTiles[tile].sprites[sprite].destroyable == 'undefined') resultTiles[tile].sprites[sprite].destroyable = spriteDefault.destroyable;
+			if (typeof resultTiles[tile].sprites[sprite].animate == 'undefined') resultTiles[tile].sprites[sprite].animate = spriteDefault.animate;
 			if (typeof resultTiles[tile].sprites[sprite].score == 'undefined') resultTiles[tile].sprites[sprite].score = spriteDefault.score;
 			if (typeof resultTiles[tile].sprites[sprite].audio == 'undefined') resultTiles[tile].sprites[sprite].audio = spriteDefault.audio;
 
@@ -218,6 +230,7 @@ $('#import').on('click', function(event) {
 				left: resultTiles[tile].sprites[sprite].left,
 				layer: resultTiles[tile].sprites[sprite].layer,
 				destroyable: resultTiles[tile].sprites[sprite].destroyable,
+				animate: resultTiles[tile].sprites[sprite].animate,
 				score: resultTiles[tile].sprites[sprite].score,
 				audio: resultTiles[tile].sprites[sprite].audio
 			};
@@ -253,7 +266,9 @@ function renderTile(tile) {
 	$('#grid').children().remove();
 	setBackground(tile.background);
 	
+	var numberOfSprites = 0;
 	for(sprite in tile.sprites) {
+		numberOfSprites++;
 		addSprite(
 			sprite,
 			tile.sprites[sprite].path,
@@ -261,10 +276,13 @@ function renderTile(tile) {
 			tile.sprites[sprite].left,
 			tile.sprites[sprite].layer,
 			tile.sprites[sprite].destroyable,
+			tile.sprites[sprite].animate,
 			tile.sprites[sprite].score,
 			tile.sprites[sprite].audio
-			);
+		);
 	}
+
+	$('#log').html('Sprites: ' + numberOfSprites);
 }
 
 
@@ -334,6 +352,7 @@ function setSprites() {
 			left: sprite.offset().left,
 			layer: sprite.data('layer'),
 			destroyable: sprite.data('destroyable'),
+			animate: sprite.data('animate'),
 			score: 	sprite.data('score'),
 			audio: 	sprite.data('audio')
 		};
@@ -392,6 +411,7 @@ $(document).ready(function() {
 	$('#spriteProps :input').on('change', function(){
 		$('.sprite--selected').data('layer', $('#spriteProps #layer').val())
 		.data('destroyable', ($('#spriteProps #destroyable').is(':checked') ? true : false))
+		.data('animate', ($('#spriteProps #animate').is(':checked') ? true : false))
 		.data('score', parseInt($('#spriteProps #score').val(), 10) || 1)
 		.data('audio', $('#spriteProps #audio').val());
 		updateSprite();
@@ -410,7 +430,9 @@ $(document).ready(function() {
 
 Log = function(logline) {
 	$('#log').html(logline);
-	setTimeout(function(){
-		$('#log').html('');
-	}, 3000);
+	/*setTimeout(function(){
+		var numberOfSprites = 0;
+    	for (sprite in tiles[currentTileIndex].sprites) { numberOfSprites++; }
+		$('#log').html('Sprites: ' + numberOfSprites);
+	}, 3000);*/
 }

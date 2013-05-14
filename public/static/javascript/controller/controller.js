@@ -3,7 +3,6 @@ var socket = io.connect(window.location.hostname + ':3333');
 $(document).ready(function(){
     var viewportWidth = $(window).width();
     var viewportHeight = $(window).height();
-    var fresh = true;
     var player = {
 		id: sessionStorage.getItem('player-id') || Math.floor((Math.random() * 10000) + 10000),
         angle: 0,
@@ -16,7 +15,8 @@ $(document).ready(function(){
         speedY: 0,
         joined: false,
         score: 0,
-        color: ''
+        color: '',
+        fresh: true
     };
     sessionStorage.setItem('player-id', player.id);
     var gameRoom = parseInt(sessionStorage.getItem('game-room'), 10);
@@ -37,7 +37,7 @@ $(document).ready(function(){
     socket.on('disconnect', function(){
         document.location = '/';
     });
-    
+
     socket.on('game-invalid', function(data){
         sessionStorage.setItem('player-id', '');
         sessionStorage.setItem('game-room', '');
@@ -47,14 +47,14 @@ $(document).ready(function(){
 	socket.on('game-has-started', function(data){
         $('#score').html('Sorry, game already started');
     });
-    
+
     socket.on('game-full', function(data){
         $('#score').html('Too many players');
     });
 
     socket.on('player-joined', function(data){
         player.joined = true;
-        playerUpdate();
+        emitPlayerUpdate();
         $('#score').html('Waiting for other players');
     });
 
@@ -66,25 +66,25 @@ $(document).ready(function(){
         Upon.log('game-get-ready');
         $('#score').html('Get ready');
     });
-    
+
     socket.on('game-start', function(data){
         Upon.log('game-start');
         $('#score').html(0);
     });
-    
+
     socket.on('game-end', function(data){
         Upon.log('game-end');
-        
+
         $('#score').html(player.score);
         player.joined = false;
     });
-    
+
     socket.on('update-score', function(data){
         Upon.log('update-score');
- 
+
         $('html,body').css({ backgroundColor: '#FFF' });
         setTimeout(function(){
-            $('html,body').css({ backgroundColor: player.color });
+            $('html,body').css({ backgroundColor: 'rgba(' + player.color + ',.8)' });
         }, 250);
 
 		player.score = data.score;
@@ -93,60 +93,99 @@ $(document).ready(function(){
 
     socket.on('update-player-color', function(data){
         player.color = data.playerColor;
-        $('html, body').css({ backgroundColor: player.color });
+        $('html, body').css({ backgroundColor: 'rgba(' + player.color + ',.8)' });
     });
-    
-    var playerUpdate = function() {
-        if (!player.joined) { return false; }
-        
-        socket.emit('player-update', {
-			pid: player.id,
-			gr: gameRoom,
-			v: [Math.floor(player.angle), Math.floor(player.length), player.layer]
-		});
-        
-        setTimeout(playerUpdate, 40);
-    };
-    
-    /* Fixes pinch-zoom? */
-    $('html, body').on('touchstart', function(event) {
-        event.preventDefault();
-    });
-    $('html, body').on('touchmove', function(event) {
-        event.preventDefault();
-    });
-    /* */
 
-    $('#leftControls').on('touchstart', function(event) {
-        event.preventDefault();
-    });
-    $('#leftControls').on('touchmove', function(event) {
-        event.preventDefault();
-        
-		var radius = $(this).width()/3;
-		
-		var x = (event.originalEvent.targetTouches[0].clientX - $(this).offset().left);
-		var y = (event.originalEvent.targetTouches[0].clientY - $(this).offset().top);
-		var vector = toDegrees(x, y, radius);
-		
-		player.angle = vector.deg;
-		player.length = vector.length;
-		
-		$('#joystick').width(vector.length).css('-webkit-transform', 'rotate(' + vector.deg + 'deg)');
-        fresh = true;
-    });
-    $('#leftControls').on('touchend', function(event) {
-		$('#joystick').animate({'width': 5}, 400);
-        fresh = false;
-    });
-    $('#rightControls #button').on('touchstart', function(event) {
-        player.layer = 3;
-        $(this).toggleClass('pressed');
-    });
-    $('#rightControls #button').on('touchend', function(event) {
-        player.layer = 1;
-        $(this).toggleClass('pressed');
-    });
+    var emitPlayerUpdate = function() {
+        if (!player.joined) { return false; }
+
+        if (player.fresh) {
+            socket.emit('player-update', {
+    			pid: player.id,
+    			gr: gameRoom,
+    			v: [Math.floor(player.angle), Math.floor(player.length), player.layer]
+    		});
+            player.fresh = false;
+        }
+
+        setTimeout(emitPlayerUpdate, 40);
+    };
+
+    var updatePlayerXY = function(x, y) {
+        var radius = $('#leftControls').width() / 3;
+        var vector = toDegrees(x, y, radius);
+
+        player.angle = vector.deg;
+        player.length = vector.length;
+
+        $('#joystick').width(vector.length).css({
+            '-webkit-transform': 'rotate(' + vector.deg + 'deg)',
+            '-ms-transform': 'rotate(' + vector.deg + 'deg)'
+        });
+
+        player.fresh = true;
+    };
+
+    var updatePlayerZ = function(z) {
+        player.layer = z;
+        player.fresh = true;
+    };
+
+    if (window.navigator.msPointerEnabled) {
+        //http://blogs.msdn.com/b/ie/archive/2011/09/20/touch-input-for-ie10-and-metro-style-apps.aspx
+        /*$('#leftControls').on('MSPointerDown', function(event) {
+            event.preventDefault();
+        });*/
+        $('#leftControls').on('MSPointerMove', function(event) {
+            event.preventDefault();
+
+            //$('#message').html(event.originalEvent.clientX + '!');
+            var x = (event.originalEvent.clientX.toFixed(0) - $(this).offset().left);
+            var y = (event.originalEvent.clientY.toFixed(0) - $(this).offset().top);
+            updatePlayerXY(x, y);
+        });
+        $('#leftControls').on('MSPointerUp', function(event) {
+            $('#joystick').animate({'width': 5}, 400);
+        });
+        $('#rightControls #button').on('MSPointerDown', function(event) {
+            event.preventDefault();
+
+            updatePlayerZ(3);
+            $(this).toggleClass('pressed');
+        });
+        $('#rightControls #button').on('MSPointerUp', function(event) {
+            event.preventDefault();
+
+            updatePlayerZ(1);
+            $(this).toggleClass('pressed');
+        });
+    } else {
+        /*$('#leftControls').on('touchstart', function(event) {
+            event.preventDefault();
+        });*/
+        $('#leftControls').on('touchmove', function(event) {
+            event.preventDefault();
+
+            var x = (event.originalEvent.targetTouches[0].clientX - $(this).offset().left);
+            var y = (event.originalEvent.targetTouches[0].clientY - $(this).offset().top);
+            updatePlayerXY(x, y);
+        });
+        $('#leftControls').on('touchend', function(event) {
+    		$('#joystick').animate({'width': 5}, 400);
+        });
+        $('#rightControls #button').on('touchstart', function(event) {
+            event.preventDefault();
+
+            updatePlayerZ(3);
+            $(this).toggleClass('pressed');
+        });
+        $('#rightControls #button').on('touchend', function(event) {
+            event.preventDefault();
+
+            updatePlayerZ(1);
+            $(this).toggleClass('pressed');
+        });
+    }
 });
 
 

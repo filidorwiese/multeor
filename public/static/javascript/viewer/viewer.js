@@ -2,16 +2,10 @@
 
 
 // Setup canvas
-var mainCanvas = document.getElementById('canvas');
-var mainContext = mainCanvas.getContext('2d');
-    mainCanvas.width = $(window).width();
-    mainCanvas.height = 600;
-var offscreenCanvas = document.createElement("canvas");
-var offscreenContext = offscreenCanvas.getContext('2d');
-    offscreenCanvas.width = mainCanvas.width;
-    offscreenCanvas.height = mainCanvas.height
-//var context = offscreenContext;
-var context = mainContext;
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = 600;
 
 // Setup socket.io
 var socket = io.connect(window.location.hostname + ':3333');
@@ -21,14 +15,14 @@ var players = {};
 var getReadyInterval = false;
 var game = false;
 var playerColors = [
-                    'rgba(255,0,36,0.8)',
-                    'rgba(8,103,255,0.8)',
-                    'rgba(255,110,221,0.8)',
-                    'rgba(255,255,0,0.8)',
-                    'rgba(110,8,157,0.8)',
-                    'rgba(0,255,247,0.8)',
-                    'rgba(16,230,34,0.8)',
-                    'rgba(255,174,26,0.8)'
+                    '255,0,36',
+                    '8,103,255',
+                    '255,110,221',
+                    '255,255,0',
+                    '110,8,157',
+                    '0,255,247',
+                    '16,230,34',
+                    '255,174,26'
                     ];
 var playerColorsShuffled = shuffleArray(playerColors.slice(0)); // Clone it and shuffle
 
@@ -42,13 +36,13 @@ sessionStorage.setItem('viewer-id', viewerId);
 
 $(document).ready(function(){
     var game = new Game('/levels/forest', gameRoom);
-    
+
     socket.emit('new-viewer', {viewerId: viewerId, gameRoom: gameRoom});
-    
+
     socket.on('game-end', function(data){
         game.abortGame();
     });
-    
+
     socket.on('game-invalid', function(data){
         sessionStorage.setItem('viewer-id', '');
         sessionStorage.setItem('game-room', '');
@@ -56,7 +50,7 @@ $(document).ready(function(){
         document.location = '/';
         logGAEvent('Room hijacking?');
     });
-    
+
     socket.on('update-game-state', function(data){
         // Start countdown on first joined player
         var playerCount = 0;
@@ -64,7 +58,7 @@ $(document).ready(function(){
         if (playerCount === 1) {
             game.getReady();
         }
-        
+
         // Add player to players array
         var numberOfPlayers = 0;
         for (var ii in data.players) {
@@ -95,23 +89,27 @@ $(document).ready(function(){
         if (typeof players[data.pid] == 'undefined') {
             return false;
         }
-        
+
         players[data.pid].props.vector = data.v;
     });
-    
-    
+
+
     profiler.start(context, 12, 245, 120, 1);
 
-    (function animloop(time){
-	
-		requestAnimationFrame(animloop);
-        
-        if (game) { game.tick(time); }
+    var now;
+    var delta;
+    var then = new Date().getTime();
+
+    (function gameLoop(time){
+
+		requestAnimationFrame(gameLoop);
+
+        now = new Date().getTime();
+        delta = now - then;
+        then = now;
+        if (game) { game.tick(delta); }
 
         profiler.tick();
-
-        //mainContext.clearRect(0, 0, canvas.width, canvas.height);
-        mainContext.drawImage(offscreenCanvas, 0, 0);
 
     })();
 });
@@ -123,17 +121,17 @@ function logGAEvent(action, label, value) {
     if (typeof _gaq !== 'undefined') {
         if (typeof label !== 'undefined' && typeof value !== 'undefined') {
             Upon.log('Viewer, ' + action + ', ' + label + ', ' + value);
-            _gaq.push(['_trackEvent', 'Viewer', action, label, value]);        
+            _gaq.push(['_trackEvent', 'Viewer', action, label, value]);
         } else {
             _gaq.push(['_trackEvent', 'Viewer', action]);
         }
     }
-}   
+}
 
 function shuffleArray(o){
     for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x) {};
     return o;
-};
+}
 
 (function() {
     var lastTime = 0;
@@ -159,3 +157,7 @@ function shuffleArray(o){
             clearTimeout(id);
         };
 }());
+
+function randomFloat (min, max) {
+    return min + Math.random()*(max-min);
+}

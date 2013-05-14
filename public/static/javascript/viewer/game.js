@@ -4,26 +4,24 @@ var Game = function(levelPath, code){
         state: 'LOADING', // LOADING, WAITING, GETREADY, STARTED, LEADERBOARD, ENDED, ABORTED
         message: false,
         defaultText: 'Go to http://game.multeor.com on your mobile and enter code ' + code + ' to join',
+        levelPath: levelPath,
         preloadImages: [],
+        images: {},
         audio: {},
-        images: [],
         world: false,
         worldX: 0,
         worldSpeed: 10,
         destroyed: {},
-        levelPath: levelPath,
-        spriteAnimationFrame: 1,
-        tmpImage: false
+        explosions: [],
+        spriteAnimationFrame: 1
     };
-    
+
     $.ajaxSetup({ cache: true });
     $.getJSON(self.props.levelPath + '/level.json', function(world){
-        self.message('Loading');
-
         self.props.world = world;
         for (var i=0; i < world.length; i++) {
             if (typeof world[i].background != 'undefined') { self.props.preloadImages.push(world[i].background); }
-            
+
             if (world[i].sprites.length) {
                 for (var j=0; j< world[i].sprites.length; j++) {
                     var spriteObject = world[i].sprites[j];
@@ -57,7 +55,7 @@ var Game = function(levelPath, code){
 
 Game.prototype.loadAudio = function() {
     var self = this;
-    
+
     // Load soundtrack
     var soundtrack = new Howl({
         urls: [self.props.levelPath + '/audio/level.mp3', self.props.levelPath + '/audio/level.ogg'],
@@ -102,12 +100,32 @@ Game.prototype.loadAudio = function() {
     }
 }
 
-Game.prototype.tick = function(time) {
-    if (this.props.state == 'LOADING') { return false; }
-    
+Game.prototype.tick = function(delta) {
+    if (this.props.state == 'LOADING') {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        if (this.props.message.length) { this.renderText(); }
+        return false;
+    }
+
     // Clear scherm
-    //context.clearRect(0, 0, canvas.width, canvas.height);
-    
+    /*
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (this.props.explosions.length < 2) {
+        this.props.explosions = this.props.explosions.concat(Explosion(100, 100, 1000, 3, 1, '255,255,255'));
+    }
+    for (var i=0; i < this.props.explosions.length; i++) {
+        var particle = this.props.explosions[i];
+
+        if (particle.dead) {
+            this.props.explosions.splice(i, 1);
+        }
+
+        particle.draw(context);
+    }
+    return;*/
+
+
     // Update worldX
     if (this.props.state == 'STARTED' || this.props.state == 'LEADERBOARD') {
         if (this.props.worldX < ((this.props.world.length * 1000) - canvas.width)) {
@@ -119,13 +137,13 @@ Game.prototype.tick = function(time) {
 
     var numberOfTiles = Math.ceil(canvas.width / 1000);
     var bgBase = Math.floor(this.props.worldX / 1000);
-    var bgModulus = this.props.worldX % 1000;
+    var bgModulus = Math.floor(this.props.worldX % 1000);
     //Upon.log(numberOfTiles + ', ' + bgBase + ', ' + bgModulus);
-    
+
 	// Draw background tiles
     this.renderBackgrounds(numberOfTiles, bgBase, bgModulus);
 
-    // Draw entities, destroyables and players	
+    // Draw entities, destroyables and players
     this.renderEntities(numberOfTiles, bgBase, bgModulus);
 
     // Draw on screen text
@@ -142,32 +160,31 @@ Game.prototype.tick = function(time) {
     // Draw Leaderbord
     if (this.props.state == 'ENDED' || this.props.state == 'LEADERBOARD') {
         this.renderLeaderboard();
-    }    
+    }
 }
 
 Game.prototype.renderBackgrounds = function(numberOfTiles, bgBase, bgModulus) {
     for (var ii = 0; ii <= numberOfTiles; ii++) {
         var tile = this.props.world[bgBase + ii];
         if (typeof tile == 'undefined') { continue; }
-        
+
         var x = (ii * 1000) - bgModulus;
         if (x > canvas.width) { continue; }
 
         var sx = 0;
         var sw = 1000;
-        
+
+        if (x + 1000 > canvas.width) {
+            sw = canvas.width - x;
+        }
         if (x < 0) {
             x = 0;
             sx = bgModulus;
             sw = 1000 - bgModulus;
         }
-        if (x + 1000 > canvas.width) {
-            sw = canvas.width - x;
-        }
-        
+
         // image, sx, sy, sw, sh, x, y, w, height
         var bgImage = this.getImage(tile.background);
-        //var bgImage = this.props.tmpImage.image;
         if (bgImage) {
             //Upon.log(tile.background + ', '+ sx + ', 0, ' + sw + ', ' + canvas.height + ', ' + x + ', 0, ' + sw + ', ' + canvas.height);
             //context.drawImage(bgImage, sx, 0, sw, canvas.height, x + (ii * 5), 0, sw, canvas.height);
@@ -194,21 +211,21 @@ Game.prototype.renderEntities = function(numberOfTiles, bgBase, bgModulus) {
     for (var ii = 0; ii <= numberOfTiles; ii++) {
         var tile = this.props.world[bgBase + ii];
         if (typeof tile == 'undefined') { continue; }
-        
+
         for (sprite in tile.sprites) {
             var spriteObject = tile.sprites[sprite];
             var destroyedColorIndex = this.props.destroyed[spriteObject.id] || false;
             var x = (ii * 1000) - bgModulus + spriteObject.left;
             var y = spriteObject.top;
             var z = spriteObject.layer * 50;
-            var zIndex =  entitiesOffset + (spriteObject.layer * 1000);
+            var zIndex = entitiesOffset + (spriteObject.layer * 1000);
 
             // Parallax fx
             spriteObject.left -= (spriteObject.layer - 1) * 2;
 
             // Draw entity
-            entities[zIndex] = new Destroyable(spriteObject.id, this.getImage(spriteObject.path), x, y, z, spriteObject.destroyable, destroyedColorIndex, currentSpriteFrame);
-            
+            entities[zIndex] = new Destroyable(spriteObject.id, this.getImage(spriteObject.path), x, y, z, spriteObject.destroyable, destroyedColorIndex, spriteObject.animate, currentSpriteFrame);
+
             // Do collision detection
             if (spriteObject.destroyable && !destroyedColorIndex) {
                 var playerCollidedId = entities[zIndex].collides(players, bgModulus);
@@ -227,19 +244,34 @@ Game.prototype.renderEntities = function(numberOfTiles, bgBase, bgModulus) {
                             this.props.audio[spriteObject.audio].volume(.2).play();
                         }
                     }
+
+                    // Create explosion
+                    var zIndex = entitiesOffset + (spriteObject.layer * 1000) + 200;
+                    var newParticles = Explosion(x, y, zIndex, spriteObject.layer, spriteObject.score, playerCollidedColor);
+                    this.props.explosions = this.props.explosions.concat(newParticles);
                 }
             }
-            
+
             entitiesOffset++;
         }
     }
 
     // Players tekenen
     for (player in players) {
-        var zIndex = (players[player].props.layer * 1000) + 900 + players[player].props.playerNumber;
+        var zIndex = (players[player].props.vector[2] * 1000) + 900 + players[player].props.playerNumber;
         entities[zIndex] = players[player];
     }
-    
+
+    // Explosies tekenen
+    if (this.props.explosions.length) {
+        for (i in this.props.explosions) {
+            var particle = this.props.explosions[i];
+            if (!particle.dead) {
+                entities[particle.zIndex] = particle;
+            }
+        }
+    }
+
     // Alle entities op canvas tekenen
     for (key in entities) {
         entities[key].draw(context, bgModulus);
@@ -313,10 +345,15 @@ Game.prototype.loadImage = function(imageSrc) {
                 height: this.height,
                 image: this
             }
-            //self.props.tmpImage = self.props.images[imageSrc];
-            if (self.props.preloadImages.length >= self.props.images.length) {
+
+            var imagesLoaded = 0;
+            for (var ii in self.props.images) { imagesLoaded++; }
+            var progress = (100 / self.props.preloadImages.length) * imagesLoaded;
+            if (progress >= 100) {
                 self.props.state = 'WAITING';
                 self.message(self.props.defaultText);
+            } else {
+                self.message(progress + '%');
             }
         }
         image.onerror = function() {
@@ -346,7 +383,7 @@ Game.prototype.resetGame = function() {
 Game.prototype.abortGame = function() {
     var self = this;
     socket.emit('game-end', {viewerId: viewerId, gameRoom: gameRoom});
-    
+
     self.props.state = 'ABORTED';
     $(window).trigger('game-audio-stop');
     self.message('Game aborted!');
@@ -373,12 +410,12 @@ Game.prototype.endGame = function(){
 Game.prototype.getReady = function(){
     var self = this;
     if (self.props.state != 'WAITING') { return false; }
-    
+
     $(window).trigger('game-audio-start');
 
 	self.props.state = 'GETREADY';
     socket.emit('game-get-ready', {viewerId: viewerId, gameRoom: gameRoom});
-    var countDown = 10;
+    var countDown = 4;
     var getReadyInterval = setInterval(function(){
         if (self.props.state != 'GETREADY') { clearInterval(getReadyInterval); return false; }
         if (countDown < 1) {
