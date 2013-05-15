@@ -1,9 +1,15 @@
-// Start websocket
-var io = require('socket.io').listen(3333);
-io.set('log level', 1);
+// Start websocket on port 843
+// https://github.com/LearnBoost/socket.io/wiki/Socket.IO-and-firewall-software
+// https://github.com/LearnBoost/Socket.IO/wiki/Configuring-Socket.IO
+var io = require('socket.io').listen(843);
+io.enable('browser client minification');
+io.enable('browser client etag');
+io.enable('browser client gzip');
+io.set('log level', 3);
+//io.set('transports', ['websocket', 'flashsocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
 
 var ppsCounter = 0;
-var previousTimer = 0;
+var previousTimer = new Date();
 var currentGames = {};
 var maxPlayers = 8;
 

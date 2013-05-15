@@ -1,6 +1,6 @@
 Upon.require({
     'third-party': [
-        'http://game.multeor.com:3333/socket.io/socket.io.js',
+        'http://game.multeor.com:843/socket.io/socket.io.js',
         'third-party/jquery-1.9.1.min.js',
         'third-party/howler.min.js'
     ],

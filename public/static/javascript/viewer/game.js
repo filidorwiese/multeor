@@ -100,82 +100,105 @@ Game.prototype.loadAudio = function() {
     }
 }
 
-Game.prototype.tick = function(delta) {
+Game.prototype.tick = function(bgContext, fgContext, delta) {
     if (this.props.state == 'LOADING') {
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        if (this.props.message.length) { this.renderText(); }
+        fgContext.clearRect(0, 0, bgContext.canvas.width, bgContext.canvas.height);
+        if (this.props.message.length) { this.renderText(fgContext); }
         return false;
     }
 
-    // Clear scherm
     /*
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     if (this.props.explosions.length < 2) {
-        this.props.explosions = this.props.explosions.concat(Explosion(100, 100, 1000, 3, 1, '255,255,255'));
+        this.props.explosions = this.props.explosions.concat(Explosion(200, 200, 1000, 5, 1, '255,255,255'));
     }
     for (var i=0; i < this.props.explosions.length; i++) {
         var particle = this.props.explosions[i];
 
         if (particle.dead) {
-            this.props.explosions.splice(i, 1);
+            //this.props.explosions.splice(i, 1);
         }
 
         particle.draw(context);
     }
     return;*/
 
-
     // Update worldX
     if (this.props.state == 'STARTED' || this.props.state == 'LEADERBOARD') {
-        if (this.props.worldX < ((this.props.world.length * 1000) - canvas.width)) {
+        if (this.props.worldX < ((this.props.world.length * 1000) - bgContext.canvas.width)) {
             this.props.worldX += this.props.worldSpeed;
         } else {
             this.endGame();
         }
     }
+    this.props.worldX += this.props.worldSpeed;
 
-    var numberOfTiles = Math.ceil(canvas.width / 1000);
+    var numberOfTiles = Math.ceil(bgContext.canvas.width / 1000);
     var bgBase = Math.floor(this.props.worldX / 1000);
     var bgModulus = Math.floor(this.props.worldX % 1000);
     //Upon.log(numberOfTiles + ', ' + bgBase + ', ' + bgModulus);
 
 	// Draw background tiles
-    this.renderBackgrounds(numberOfTiles, bgBase, bgModulus);
+    this.renderBackgrounds(bgContext, numberOfTiles, bgBase, bgModulus);
+
+
+    // Clear scherm
+    fgContext.clearRect(0, 0, fgContext.canvas.width, fgContext.canvas.height);
 
     // Draw entities, destroyables and players
-    this.renderEntities(numberOfTiles, bgBase, bgModulus);
+    this.renderEntities(fgContext, numberOfTiles, bgBase, bgModulus);
 
     // Draw on screen text
     if (this.props.message.length) {
-        this.renderText();
+        this.renderText(fgContext);
     }
 
     // If near the end of the world, take over control and render to leaderboard positions
     if (this.props.state == 'STARTED' && this.props.worldX > ((this.props.world.length * 1000) - 7000)) {
         this.props.state = 'LEADERBOARD';
-        this.renderToLeaderboard();
+        this.prepareLeaderboard();
     }
 
     // Draw Leaderbord
     if (this.props.state == 'ENDED' || this.props.state == 'LEADERBOARD') {
-        this.renderLeaderboard();
+        this.renderLeaderboard(fgContext);
     }
 }
 
-Game.prototype.renderBackgrounds = function(numberOfTiles, bgBase, bgModulus) {
+
+Game.prototype.renderBackgrounds = function(context, numberOfTiles, bgBase, bgModulus) {
+    //Upon.log(numberOfTiles + ', ' + bgBase + ', ' + bgModulus);
+    offscreenContext.drawImage(bgCanvas, this.props.worldSpeed * -1, 0);
+
+    var tile = this.props.world[bgBase + numberOfTiles];
+    if (typeof tile == 'undefined') { return; }
+
+    var bgImage = this.getImage(tile.background);
+    if (bgImage) {
+        var x = context.canvas.width - this.props.worldSpeed;
+        var sx = bgModulus;
+        var sw = this.props.worldSpeed;
+        offscreenContext.drawImage(bgImage, sx, 0, sw, context.canvas.height, x, 0, sw, context.canvas.height);
+    }
+
+    context.drawImage(offscreenCanvas, 0, 0);
+}
+
+/*
+Game.prototype.renderBackgrounds = function(context, numberOfTiles, bgBase, bgModulus) {
     for (var ii = 0; ii <= numberOfTiles; ii++) {
         var tile = this.props.world[bgBase + ii];
         if (typeof tile == 'undefined') { continue; }
 
         var x = (ii * 1000) - bgModulus;
-        if (x > canvas.width) { continue; }
+        if (x > context.canvas.width) { continue; }
 
         var sx = 0;
         var sw = 1000;
 
-        if (x + 1000 > canvas.width) {
-            sw = canvas.width - x;
+        if (x + 1000 > context.canvas.width) {
+            sw = context.canvas.width - x;
         }
         if (x < 0) {
             x = 0;
@@ -188,12 +211,12 @@ Game.prototype.renderBackgrounds = function(numberOfTiles, bgBase, bgModulus) {
         if (bgImage) {
             //Upon.log(tile.background + ', '+ sx + ', 0, ' + sw + ', ' + canvas.height + ', ' + x + ', 0, ' + sw + ', ' + canvas.height);
             //context.drawImage(bgImage, sx, 0, sw, canvas.height, x + (ii * 5), 0, sw, canvas.height);
-            context.drawImage(bgImage, sx, 0, sw, canvas.height, x, 0, sw, canvas.height);
+            context.drawImage(bgImage, sx, 0, sw, context.canvas.height, x, 0, sw, context.canvas.height);
         }
     }
-}
+}*/
 
-Game.prototype.renderEntities = function(numberOfTiles, bgBase, bgModulus) {
+Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModulus) {
     // Entities bijhouden
     var entities = [];
     var entitiesOffset = 0;
@@ -221,10 +244,10 @@ Game.prototype.renderEntities = function(numberOfTiles, bgBase, bgModulus) {
             var zIndex = entitiesOffset + (spriteObject.layer * 1000);
 
             // Parallax fx
-            spriteObject.left -= (spriteObject.layer - 1) * 2;
+            spriteObject.left -= (spriteObject.layer - 1) * 1.5;
 
             // Draw entity
-            entities[zIndex] = new Destroyable(spriteObject.id, this.getImage(spriteObject.path), x, y, z, spriteObject.destroyable, destroyedColorIndex, spriteObject.animate, currentSpriteFrame);
+            entities[zIndex] = new Destroyable(spriteObject, this.getImage(spriteObject.path), x, y, z, destroyedColorIndex, currentSpriteFrame);
 
             // Do collision detection
             if (spriteObject.destroyable && !destroyedColorIndex) {
@@ -237,7 +260,7 @@ Game.prototype.renderEntities = function(numberOfTiles, bgBase, bgModulus) {
 
                     // Update playerScore
                     if (spriteObject.score > 0) {
-                       players[playerCollidedId].updateScore(spriteObject.score);
+                        players[playerCollidedId].updateScore(spriteObject.score);
 
                         // Play audio effect
                         if (spriteObject.audio && spriteObject.audio != 'none') {
@@ -247,7 +270,8 @@ Game.prototype.renderEntities = function(numberOfTiles, bgBase, bgModulus) {
 
                     // Create explosion
                     var zIndex = entitiesOffset + (spriteObject.layer * 1000) + 200;
-                    var newParticles = Explosion(x, y, zIndex, spriteObject.layer, spriteObject.score, playerCollidedColor);
+                    var scale = 4 * parseInt(spriteObject.layer, 10);
+                    var newParticles = Explosion(x - 50, y - 50, zIndex, scale, playerCollidedColor);
                     this.props.explosions = this.props.explosions.concat(newParticles);
                 }
             }
@@ -278,14 +302,14 @@ Game.prototype.renderEntities = function(numberOfTiles, bgBase, bgModulus) {
     }
 }
 
-Game.prototype.renderText = function() {
-    var maxWidth = canvas.width / 2;
-    var x = (canvas.width - maxWidth) / 2;
-    var y = (canvas.height / 2.2);
+Game.prototype.renderText = function(context) {
+    var maxWidth = context.canvas.width / 2;
+    var x = (context.canvas.width - maxWidth) / 2;
+    var y = (context.canvas.height / 2.2);
     this.drawMessage(context, this.props.message, x, y, maxWidth, 35, true);
 }
 
-Game.prototype.renderToLeaderboard = function() {
+Game.prototype.prepareLeaderboard = function() {
     // Prevent player input and determine leaderboard position
     var highestScore = 0;
     var leaderboardPositions = [];
@@ -312,7 +336,7 @@ Game.prototype.renderToLeaderboard = function() {
     }
 }
 
-Game.prototype.renderLeaderboard = function() {
+Game.prototype.renderLeaderboard = function(context) {
     // Draw leaderboard header
     var maxWidth = canvas.width / 2;
     var x = (canvas.width - maxWidth) / 2;
@@ -411,7 +435,7 @@ Game.prototype.getReady = function(){
     var self = this;
     if (self.props.state != 'WAITING') { return false; }
 
-    $(window).trigger('game-audio-start');
+    //$(window).trigger('game-audio-start');
 
 	self.props.state = 'GETREADY';
     socket.emit('game-get-ready', {viewerId: viewerId, gameRoom: gameRoom});
@@ -462,7 +486,7 @@ Game.prototype.drawMessage = function(context, text, x, y, maxWidth, lineHeight,
         y += lineHeight;
       } else {
         if (center) {
-            x = (canvas.width / 2) - (testWidth / 2);
+            x = (context.canvas.width / 2) - (testWidth / 2);
         }
         line = testLine;
       }

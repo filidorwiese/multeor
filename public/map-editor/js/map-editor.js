@@ -1,12 +1,12 @@
 $.fn.moveUp = function() {
     $.each(this, function() {
-         $(this).after($(this).prev());   
+         $(this).after($(this).prev());
     });
 };
 
 $.fn.moveDown = function() {
     $.each(this, function() {
-         $(this).before($(this).next());   
+         $(this).before($(this).next());
     });
 };
 
@@ -46,7 +46,7 @@ function updateSprite() {
 		score: sprite.data('score'),
 		audio: sprite.data('audio')
 	};
-	
+
 	if (sprite.data('destroyable')) {
 		sprite.width(sprite.data('orig-width') / 8);
 		sprite.height(sprite.data('orig-height') / 2);
@@ -96,15 +96,15 @@ function getOutput() {
 	for (tile in tiles) {
 		var resultSprites = [];
 		tileCounter++;
-		
+
 		for (sprite in tiles[tile].sprites) {
 			spriteCounter++;
-            
+
             var id = 'xxxxxxxxxxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
                 var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
                 return v.toString(16);
             });
-            
+
 			resultSprites.push({
 				id: id,
 				path: tiles[tile].sprites[sprite].path,
@@ -117,13 +117,13 @@ function getOutput() {
 				audio: tiles[tile].sprites[sprite].audio
 			});
 		}
-		
+
 		resultTiles.push({
 			background: tiles[tile].background,
 			sprites: resultSprites
 		});
 	}
-	
+
 	Log('Export ready: ' + tileCounter + ' tiles, ' + spriteCounter + ' sprites');
 
 	return JSON.stringify(resultTiles);
@@ -135,7 +135,7 @@ function removeSprite(sprite) {
 	deselectSprite();
 	Log('Sprite removed');
 }
-	
+
 function addSprite(id, path, top, left, layer, destroyable, animate, score, audio) {
 	if (typeof top == 'undefined') top = spriteDefault.top;
 	if (typeof left == 'undefined') left = spriteDefault.left;
@@ -154,7 +154,7 @@ function addSprite(id, path, top, left, layer, destroyable, animate, score, audi
 		.data('animate', animate)
 		.data('score', score)
 		.data('audio', audio);
-			
+
 	img.onload = function() {
 		sprite.data('orig-width', img.width).data('orig-height', img.height);
 		sprite.width(img.width).height(img.height)
@@ -173,11 +173,11 @@ function addSprite(id, path, top, left, layer, destroyable, animate, score, audi
 			sprite.height(sprite.data('orig-height'));
 		}
 	};
-	
+
 	img.src = levelPath + path;
-	
+
 	tiles[currentTileIndex].sprites[id] = {
-		path: path,	
+		path: path,
 		top: top,
 		left: left,
 		layer: layer,
@@ -186,8 +186,8 @@ function addSprite(id, path, top, left, layer, destroyable, animate, score, audi
 		score: score,
 		audio: audio
 	};
-	
-	sprite.draggable({ containment: 'parent', distance: 10, stop: updateSprite } ).appendTo($('#grid'));
+	// containment: 'parent',
+	sprite.draggable({ distance: 10, stop: updateSprite } ).appendTo($('#grid'));
 }
 
 $('#setBackground').on('click', function(event) {
@@ -210,10 +210,10 @@ $('#import').on('click', function(event) {
 	tiles = [];
 
 	var resultTiles = JSON.parse(input);
-	
+
 	for	(tile in resultTiles) {
 		var sprites = [];
-		
+
 		for(sprite in resultTiles[tile].sprites) {
 			if (typeof resultTiles[tile].sprites[sprite].path == 'undefined') throw 'Undefined path in sprite';
 			if (typeof resultTiles[tile].sprites[sprite].top == 'undefined') resultTiles[tile].sprites[sprite].top = spriteDefault.top;
@@ -235,23 +235,23 @@ $('#import').on('click', function(event) {
 				audio: resultTiles[tile].sprites[sprite].audio
 			};
 		}
-		
+
 		tiles.push({
 			background: resultTiles[tile].background,
 			sprites: sprites
 		});
 	}
-	
+
 	currentTileIndex = 0;
-	
+
 	if(tiles.length == 0) {
 		tiles.push( { sprites: []  } );
 	}
-	
+
 	renderTile(tiles[currentTileIndex]);
 
     updateTileCounter();
-    
+
 	$('#output').val('');
 	Log('Import complete');
 });
@@ -265,7 +265,7 @@ function updateTileCounter() {
 function renderTile(tile) {
 	$('#grid').children().remove();
 	setBackground(tile.background);
-	
+
 	var numberOfSprites = 0;
 	for(sprite in tile.sprites) {
 		numberOfSprites++;
@@ -288,7 +288,7 @@ function renderTile(tile) {
 
 $('#firstTile').on('click', function(event) {
 	deselectSprite();
-	
+
 	currentTileIndex=0;
 	renderTile(tiles[currentTileIndex]);
 
@@ -304,7 +304,7 @@ $('#nextTile').on('click', function(event) {
     }
 
     renderTile(tiles[currentTileIndex]);
-    
+
     updateTileCounter();
 });
 
@@ -330,12 +330,12 @@ $('#lastTile').on('click', function(event) {
 $('#addSprite').on('click', function(event){
 	var id = Math.random();
 	var path = $('#sprites').val();
-	
+
 	addSprite(id, path);
 });
 
 $('#start-over').on('click', function(event){
-	if (confirm('Sure?')) { 
+	if (confirm('Sure?')) {
 		document.location = '/map-editor/';
 	}
 });
@@ -345,7 +345,7 @@ function setSprites() {
 
 	$.each($('#grid').children(), function(key, object) {
 		var sprite = $(object);
-	
+
 		tiles[currentTileIndex].sprites[sprite.data('id')] = {
 			path: sprite.data('path'),
 			top: sprite.offset().top,
@@ -353,8 +353,8 @@ function setSprites() {
 			layer: sprite.data('layer'),
 			destroyable: sprite.data('destroyable'),
 			animate: sprite.data('animate'),
-			score: 	sprite.data('score'),
-			audio: 	sprite.data('audio')
+			score: sprite.data('score'),
+			audio: sprite.data('audio')
 		};
 	});
 }
@@ -407,12 +407,12 @@ $(document).ready(function() {
 			deselectSprite();
 		}
 	});
-	
+
 	$('#spriteProps :input').on('change', function(){
 		$('.sprite--selected').data('layer', $('#spriteProps #layer').val())
 		.data('destroyable', ($('#spriteProps #destroyable').is(':checked') ? true : false))
 		.data('animate', ($('#spriteProps #animate').is(':checked') ? true : false))
-		.data('score', parseInt($('#spriteProps #score').val(), 10) || 1)
+		.data('score', parseInt($('#spriteProps #score').val(), 10) || 0)
 		.data('audio', $('#spriteProps #audio').val());
 		updateSprite();
 	});
@@ -423,8 +423,8 @@ $(document).ready(function() {
 		selectSprite($(this));
 	})
 	setBackground($('#backgrounds').val());
-	
-	$('#import').trigger('click');	
+
+	$('#import').trigger('click');
 });
 
 

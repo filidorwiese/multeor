@@ -2,13 +2,32 @@
 
 
 // Setup canvas
+var bgCanvas = document.getElementById('bgCanvas');
+var bgContext = bgCanvas.getContext('2d');
+    bgCanvas.width = window.innerWidth;
+    bgCanvas.height = 600;
+var fgCanvas = document.getElementById('fgCanvas');
+var fgContext = fgCanvas.getContext('2d');
+    fgCanvas.width = window.innerWidth;
+    fgCanvas.height = 600;
+
+/*
+var mainCanvas = document.getElementById('canvas');
+var mainContext = mainCanvas.getContext('2d');
+    mainCanvas.width = window.innerWidth;
+    mainCanvas.height = 600;*/
+var offscreenCanvas = document.createElement("canvas");
+var offscreenContext = offscreenCanvas.getContext('2d');
+    offscreenCanvas.width = window.innerWidth;
+    offscreenCanvas.height = 600;
+/*
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
     canvas.width = window.innerWidth;
-    canvas.height = 600;
+    canvas.height = 600;*/
 
 // Setup socket.io
-var socket = io.connect(window.location.hostname + ':3333');
+var socket = io.connect(window.location.hostname + ':843');
 
 // Setup game globals
 var players = {};
@@ -66,7 +85,7 @@ $(document).ready(function(){
             numberOfPlayers++;
             if (typeof players[playerId] == 'undefined') {
                 var playerColor = playerColorsShuffled.splice(0, 1)[0];
-                players[playerId] = new Player(playerId, canvas.width, canvas.height, playerColor, numberOfPlayers);
+                players[playerId] = new Player(playerId, bgContext.canvas.width, bgContext.canvas.height, playerColor, numberOfPlayers);
                 socket.emit('update-player-color', {viewerId: viewerId, gameRoom: gameRoom, playerId: playerId, playerColor: playerColor});
             }
         }
@@ -94,11 +113,12 @@ $(document).ready(function(){
     });
 
 
-    profiler.start(context, 12, 245, 120, 1);
+    profiler.start(bgContext, 12, 245, 120, 1);
 
     var now;
     var delta;
     var then = new Date().getTime();
+    var interval = 1000 / 60;
 
     (function gameLoop(time){
 
@@ -106,8 +126,20 @@ $(document).ready(function(){
 
         now = new Date().getTime();
         delta = now - then;
-        then = now;
-        if (game) { game.tick(delta); }
+
+        if (delta > interval) {
+            then = now - (delta % interval);
+
+            if (game) {
+                //console.log(delta);
+                game.tick(bgContext, fgContext, delta);
+            }
+        }
+
+        //if (delta > interval) {
+            //mainContext.drawImage(offscreenCanvas, 0, 0);
+            //then = time;
+        //}
 
         profiler.tick();
 

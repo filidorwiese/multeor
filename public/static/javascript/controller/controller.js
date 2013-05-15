@@ -1,4 +1,4 @@
-var socket = io.connect(window.location.hostname + ':3333');
+var socket = io.connect(window.location.hostname + ':843');
 
 $(document).ready(function(){
     var viewportWidth = $(window).width();
@@ -23,16 +23,6 @@ $(document).ready(function(){
 
     // Verify gameRoom
     socket.emit('verify-game-room', {gameRoom: gameRoom});
-
-    var playerWaitingtoJoin = function() {
-        player.joined = false;
-        $('#score').html('Click to join game');
-        $('body').on('click touchstart', function(){
-            $('body').off('click touchstart');
-            socket.emit('new-player', {playerId: player.id, gameRoom: gameRoom});
-        });
-    }
-    playerWaitingtoJoin();
 
     socket.on('disconnect', function(){
         document.location = '/';
@@ -96,6 +86,29 @@ $(document).ready(function(){
         $('html, body').css({ backgroundColor: 'rgba(' + player.color + ',.8)' });
     });
 
+    var ppsCounter = 0;
+    var previousTimer = new Date();
+    setInterval(function(){
+        var time = new Date();
+        var timePast = time - previousTimer;
+        if (timePast > 1000) {
+            previousTimer = time;
+            var currentPps = Math.round(ppsCounter / (timePast / 1000), 2);
+            $('#message').html(currentPps + ' average PPS');
+            ppsCounter = 0;
+        }
+    }, 500);
+
+    var playerWaitingtoJoin = function() {
+        player.joined = false;
+        $('#score').html('Click to join game');
+        $('body').on('click touchstart', function(){
+            $('body').off('click touchstart');
+            socket.emit('new-player', {playerId: player.id, gameRoom: gameRoom});
+        });
+    }
+    playerWaitingtoJoin();
+
     var emitPlayerUpdate = function() {
         if (!player.joined) { return false; }
 
@@ -105,10 +118,11 @@ $(document).ready(function(){
     			gr: gameRoom,
     			v: [Math.floor(player.angle), Math.floor(player.length), player.layer]
     		});
+            ppsCounter++;
             player.fresh = false;
         }
 
-        setTimeout(emitPlayerUpdate, 40);
+        setTimeout(emitPlayerUpdate, 20);
     };
 
     var updatePlayerXY = function(x, y) {
@@ -130,6 +144,29 @@ $(document).ready(function(){
         player.layer = z;
         player.fresh = true;
     };
+
+    var toDegrees = function(x, y, radius) {
+        var degrees = 0;
+        var overstaand = y - radius;
+        var aanliggend = x - radius;
+        var schuin = Math.sqrt(Math.pow(overstaand,2) + Math.pow(aanliggend,2));
+        var sinJ = overstaand/schuin;
+        var cosJ = aanliggend/schuin;
+
+        degrees = Math.asin(sinJ)*180/Math.PI;
+        if(aanliggend < 0) {
+            degrees = 180 - degrees;
+        }
+
+        if(schuin > radius) {
+            schuin = radius;
+            overstaand = cosJ * radius;
+            aanliggend = sinJ * radius;
+        }
+
+        return {'deg': degrees, 'length': schuin};
+    };
+
 
     if (window.navigator.msPointerEnabled) {
         //http://blogs.msdn.com/b/ie/archive/2011/09/20/touch-input-for-ie10-and-metro-style-apps.aspx
@@ -190,24 +227,3 @@ $(document).ready(function(){
 
 
 
-function toDegrees(x, y, radius){
-	var degrees = 0;
-	var overstaand = y - radius;
-	var aanliggend = x - radius;
-	var schuin = Math.sqrt(Math.pow(overstaand,2) + Math.pow(aanliggend,2));
-	var sinJ = overstaand/schuin;
-	var cosJ = aanliggend/schuin;
-
-	degrees = Math.asin(sinJ)*180/Math.PI;
-	if(aanliggend < 0) {
-		degrees = 180 - degrees;
-	}
-
-	if(schuin > radius) {
-		schuin = radius;
-		overstaand = cosJ * radius;
-		aanliggend = sinJ * radius;
-	}
-
-	return {'deg': degrees, 'length': schuin};
-}
