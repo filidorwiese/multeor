@@ -100,10 +100,10 @@ Game.prototype.loadAudio = function() {
     }
 }
 
-Game.prototype.tick = function(bgContext, fgContext, delta) {
+Game.prototype.tick = function(context, delta) {
     if (this.props.state == 'LOADING') {
-        fgContext.clearRect(0, 0, bgContext.canvas.width, bgContext.canvas.height);
-        if (this.props.message.length) { this.renderText(fgContext); }
+        context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+        if (this.props.message.length) { this.renderText(context); }
         return false;
     }
 
@@ -126,32 +126,27 @@ Game.prototype.tick = function(bgContext, fgContext, delta) {
 
     // Update worldX
     if (this.props.state == 'STARTED' || this.props.state == 'LEADERBOARD') {
-        if (this.props.worldX < ((this.props.world.length * 1000) - bgContext.canvas.width)) {
+        if (this.props.worldX < ((this.props.world.length * 1000) - context.canvas.width)) {
             this.props.worldX += this.props.worldSpeed;
         } else {
             this.endGame();
         }
     }
-    this.props.worldX += this.props.worldSpeed;
 
-    var numberOfTiles = Math.ceil(bgContext.canvas.width / 1000);
+    var numberOfTiles = Math.ceil(context.canvas.width / 1000);
     var bgBase = Math.floor(this.props.worldX / 1000);
     var bgModulus = Math.floor(this.props.worldX % 1000);
     //Upon.log(numberOfTiles + ', ' + bgBase + ', ' + bgModulus);
 
 	// Draw background tiles
-    this.renderBackgrounds(bgContext, numberOfTiles, bgBase, bgModulus);
-
-
-    // Clear scherm
-    fgContext.clearRect(0, 0, fgContext.canvas.width, fgContext.canvas.height);
+    this.renderBackgrounds(context, numberOfTiles, bgBase, bgModulus);
 
     // Draw entities, destroyables and players
-    this.renderEntities(fgContext, numberOfTiles, bgBase, bgModulus);
+    this.renderEntities(context, numberOfTiles, bgBase, bgModulus);
 
     // Draw on screen text
     if (this.props.message.length) {
-        this.renderText(fgContext);
+        this.renderText(context);
     }
 
     // If near the end of the world, take over control and render to leaderboard positions
@@ -162,30 +157,10 @@ Game.prototype.tick = function(bgContext, fgContext, delta) {
 
     // Draw Leaderbord
     if (this.props.state == 'ENDED' || this.props.state == 'LEADERBOARD') {
-        this.renderLeaderboard(fgContext);
+        this.renderLeaderboard(context);
     }
 }
 
-
-Game.prototype.renderBackgrounds = function(context, numberOfTiles, bgBase, bgModulus) {
-    //Upon.log(numberOfTiles + ', ' + bgBase + ', ' + bgModulus);
-    offscreenContext.drawImage(bgCanvas, this.props.worldSpeed * -1, 0);
-
-    var tile = this.props.world[bgBase + numberOfTiles];
-    if (typeof tile == 'undefined') { return; }
-
-    var bgImage = this.getImage(tile.background);
-    if (bgImage) {
-        var x = context.canvas.width - this.props.worldSpeed;
-        var sx = bgModulus;
-        var sw = this.props.worldSpeed;
-        offscreenContext.drawImage(bgImage, sx, 0, sw, context.canvas.height, x, 0, sw, context.canvas.height);
-    }
-
-    context.drawImage(offscreenCanvas, 0, 0);
-}
-
-/*
 Game.prototype.renderBackgrounds = function(context, numberOfTiles, bgBase, bgModulus) {
     for (var ii = 0; ii <= numberOfTiles; ii++) {
         var tile = this.props.world[bgBase + ii];
@@ -214,7 +189,7 @@ Game.prototype.renderBackgrounds = function(context, numberOfTiles, bgBase, bgMo
             context.drawImage(bgImage, sx, 0, sw, context.canvas.height, x, 0, sw, context.canvas.height);
         }
     }
-}*/
+}
 
 Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModulus) {
     // Entities bijhouden
