@@ -58,22 +58,20 @@ Player.prototype.draw = function(context) {
         context.bezierCurveTo(control1X, control1Y, control2X, control2Y, headX, headY);
         context.stroke();
 
+
         // Meteor head
+        context.save();
+        context.translate(headX, headY);
+        context.rotate((Math.PI / 180) * this.props.meteorHeadAngle);
+        this.props.meteorHeadAngle++;
+
         if (this.props.icon) {
-            var w = Math.floor(this.props.z * .55);
-            var h = Math.floor(this.props.z * .55);
+            var w = Math.floor(this.props.z * .4);
+            var h = Math.floor(this.props.z * .4);
             var x = Math.floor((w / 2) * -1); //(0.5 + somenum) << 0;
             var y = Math.floor((h / 2) * -1);
-
-            context.save();
-            //context.globalAlpha = 0.5;
-            context.translate(headX, headY);
-            context.rotate((Math.PI / 180) * this.props.meteorHeadAngle);
-            this.props.meteorHeadAngle++;
-            
-            // image, sx, sy, sw, sh, x, y, w, height
+            context.globalAlpha = 0.8;
             context.drawImage(this.props.icon.image, x, y, w, h);
-            context.restore();
         } else {
             var playerYPadding = Math.floor(this.props.z * .2);
             var playerXPadding = Math.floor(this.props.z * .2);
@@ -81,14 +79,12 @@ Player.prototype.draw = function(context) {
             var playerLeft = this.props.x + playerXPadding;
             var playerTop = this.props.y + playerYPadding;
             var playerBottom = this.props.y - playerYPadding;
-            context.save();
-            context.fillStyle = 'rgba(0,0,0,.6)';
-            context.translate(headX , headY);
-            context.rotate((Math.PI / 180) * this.props.meteorHeadAngle);
+
+            context.fillStyle = 'rgba(0,0,0,.8)';
             context.fillRect(playerXPadding, playerYPadding, playerRight - playerLeft, playerBottom - playerTop);
-            context.restore();
-            this.props.meteorHeadAngle++;
         }
+        
+        context.restore();
     }    
 };
 

@@ -20,7 +20,11 @@ var Game = function(levelPath, code){
     $.getJSON(self.props.levelPath + '/level.json', function(world){
         self.props.world = world;
         for (var i=0; i < world.length; i++) {
-            if (typeof world[i].background != 'undefined') { self.props.preloadImages.push(world[i].background); }
+            if (typeof world[i].background !== 'undefined') {
+                if ($.inArray(world[i].background, self.props.preloadImages) === -1) {
+                    self.props.preloadImages.push(world[i].background);
+                }
+            }
 
             if (world[i].sprites.length) {
                 for (var j=0; j< world[i].sprites.length; j++) {
@@ -348,7 +352,7 @@ Game.prototype.loadImage = function(imageSrc) {
 
             var imagesLoaded = 0;
             for (var ii in self.props.images) { imagesLoaded++; }
-            var progress = (100 / self.props.preloadImages.length) * imagesLoaded;
+            var progress = Math.floor((100 / self.props.preloadImages.length) * imagesLoaded);
             if (progress >= 100) {
                 self.props.state = 'WAITING';
                 self.message(self.props.defaultText);

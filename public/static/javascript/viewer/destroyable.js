@@ -42,8 +42,7 @@ Destroyable.prototype.draw = function(context, bgModulus) {
 Destroyable.prototype.collides = function(players, bgModulus) {
     // No collision detection if sprite isn't a destroyable, is already destroyed or isn't in view
     if (!this.props.sprite.destroyable || this.props.destroyedColorIndex) { return false; }
-    //if (this.props.x < (this.props.frameWidth * -1) || this.props.x > canvas.width) { return false; }
-    if (this.props.x < (this.props.frameWidth * -1)) { return false; }
+    if (this.props.x < (this.props.frameWidth * -1) || this.props.x > canvas.width) { return false; }
 
     var weirdnessOffset = 100;
     var houseLeft = this.props.x;
@@ -54,7 +53,9 @@ Destroyable.prototype.collides = function(players, bgModulus) {
     var houseZmax = this.props.z + 20;
 
     // Uncomment to debug collision detection
-    context.fillRect(houseLeft, houseTop, houseRight - houseLeft, houseBottom - houseTop);
+    //context.save();
+    //context.fillStyle = 'rgba(255,0,0,1)';
+    //context.fillRect(houseLeft, houseTop, houseRight - houseLeft, houseBottom - houseTop);
 
     for(player in players) {
         var playerYPadding = players[player].props.z * .2;
@@ -66,7 +67,7 @@ Destroyable.prototype.collides = function(players, bgModulus) {
         var playerZ = players[player].props.z;
 
         // Uncomment to debug collision detection
-        context.fillRect(playerLeft, playerTop, playerRight - playerLeft, playerBottom - playerTop);
+        //context.fillRect(playerLeft, playerTop, playerRight - playerLeft, playerBottom - playerTop);
 
         if (playerZ >= houseZmin && playerZ <= houseZmax) {
             if (playerRight >= houseLeft && playerLeft <= houseRight) {
@@ -76,6 +77,8 @@ Destroyable.prototype.collides = function(players, bgModulus) {
             }
         }
     }
+
+    //context.restore();
 
     return false;
 }

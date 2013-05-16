@@ -32,14 +32,15 @@ function setBackground(path) {
 }
 
 function updateSprite() {
+	$('#spriteProps :input').blur();
 	var sprite = $('.sprite--selected');
 	if (sprite.size() < 1) { return false; }
 	var id = sprite.data('id');
 
 	tiles[currentTileIndex].sprites[id] = {
 		path: tiles[currentTileIndex].sprites[id].path,
-		top: parseInt(sprite.offset().top, 10),
-		left: parseInt(sprite.offset().left, 10),
+		top: parseInt(sprite.css('top'), 10),
+		left: parseInt(sprite.css('left'), 10),
 		layer: sprite.data('layer'),
 		destroyable: sprite.data('destroyable'),
 		animate: sprite.data('animate'),
@@ -72,6 +73,7 @@ function updateSprite() {
 }
 
 function selectSprite(sprite) {
+	updateSprite();
 	deselectSprite();
 	var sprite = $(sprite).addClass('sprite--selected');
 
@@ -84,6 +86,7 @@ function selectSprite(sprite) {
 }
 
 function deselectSprite() {
+	updateSprite();
 	$('#spriteProps').removeClass('selected');
 	$('.sprite--selected').removeClass('sprite--selected');
 }
@@ -94,34 +97,36 @@ function getOutput() {
 	var spriteCounter = 0;
 
 	for (tile in tiles) {
-		var resultSprites = [];
-		tileCounter++;
+		if (typeof tiles[tile].background !== 'undefined') {
+			var resultSprites = [];
+			tileCounter++;
 
-		for (sprite in tiles[tile].sprites) {
-			spriteCounter++;
+			for (sprite in tiles[tile].sprites) {
+				spriteCounter++;
 
-            var id = 'xxxxxxxxxxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-                var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-                return v.toString(16);
-            });
+	            var id = 'xxxxxxxxxxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+	                var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+	                return v.toString(16);
+	            });
 
-			resultSprites.push({
-				id: id,
-				path: tiles[tile].sprites[sprite].path,
-				top: parseInt(tiles[tile].sprites[sprite].top, 10),
-				left: parseInt(tiles[tile].sprites[sprite].left, 10),
-				layer: tiles[tile].sprites[sprite].layer,
-				destroyable: tiles[tile].sprites[sprite].destroyable,
-				animate: tiles[tile].sprites[sprite].animate,
-				score: tiles[tile].sprites[sprite].score,
-				audio: tiles[tile].sprites[sprite].audio
+				resultSprites.push({
+					id: id,
+					path: tiles[tile].sprites[sprite].path,
+					top: parseInt(tiles[tile].sprites[sprite].top, 10),
+					left: parseInt(tiles[tile].sprites[sprite].left, 10),
+					layer: tiles[tile].sprites[sprite].layer,
+					destroyable: tiles[tile].sprites[sprite].destroyable,
+					animate: tiles[tile].sprites[sprite].animate,
+					score: tiles[tile].sprites[sprite].score,
+					audio: tiles[tile].sprites[sprite].audio
+				});
+			}
+
+			resultTiles.push({
+				background: tiles[tile].background,
+				sprites: resultSprites
 			});
 		}
-
-		resultTiles.push({
-			background: tiles[tile].background,
-			sprites: resultSprites
-		});
 	}
 
 	Log('Export ready: ' + tileCounter + ' tiles, ' + spriteCounter + ' sprites');
@@ -130,7 +135,8 @@ function getOutput() {
 }
 
 function removeSprite(sprite) {
-	delete tiles[currentTileIndex].sprites[sprite.id];
+	var id = sprite.data('id');
+	delete tiles[currentTileIndex].sprites[id];
 	sprite.remove();
 	deselectSprite();
 	Log('Sprite removed');
@@ -188,7 +194,13 @@ function addSprite(id, path, top, left, layer, destroyable, animate, score, audi
 	};
 	// containment: 'parent',
 	sprite.draggable({ distance: 10, stop: updateSprite } ).appendTo($('#grid'));
+	return sprite;
 }
+
+$('#backgrounds').on('change', function(event) {
+	deselectSprite();
+	setBackground($('#backgrounds').val());
+});
 
 $('#setBackground').on('click', function(event) {
 	deselectSprite();
@@ -211,7 +223,7 @@ $('#import').on('click', function(event) {
 
 	var resultTiles = JSON.parse(input);
 
-	for	(tile in resultTiles) {
+	for (tile in resultTiles) {
 		var sprites = [];
 
 		for(sprite in resultTiles[tile].sprites) {
@@ -331,7 +343,8 @@ $('#addSprite').on('click', function(event){
 	var id = Math.random();
 	var path = $('#sprites').val();
 
-	addSprite(id, path);
+	sprite = addSprite(id, path);
+	selectSprite(sprite);
 });
 
 $('#start-over').on('click', function(event){
@@ -348,8 +361,8 @@ function setSprites() {
 
 		tiles[currentTileIndex].sprites[sprite.data('id')] = {
 			path: sprite.data('path'),
-			top: sprite.offset().top,
-			left: sprite.offset().left,
+			top: sprite.position().top,
+			left: sprite.position().left,
 			layer: sprite.data('layer'),
 			destroyable: sprite.data('destroyable'),
 			animate: sprite.data('animate'),
@@ -372,25 +385,57 @@ $('body').on('keydown', function (event) {
 			selectedSprite.moveUp();
 			setSprites();
 		}
-		else if (event.which == 46) { // Del
+		else if (event.which == 68 || event.which == 46) { // d or del
 			event.preventDefault();
 			removeSprite(selectedSprite);
 		}
 		else if (event.which == 38) { // Up
 			event.preventDefault();
-			selectedSprite.css({ top: '-=1' });
+			if (event.shiftKey) {
+				selectedSprite.css({ top: '-=20' });
+			} else {
+				selectedSprite.css({ top: '-=1' });
+			}
+			updateSprite();
 		}
 		else if (event.which == 40) { // Down
 			event.preventDefault();
-			selectedSprite.css({ top: '+=1' });
+			if (event.shiftKey) {
+				selectedSprite.css({ top: '+=20' });
+			} else {
+				selectedSprite.css({ top: '+=1' });
+			}
+			updateSprite();
 		}
 		else if (event.which == 37) { // Left
 			event.preventDefault();
-			selectedSprite.css({ left: '-=1' });
+			if (event.shiftKey) {
+				selectedSprite.css({ left: '-=20' });
+			} else {
+				selectedSprite.css({ left: '-=1' });
+			}
+			updateSprite();
 		}
 		else if (event.which == 39) { // Right
 			event.preventDefault();
-			selectedSprite.css({ left: '+=1' });
+			if (event.shiftKey) {
+				selectedSprite.css({ left: '+=20' });
+			} else {
+				selectedSprite.css({ left: '+=1' });
+			}
+			updateSprite();
+		}
+		else if (event.which == 219 || event.which == 33) { // [ or PgUp
+			event.preventDefault();
+			$('#prevTile').trigger('click');
+		}
+		else if (event.which == 221 || event.which == 34) { // ] or PgDown
+			event.preventDefault();
+			$('#nextTile').trigger('click');
+		}
+		else if (event.which == 220) { // \
+			event.preventDefault();
+			$('#addSprite').trigger('click');	
 		}
 		else if (event.which == 27) { // Esc
 			event.preventDefault();
@@ -398,7 +443,7 @@ $('body').on('keydown', function (event) {
 		}
 	}
 
-	//Log('Key pressed: ' + event.which);
+	Log('Key pressed: ' + event.which);
 });
 
 $(document).ready(function() {
