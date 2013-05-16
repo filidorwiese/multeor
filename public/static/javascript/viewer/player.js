@@ -1,18 +1,19 @@
-var Player = function(playerId, viewportWidth, viewportHeight, playerColor, playerNumber){
+var Player = function(context, playerId, playerIcon, playerColor, playerNumber) {
 
     var self = this;
     self.props = {
 		playerId: playerId,
         playerNumber: playerNumber,
+        icon: false,
         score: 0,
         x: 0,
         y: 0,
         z: 0,
         vector: [0, 0, 0], // Angle, length, layer
         minX: 60,
-        maxX: viewportWidth - 180,
+        maxX: context.canvas.width - 180,
         minY: 0,
-        maxY: viewportHeight,
+        maxY: context.canvas.height,
         minZ: 50,
         maxZ: 150,
         color: playerColor,
@@ -25,6 +26,10 @@ var Player = function(playerId, viewportWidth, viewportHeight, playerColor, play
     };
     
     self.props.y = (playerNumber * (self.props.minZ + 18));
+
+    if (playerIcon) {
+        self.loadIcon(playerIcon);
+    }
 }
 
 Player.prototype.draw = function(context) {
@@ -53,20 +58,37 @@ Player.prototype.draw = function(context) {
         context.bezierCurveTo(control1X, control1Y, control2X, control2Y, headX, headY);
         context.stroke();
 
-        // meteor head
-        var playerYPadding = this.props.z * .2;
-        var playerXPadding = this.props.z * .2;
-        var playerRight = this.props.x - playerXPadding;
-        var playerLeft = this.props.x + playerXPadding;
-        var playerTop = this.props.y + playerYPadding;
-        var playerBottom = this.props.y - playerYPadding;
-        context.save();
-        context.fillStyle = 'rgba(0,0,0,.6)';
-        context.translate(headX , headY);
-        this.props.meteorHeadAngle++;
-        context.rotate((Math.PI / 180) * this.props.meteorHeadAngle);
-        context.fillRect(playerXPadding, playerYPadding, playerRight - playerLeft, playerBottom - playerTop);
-        context.restore();
+        // Meteor head
+        if (this.props.icon) {
+            var w = Math.floor(this.props.z * .55);
+            var h = Math.floor(this.props.z * .55);
+            var x = Math.floor((w / 2) * -1); //(0.5 + somenum) << 0;
+            var y = Math.floor((h / 2) * -1);
+
+            context.save();
+            //context.globalAlpha = 0.5;
+            context.translate(headX, headY);
+            context.rotate((Math.PI / 180) * this.props.meteorHeadAngle);
+            this.props.meteorHeadAngle++;
+            
+            // image, sx, sy, sw, sh, x, y, w, height
+            context.drawImage(this.props.icon.image, x, y, w, h);
+            context.restore();
+        } else {
+            var playerYPadding = Math.floor(this.props.z * .2);
+            var playerXPadding = Math.floor(this.props.z * .2);
+            var playerRight = this.props.x - playerXPadding;
+            var playerLeft = this.props.x + playerXPadding;
+            var playerTop = this.props.y + playerYPadding;
+            var playerBottom = this.props.y - playerYPadding;
+            context.save();
+            context.fillStyle = 'rgba(0,0,0,.6)';
+            context.translate(headX , headY);
+            context.rotate((Math.PI / 180) * this.props.meteorHeadAngle);
+            context.fillRect(playerXPadding, playerYPadding, playerRight - playerLeft, playerBottom - playerTop);
+            context.restore();
+            this.props.meteorHeadAngle++;
+        }
     }    
 };
 
@@ -120,4 +142,17 @@ Player.prototype.updateScore = function(points) {
 
 Player.prototype.lockPlayer = function() {
     this.props.locked = true;
+}
+
+Player.prototype.loadIcon = function(playerIcon) {
+    var self = this;
+    var image = new Image();
+    image.src = playerIcon;
+    image.onload = function() {
+        self.props.icon = {
+            width: this.width,
+            height: this.height,
+            image: this
+        }
+    }
 }

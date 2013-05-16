@@ -54,7 +54,7 @@ Destroyable.prototype.collides = function(players, bgModulus) {
     var houseZmax = this.props.z + 20;
 
     // Uncomment to debug collision detection
-    //context.fillRect(houseLeft, houseTop, houseRight - houseLeft, houseBottom - houseTop);
+    context.fillRect(houseLeft, houseTop, houseRight - houseLeft, houseBottom - houseTop);
 
     for(player in players) {
         var playerYPadding = players[player].props.z * .2;
@@ -66,7 +66,7 @@ Destroyable.prototype.collides = function(players, bgModulus) {
         var playerZ = players[player].props.z;
 
         // Uncomment to debug collision detection
-        //context.fillRect(playerLeft, playerTop, playerRight - playerLeft, playerBottom - playerTop);
+        context.fillRect(playerLeft, playerTop, playerRight - playerLeft, playerBottom - playerTop);
 
         if (playerZ >= houseZmin && playerZ <= houseZmax) {
             if (playerRight >= houseLeft && playerLeft <= houseRight) {

@@ -246,7 +246,8 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
                     // Create explosion
                     var zIndex = entitiesOffset + (spriteObject.layer * 1000) + 200;
                     var scale = 4 * parseInt(spriteObject.layer, 10);
-                    var newParticles = Explosion(x - 50, y - 50, zIndex, scale, playerCollidedColor);
+                    var yOffset = y - (players[playerCollidedId].props.z / 2) * -1;
+                    var newParticles = Explosion(x - 50, yOffset, zIndex, scale, playerCollidedColor);
                     this.props.explosions = this.props.explosions.concat(newParticles);
                 }
             }

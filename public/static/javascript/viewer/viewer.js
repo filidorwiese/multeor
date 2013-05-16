@@ -65,7 +65,8 @@ $(document).ready(function(){
             numberOfPlayers++;
             if (typeof players[playerId] == 'undefined') {
                 var playerColor = playerColorsShuffled.splice(0, 1)[0];
-                players[playerId] = new Player(playerId, context.canvas.width, context.canvas.height, playerColor, numberOfPlayers);
+                var playerIcon = '/tmp-facebook-icon.jpg';
+                players[playerId] = new Player(context, playerId, playerIcon, playerColor, numberOfPlayers);
                 socket.emit('update-player-color', {viewerId: viewerId, gameRoom: gameRoom, playerId: playerId, playerColor: playerColor});
             }
         }
