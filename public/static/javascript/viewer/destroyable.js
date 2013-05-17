@@ -22,13 +22,14 @@ Destroyable.prototype.draw = function(context, bgModulus) {
         context.drawImage(this.props.image, (this.props.frameWidth * (this.props.destroyedColorIndex - 1)), this.props.frameHeight, this.props.frameWidth, this.props.frameHeight, this.props.x, this.props.y, this.props.frameWidth, this.props.frameHeight);
 
         // Draw points on object
+        /*
         if (this.props.sprite.score > 0) {
             context.save();
             context.font = '20px ablas_altbold';
             context.fillStyle = '#000000';
             context.fillText(this.props.sprite.score.toString(), this.props.x + (this.props.frameWidth / 2), this.props.y);
             context.restore();
-        }
+        }*/
     } else {
         // If not destroyed, draw sprite (with or without animation)
         if (this.props.sprite.animate) {

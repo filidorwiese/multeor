@@ -24,8 +24,9 @@ var Player = function(context, playerId, playerIcon, playerColor, playerNumber) 
         endY: 0,
         endZ: 60
     };
-    
+
     self.props.y = (playerNumber * (self.props.minZ + 18));
+    self.props.z = 150;
 
     if (playerIcon) {
         self.loadIcon(playerIcon);
@@ -34,7 +35,7 @@ var Player = function(context, playerId, playerIcon, playerColor, playerNumber) 
 
 Player.prototype.draw = function(context) {
 	this.updatePosition();
-	
+
     if (this.props.lastMoves.length > 9) {
         var tailX = 0;
         var tailY = this.props.lastMoves[0][1];
@@ -45,7 +46,7 @@ Player.prototype.draw = function(context) {
         var headX = 100 + this.props.lastMoves[9][0];
         var headY = this.props.lastMoves[9][1];
         context.lineWidth = this.props.z;
-        
+
         var lingrad2 = context.createLinearGradient(0,0, (headX - context.lineWidth / 2),0);
         lingrad2.addColorStop(1, 'rgba(' + this.props.color + ',.8)');
         lingrad2.addColorStop(0, 'rgba(' + this.props.color + ',0)');
@@ -57,7 +58,6 @@ Player.prototype.draw = function(context) {
         context.moveTo(tailX, tailY);
         context.bezierCurveTo(control1X, control1Y, control2X, control2Y, headX, headY);
         context.stroke();
-
 
         // Meteor head
         context.save();
@@ -83,9 +83,9 @@ Player.prototype.draw = function(context) {
             context.fillStyle = 'rgba(0,0,0,.8)';
             context.fillRect(playerXPadding, playerYPadding, playerRight - playerLeft, playerBottom - playerTop);
         }
-        
+
         context.restore();
-    }    
+    }
 };
 
 Player.prototype.updatePosition = function() {
@@ -120,7 +120,7 @@ Player.prototype.updatePosition = function() {
         this.props.x += ((Math.cos(radians) * this.props.vector[1]) * xSpeed);
         if (this.props.x > this.props.maxX) { this.props.x = this.props.maxX; }
         if (this.props.x < this.props.minX) { this.props.x = this.props.minX; }
-        
+
         var halfHeight = this.props.z / 2;
         this.props.y += ((Math.sin(radians) * this.props.vector[1]) * ySpeed);
         if (this.props.y > this.props.maxY - halfHeight) { this.props.y = this.props.maxY - halfHeight; }

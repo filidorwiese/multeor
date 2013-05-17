@@ -8,7 +8,7 @@
 		//var_dump($_POST);die;
 		$load = (isset($_POST['loadlevelsubmit']) ? true : false);
 		$level = ($load ? $_POST['loadlevel'] : $_POST['newlevel']);
-		
+
 		if (strstr($level, '.') !== false || strstr($level, '/') !== false) {
 			die('403');
 		}
@@ -35,7 +35,7 @@
 		display:inline-block;
 		margin-top:30px;
 	}
-	
+
 	#grid-and-settings {
 		width:1220px;
 	}
@@ -50,7 +50,7 @@
 		border:1px solid #000;
 		margin:10px 0;
 	}
-	
+
 	#output {
 		height:300px;
 		width:200px;
@@ -66,7 +66,7 @@
 		padding:10px;
 		margin-bottom:20px;
 	}
-	
+
 	#spriteProps div {
 		visibility: hidden;
 	}
@@ -78,7 +78,7 @@
 		display: inline-block;
 		width:80px;
 	}
-	
+
 	#spriteProps input#score {
 		width:20px;
 	}
@@ -112,7 +112,7 @@
 				<legend>New level</legend>
 				Choose an existing level for it's assets
 				<select name="newlevel">
-					<?php 
+					<?php
 						foreach (glob($levelBasePath . "/*", GLOB_ONLYDIR) as $dir) {
 							echo '<option>' . basename($dir) . '</option>';
 						}
@@ -125,7 +125,7 @@
 				<legend>Load level</legend>
 				Load an existing level
 				<select name="loadlevel">
-					<?php 
+					<?php
 						foreach (glob($levelBasePath . "/*", GLOB_ONLYDIR) as $dir) {
 							echo '<option>' . basename($dir) . '</option>';
 						}
@@ -142,7 +142,7 @@
 	<div id="assets">
 		<label for="backgrounds">Backgrounds:</label>
 		<select id="backgrounds">
-			<?php 
+			<?php
 				foreach (glob($levelPath . "/images/maps/*.png") as $file) {
 					echo '<option>' . str_replace($levelPath, '', $file) . '</option>';
 				}
@@ -152,7 +152,7 @@
 		|
 		<label for="sprites">Sprites:</label>
 		<select id="sprites">
-			<?php 
+			<?php
 				foreach (glob($levelPath . "/images/sprites/*.png") as $file) {
 					echo '<option>' . str_replace($levelPath, '', $file) . '</option>';
 				}
@@ -166,6 +166,10 @@
 		<div id="settings">
 			<h3>Sprite properties:</h3>
 			<div id="spriteProps">
+				<div class="prop">
+					<label>Sprite:</label>
+					<span id="image"></span>
+				</div>
 				<div class="prop">
 					<label for="layer">Layer</label>
 					<select id="layer">
@@ -220,7 +224,7 @@
 	<script src="js/jquery-1.9.1.js"></script>
 	<script src="js/jquery-ui-1.10.1.custom.js"></script>
 	<script src="js/map-editor.js"></script>
-	
+
 <? endif; ?>
 
 </body>

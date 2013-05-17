@@ -14,14 +14,14 @@ var players = {};
 var getReadyInterval = false;
 var game = false;
 var playerColors = [
-                    '255,0,36',
-                    '8,103,255',
-                    '255,110,221',
-                    '255,255,0',
                     '110,8,157',
                     '0,255,247',
                     '16,230,34',
-                    '255,174,26'
+                    '255,174,26',
+                    '255,255,0',
+                    '255,110,221',
+                    '8,103,255',
+                    '255,0,36'
                     ];
 var playerColorsShuffled = shuffleArray(playerColors.slice(0)); // Clone it and shuffle
 

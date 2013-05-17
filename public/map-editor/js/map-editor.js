@@ -83,6 +83,7 @@ function selectSprite(sprite) {
 	$('#spriteProps #animate').prop('checked', sprite.data('animate'));
 	$('#spriteProps #score').val(sprite.data('score'));
 	$('#spriteProps #audio').val(sprite.data('audio'));
+	$('#spriteProps #image').html(sprite.css('background-image').replace(/\\/g, '/').replace( /.*\//, '' ).replace(')', ''));
 }
 
 function deselectSprite() {
@@ -373,6 +374,10 @@ function setSprites() {
 }
 
 $('body').on('keydown', function (event) {
+	if (event.which == 8) { // backspace, prevent going back on mac
+		event.preventDefault();
+	}
+
 	var selectedSprite = $('.sprite--selected');
 	if (selectedSprite) {
 		if (event.which == 187) { // -
@@ -435,7 +440,7 @@ $('body').on('keydown', function (event) {
 		}
 		else if (event.which == 220) { // \
 			event.preventDefault();
-			$('#addSprite').trigger('click');	
+			$('#addSprite').trigger('click');
 		}
 		else if (event.which == 27) { // Esc
 			event.preventDefault();

@@ -29,6 +29,7 @@ var Game = function(levelPath, code){
             if (world[i].sprites.length) {
                 for (var j=0; j< world[i].sprites.length; j++) {
                     var spriteObject = world[i].sprites[j];
+                    world[i].sprites[j].origLeft = spriteObject.left; // needed for parallax reset
                     if (typeof spriteObject.path != 'undefined') {
                         if ($.inArray(spriteObject.path, self.props.preloadImages) === -1) {
                             self.props.preloadImages.push(spriteObject.path);
@@ -249,7 +250,7 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
 
                     // Create explosion
                     var zIndex = entitiesOffset + (spriteObject.layer * 1000) + 200;
-                    var scale = 4 * parseInt(spriteObject.layer, 10);
+                    var scale = 5 * parseInt(spriteObject.layer, 10);
                     var yOffset = y - (players[playerCollidedId].props.z / 2) * -1;
                     var newParticles = Explosion(x - 50, yOffset, zIndex, scale, playerCollidedColor);
                     this.props.explosions = this.props.explosions.concat(newParticles);
@@ -379,6 +380,16 @@ Game.prototype.resetGame = function() {
     this.message(this.props.defaultText);
     this.props.destroyed = [];
     players = {};
+
+    // Dirty workaround: reset parralax for sprites
+    world = this.props.world;
+    for (var i=0; i < world.length; i++) {
+        if (world[i].sprites.length) {
+            for (var j=0; j< world[i].sprites.length; j++) {
+                world[i].sprites[j].left = world[i].sprites[j].origLeft;
+            }
+        }
+    }
 
     socket.emit('game-reset', {viewerId: viewerId, gameRoom: gameRoom});
     clearInterval(getReadyInterval);
