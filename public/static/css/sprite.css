@@ -1,3 +1,24 @@
+.avth-logo {
+  background: url(../images/sprite.png) 0px -217px no-repeat;
+  display: inline-block;
+  width: 49px;
+  height: 49px;
+}
+
+.dasblitz-logo {
+  background: url(../images/sprite.png) 0px -288px no-repeat;
+  display: inline-block;
+  width: 88px;
+  height: 33px;
+}
+
+.fili-logo {
+  background: url(../images/sprite.png) 0px -344px no-repeat;
+  display: inline-block;
+  width: 94px;
+  height: 14px;
+}
+
 .info-graphic {
   background: url(../images/sprite.png) -173px 0px no-repeat;
   display: inline-block;
@@ -6,14 +27,14 @@
 }
 
 .step1-bg {
-  background: url(../images/sprite.png) -88px -443px no-repeat;
+  background: url(../images/sprite.png) -88px -543px no-repeat;
   display: inline-block;
   width: 240px;
   height: 169px;
 }
 
 .step2-bg {
-  background: url(../images/sprite.png) -407px -383px no-repeat;
+  background: url(../images/sprite.png) -408px -483px no-repeat;
   display: inline-block;
   width: 240px;
   height: 229px;
