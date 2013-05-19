@@ -74,7 +74,7 @@ Game.prototype.loadAudio = function() {
             volume: 1
         }, {
             easing: 'linear',
-            duration: 5000,
+            duration: 15000,
             step: function(now, tween){
                 soundtrack.volume(now);
             }
@@ -242,10 +242,11 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
                     if (spriteObject.score > 0) {
                         players[playerCollidedId].updateScore(spriteObject.score);
 
-                        // Play audio effect
-                        if (spriteObject.audio && spriteObject.audio != 'none') {
-                            this.props.audio[spriteObject.audio].volume(.2).play();
-                        }
+                    }
+
+                    // Play audio effect
+                    if (spriteObject.audio && spriteObject.audio != 'none') {
+                        this.props.audio[spriteObject.audio].volume(.8).play();
                     }
 
                     // Create explosion
@@ -428,7 +429,7 @@ Game.prototype.getReady = function(){
 
     //$(window).trigger('game-audio-start');
 
-	self.props.state = 'GETREADY';
+    self.props.state = 'GETREADY';
     socket.emit('game-get-ready', {viewerId: viewerId, gameRoom: gameRoom});
     var countDown = 4;
     var getReadyInterval = setInterval(function(){
