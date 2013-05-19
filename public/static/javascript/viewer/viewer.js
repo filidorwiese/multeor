@@ -34,6 +34,11 @@ var viewerId = sessionStorage.getItem('viewer-id') || Math.floor((Math.random() 
 sessionStorage.setItem('viewer-id', viewerId);
 
 $(document).ready(function(){
+
+    $('#gameStart').off('click').on('click', function(){
+        hideInstructions();
+    })
+
     var game = new Game('/levels/forest', gameRoom);
 
     socket.emit('new-viewer', {viewerId: viewerId, gameRoom: gameRoom});
@@ -139,6 +144,28 @@ function logGAEvent(action, label, value) {
             _gaq.push(['_trackEvent', 'Viewer', action]);
         }
     }
+}
+
+function hideInstructions(){
+    $.each($('.step'), function(key, val){
+        $(val).delay(key*200).animate({top: '+='+346}, function(){
+            
+            if(key == $('.step').length-1 ) {
+
+                var delay = 1000;
+                for(var i=$('.step-header').length-1; i >= 0; i--){
+                    $('.step-header').eq(i).delay(delay).animate({opacity: 0});
+                    delay += 1000;
+                }
+            }    
+        });
+    });
+}
+
+
+function showInstructions(){
+    $('.step').css({top: 0, opacity: 0}).animate({opacity: 1}, 300);
+    $('.step-header').animate({opacity: 1}, 300);
 }
 
 function shuffleArray(o){

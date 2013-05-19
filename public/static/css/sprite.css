@@ -1,0 +1,20 @@
+.info-graphic {
+  background: url(../images/sprite.png) -173px 0px no-repeat;
+  display: inline-block;
+  width: 358px;
+  height: 234px;
+}
+
+.step1-bg {
+  background: url(../images/sprite.png) -88px -443px no-repeat;
+  display: inline-block;
+  width: 240px;
+  height: 169px;
+}
+
+.step2-bg {
+  background: url(../images/sprite.png) -407px -383px no-repeat;
+  display: inline-block;
+  width: 240px;
+  height: 229px;
+}

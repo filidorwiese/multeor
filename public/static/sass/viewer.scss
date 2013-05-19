@@ -1,25 +1,170 @@
 @import "compass/reset";
 @import "compass/css3";
 @import "_font";
+@import "_vars";
+@import "smart-grid.css";
 
 html, body {
-    background-color:#324444;
     padding:0;
     margin:0;
-    }
+    height: 100%;
+}
 
-#container {
-    position:absolute;
-    top:50%;
-    margin-top:-300px;
-    width:100%;
-    height:600px;
+body {
+    background: black;
+    font-family: 'nevis';
+    padding: 0 19px;
+}
+    
+.wrapper {
+    position: relative;
+    background: #191f26;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -79px; /* the bottom margin is the negative value of the footer's height + footer border*/
+    color: white;
 
-    canvas {
-        position:absolute;
-        top:0;
-        left:0;
-        width:100%;
-        height:600px;
+    .main {
+        border-top: 19px solid black;
+        background: #272d33;
+        position: relative;
+
+        .instructions-container {
+            text-align: center;
+            position: relative;
+            z-index: 1000;
+            height: 600px;
+            overflow: hidden;
+
+            .step-header{
+                font-size: 130px;
+                margin-top: 98px;
+            } 
+
+            .step-header-first {
+                color: #ff0000;
+            }
+
+            .step-header-second {
+                color: #10e622;
+            }
+
+            .step-header-third {
+                color: #ffd800;
+            }
+
+            .step-row {
+                margin-top: 26px;
+
+                .step {
+                    font-size: 30px;
+                    line-height: 40px;
+                    height: 346px;
+                    position: relative;
+                }
+
+                .step-first {
+                    background: url(../images/sprite.png) -55px bottom no-repeat;
+                }
+
+                .step-second {
+                    background: url(../images/sprite.png) -378px bottom no-repeat;
+
+                    .gamecode-container.second {
+                        display: block;
+                        margin-top: 163px;
+                        font-size: 24px;
+                        margin-left: 68px;
+                        text-align: left;
+                        color: black;
+                    }
+                }
+
+                .step-third {
+
+                    p {
+                        margin-bottom: 130px; 
+                    }
+                }
+            }
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            width:100%;
+            height:600px;
         }
     }
+
+    .about {
+        text-align: right;
+        
+        a {
+            color: white;
+            display: inline-block;
+            opacity: 0.2;
+            margin: 30px 30px 110px 0;
+        }
+    }
+}
+
+.push {
+    height: 79px; /* .push must be the same height as .footer + borders */
+}
+
+.footer {
+    position: relative;
+    height: 60px;
+    z-index: 1000;
+    border-bottom: 19px solid black;
+    text-align: center;
+
+    .developed-by {
+        list-style-type: none;
+
+        li {
+            float: left;
+            margin-right: 10px;
+
+            a {
+                color: white;
+            }
+        }
+    }
+}
+
+
+a.button {
+    background: #b6a300;
+    position: relative;
+    border-bottom: 5px solid #b6a300;
+    display: inline-block;
+    @include border-radius(5px);
+
+    button {
+        background: #ffe400;
+        border: none;
+        @include border-radius(5px);
+        color: #272d33;
+        font-family: 'nevis';
+        font-size: 30px;
+        margin: 0;
+        padding: 20px 30px;
+
+        .button-sub {
+            display: block;
+            font-size: 14px;
+        }
+    }    
+}
+
+a.button:hover {
+    border: none;
+    background: none;
+    margin-top: 5px;
+}
+#mobile-container {
+    display:none;
+}

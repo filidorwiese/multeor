@@ -1,18 +1,138 @@
 @import "compass/reset";
 @import "compass/css3";
 @import "_font";
+@import "_vars";
+@import "smart-grid.css";
 
 html, body {
-    background: #324444;
     padding:0;
     margin:0;
+    height: 100%;
 }
 
-#desktop-container {
-    display:block;
+body {
+    background: black;
+    font-family: 'nevis';
+    padding: 0 19px;
+}
+    
+.wrapper {
+    position: relative;
+    background: #191f26;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -79px; /* the bottom margin is the negative value of the footer's height + footer border*/
+    color: white;
+
+    .main {
+        border-top: 19px solid black;
+        background: #272d33;
+
+        h1 {
+            font-size: 90px;
+            text-align: center;
+            margin-top: 40px; 
+            @media screen and (min-width: $mobileMax) {
+                font-size: 200px;
+            }
+        }
+
+        .content {
+            margin-top: 30px;
+            font-size: 30px;
+            line-height: 34px;
+            text-align: center;
+            @media screen and (min-width: $mobileMax) {
+                text-align: right;
+            }
+            padding-bottom: 40px;
+
+            h2 {
+                font-size: 30px;
+            }
+
+            .introduction {
+                margin: 30px 0 36px;
+            }
+        }
+
+        .info-graphic {
+          background: url(../images/sprite.png) center 5px no-repeat;
+          height: 240px;
+          margin-top: 30px;
+        }
+    }
+
+    .about {
+        text-align: right;
+        
+        a {
+            color: white;
+            display: inline-block;
+            opacity: 0.2;
+            margin: 30px 30px 110px 0;
+        }
+    }
+}
+
+.push {
+    height: 79px; /* .push must be the same height as .footer + borders */
+}
+
+.footer {
+    position: relative;
+    height: 60px;
+    z-index: 1000;
+    border-bottom: 19px solid black;
+    text-align: center;
+
+    .developed-by {
+        list-style-type: none;
+
+        li {
+            float: left;
+            margin-right: 10px;
+
+            a {
+                color: white;
+            }
+        }
+    }
+}
+
+
+a.button {
+    background: #b6a300;
+    position: relative;
+    border-bottom: 5px solid #b6a300;
+    display: inline-block;
+    @include border-radius(5px);
+
+    button {
+        background: #ffe400;
+        border: none;
+        @include border-radius(5px);
+        color: #272d33;
+        font-family: 'nevis';
+        font-size: 30px;
+        margin: 0;
+        padding: 20px 30px;
+
+        .button-sub {
+            display: block;
+            font-size: 14px;
+        }
+    }    
+}
+
+a.button:hover {
+    border: none;
+    background: none;
+    margin-top: 5px;
 }
 #mobile-container {
-    /*display:none;*/
+    display:none;
 }
 
 @media screen and (max-device-width: 960px) {
