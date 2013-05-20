@@ -11,7 +11,6 @@ var socket = io.connect(window.location.hostname + ':843');
 
 // Setup game globals
 var players = {};
-var getReadyInterval = false;
 var game = false;
 var playerColors = [
                     '110,8,157',
@@ -35,10 +34,6 @@ sessionStorage.setItem('viewer-id', viewerId);
 
 $(document).ready(function(){
 
-    $('#gameStart').off('click').on('click', function(){
-        hideInstructions();
-    })
-
     var game = new Game('/levels/forest', gameRoom);
 
     socket.emit('new-viewer', {viewerId: viewerId, gameRoom: gameRoom});
@@ -52,29 +47,37 @@ $(document).ready(function(){
         sessionStorage.setItem('game-room', '');
         alert('Sorry, no game hijacking');
         document.location = '/';
-        logGAEvent('Room hijacking?');
+        logGAEvent('Game hijacking?');
     });
 
     socket.on('update-game-state', function(data){
-        // Start countdown on first joined player
+        // Enable button on first joined player
         var playerCount = 0;
         for (var ii in data.players) { playerCount++; }
-        if (playerCount === 1) {
-            game.getReady();
+        if (playerCount) {
+            $('#gameStart').removeClass('disabled');
         }
 
         // Add player to players array
         var numberOfPlayers = 0;
-        for (var ii in data.players) {
-            var playerId = data.players[ii];
-            numberOfPlayers++;
-            if (typeof players[playerId] == 'undefined') {
-                var playerColor = playerColorsShuffled.splice(0, 1)[0];
-                var playerIcon = '/tmp-facebook-icon-arjen.jpg';
-                players[playerId] = new Player(context, playerId, playerIcon, playerColor, numberOfPlayers);
-                socket.emit('update-player-color', {viewerId: viewerId, gameRoom: gameRoom, playerId: playerId, playerColor: playerColor});
+
+        //for (var oo=0; oo < 8; oo++) {
+
+            for (var ii in data.players) {
+                //var playerId = data.players[ii] + oo;
+                var playerId = data.players[ii];
+                numberOfPlayers++;
+                if (typeof players[playerId] == 'undefined') {
+                    var playerColor = playerColorsShuffled.splice(0, 1)[0];
+                    var playerIcon = '/tmp-facebook-icon-arjen.jpg';
+                    //var playerIcon = false;
+                    players[playerId] = new Player(context, playerId, playerIcon, playerColor, numberOfPlayers);
+                    //playerId++;
+                    socket.emit('update-player-color', {viewerId: viewerId, gameRoom: gameRoom, playerId: playerId, playerColor: playerColor});
+                }
             }
-        }
+
+        //}
 
         // Check for deleted players
         for (var oo in players) {
@@ -98,8 +101,7 @@ $(document).ready(function(){
         players[data.pid].props.vector = data.v;
     });
 
-
-    profiler.start(context, 12, 245, 120, 1);
+    //profiler.start(context, 12, 245, 120, 1);
 
     var now;
     var delta;
@@ -127,9 +129,24 @@ $(document).ready(function(){
             //then = time;
         //}
 
-        profiler.tick();
+        //profiler.tick();
 
     })();
+
+
+    $('.gamecode-container').html(gameRoom);
+
+    $('#gameStart').off('click').on('click', function(event){
+        event.preventDefault();
+        if ($(this).hasClass('disabled')) { return false; }
+        hideInstructions();
+        game.getReady();
+    });
+
+    $('#gameReset').off('click').on('click', function(event){
+        event.preventDefault();
+        game.resetGame();
+    });
 });
 
 
@@ -149,7 +166,7 @@ function logGAEvent(action, label, value) {
 function hideInstructions(){
     $.each($('.step'), function(key, val){
         $(val).delay(key*200).animate({top: '+='+346}, function(){
-            
+
             if(key == $('.step').length-1 ) {
 
                 var delay = 1000;
@@ -157,13 +174,14 @@ function hideInstructions(){
                     $('.step-header').eq(i).delay(delay).animate({opacity: 0});
                     delay += 1000;
                 }
-            }    
+            }
         });
     });
 }
 
-
 function showInstructions(){
+    $('.leaderboard-container').hide();
+    $('.instructions-container').show();
     $('.step').css({top: 0, opacity: 0}).animate({opacity: 1}, 300);
     $('.step-header').animate({opacity: 1}, 300);
 }

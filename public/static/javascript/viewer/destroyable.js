@@ -46,21 +46,21 @@ Destroyable.prototype.collides = function(players, bgModulus) {
     if (this.props.x < (this.props.frameWidth * -1) || this.props.x > canvas.width) { return false; }
 
     var weirdnessOffset = 100;
-    var houseLeft = this.props.x;
-    var houseRight = houseLeft + this.props.frameWidth;
-    var houseTop = this.props.y;
-    var houseBottom = houseTop + this.props.frameHeight;
-    var houseZmin = this.props.z - 20;
-    var houseZmax = this.props.z + 20;
+    var entityLeft = this.props.x;
+    var entityRight = entityLeft + this.props.frameWidth;
+    var entityTop = this.props.y;
+    var entityBottom = entityTop + this.props.frameHeight;
+    var entityZmin = this.props.z - 20;
+    var entityZmax = this.props.z + 20;
 
     // Uncomment to debug collision detection
     //context.save();
     //context.fillStyle = 'rgba(255,0,0,1)';
-    //context.fillRect(houseLeft, houseTop, houseRight - houseLeft, houseBottom - houseTop);
+    //context.fillRect(entityLeft, entityTop, entityRight - entityLeft, entityBottom - entityTop);
 
     for(player in players) {
-        var playerYPadding = players[player].props.z * .2;
-        var playerXPadding = players[player].props.z * .2;
+        var playerYPadding = players[player].props.z * .25;
+        var playerXPadding = players[player].props.z * .25;
         var playerLeft = players[player].props.x + playerXPadding + weirdnessOffset;
         var playerRight = players[player].props.x - playerXPadding + weirdnessOffset;
         var playerTop = players[player].props.y + playerYPadding;
@@ -70,9 +70,9 @@ Destroyable.prototype.collides = function(players, bgModulus) {
         // Uncomment to debug collision detection
         //context.fillRect(playerLeft, playerTop, playerRight - playerLeft, playerBottom - playerTop);
 
-        if (playerZ >= houseZmin && playerZ <= houseZmax) {
-            if (playerRight >= houseLeft && playerLeft <= houseRight) {
-                if (playerTop >= houseTop && playerBottom <= houseBottom) {
+        if (playerZ >= entityZmin && playerZ <= entityZmax) {
+            if (playerRight >= entityLeft && playerLeft <= entityRight) {
+                if (playerTop >= entityTop && playerBottom <= entityBottom) {
                     return player;
                 }
             }

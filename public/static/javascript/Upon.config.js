@@ -5,10 +5,10 @@ Upon.require({
         'third-party/howler.min.js'
     ],
     'title-screen-production': [
-        'title-screen/title-screen.js'
+        'title-screen.min.js'
     ],
     'title-screen-development': [
-        'title-screen.min.js'
+        'title-screen/title-screen.js'
     ],
     'viewer-production': [
         'viewer.min.js'

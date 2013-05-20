@@ -1,0 +1,144 @@
+
+html, body {
+    padding:0;
+    margin:0;
+    height: 100%;
+}
+
+body {
+    background: black;
+    font-family: 'nevis';
+    padding: 0 19px;
+}
+
+a.button {
+    background: #b6a300;
+    position: relative;
+    border-bottom: 5px solid #b6a300;
+    display: inline-block;
+    @include border-radius(5px);
+
+    button {
+        background: #ffe400;
+        border: none;
+        @include border-radius(5px);
+        color: #272d33;
+        font-family: 'nevis';
+        font-size: 30px;
+        margin: 0;
+        padding: 15px 30px;
+        cursor: pointer;
+
+        .button-sub {
+            display: block;
+            font-size: 14px;
+        }
+    }
+
+    &:hover button {
+        background: #FCFF00;
+    }
+
+    &:active {
+        border: none;
+        background: none;
+        margin-top: 5px;
+    }
+
+    &.disabled {
+        border-bottom: 5px solid #999 !important;
+        background:#999 !important;
+        margin-top:0 !important;
+
+        button {
+            background:#ccc !important;
+            cursor:default !important;
+        }
+    }
+}
+
+.wrapper {
+    position: relative;
+    background: #191f26;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -99px; /* the bottom margin is the negative value of the footer's height + footer border*/
+    color: white;
+}
+
+.push {
+    height: 99px; /* .push must be the same height as .footer + borders */
+}
+
+.footer {
+    position: relative;
+    height: 60px;
+    z-index: 1000;
+    border-bottom: 19px solid black;
+    padding-bottom: 20px;
+    text-align: center;
+
+    .developed-by {
+        list-style-type: none;
+        width: 410px;
+        margin: 0 auto;
+
+        li {
+            float: left;
+            margin-right: 10px;
+
+            a {
+                display: inline-block;
+                height: 50px;
+                margin: 0 20px;
+                text-indent:100%;
+                overflow:hidden;
+                white-space:nowrap;
+            }
+
+            .avth-logo {
+                background: url(../images/sprite.png) 0px -217px no-repeat;
+                width: 49px;
+                height: 49px;
+                opacity: 0.2;
+            }
+
+            .dasblitz-logo {
+                background: url(../images/sprite.png) 0px -276px no-repeat;
+                display: inline-block;
+                width: 88px;
+                height: 50px;
+                opacity: 0.2;
+            }
+
+            .fili-logo {
+                background: url(../images/sprite.png) 0px -325px no-repeat;
+                display: inline-block;
+                width: 94px;
+                height: 50px;
+            }
+        }
+    }
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+.clearfix {
+    display: inline-block;
+}
+
+html[xmlns] .clearfix {
+    display: block;
+}
+
+* html .clearfix {
+    height: 1%;
+}

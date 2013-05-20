@@ -3,7 +3,7 @@ $(document).ready(function(){
     // tijdelijk voor debugging
     $('form input[name=game]').val(sessionStorage.getItem('game-room'));
 
-    // 
+    //
     $('form').on('submit', function(event){
         event.preventDefault();
         var gameRoomInput = $(this).find('input');
@@ -16,4 +16,5 @@ $(document).ready(function(){
             document.location = '/controller/';
         }
     });
+
 });

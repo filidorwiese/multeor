@@ -49,7 +49,8 @@ $(document).ready(function(){
     });
 
     socket.on('game-reset', function(data){
-        playerWaitingtoJoin();
+        document.location.reload();
+        //playerWaitingtoJoin();
     });
 
     socket.on('game-get-ready', function(data){
@@ -101,11 +102,7 @@ $(document).ready(function(){
 
     var playerWaitingtoJoin = function() {
         player.joined = false;
-        $('#score').html('Click to join game');
-        $('body').on('click touchstart', function(){
-            $('body').off('click touchstart');
-            socket.emit('new-player', {playerId: player.id, gameRoom: gameRoom});
-        });
+        socket.emit('new-player', {playerId: player.id, gameRoom: gameRoom});
     }
     playerWaitingtoJoin();
 

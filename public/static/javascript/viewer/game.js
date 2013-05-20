@@ -3,7 +3,6 @@ var Game = function(levelPath, code){
     self.props = {
         state: 'LOADING', // LOADING, WAITING, GETREADY, STARTED, LEADERBOARD, ENDED, ABORTED
         message: false,
-        defaultText: 'Go to http://game.multeor.com on your mobile and enter code ' + code + ' to join',
         levelPath: levelPath,
         preloadImages: [],
         images: {},
@@ -103,31 +102,24 @@ Game.prototype.loadAudio = function() {
             urls: [self.props.levelPath + '/audio/sprites/' + i + '.mp3', self.props.levelPath + '/audio/sprites/' + i + '.ogg']
         });
     }
+
+    // Enable audio-toggle
+    $('.audio-toggle').off('click').on('click', function(event){
+        event.preventDefault();
+        $(this).toggleClass('is-muted');
+
+        if ($(this).hasClass('is-muted')) {
+           Howler.mute();
+        } else {
+           Howler.unmute();
+        }
+    });
 }
 
 Game.prototype.tick = function(context, delta) {
     if (this.props.state == 'LOADING') {
-        context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-        if (this.props.message.length) { this.renderText(context); }
         return false;
     }
-
-    /*
-    context.clearRect(0, 0, canvas.width, canvas.height);
-
-    if (this.props.explosions.length < 2) {
-        this.props.explosions = this.props.explosions.concat(Explosion(200, 200, 1000, 5, 1, '255,255,255'));
-    }
-    for (var i=0; i < this.props.explosions.length; i++) {
-        var particle = this.props.explosions[i];
-
-        if (particle.dead) {
-            //this.props.explosions.splice(i, 1);
-        }
-
-        particle.draw(context);
-    }
-    return;*/
 
     // Update worldX
     if (this.props.state == 'STARTED' || this.props.state == 'LEADERBOARD') {
@@ -141,18 +133,12 @@ Game.prototype.tick = function(context, delta) {
     var numberOfTiles = Math.ceil(context.canvas.width / 1000);
     var bgBase = Math.floor(this.props.worldX / 1000);
     var bgModulus = Math.floor(this.props.worldX % 1000);
-    //Upon.log(numberOfTiles + ', ' + bgBase + ', ' + bgModulus);
 
 	// Draw background tiles
     this.renderBackgrounds(context, numberOfTiles, bgBase, bgModulus);
 
     // Draw entities, destroyables and players
     this.renderEntities(context, numberOfTiles, bgBase, bgModulus);
-
-    // Draw on screen text
-    if (this.props.message.length) {
-        this.renderText(context);
-    }
 
     // If near the end of the world, take over control and render to leaderboard positions
     if (this.props.state == 'STARTED' && this.props.worldX > ((this.props.world.length * 1000) - 7000)) {
@@ -190,7 +176,6 @@ Game.prototype.renderBackgrounds = function(context, numberOfTiles, bgBase, bgMo
         var bgImage = this.getImage(tile.background);
         if (bgImage) {
             //Upon.log(tile.background + ', '+ sx + ', 0, ' + sw + ', ' + canvas.height + ', ' + x + ', 0, ' + sw + ', ' + canvas.height);
-            //context.drawImage(bgImage, sx, 0, sw, canvas.height, x + (ii * 5), 0, sw, canvas.height);
             context.drawImage(bgImage, sx, 0, sw, context.canvas.height, x, 0, sw, context.canvas.height);
         }
     }
@@ -304,33 +289,30 @@ Game.prototype.prepareLeaderboard = function() {
     logGAEvent('Ended', 'Highest score', highestScore);
 
     // Calculate player leaderboard position
-    var numberOfPlayer = 0;
-    var headerHeight = 70;
+    var numberOfPlayers = 0;
+    for (var ii in players) { numberOfPlayers++; }
+
+    var headerHeight = ((600 - (numberOfPlayers * 60)) / 2);
     var leaderboardWidth = canvas.width / 4;
+    var numberOfPlayer = 0;
     for (player in leaderboardPositions) {
-        var thePlayer = leaderboardPositions[player][0];
         numberOfPlayer++;
+        var thePlayer = leaderboardPositions[player][0];
         thePlayer.props.endX = Math.floor((thePlayer.props.score / highestScore) * ((canvas.width / 2) + leaderboardWidth));
         if (thePlayer.props.endX < (canvas.width / 2) - leaderboardWidth) {
             thePlayer.props.endX = (canvas.width / 2) - leaderboardWidth;
         }
-        thePlayer.props.endY = Math.floor((numberOfPlayer * (thePlayer.props.minZ + 30)) + headerHeight);
+        thePlayer.props.endY = Math.floor((numberOfPlayer * thePlayer.props.endZ) - (thePlayer.props.endZ / 2) + headerHeight);
     }
 }
 
 Game.prototype.renderLeaderboard = function(context) {
-    // Draw leaderboard header
     var maxWidth = canvas.width / 2;
-    var x = (canvas.width - maxWidth) / 2;
-    var y = 70;
-    this.drawMessage(context, 'SCORES', x, y, maxWidth, 35, true);
-
-    // Draw score
     var fuzzyNumber = 10;
     for (player in players) {
         if (players[player].props.x < players[player].props.endX + fuzzyNumber && players[player].props.x > players[player].props.endX - fuzzyNumber) {
             if (players[player].props.y < players[player].props.endY + fuzzyNumber && players[player].props.y > players[player].props.endY - fuzzyNumber) {
-                this.drawMessage(context, players[player].props.score, players[player].props.endX + 130, players[player].props.endY + 9, maxWidth, 35, false);
+                this.drawMessage(context, players[player].props.score, players[player].props.endX + 140, players[player].props.endY + 9, maxWidth, 35, false);
             }
         }
     }
@@ -357,9 +339,6 @@ Game.prototype.loadImage = function(imageSrc) {
             var progress = Math.floor((100 / self.props.preloadImages.length) * imagesLoaded);
             if (progress >= 100) {
                 self.props.state = 'WAITING';
-                self.message(self.props.defaultText);
-            } else {
-                self.message(progress + '%');
             }
         }
         image.onerror = function() {
@@ -376,9 +355,12 @@ Game.prototype.getImage = function(imageSrc) {
 }
 
 Game.prototype.resetGame = function() {
+    socket.emit('game-reset', {viewerId: viewerId, gameRoom: gameRoom});
+    document.location.reload();
+    return;
+    /*
     this.props.worldX = 0;
     this.props.state = 'WAITING';
-    this.message(this.props.defaultText);
     this.props.destroyed = [];
     players = {};
 
@@ -393,7 +375,7 @@ Game.prototype.resetGame = function() {
     }
 
     socket.emit('game-reset', {viewerId: viewerId, gameRoom: gameRoom});
-    clearInterval(getReadyInterval);
+    showInstructions();*/
 }
 
 Game.prototype.abortGame = function() {
@@ -402,7 +384,6 @@ Game.prototype.abortGame = function() {
 
     self.props.state = 'ABORTED';
     $(window).trigger('game-audio-stop');
-    self.message('Game aborted!');
 
     logGAEvent('Aborted');
 
@@ -419,33 +400,21 @@ Game.prototype.endGame = function(){
     $(window).trigger('game-audio-stop');
 
     setTimeout(function(){
-        self.resetGame();
-    }, 10000);
+        $('.leaderboard-container').fadeIn(1000);
+    }, 1000);
 }
 
 Game.prototype.getReady = function(){
     var self = this;
     if (self.props.state != 'WAITING') { return false; }
 
-    //$(window).trigger('game-audio-start');
+    $(window).trigger('game-audio-start');
 
     self.props.state = 'GETREADY';
     socket.emit('game-get-ready', {viewerId: viewerId, gameRoom: gameRoom});
-    var countDown = 4;
-    var getReadyInterval = setInterval(function(){
-        if (self.props.state != 'GETREADY') { clearInterval(getReadyInterval); return false; }
-        if (countDown < 1) {
-            self.message('GO!');
-            clearInterval(getReadyInterval);
-            setTimeout(function(){
-                self.message('');
-                self.startGame();
-            }, 1000);
-        } else {
-            self.message('Game starting in ' + countDown + ' seconds, get ready...');
-            countDown--;
-        }
-    }, 1000);
+    setTimeout(function(){
+        self.startGame();
+    }, 4000);
 }
 
 Game.prototype.startGame = function(){
@@ -458,6 +427,8 @@ Game.prototype.startGame = function(){
     var numberOfPlayers = 0;
     for (var ii in players) { numberOfPlayers++; }
     logGAEvent('Started', 'Players', numberOfPlayers);
+
+    $('.instructions-container').hide();
 }
 
 Game.prototype.drawMessage = function(context, text, x, y, maxWidth, lineHeight, center) {
