@@ -49,8 +49,7 @@ $(document).ready(function(){
     });
 
     socket.on('game-reset', function(data){
-        document.location.reload();
-        //playerWaitingtoJoin();
+        //document.location.reload();
     });
 
     socket.on('game-get-ready', function(data){
@@ -67,7 +66,6 @@ $(document).ready(function(){
         Upon.log('game-end');
         player.joined = false;
 
-        //data.leaderboard;
         $('#game-start, #controller').hide();
         $('#game-end').show();
 
@@ -75,7 +73,11 @@ $(document).ready(function(){
         if (player.facebookProfile) {
             $('#facebook-share').show().off('click').on('click', function(event){
                 event.preventDefault();
-                fbPublish(player.score, data.leaderboard);
+                fbPublish(player.score, data.leaderboard, function(status){
+                    if (status) {
+                        $('#facebook-share').hide();
+                    }
+                });
             });
         } else {
             $('#facebook-share').hide();
@@ -85,9 +87,9 @@ $(document).ready(function(){
     socket.on('update-score', function(data){
         Upon.log('update-score');
 
-        $('html,body').css({ backgroundColor: '#FFF' });
+        $('#controller').css({ backgroundColor: '#FFF' });
         setTimeout(function(){
-            $('html,body').css({ backgroundColor: 'rgba(' + player.color + ',.8)' });
+            $('#controller').css({ backgroundColor: 'rgba(' + player.color + ',1)' });
         }, 250);
 
 		player.score = data.score;
@@ -96,7 +98,7 @@ $(document).ready(function(){
 
     socket.on('update-player-color', function(data){
         player.color = data.playerColor;
-        $('html, body').css({ backgroundColor: 'rgba(' + player.color + ',.8)' });
+        $('#controller').css({ backgroundColor: 'rgba(' + player.color + ',1)' });
         $('#game-start, #game-end').hide();
         $('#controller').show();
     });
@@ -220,20 +222,24 @@ $(document).ready(function(){
         });
     }
 
-    $('#join-game').on('click', function(){
+    $('#join-game').on('click', function(event){
+        event.preventDefault();
         var gameRoomInput = $('input[name=game-code]');
         var gameRoom = parseInt(gameRoomInput.val(), 10);
         if (isNaN(gameRoom) || gameRoom < 10000 || gameRoom > 99999) {
             alert('Not a valid code');
             gameRoomInput.val('').focus();
         } else {
-
             sessionStorage.setItem('game-room', gameRoom);
             player.gameRoom = gameRoom;
-
             var playerIcon = player.facebookProfile ? player.facebookProfile.picture.data.url : false;
             socket.emit('new-player', {playerId: player.id, gameRoom: gameRoom, playerIcon: playerIcon});
         }
+    });
+
+    $('#game-reset').on('click', function(event){
+        event.preventDefault();
+        document.location.reload();
     });
 
     // Insert game-code if available in storage
@@ -242,7 +248,7 @@ $(document).ready(function(){
 
     // Show Facebook icon if connected
     if (player.facebookProfile) {
-        $('.buddy-icon').append('<img src="' + player.facebookProfile.picture.data.url + '" /><div>' + player.facebookProfile.name + '</div>').show();
+        $('.buddy-icon').append('<img src="' + player.facebookProfile.picture.data.url + '" /><div>Playing as<br />' + player.facebookProfile.name + '</div>').show();
     }
 
 });

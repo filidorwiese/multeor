@@ -166,10 +166,10 @@ function hideInstructions(){
 
             if(key == $('.step').length-1 ) {
 
-                var delay = 1000;
+                var delay = 200;
                 for(var i=$('.step-header').length-1; i >= 0; i--){
                     $('.step-header').eq(i).delay(delay).animate({opacity: 0});
-                    delay += 1000;
+                    delay += 750;
                 }
             }
         });

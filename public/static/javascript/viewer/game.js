@@ -8,7 +8,7 @@ var Game = function(levelPath, code){
         images: {},
         audio: {},
         world: false,
-        worldX: 63000,
+        worldX: 0,
         worldSpeed: 10,
         destroyed: {},
         explosions: [],
@@ -66,18 +66,8 @@ Game.prototype.loadAudio = function() {
         loop: true
     });
     $(window).off('game-audio-start').on('game-audio-start', function(e){
-        var audio = { volume: 0 };
-        soundtrack.volume(audio.volume);
+        soundtrack.volume(.5);
         soundtrack.play();
-        $(audio).animate({
-            volume: 1
-        }, {
-            easing: 'linear',
-            duration: 15000,
-            step: function(now, tween){
-                soundtrack.volume(now);
-            }
-        });
     });
 
     $(window).off('game-audio-stop').on('game-audio-stop', function(e){
@@ -231,7 +221,7 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
 
                     // Play audio effect
                     if (spriteObject.audio && spriteObject.audio != 'none') {
-                        this.props.audio[spriteObject.audio].volume(.8).play();
+                        this.props.audio[spriteObject.audio].volume(1).play();//.pos3d(x, y, z)
                     }
 
                     // Create explosion

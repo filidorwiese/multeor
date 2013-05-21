@@ -47,6 +47,7 @@
 
     .about {
         text-align: right;
+        font-size:16px;
 
         a {
             color:#616467;
@@ -64,6 +65,12 @@
 
 #mobile-container {
     display:none;
+    margin-top:10px;
+    
+    h1 {
+        font-size:30px;
+        margin-bottom:10px;
+    }
 }
 
 //@media screen and (max-device-width: 960px) {

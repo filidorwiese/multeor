@@ -8,8 +8,13 @@ html, body, #desktop-container {
 body {
     background: black;
     font-family: 'nevis';
+    font-size:12px;
     padding: 0 19px;
     color: white;
+}
+
+p {
+    margin-bottom:10px;
 }
 
 a.button {
@@ -57,6 +62,13 @@ a.button {
         }
     }
 }
+@media screen and (max-width: 960px) {
+    a.button button {
+        font-size:20px;
+        padding:10px 10px;
+    }
+}
+
 
 .wrapper {
     position: relative;

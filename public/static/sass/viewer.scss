@@ -10,11 +10,11 @@
         border-top: 19px solid black;
         background: #272d33;
         position: relative;
+        height:600px;
 
         .instructions-container {
             text-align: center;
             position: absolute;
-            top:3px;
             left:50%;
             margin-left:-480px;
             z-index: 1000;
@@ -126,6 +126,7 @@
         .about {
             float:right;
             color:#616467;
+            font-size:16px;
 
             &:hover {
                 color: #FFF;

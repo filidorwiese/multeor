@@ -49,23 +49,23 @@ function fbLoggedIn() {
     return facebookConnected;
 }
 
-function fbPublish(score, image) {
+function fbPublish(score, image, callback) {
     //https://developers.facebook.com/docs/guides/attachments/
     FB.ui({
-        display: 'touch',
-        method: 'stream.publish',
-        name: 'I played Multeor and I scored ' + score + ' points!',
+        display: 'popup',
+        method: 'feed',
+        name: 'I played Multeor and scored ' + score + ' points!',
         href: 'http://multeor.com',
         caption: 'Multeor - a multiplayer webgame',
         description: 'Use a mobile to pilot your meteor. Make sure you leave the biggest trail of destruction.',
         link: 'http://multeor.com',
-        action_links: [{ text: 'Play', href: 'http://multeor.com' }],
+        //action_links: [{ text: 'Play', href: 'http://multeor.com' }],
         picture: image
     }, function(response) {
         if (response && response.post_id) {
-            alert('Post was published.');
+            callback(true);
         } else {
-            alert('Post was not published.');
+            callback(false);
         }
     });
 }
