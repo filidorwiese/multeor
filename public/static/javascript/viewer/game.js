@@ -8,7 +8,7 @@ var Game = function(levelPath, code){
         images: {},
         audio: {},
         world: false,
-        worldX: 0,
+        worldX: 60000,
         worldSpeed: 10,
         destroyed: {},
         explosions: [],
@@ -279,10 +279,12 @@ Game.prototype.renderText = function(context) {
 Game.prototype.prepareLeaderboard = function() {
     // Prevent player input and determine leaderboard position
     var highestScore = 0;
+    var lowestScore = 10000;
     var leaderboardPositions = [];
     for (player in players) {
         players[player].lockPlayer();
         if (players[player].props.score > highestScore) { highestScore = players[player].props.score; }
+        if (players[player].props.score < lowestScore) { lowestScore = players[player].props.score; }
         leaderboardPositions.push([players[player], players[player].props.score]);
     }
     leaderboardPositions.sort(function(a, b) {return b[1] - a[1] });
@@ -293,15 +295,15 @@ Game.prototype.prepareLeaderboard = function() {
     for (var ii in players) { numberOfPlayers++; }
 
     var headerHeight = ((600 - (numberOfPlayers * 60)) / 2);
-    var leaderboardWidth = canvas.width / 4;
+    var leaderboardWidth = 800;
+    var leaderboardLeft = (canvas.width / 2) - (leaderboardWidth / 2);
     var numberOfPlayer = 0;
     for (player in leaderboardPositions) {
         numberOfPlayer++;
         var thePlayer = leaderboardPositions[player][0];
-        thePlayer.props.endX = Math.floor((thePlayer.props.score / highestScore) * ((canvas.width / 2) + leaderboardWidth));
-        if (thePlayer.props.endX < (canvas.width / 2) - leaderboardWidth) {
-            thePlayer.props.endX = (canvas.width / 2) - leaderboardWidth;
-        }
+        var thePlayerPercent = ((thePlayer.props.score - lowestScore) / highestScore);
+        console.log(thePlayerPercent);
+        thePlayer.props.endX = Math.floor((thePlayerPercent * leaderboardWidth) + leaderboardLeft);
         thePlayer.props.endY = Math.floor((numberOfPlayer * thePlayer.props.endZ) - (thePlayer.props.endZ / 2) + headerHeight);
     }
 }
@@ -358,24 +360,6 @@ Game.prototype.resetGame = function() {
     socket.emit('game-reset', {viewerId: viewerId, gameRoom: gameRoom});
     document.location.reload();
     return;
-    /*
-    this.props.worldX = 0;
-    this.props.state = 'WAITING';
-    this.props.destroyed = [];
-    players = {};
-
-    // Dirty workaround: reset parralax for sprites
-    world = this.props.world;
-    for (var i=0; i < world.length; i++) {
-        if (world[i].sprites.length) {
-            for (var j=0; j< world[i].sprites.length; j++) {
-                world[i].sprites[j].left = world[i].sprites[j].origLeft;
-            }
-        }
-    }
-
-    socket.emit('game-reset', {viewerId: viewerId, gameRoom: gameRoom});
-    showInstructions();*/
 }
 
 Game.prototype.abortGame = function() {
@@ -394,12 +378,26 @@ Game.prototype.abortGame = function() {
 
 Game.prototype.endGame = function(){
     var self = this;
-    socket.emit('game-end', {viewerId: viewerId, gameRoom: gameRoom});
 
     self.props.state = 'ENDED';
     $(window).trigger('game-audio-stop');
 
     setTimeout(function(){
+        // Save Leaderboard image-data
+        var image = context.getImageData(((canvas.width - 1000) / 2), 0, 1000, 600);
+        var buffer = document.createElement('canvas');
+        var bufferCtx = buffer.getContext('2d');
+        buffer.width = 1000;
+        buffer.height = 600;
+        bufferCtx.putImageData(image, 0, 0);
+        bufferCtx.font = '80px nevis';
+        bufferCtx.fillStyle = '#FFFFFF';
+        bufferCtx.fillText('Multeor', 650, 550);
+        var leaderboardImage = buffer.toDataURL();
+
+        // Emit game-end
+        socket.emit('game-end', {viewerId: viewerId, gameRoom: gameRoom, leaderboard: leaderboardImage});
+
         $('.leaderboard-container').fadeIn(1000);
     }, 1000);
 }
@@ -433,7 +431,7 @@ Game.prototype.startGame = function(){
 
 Game.prototype.drawMessage = function(context, text, x, y, maxWidth, lineHeight, center) {
     context.save();
-    context.font = '30px ablas_altbold';
+    context.font = '30px nevis';
     context.fillStyle = '#FFFFFF';
 
     var words = text.toString().split(' ');

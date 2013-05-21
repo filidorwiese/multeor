@@ -1,11 +1,13 @@
 // Start websocket on port 843
 // https://github.com/LearnBoost/socket.io/wiki/Socket.IO-and-firewall-software
 // https://github.com/LearnBoost/Socket.IO/wiki/Configuring-Socket.IO
+var fs = require('fs');
+var sys = require('sys');
 var io = require('socket.io').listen(843);
 io.enable('browser client minification');
 io.enable('browser client etag');
 io.enable('browser client gzip');
-io.set('log level', 3);
+io.set('log level', 1);
 //io.set('transports', ['websocket', 'flashsocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
 
 var ppsCounter = 0;
@@ -142,7 +144,7 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('game-end', function(data){
-        log('Game-end: ' + JSON.stringify(data));
+        //log('Game-end: ' + JSON.stringify(data));
 
         // Verify if this viewer is authorative for this gameRoom and that is exists
         if (!(verifyGameRoom(data.gameRoom, data.viewerId))) {
@@ -151,9 +153,20 @@ io.sockets.on('connection', function(socket) {
             return false;
         }
 
+        // Store leaderboard image
+        var leaderboardImage = false;
+        if (data.leaderboard) {
+            var leaderboardPath = __dirname + '/public/leaderboards/';
+            var leaderboardImage = 'leaderboard_' + data.gameRoom + '_' + new Date().getTime() + '.png';
+            var image = data.leaderboard.replace(/^data:image\/\w+;base64,/, '');
+            var buf = new Buffer(image, 'base64');
+            fs.writeFile(leaderboardPath + leaderboardImage, buf);
+            log('Game-end: Saving leaderboard to ' + leaderboardPath + leaderboardImage);
+        }
+
         // Emit Game-end to players
         for (var ii in currentGames[data.gameRoom].players) {
-			io.sockets.socket(ii).emit('game-end');
+            io.sockets.socket(ii).emit('game-end', { leaderboard: leaderboardImage });
         }
     });
 

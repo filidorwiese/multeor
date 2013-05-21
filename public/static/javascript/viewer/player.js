@@ -137,8 +137,8 @@ Player.prototype.loadIcon = function(image) {
 
     var canvas = document.createElement('canvas');
     var ctx = canvas.getContext('2d');
-    canvas.width = 100;
-    canvas.height = 100;
+    canvas.width = 50;
+    canvas.height = 50;
     var a = canvas.width, r = a / 2;
 
     if (image) {
@@ -152,8 +152,8 @@ Player.prototype.loadIcon = function(image) {
     // http://jsfiddle.net/XnzP8/1/
     // http://blog.riacode.in/2011/03/03/drawing-regular-polygons-in-html5-canvas/
     ctx.globalCompositeOperation = 'destination-in';
-    ctx.globalAlpha = .3;
-    self.drawPolygon(ctx, 50, 50, r, 8);
+    ctx.globalAlpha = .9;
+    self.drawPolygon(ctx, 25, 25, r, 8);
 
     self.props.icon = canvas;
 }

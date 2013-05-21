@@ -2,7 +2,7 @@
 @import "compass/css3";
 @import "_font";
 @import "_vars";
-@import "_smart-grid";
+@import "_layout";
 @import "_base";
 
 .wrapper {
@@ -14,6 +14,7 @@
         .instructions-container {
             text-align: center;
             position: absolute;
+            top:3px;
             left:50%;
             margin-left:-480px;
             z-index: 1000;
@@ -48,7 +49,7 @@
                 }
 
                 .step-first {
-                    background: url(../images/sprite.png) -55px bottom no-repeat;
+                    background: url(../images/step1-bg.png) center bottom no-repeat;
 
                     .siteurl {
                         display: block;
@@ -62,7 +63,7 @@
                 }
 
                 .step-second {
-                    background: url(../images/sprite.png) -378px bottom no-repeat;
+                    background: url(../images/step2-bg.png)  center bottom no-repeat;
 
                     .gamecode-container.second {
                         display: block;
