@@ -65,25 +65,23 @@ $(document).ready(function(){
 
             for (var ii in data.players) {
                 //var playerId = data.players[ii] + oo;
-                var playerId = data.players[ii];
+                var playerId = data.players[ii].playerId;
                 numberOfPlayers++;
                 if (typeof players[playerId] == 'undefined') {
                     var playerColor = playerColorsShuffled.splice(0, 1)[0];
-                    var playerIcon = '/tmp-facebook-icon-arjen.jpg';
-                    //var playerIcon = false;
+                    var playerIcon = data.players[ii].playerIcon;
                     players[playerId] = new Player(context, playerId, playerIcon, playerColor, numberOfPlayers);
                     //playerId++;
                     socket.emit('update-player-color', {viewerId: viewerId, gameRoom: gameRoom, playerId: playerId, playerColor: playerColor});
                 }
             }
-
         //}
 
         // Check for deleted players
         for (var oo in players) {
             var playerStillExists = false;
             for (var ii in data.players) {
-                if (data.players[ii] == oo) {
+                if (data.players[ii].playerId == oo) {
                     playerStillExists = true;
                 }
             }
@@ -97,7 +95,6 @@ $(document).ready(function(){
         if (typeof players[data.pid] == 'undefined') {
             return false;
         }
-
         players[data.pid].props.vector = data.v;
     });
 

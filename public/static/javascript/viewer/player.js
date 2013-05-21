@@ -29,6 +29,7 @@ var Player = function(context, playerId, playerIcon, playerColor, playerNumber) 
 
     if (playerIcon) {
         var image = new Image();
+        image.crossOrigin = 'Anonymous';
         image.src = playerIcon;
         image.onload = function() {
             self.loadIcon(this);

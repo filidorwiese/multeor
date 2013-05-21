@@ -14,42 +14,62 @@
 </head>
 
 <body>
-  <div id="desktop-container" class="wrapper">
-    <div class="main">
-      <div class="container">
-        <div class="row" role="header">
-          <h1 class="columns twelve">Multeor</h1>
-        </div>
-        <div class="row">
-          <div class="content columns six" role="main">
-            <h2 class="tagline">a multiplayer webgame.</h2>
-            <p class="introduction">Use a mobile to pilot your meteor. Make sure you leave the biggest trail of destruction.</p>
-            <a href="/viewer/" class="button"><button>Play game!<span class="button-sub">(up to 8 players)</span></button></a>
+  <div id="fb-root"></div>
+
+  <div id="desktop-container">
+    <div class="wrapper">
+      <div class="main">
+        <div class="container">
+          <div class="row" role="header">
+            <h1 class="columns twelve">Multeor</h1>
           </div>
-          <div class="info-graphic columns six"></div>
+          <div class="row">
+            <div class="content columns six" role="main">
+              <h2 class="tagline">a multiplayer webgame.</h2>
+              <p class="introduction">Use a mobile to pilot your meteor. Make sure you leave the biggest trail of destruction.</p>
+              <a href="/viewer/" class="button"><button>Play game!<span class="button-sub">(up to 8 players)</span></button></a>
+            </div>
+            <div class="info-graphic columns six"></div>
+          </div>
         </div>
       </div>
+      <div class="about">
+        <a href="#" target="_blank">About Multeor</a>
+      </div>
+      <div class="push"></div>
     </div>
-    <div class="about">
-      <a href="#" target="_blank">About Multeor</a>
+    <div class="footer" role="footer">
+      <ul class="developed-by">
+        <li><a href="http://galaxy.fili.nl" title="Front-end and back-end Webdeveloper" target="_blank" class="fili-logo">Filidor Wiese</a></li>
+        <li><a href="http://avth.nl" title="Grafisch ontwerp en illustratie" target="blank" class="avth-logo">Arthur van 't Hoog</a></li>
+        <li><a href="http://dasblitz.nl" title="webdevelopment" target="_blank" class="dasblitz-logo">Arjen de Vries</a></li>
+      </ul>
     </div>
-    <div class="push"></div>
-  </div>
-  <div class="footer" role="footer">
-    <ul class="developed-by">
-      <li><a href="http://galaxy.fili.nl" title="Front-end and back-end Webdeveloper" target="_blank" class="fili-logo">Filidor Wiese</a></li>
-      <li><a href="http://avth.nl" title="Grafisch ontwerp en illustratie" target="blank" class="avth-logo">Arthur van 't Hoog</a></li>
-      <li><a href="http://dasblitz.nl" title="webdevelopment" target="_blank" class="dasblitz-logo">Arjen de Vries</a></li>
-    </ul>
   </div>
 
   <div id="mobile-container">
-      <h1>Title screen</h1>
+
+    <div class="container">
+      <div class="row" role="header">
+
+            <div class="content columns twelve" role="main">
+                <h1>Multeor</h1>
+                <button id="play-fb">Play with Facebook</button>
+                <button id="play-anon">Play anonymously</button>
+                <p>
+                  <a href="/viewer/">Use this device as a viewer</a>
+                </p>
+            </div>
+
+
+      </div>
+    </div>
+<!--
       <form action="/controller/">
           <p><label>Insert code: <input type="tel" name="game" value="" maxlength="6" placeholder="eg. 654321" /></label></p>
           <p><button type="submit">Join Game</button></p>
       </form>
-      <p>Tip: for best experience, put your browser in fullscreen mode or use the 'Add to home screen' feature</p>
+      <p>Tip: for best experience, put your browser in fullscreen mode or use the 'Add to home screen' feature</p>-->
   </div>
 
 <script>

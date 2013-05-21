@@ -8,7 +8,7 @@ var Game = function(levelPath, code){
         images: {},
         audio: {},
         world: false,
-        worldX: 60000,
+        worldX: 63000,
         worldSpeed: 10,
         destroyed: {},
         explosions: [],
@@ -302,7 +302,6 @@ Game.prototype.prepareLeaderboard = function() {
         numberOfPlayer++;
         var thePlayer = leaderboardPositions[player][0];
         var thePlayerPercent = ((thePlayer.props.score - lowestScore) / highestScore);
-        console.log(thePlayerPercent);
         thePlayer.props.endX = Math.floor((thePlayerPercent * leaderboardWidth) + leaderboardLeft);
         thePlayer.props.endY = Math.floor((numberOfPlayer * thePlayer.props.endZ) - (thePlayer.props.endZ / 2) + headerHeight);
     }

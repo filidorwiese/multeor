@@ -20,16 +20,6 @@ html, body {
     -o-user-drag: none;
     user-drag: none;
     }
-
-#controller {
-    position: absolute;
-    text-align: center;
-    width: 100%;
-    overflow:hidden;
-    -ms-touch-action: none;
-    -ms-content-zooming: none;
-    }
-
 @media screen and (orientation: portrait) {
     html, body {
         width:100%;
@@ -41,64 +31,88 @@ html, body {
         }
     }
 
-#leftControls {
-    width: 297px;
-    height: 297px;
-    background: url(../images/controller_compasroos.png) center center no-repeat;
-    float: left;
-    position: relative;
-    margin-top:-40px;
+#controller {
+    display:none;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    overflow:hidden;
+    -ms-touch-action: none;
+    -ms-content-zooming: none;
 
-    #joystick {
-        width: 130px;
-        height: 41px;
-        background: url(../images/controller_compaspijl.png) right top no-repeat;
-        position: absolute;
-        top: 129px;
-        left: 149px;
-        @include apply-origin(0 50%, 0);
-        @include transition(rotate(180deg));
-        }
-    }
+    #leftControls {
+        width: 297px;
+        height: 297px;
+        background: url(../images/controller_compasroos.png) center center no-repeat;
+        float: left;
+        position: relative;
+        margin-top:-40px;
 
-#rightControls {
-    position: relative;
-    float: right;
-    width:100px;
-    height:100px;
-    margin-right:50px;
-    margin-top:50px;
-
-    #button {
-        width:100px;
-        height:100px;
-        border:1px solid orange;
-
-        &.pressed {
-            border-color:lime;
+        #joystick {
+            width: 130px;
+            height: 41px;
+            background: url(../images/controller_compaspijl.png) right top no-repeat;
+            position: absolute;
+            top: 129px;
+            left: 149px;
+            @include apply-origin(0 50%, 0);
+            @include transition(rotate(180deg));
             }
         }
+
+    #rightControls {
+        position: relative;
+        float: right;
+        width:100px;
+        height:100px;
+        margin-right:50px;
+        margin-top:50px;
+
+        #button {
+            width:100px;
+            height:100px;
+            border:1px solid orange;
+
+            &.pressed {
+                border-color:lime;
+                }
+            }
+        }
+
+    #score {
+        display: block;
+        font-family: 'nevis';
+        font-size: 2em;
+        color: white;
+        margin-top:10px;
+        margin-left:100px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+        }
+
+    #message {
+        position:absolute;
+        top:10px;
+        left:10px;
+        width:90%;
+        height:20px;
+        text-align: left;
+        }
     }
 
-#score {
-    display: block;
-    font-family: 'nevis';
-    font-size: 2em;
-    color: white;
-    margin-top:10px;
-    margin-left:100px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -o-user-select: none;
-    user-select: none;
-    }
+#game-start {
+    .buddy-icon {
+        display:none;
 
-#message {
-    position:absolute;
-    top:10px;
-    left:10px;
-    width:90%;
-    height:20px;
-    text-align: left;
+        img {
+            border:1px solid #000;
+        }
     }
+}
+
+#game-end {
+    display:none;
+}

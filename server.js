@@ -44,7 +44,7 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('new-player', function(data){
-        assignNewPlayer(socket, data.playerId, data.gameRoom);
+        assignNewPlayer(socket, data.playerId, data.gameRoom, data.playerIcon);
     });
 
     socket.on('verify-game-room', function(data){
@@ -66,8 +66,8 @@ io.sockets.on('connection', function(socket) {
         }
 
         // Check if player is joined in gameRoom
-        if (currentGames[data.gr].players[socket.id] != data.pid) {
-            //kickClient(socket);
+        if (currentGames[data.gr].players[socket.id].playerId != data.pid) {
+            kickClient(socket);
             return false;
         }
 
@@ -82,14 +82,14 @@ io.sockets.on('connection', function(socket) {
 
         // Verify if this viewer is authorative for this gameRoom and that is exists
         if (!(verifyGameRoom(data.gameRoom, data.viewerId))) {
-			log('Game-start: kickPlayer');
+			log('Update-score: kickPlayer');
             kickClient(socket);
             return false;
         }
 
         // Lookup player and emit update-score
         for (var ii in currentGames[data.gameRoom].players) {
-			if (currentGames[data.gameRoom].players[ii] == data.playerId) {
+			if (currentGames[data.gameRoom].players[ii].playerId == data.playerId) {
 				io.sockets.socket(ii).emit('update-score', data);
 			}
 		}
@@ -100,14 +100,14 @@ io.sockets.on('connection', function(socket) {
 
         // Verify if this viewer is authorative for this gameRoom and that is exists
         if (!(verifyGameRoom(data.gameRoom, data.viewerId))) {
-            log('Game-start: kickPlayer');
+            log('Update-player-color: kickPlayer');
             kickClient(socket);
             return false;
         }
 
         // Lookup player and emit update-score
         for (var ii in currentGames[data.gameRoom].players) {
-            if (currentGames[data.gameRoom].players[ii] == data.playerId) {
+            if (currentGames[data.gameRoom].players[ii].playerId == data.playerId) {
                 io.sockets.socket(ii).emit('update-player-color', data);
             }
         }
@@ -166,7 +166,7 @@ io.sockets.on('connection', function(socket) {
 
         // Emit Game-end to players
         for (var ii in currentGames[data.gameRoom].players) {
-            io.sockets.socket(ii).emit('game-end', { leaderboard: leaderboardImage });
+            io.sockets.socket(ii).emit('game-end', { leaderboard: 'http://game.multeor.com/leaderboards/' + leaderboardImage });
         }
     });
 
@@ -231,10 +231,8 @@ io.sockets.on('connection', function(socket) {
     });
 });
 
-
-
-function assignNewPlayer(socket, playerId, gameRoom) {
-    log('New player entered game ' + socket.id + ' using playerId ' + playerId + ' and gameRoom ' + gameRoom);
+function assignNewPlayer(socket, playerId, gameRoom, playerIcon) {
+    log('New player entered game ' + socket.id + ' using playerId ' + playerId + ', gameRoom ' + gameRoom + ' and playerIcon ' + playerIcon);
 
     // Check if gameRoom exists
     if (!verifyGameRoom(gameRoom)) {
@@ -266,7 +264,7 @@ function assignNewPlayer(socket, playerId, gameRoom) {
     socket.join('room-' + gameRoom);
 
     // Update gameState
-    currentGames[gameRoom].players[socket.id] = playerId;
+    currentGames[gameRoom].players[socket.id] = { playerId: playerId, playerIcon: playerIcon };
 
     // Emit join succes to player
     io.sockets.socket(socket.id).emit('player-joined');

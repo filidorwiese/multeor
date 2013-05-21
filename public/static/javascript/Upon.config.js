@@ -8,7 +8,8 @@ Upon.require({
         'title-screen.min.js'
     ],
     'title-screen-development': [
-        'title-screen/title-screen.js'
+        'title-screen/title-screen.js',
+        'controller/facebook.js'
     ],
     'viewer-production': [
         'viewer.min.js'
@@ -25,6 +26,7 @@ Upon.require({
         'controller.min.js'
     ],
     'controller-development': [
-        'controller/controller.js'
+        'controller/controller.js',
+        'controller/facebook.js'
     ]
 });

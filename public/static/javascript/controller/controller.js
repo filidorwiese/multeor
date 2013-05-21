@@ -5,6 +5,7 @@ $(document).ready(function(){
     var viewportHeight = $(window).height();
     var player = {
 		id: sessionStorage.getItem('player-id') || Math.floor((Math.random() * 10000) + 10000),
+        gameRoom: parseInt(sessionStorage.getItem('game-room'), 10),
         angle: 0,
         length: 0,
         layer: 1,
@@ -16,22 +17,21 @@ $(document).ready(function(){
         joined: false,
         score: 0,
         color: '',
-        fresh: true
+        fresh: true,
+        facebookProfile: JSON.parse(sessionStorage.getItem('facebook-profile'))
     };
     sessionStorage.setItem('player-id', player.id);
-    var gameRoom = parseInt(sessionStorage.getItem('game-room'), 10);
-
-    // Verify gameRoom
-    socket.emit('verify-game-room', {gameRoom: gameRoom});
 
     socket.on('disconnect', function(){
-        document.location = '/';
+        player.joined = false;
+        document.location = '/controller/';
     });
 
     socket.on('game-invalid', function(data){
+        player.joined = false;
         sessionStorage.setItem('player-id', '');
         sessionStorage.setItem('game-room', '');
-        document.location = '/';
+        document.location = '/controller/';
     });
 
 	socket.on('game-has-started', function(data){
@@ -65,9 +65,21 @@ $(document).ready(function(){
 
     socket.on('game-end', function(data){
         Upon.log('game-end');
-
-        $('#score').html(player.score);
         player.joined = false;
+
+        //data.leaderboard;
+        $('#game-start, #controller').hide();
+        $('#game-end').show();
+
+        $('#game-end h1 span').html(player.score);
+        if (player.facebookProfile) {
+            $('#facebook-share').show().off('click').on('click', function(event){
+                event.preventDefault();
+                fbPublish(player.score, data.leaderboard);
+            });
+        } else {
+            $('#facebook-share').hide();
+        }
     });
 
     socket.on('update-score', function(data){
@@ -85,6 +97,8 @@ $(document).ready(function(){
     socket.on('update-player-color', function(data){
         player.color = data.playerColor;
         $('html, body').css({ backgroundColor: 'rgba(' + player.color + ',.8)' });
+        $('#game-start, #game-end').hide();
+        $('#controller').show();
     });
 
     var ppsCounter = 0;
@@ -100,19 +114,13 @@ $(document).ready(function(){
         }
     }, 500);
 
-    var playerWaitingtoJoin = function() {
-        player.joined = false;
-        socket.emit('new-player', {playerId: player.id, gameRoom: gameRoom});
-    }
-    playerWaitingtoJoin();
-
     var emitPlayerUpdate = function() {
         if (!player.joined) { return false; }
 
         if (player.fresh) {
             socket.emit('player-update', {
     			pid: player.id,
-    			gr: gameRoom,
+    			gr: player.gameRoom,
     			v: [Math.floor(player.angle), Math.floor(player.length), player.layer]
     		});
             ppsCounter++;
@@ -164,16 +172,10 @@ $(document).ready(function(){
         return {'deg': degrees, 'length': schuin};
     };
 
-
     if (window.navigator.msPointerEnabled) {
         //http://blogs.msdn.com/b/ie/archive/2011/09/20/touch-input-for-ie10-and-metro-style-apps.aspx
-        /*$('#leftControls').on('MSPointerDown', function(event) {
-            event.preventDefault();
-        });*/
         $('#leftControls').on('MSPointerMove', function(event) {
             event.preventDefault();
-
-            //$('#message').html(event.originalEvent.clientX + '!');
             var x = (event.originalEvent.clientX.toFixed(0) - $(this).offset().left);
             var y = (event.originalEvent.clientY.toFixed(0) - $(this).offset().top);
             updatePlayerXY(x, y);
@@ -194,9 +196,6 @@ $(document).ready(function(){
             $(this).toggleClass('pressed');
         });
     } else {
-        /*$('#leftControls').on('touchstart', function(event) {
-            event.preventDefault();
-        });*/
         $('#leftControls').on('touchmove', function(event) {
             event.preventDefault();
 
@@ -220,7 +219,30 @@ $(document).ready(function(){
             $(this).toggleClass('pressed');
         });
     }
+
+    $('#join-game').on('click', function(){
+        var gameRoomInput = $('input[name=game-code]');
+        var gameRoom = parseInt(gameRoomInput.val(), 10);
+        if (isNaN(gameRoom) || gameRoom < 10000 || gameRoom > 99999) {
+            alert('Not a valid code');
+            gameRoomInput.val('').focus();
+        } else {
+
+            sessionStorage.setItem('game-room', gameRoom);
+            player.gameRoom = gameRoom;
+
+            var playerIcon = player.facebookProfile ? player.facebookProfile.picture.data.url : false;
+            socket.emit('new-player', {playerId: player.id, gameRoom: gameRoom, playerIcon: playerIcon});
+        }
+    });
+
+    // Insert game-code if available in storage
+    if (player.gameRoom) { $('input[name=game-code]').val(player.gameRoom); }
+    $('input[name=game-code]').focus();
+
+    // Show Facebook icon if connected
+    if (player.facebookProfile) {
+        $('.buddy-icon').append('<img src="' + player.facebookProfile.picture.data.url + '" /><div>' + player.facebookProfile.name + '</div>').show();
+    }
+
 });
-
-
-
