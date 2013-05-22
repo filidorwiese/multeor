@@ -110,16 +110,16 @@
     }
 
     .canvas-footer {
-        padding: 30px 30px 110px 30px ;
+        padding: 30px;
 
         .audio-toggle {
             float:left;
             width:30px;
             height:30px;
-            background:url(/static/images/audio-toggle.png) left top no-repeat;
+            background:url(/static/images/audio-toggle.png) right top no-repeat;
 
             &.is-muted {
-                background-position:right top;
+                background-position:left top;
             }
         }
 

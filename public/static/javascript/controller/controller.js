@@ -1,3 +1,5 @@
+'use strict';
+
 var socket = io.connect(window.location.hostname + ':843');
 
 $(document).ready(function(){
@@ -28,7 +30,7 @@ $(document).ready(function(){
     });
 
     socket.on('game-invalid', function(data){
-        player.joined = false;
+        if (!player.joined) { return; }
         sessionStorage.setItem('player-id', '');
         sessionStorage.setItem('game-room', '');
         document.location = '/controller/';
@@ -71,8 +73,9 @@ $(document).ready(function(){
 
         $('#game-end h1 span').html(player.score);
         if (player.facebookProfile) {
-            $('#facebook-share').show().off('click').on('click', function(event){
+            $('#facebook-share').show().find('button').off('click').on('click', function(event){
                 event.preventDefault();
+                if ($(this).hasClass('disabled')) { return false; }
                 fbPublish(player.score, data.leaderboard, function(status){
                     if (status) {
                         $('#facebook-share').hide();
@@ -185,13 +188,13 @@ $(document).ready(function(){
         $('#leftControls').on('MSPointerUp', function(event) {
             $('#joystick').animate({'width': 5}, 400);
         });
-        $('#rightControls #button').on('MSPointerDown', function(event) {
+        $('#rightControls #boost').on('MSPointerDown', function(event) {
             event.preventDefault();
 
             updatePlayerZ(3);
             $(this).toggleClass('pressed');
         });
-        $('#rightControls #button').on('MSPointerUp', function(event) {
+        $('#rightControls #boost').on('MSPointerUp', function(event) {
             event.preventDefault();
 
             updatePlayerZ(1);
@@ -208,13 +211,13 @@ $(document).ready(function(){
         $('#leftControls').on('touchend', function(event) {
     		$('#joystick').animate({'width': 5}, 400);
         });
-        $('#rightControls #button').on('touchstart', function(event) {
+        $('#rightControls #boost').on('touchstart', function(event) {
             event.preventDefault();
 
             updatePlayerZ(3);
             $(this).toggleClass('pressed');
         });
-        $('#rightControls #button').on('touchend', function(event) {
+        $('#rightControls #boost').on('touchend', function(event) {
             event.preventDefault();
 
             updatePlayerZ(1);
@@ -222,8 +225,9 @@ $(document).ready(function(){
         });
     }
 
-    $('#join-game').on('click', function(event){
+    $('#join-game button').on('click', function(event){
         event.preventDefault();
+
         var gameRoomInput = $('input[name=game-code]');
         var gameRoom = parseInt(gameRoomInput.val(), 10);
         if (isNaN(gameRoom) || gameRoom < 10000 || gameRoom > 99999) {
@@ -237,13 +241,13 @@ $(document).ready(function(){
         }
     });
 
-    $('#game-reset').on('click', function(event){
+    $('#game-reset button').on('click', function(event){
         event.preventDefault();
         document.location.reload();
     });
 
     // Insert game-code if available in storage
-    if (player.gameRoom) { $('input[name=game-code]').val(player.gameRoom); }
+    if(player.gameRoom) { $('input[name=game-code]').val(player.gameRoom); }
     $('input[name=game-code]').focus();
 
     // Show Facebook icon if connected

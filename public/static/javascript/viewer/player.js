@@ -1,8 +1,9 @@
-var Player = function(context, playerId, playerIcon, playerColor, playerNumber) {
+'use strict';
 
+var Player = function(context, playerId, playerIcon, playerColor, playerNumber) {
     var self = this;
     self.props = {
-		playerId: playerId,
+        playerId: playerId,
         playerNumber: playerNumber,
         icon: false,
         score: 0,
@@ -33,11 +34,11 @@ var Player = function(context, playerId, playerIcon, playerColor, playerNumber) 
         image.src = playerIcon;
         image.onload = function() {
             self.loadIcon(this);
-        }
+        };
     } else {
         self.loadIcon();
     }
-}
+};
 
 Player.prototype.draw = function(context) {
 	this.updatePosition();
@@ -71,9 +72,9 @@ Player.prototype.draw = function(context) {
             context.rotate((Math.PI / 180) * this.props.meteorHeadAngle);
             this.props.meteorHeadAngle++;
 
-            var w = Math.floor(this.props.z * .5);
-            var h = Math.floor(this.props.z * .5);
-            var x = Math.floor((w / 2) * -1); //(0.5 + somenum) << 0;
+            var w = Math.floor(this.props.z * 0.6);
+            var h = Math.floor(this.props.z * 0.6);
+            var x = Math.floor((w / 2) * -1);
             var y = Math.floor((h / 2) * -1);
             context.drawImage(this.props.icon, x, y, w, h);
             context.restore();
@@ -97,7 +98,8 @@ Player.prototype.updatePosition = function() {
 
     } else {
         // Adjust to player input
-        var xSpeed = ySpeed = .1;
+        var xSpeed = 0.1;
+        var ySpeed = 0.1;
     	var radians = this.props.vector[0] * (Math.PI / 180);
 
     	var zSpeed = 3;
@@ -122,42 +124,42 @@ Player.prototype.updatePosition = function() {
 
     this.props.lastMoves.push([this.props.x, this.props.y]); //, playerProps.z
     if (this.props.lastMoves.length > 10) { this.props.lastMoves.shift(); }
-}
+};
 
 Player.prototype.updateScore = function(points) {
     this.props.score += points;
 	socket.emit('update-score', {viewerId: viewerId, gameRoom: gameRoom, playerId: this.props.playerId, score: this.props.score});
-}
+};
 
 Player.prototype.lockPlayer = function() {
     this.props.locked = true;
-}
+};
 
 Player.prototype.loadIcon = function(image) {
     var self = this;
 
     var canvas = document.createElement('canvas');
     var ctx = canvas.getContext('2d');
-    canvas.width = 50;
-    canvas.height = 50;
-    var a = canvas.width, r = a / 2;
+    canvas.width = 100;
+    canvas.height = 100;
+    var r = canvas.width / 2;
 
     if (image) {
         ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
     } else {
         ctx.fillStyle = 'rgba(0,0,0,1)';
-        ctx.fillRect(0, 0, a, a);
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
 
     // http://stackoverflow.com/questions/8778864/cropping-an-image-into-hexagon-shape-in-a-web-page
     // http://jsfiddle.net/XnzP8/1/
     // http://blog.riacode.in/2011/03/03/drawing-regular-polygons-in-html5-canvas/
     ctx.globalCompositeOperation = 'destination-in';
-    ctx.globalAlpha = .9;
-    self.drawPolygon(ctx, 25, 25, r, 8);
+    //ctx.globalAlpha = .9;
+    self.drawPolygon(ctx, r, r, r, 8);
 
     self.props.icon = canvas;
-}
+};
 
 Player.prototype.drawPolygon = function(context, x, y, radius, numOfSides) {
     var angChange = (360 / numOfSides) * (Math.PI / 180.0);
@@ -185,4 +187,4 @@ Player.prototype.drawPolygon = function(context, x, y, radius, numOfSides) {
 
     context.closePath();
     context.fill();
-}
+};

@@ -17,7 +17,7 @@ p {
     margin-bottom:10px;
 }
 
-a.button {
+.button {
     background: #b6a300;
     position: relative;
     border-bottom: 5px solid #b6a300;
@@ -63,7 +63,7 @@ a.button {
     }
 }
 @media screen and (max-width: 960px) {
-    a.button button {
+    .button button {
         font-size:20px;
         padding:10px 10px;
     }

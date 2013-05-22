@@ -1,3 +1,5 @@
+'use strict';
+
 // FIXME: test if sessionStorage/canvas/websockets is supported?
 
 // Setup canvas
@@ -140,7 +142,7 @@ $(document).ready(function(){
         game.getReady();
     });
 
-    $('#gameReset').off('click').on('click', function(event){
+    $('#gameReset button').off('click').on('click', function(event){
         event.preventDefault();
         game.resetGame();
     });

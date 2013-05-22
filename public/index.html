@@ -14,73 +14,63 @@
 </head>
 
 <body>
-  <div id="fb-root"></div>
+    <div id="fb-root"></div>
 
-  <div id="desktop-container">
-    <div class="wrapper">
-      <div class="main">
-        <div class="container">
-          <div class="row" role="header">
-            <h1 class="columns twelve">Multeor</h1>
-          </div>
-          <div class="row">
-            <div class="content columns six" role="main">
-              <h2 class="tagline">a multiplayer webgame.</h2>
-              <p class="introduction">Use a mobile to pilot your meteor. Make sure you leave the biggest trail of destruction.</p>
-              <a href="/viewer/" class="button"><button>Play game!<span class="button-sub">(up to 8 players)</span></button></a>
+    <div id="desktop-container">
+        <div class="wrapper">
+            <div class="main">
+                <div class="container">
+                    <div class="row" role="header">
+                        <h1 class="columns twelve">Multeor</h1>
+                    </div>
+                    <div class="row">
+                        <div class="content columns six" role="main">
+                            <h2 class="tagline">a multiplayer webgame.</h2>
+                            <p class="introduction">Use a mobile to pilot your meteor. Make sure you leave the biggest trail of destruction.</p>
+                            <a href="/viewer/" class="button"><button>Play game!<span class="button-sub">(up to 8 players)</span></button></a>
+                        </div>
+                        <div class="info-graphic columns six"></div>
+                    </div>
+                </div>
             </div>
-            <div class="info-graphic columns six"></div>
-          </div>
+            <div class="about">
+                <a href="#" target="_blank">About Multeor</a>
+            </div>
+            <div class="push"></div>
         </div>
-      </div>
-      <div class="about">
-        <a href="#" target="_blank">About Multeor</a>
-      </div>
-      <div class="push"></div>
+        <div class="footer" role="footer">
+            <ul class="developed-by">
+                <li><a href="http://galaxy.fili.nl" title="Front-end and back-end Webdeveloper" target="_blank" class="fili-logo">Filidor Wiese</a></li>
+                <li><a href="http://avth.nl" title="Grafisch ontwerp en illustratie" target="blank" class="avth-logo">Arthur van 't Hoog</a></li>
+                <li><a href="http://dasblitz.nl" title="webdevelopment" target="_blank" class="dasblitz-logo">Arjen de Vries</a></li>
+            </ul>
+        </div>
     </div>
-    <div class="footer" role="footer">
-      <ul class="developed-by">
-        <li><a href="http://galaxy.fili.nl" title="Front-end and back-end Webdeveloper" target="_blank" class="fili-logo">Filidor Wiese</a></li>
-        <li><a href="http://avth.nl" title="Grafisch ontwerp en illustratie" target="blank" class="avth-logo">Arthur van 't Hoog</a></li>
-        <li><a href="http://dasblitz.nl" title="webdevelopment" target="_blank" class="dasblitz-logo">Arjen de Vries</a></li>
-      </ul>
-    </div>
-  </div>
 
-  <div id="mobile-container">
-
-    <div class="container">
-      <div class="row" role="header">
-
-            <div class="content columns twelve" role="main">
-                <h1>Multeor</h1>
-                <p><a href="#" id="play-fb" class="button"><button>Play with Facebook</button></a></p>
-                <p><a href="#" id="play-anon" class="button"><button>Play anonymously</button></a></p>
-                <p>
-                    <a href="/viewer/">Use this device as a viewer instead</a>
-                </p>
+    <div id="mobile-container">
+        <div class="container">
+            <div class="row" role="header">
+                <div class="content columns twelve" role="main">
+                  <h1>Multeor</h1>
+                  <p><span id="play-fb" class="button"><button>Play with Facebook</button></span></p>
+                  <p><span id="play-anon" class="button"><button>Play anonymously</button></span></p>
+                  <p>
+                      <a href="/viewer/">Use this device as a viewer instead</a>
+                  </p>
+                </div>
             </div>
-
-
-      </div>
+        </div>
     </div>
-<!--
-      <form action="/controller/">
-          <p><label>Insert code: <input type="tel" name="game" value="" maxlength="6" placeholder="eg. 654321" /></label></p>
-          <p><button type="submit">Join Game</button></p>
-      </form>
-      <p>Tip: for best experience, put your browser in fullscreen mode or use the 'Add to home screen' feature</p>-->
-  </div>
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-40099645-1', 'multeor.com');
-  ga('send', 'pageview');
-</script>
+        ga('create', 'UA-40099645-1', 'multeor.com');
+        ga('send', 'pageview');
+    </script>
 
 </body>
 </html>
