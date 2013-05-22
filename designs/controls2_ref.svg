@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="481px" height="320px" viewBox="0 0 481 320" enable-background="new 0 0 481 320" xml:space="preserve">
+<rect fill="#FF0059" width="481" height="320"/>
+<rect x="288.167" opacity="0.2" fill="#272D33" width="192.833" height="320"/>
+<circle opacity="0.2" fill="#272D33" cx="144" cy="160" r="119.106"/>
+<polygon fill="#272D33" points="353.076,236.063 308.52,191.507 308.52,128.493 353.076,83.936 416.092,83.936 460.647,128.493 
+	460.647,191.507 416.092,236.063 "/>
+<text transform="matrix(1 0 0 1 347.189 204.5503)" fill="#FF0059" font-family="'nevis-Bold'" font-size="51.0397">UP</text>
+<g>
+	
+		<polygon fill="#FF0059" stroke="#FF0059" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+		413.969,127.727 372.839,127.727 393.404,108.096 	"/>
+	
+		<path fill="#FF0059" stroke="#FF0059" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+		M386.794,127.727c0,0-4,20.756-30,21.273c0,0,44,4.936,44-21.273S386.794,127.727,386.794,127.727z"/>
+</g>
+<circle fill="#272D33" cx="68.642" cy="160" r="53.748"/>
+<rect x="240.5" fill="#272D33" width="95.333" height="45.894"/>
+<text transform="matrix(1 0 0 1 257.0625 35.894)" fill="#FFFFFF" font-family="'nevis-Bold'" font-size="36">128</text>
+</svg>

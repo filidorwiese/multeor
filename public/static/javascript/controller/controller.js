@@ -136,15 +136,19 @@ $(document).ready(function(){
     };
 
     var updatePlayerXY = function(x, y) {
-        var radius = $('#leftControls').width() / 3;
-        var vector = toDegrees(x, y, radius);
+        var radius = $('#joystick').width() / 3;
+        var centerX = $('#leftControls').width() / 2;
+        var centerY = $('#leftControls').height() / 2;
+        var vector = toDegrees(x, y, centerX, centerY, radius);
+        var y = Math.sin(vector.rad) * vector.length;
+        var x = Math.cos(vector.rad) * vector.length;
 
         player.angle = vector.deg;
         player.length = vector.length;
 
-        $('#joystick').width(vector.length).css({
-            '-webkit-transform': 'rotate(' + vector.deg + 'deg)',
-            '-ms-transform': 'rotate(' + vector.deg + 'deg)'
+        $('#stick').css({
+            left: x,
+            top: y
         });
 
         player.fresh = true;
@@ -155,17 +159,20 @@ $(document).ready(function(){
         player.fresh = true;
     };
 
-    var toDegrees = function(x, y, radius) {
+    var toDegrees = function(x, y, centerX, centerY, radius) {
         var degrees = 0;
-        var overstaand = y - radius;
-        var aanliggend = x - radius;
+        var overstaand = y - centerY;
+        var aanliggend = x - centerX;
         var schuin = Math.sqrt(Math.pow(overstaand,2) + Math.pow(aanliggend,2));
         var sinJ = overstaand/schuin;
         var cosJ = aanliggend/schuin;
 
+        var radian = Math.asin(sinJ);
+
         degrees = Math.asin(sinJ)*180/Math.PI;
         if(aanliggend < 0) {
             degrees = 180 - degrees;
+            radian = Math.PI - radian;
         }
 
         if(schuin > radius) {
@@ -174,7 +181,7 @@ $(document).ready(function(){
             aanliggend = sinJ * radius;
         }
 
-        return {'deg': degrees, 'length': schuin};
+        return {'deg': degrees, 'rad': radian, 'length': schuin};
     };
 
     if (window.navigator.msPointerEnabled) {
@@ -186,7 +193,7 @@ $(document).ready(function(){
             updatePlayerXY(x, y);
         });
         $('#leftControls').on('MSPointerUp', function(event) {
-            $('#joystick').animate({'width': 5}, 400);
+            $('#stick').animate({left:0, top: 0}, 250);
         });
         $('#rightControls #boost').on('MSPointerDown', function(event) {
             event.preventDefault();
@@ -204,24 +211,24 @@ $(document).ready(function(){
         $('#leftControls').on('touchmove', function(event) {
             event.preventDefault();
 
-            var x = (event.originalEvent.targetTouches[0].clientX - $(this).offset().left);
-            var y = (event.originalEvent.targetTouches[0].clientY - $(this).offset().top);
+            var x = (event.originalEvent.targetTouches[0].clientX);
+            var y = (event.originalEvent.targetTouches[0].clientY);
             updatePlayerXY(x, y);
         });
         $('#leftControls').on('touchend', function(event) {
-    		$('#joystick').animate({'width': 5}, 400);
+            $('#stick').animate({left:0, top: 0}, 250);
         });
-        $('#rightControls #boost').on('touchstart', function(event) {
+        $('#rightControls').on('touchstart', function(event) {
             event.preventDefault();
 
             updatePlayerZ(3);
-            $(this).toggleClass('pressed');
+            $('#boostBg').addClass('pressed');
         });
-        $('#rightControls #boost').on('touchend', function(event) {
+        $('#rightControls').on('touchend', function(event) {
             event.preventDefault();
 
             updatePlayerZ(1);
-            $(this).toggleClass('pressed');
+            $('#boostBg').removeClass('pressed');
         });
     }
 

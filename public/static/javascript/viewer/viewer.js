@@ -7,6 +7,7 @@ var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = 600;
+    context.globalAlpha = 0.5;
 
 // Setup socket.io
 var socket = io.connect(window.location.hostname + ':843');
@@ -149,25 +150,10 @@ $(document).ready(function(){
 });
 
 
-
-/** Some useful tools **/
-function logGAEvent(action, label, value) {
-    if (typeof _gaq !== 'undefined') {
-        if (typeof label !== 'undefined' && typeof value !== 'undefined') {
-            Upon.log('Viewer, ' + action + ', ' + label + ', ' + value);
-            _gaq.push(['_trackEvent', 'Viewer', action, label, value]);
-        } else {
-            _gaq.push(['_trackEvent', 'Viewer', action]);
-        }
-    }
-}
-
 function hideInstructions(){
     $.each($('.step'), function(key, val){
         $(val).delay(key*200).animate({top: '+='+346}, function(){
-
             if(key == $('.step').length-1 ) {
-
                 var delay = 200;
                 for(var i=$('.step-header').length-1; i >= 0; i--){
                     $('.step-header').eq(i).delay(delay).animate({opacity: 0});
@@ -176,6 +162,9 @@ function hideInstructions(){
             }
         });
     });
+    setTimeout(function(){
+        $('.instructions-container').hide();
+    }, 4000);
 }
 
 function showInstructions(){
@@ -190,31 +179,17 @@ function shuffleArray(o){
     return o;
 }
 
-(function() {
-    var lastTime = 0;
-    var vendors = ['ms', 'moz', 'webkit', 'o'];
-    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-        window.cancelAnimationFrame =
-          window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
-    }
-
-    if (!window.requestAnimationFrame)
-        window.requestAnimationFrame = function(callback, element) {
-            var currTime = new Date().getTime();
-            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-            var id = window.setTimeout(function() { callback(currTime + timeToCall); },
-              timeToCall);
-            lastTime = currTime + timeToCall;
-            return id;
-        };
-
-    if (!window.cancelAnimationFrame)
-        window.cancelAnimationFrame = function(id) {
-            clearTimeout(id);
-        };
-}());
-
 function randomFloat (min, max) {
     return min + Math.random()*(max-min);
+}
+
+function logGAEvent(action, label, value) {
+    if (typeof _gaq !== 'undefined') {
+        if (typeof label !== 'undefined' && typeof value !== 'undefined') {
+            Upon.log('Viewer, ' + action + ', ' + label + ', ' + value);
+            _gaq.push(['_trackEvent', 'Viewer', action, label, value]);
+        } else {
+            _gaq.push(['_trackEvent', 'Viewer', action]);
+        }
+    }
 }

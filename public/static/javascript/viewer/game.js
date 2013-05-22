@@ -422,7 +422,12 @@ Game.prototype.startGame = function(){
     for (var ii in players) { numberOfPlayers++; }
     logGAEvent('Started', 'Players', numberOfPlayers);
 
-    $('.instructions-container').hide();
+    // Fade in canvas
+    var from = {i:.5};
+    var to = {i:1};
+    $(from).animate(to, {duration: 2000, step: function(step){
+        context.globalAlpha = step;
+    }});
 };
 
 Game.prototype.drawMessage = function(context, text, x, y, maxWidth, lineHeight, center) {
