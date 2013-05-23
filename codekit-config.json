@@ -176,6 +176,17 @@
       "initialSize" : 278,
       "fileType" : 8192
     },
+    "\/public\/levels\/forest\/images\/sprites\/gebouw-15.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-15.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-15.png",
+      "initialSize" : 6015,
+      "fileType" : 8192
+    },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/test\/Sender.test.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -186,17 +197,6 @@
       "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/test\/Sender.test-ck.js",
       "fileType" : 64
-    },
-    "\/public\/levels\/forest\/images\/maps\/map2-47.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-47.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-47.png",
-      "initialSize" : 4457,
-      "fileType" : 8192
     },
     "\/public\/levels\/forest\/images\/maps\/map2-02.png" : {
       "ignoreWasSetByUser" : 0,
@@ -209,15 +209,15 @@
       "initialSize" : 5580,
       "fileType" : 8192
     },
-    "\/public\/levels\/forest tmp\/images\/maps\/map-61.png" : {
+    "\/public\/levels\/forest\/images\/maps\/map2-47.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-61.png",
+      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-47.png",
       "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-61.png",
-      "initialSize" : 2721,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-47.png",
+      "initialSize" : 4457,
       "fileType" : 8192
     },
     "\/public\/levels\/forest tmp\/images\/maps\/map-29.png" : {
@@ -231,15 +231,15 @@
       "initialSize" : 16199,
       "fileType" : 8192
     },
-    "\/public\/levels\/forest\/images\/sprites\/gebouw-15.png" : {
+    "\/public\/levels\/forest tmp\/images\/maps\/map-61.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-15.png",
+      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-61.png",
       "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-15.png",
-      "initialSize" : 6015,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-61.png",
+      "initialSize" : 2721,
       "fileType" : 8192
     },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/node_modules\/options\/lib\/options.js" : {
@@ -394,17 +394,6 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/lib\/transports\/index-ck.js",
       "fileType" : 64
     },
-    "\/public\/map-editor\/img\/gebouwen\/gebouw-16.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/img\/gebouwen\/gebouw-16.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/map-editor\/img\/gebouwen\/gebouw-16.png",
-      "initialSize" : 1907,
-      "fileType" : 8192
-    },
     "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-34.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -414,6 +403,17 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-34.png",
       "initialSize" : 10881,
+      "fileType" : 8192
+    },
+    "\/public\/map-editor\/img\/gebouwen\/gebouw-16.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/map-editor\/img\/gebouwen\/gebouw-16.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/map-editor\/img\/gebouwen\/gebouw-16.png",
+      "initialSize" : 1907,
       "fileType" : 8192
     },
     "\/node_modules\/socket.io\/node_modules\/redis\/lib\/parser\/hiredis.js" : {
@@ -438,16 +438,16 @@
       "initialSize" : 1174,
       "fileType" : 8192
     },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue11.js" : {
+    "\/public\/levels\/forest\/images\/sprites\/gebouw-08.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue11.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue11-ck.js",
-      "fileType" : 64
+      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-08.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-08.png",
+      "initialSize" : 6079,
+      "fileType" : 8192
     },
     "\/node_modules\/socket.io\/lib\/transports\/websocket\/hybi-07-12.js" : {
       "ignoreWasSetByUser" : 0,
@@ -460,16 +460,16 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/lib\/transports\/websocket\/hybi-07-12-ck.js",
       "fileType" : 64
     },
-    "\/public\/levels\/forest\/images\/sprites\/gebouw-08.png" : {
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue11.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-08.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-08.png",
-      "initialSize" : 6079,
-      "fileType" : 8192
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue11.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue11-ck.js",
+      "fileType" : 64
     },
     "\/public\/levels\/forest backup\/images\/maps\/map_plaats-28.png" : {
       "ignoreWasSetByUser" : 0,
@@ -548,15 +548,15 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/lib\/parser-ck.js",
       "fileType" : 64
     },
-    "\/public\/levels\/forest\/images\/maps\/map2-00e.png" : {
+    "\/public\/levels\/forest\/images\/sprites\/gebouw-03.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-00e.png",
+      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-03.png",
       "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-00e.png",
-      "initialSize" : 1246,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-03.png",
+      "initialSize" : 2449,
       "fileType" : 8192
     },
     "\/public\/map-editor\/development-bundle\/docs\/jQuery.widget.html" : {
@@ -568,16 +568,16 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/tmp\/uglify-hangs.js" : {
+    "\/public\/levels\/forest\/images\/maps\/map2-00e.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/tmp\/uglify-hangs.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/tmp\/uglify-hangs-ck.js",
-      "fileType" : 64
+      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-00e.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-00e.png",
+      "initialSize" : 1246,
+      "fileType" : 8192
     },
     "\/public\/levels\/forest backup\/images\/maps\/map-34.png" : {
       "ignoreWasSetByUser" : 0,
@@ -590,16 +590,16 @@
       "initialSize" : 8163,
       "fileType" : 8192
     },
-    "\/public\/levels\/forest\/images\/sprites\/gebouw-03.png" : {
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/tmp\/uglify-hangs.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-03.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-03.png",
-      "initialSize" : 2449,
-      "fileType" : 8192
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/tmp\/uglify-hangs.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/tmp\/uglify-hangs-ck.js",
+      "fileType" : 64
     },
     "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-11.png" : {
       "ignoreWasSetByUser" : 0,
@@ -623,17 +623,6 @@
       "initialSize" : 5727,
       "fileType" : 8192
     },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/issue10.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/issue10.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/issue10-ck.js",
-      "fileType" : 64
-    },
     "\/public\/levels\/forest tmp\/images\/maps\/map-44.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -644,6 +633,17 @@
       "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-44.png",
       "initialSize" : 11168,
       "fileType" : 8192
+    },
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/issue10.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/issue10.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/issue10-ck.js",
+      "fileType" : 64
     },
     "\/public\/levels\/forest backup\/images\/maps\/map_plaats-06.png" : {
       "ignoreWasSetByUser" : 0,
@@ -753,17 +753,6 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/public\/levels\/forest\/images\/maps\/map2-22.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-22.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-22.png",
-      "initialSize" : 11857,
-      "fileType" : 8192
-    },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/xmlhttprequest\/tests\/test-exceptions.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -774,6 +763,17 @@
       "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/xmlhttprequest\/tests\/test-exceptions-ck.js",
       "fileType" : 64
+    },
+    "\/public\/levels\/forest\/images\/maps\/map2-22.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-22.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-22.png",
+      "initialSize" : 11857,
+      "fileType" : 8192
     },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/lib\/Sender.js" : {
       "ignoreWasSetByUser" : 0,
@@ -797,17 +797,6 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/node_modules\/options\/test\/options.test-ck.js",
       "fileType" : 64
     },
-    "\/public\/levels\/forest backup\/images\/maps\/map-42.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-42.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-42.png",
-      "initialSize" : 20956,
-      "fileType" : 8192
-    },
     "\/public\/levels\/forest backup\/images\/maps\/map_plaats-51.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -817,6 +806,17 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map_plaats-51.png",
       "initialSize" : 43786,
+      "fileType" : 8192
+    },
+    "\/public\/levels\/forest backup\/images\/maps\/map-42.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-42.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-42.png",
+      "initialSize" : 20956,
       "fileType" : 8192
     },
     "\/public\/levels\/forest backup\/images\/sprites\/gebouw-14.png" : {
@@ -940,17 +940,6 @@
       "initialSize" : 33250,
       "fileType" : 8192
     },
-    "\/node_modules\/socket.io\/lib\/store.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/lib\/store.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/lib\/store-ck.js",
-      "fileType" : 64
-    },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/test\/events.test.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -960,6 +949,17 @@
       "outputStyle" : 0,
       "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/test\/events.test-ck.js",
+      "fileType" : 64
+    },
+    "\/node_modules\/socket.io\/lib\/store.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/lib\/store.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/lib\/store-ck.js",
       "fileType" : 64
     },
     "\/public\/levels\/forest backup\/images\/maps\/map-50.png" : {
@@ -995,6 +995,17 @@
       "initialSize" : 19598,
       "fileType" : 8192
     },
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/test\/Receiver.test.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/test\/Receiver.test.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/test\/Receiver.test-ck.js",
+      "fileType" : 64
+    },
     "\/public\/static\/css\/viewer.css" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -1003,17 +1014,6 @@
       "inputAbbreviatedPath" : "\/public\/static\/css\/viewer.css",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
-    },
-    "\/public\/levels\/forest\/images\/maps\/map2-59.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-59.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-59.png",
-      "initialSize" : 4718,
-      "fileType" : 8192
     },
     "\/public\/levels\/forest\/images\/maps\/map2-14.png" : {
       "ignoreWasSetByUser" : 0,
@@ -1026,16 +1026,16 @@
       "initialSize" : 6039,
       "fileType" : 8192
     },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/test\/Receiver.test.js" : {
+    "\/public\/levels\/forest\/images\/maps\/map2-59.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/test\/Receiver.test.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/test\/Receiver.test-ck.js",
-      "fileType" : 64
+      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-59.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-59.png",
+      "initialSize" : 4718,
+      "fileType" : 8192
     },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/xmlhttprequest\/lib\/XMLHttpRequest.js" : {
       "ignoreWasSetByUser" : 0,
@@ -1154,15 +1154,15 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/policyfile\/examples\/basic.fallback-ck.js",
       "fileType" : 64
     },
-    "\/public\/levels\/forest backup\/images\/sprites\/gebouw-13.png" : {
+    "\/public\/levels\/forest\/images\/sprites\/boom-03.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/sprites\/gebouw-13.png",
+      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/boom-03.png",
       "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/sprites\/gebouw-13.png",
-      "initialSize" : 1967,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/boom-03.png",
+      "initialSize" : 390,
       "fileType" : 8192
     },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/issue20.js" : {
@@ -1209,15 +1209,15 @@
       "initialSize" : 8333,
       "fileType" : 8192
     },
-    "\/public\/levels\/forest backup\/images\/maps\/map_plaats-52.png" : {
+    "\/public\/levels\/forest backup\/images\/sprites\/gebouw-13.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map_plaats-52.png",
+      "inputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/sprites\/gebouw-13.png",
       "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map_plaats-52.png",
-      "initialSize" : 23623,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/sprites\/gebouw-13.png",
+      "initialSize" : 1967,
       "fileType" : 8192
     },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/issue14.js" : {
@@ -1231,15 +1231,15 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/issue14-ck.js",
       "fileType" : 64
     },
-    "\/public\/levels\/forest\/images\/sprites\/boom-03.png" : {
+    "\/public\/levels\/forest backup\/images\/maps\/map_plaats-52.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/boom-03.png",
+      "inputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map_plaats-52.png",
       "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/boom-03.png",
-      "initialSize" : 390,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map_plaats-52.png",
+      "initialSize" : 23623,
       "fileType" : 8192
     },
     "\/public\/levels\/forest backup\/images\/maps\/map-25.png" : {
@@ -1342,16 +1342,17 @@
       "initialSize" : 348,
       "fileType" : 8192
     },
-    "\/public\/map-editor\/development-bundle\/themes\/base\/minified\/images\/ui-bg_glass_75_e6e6e6_1x400.png" : {
+    "\/public\/static\/sass\/_vars.scss" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
+      "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/minified\/images\/ui-bg_glass_75_e6e6e6_1x400.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/minified\/images\/ui-bg_glass_75_e6e6e6_1x400.png",
-      "initialSize" : 110,
-      "fileType" : 8192
+      "inputAbbreviatedPath" : "\/public\/static\/sass\/_vars.scss",
+      "outputStyle" : 3,
+      "shouldRunBless" : 1,
+      "outputAbbreviatedPath" : "\/public\/static\/css\/_vars.css",
+      "fileType" : 4,
+      "debugStyle" : 0
     },
     "\/public\/levels\/forest tmp\/images\/maps\/map-11.png" : {
       "ignoreWasSetByUser" : 0,
@@ -1364,17 +1365,16 @@
       "initialSize" : 21519,
       "fileType" : 8192
     },
-    "\/public\/static\/sass\/_vars.scss" : {
+    "\/public\/map-editor\/development-bundle\/themes\/base\/minified\/images\/ui-bg_glass_75_e6e6e6_1x400.png" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/static\/sass\/_vars.scss",
-      "outputStyle" : 3,
-      "shouldRunBless" : 1,
-      "outputAbbreviatedPath" : "\/public\/static\/css\/_vars.css",
-      "fileType" : 4,
-      "debugStyle" : 0
+      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/minified\/images\/ui-bg_glass_75_e6e6e6_1x400.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/minified\/images\/ui-bg_glass_75_e6e6e6_1x400.png",
+      "initialSize" : 110,
+      "fileType" : 8192
     },
     "\/public\/map-editor\/img\/gebouwen\/gebouw-11.png" : {
       "ignoreWasSetByUser" : 0,
@@ -1442,17 +1442,6 @@
       "initialSize" : 15805,
       "fileType" : 8192
     },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue21.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue21.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue21-ck.js",
-      "fileType" : 64
-    },
     "\/public\/levels\/forest\/images\/maps\/map2-06.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1463,6 +1452,17 @@
       "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-06.png",
       "initialSize" : 24392,
       "fileType" : 8192
+    },
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue21.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue21.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue21-ck.js",
+      "fileType" : 64
     },
     "\/public\/map-editor\/development-bundle\/themes\/ui-lightness\/images\/ui-icons_222222_256x240.png" : {
       "ignoreWasSetByUser" : 0,
@@ -1575,17 +1575,6 @@
       "initialSize" : 6922,
       "fileType" : 8192
     },
-    "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-23.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-23.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-23.png",
-      "initialSize" : 57614,
-      "fileType" : 8192
-    },
     "\/node_modules\/socket.io\/lib\/transport.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1596,6 +1585,17 @@
       "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/lib\/transport-ck.js",
       "fileType" : 64
+    },
+    "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-23.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-23.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-23.png",
+      "initialSize" : 57614,
+      "fileType" : 8192
     },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue25.js" : {
       "ignoreWasSetByUser" : 0,
@@ -1630,17 +1630,6 @@
       "initialSize" : 13353,
       "fileType" : 8192
     },
-    "\/public\/map-editor\/development-bundle\/themes\/base\/images\/ui-bg_highlight-soft_75_cccccc_1x100.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/images\/ui-bg_highlight-soft_75_cccccc_1x100.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/images\/ui-bg_highlight-soft_75_cccccc_1x100.png",
-      "initialSize" : 101,
-      "fileType" : 8192
-    },
     "\/public\/levels\/forest backup\/images\/maps\/map_plaats-53.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1650,6 +1639,17 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map_plaats-53.png",
       "initialSize" : 24468,
+      "fileType" : 8192
+    },
+    "\/public\/map-editor\/development-bundle\/themes\/base\/images\/ui-bg_highlight-soft_75_cccccc_1x100.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/images\/ui-bg_highlight-soft_75_cccccc_1x100.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/images\/ui-bg_highlight-soft_75_cccccc_1x100.png",
+      "initialSize" : 101,
       "fileType" : 8192
     },
     "\/public\/levels\/forest tmp\/images\/maps\/map-25.png" : {
@@ -1861,6 +1861,17 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/lib\/transports\/websocket\/hybi-16-ck.js",
       "fileType" : 64
     },
+    "\/public\/levels\/forest\/images\/maps\/map2-26.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-26.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-26.png",
+      "initialSize" : 18809,
+      "fileType" : 8192
+    },
     "\/public\/levels\/forest\/images\/sprites\/boom-01.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1881,17 +1892,6 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map_plaats-09.png",
       "initialSize" : 36487,
-      "fileType" : 8192
-    },
-    "\/public\/levels\/forest\/images\/maps\/map2-26.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-26.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-26.png",
-      "initialSize" : 18809,
       "fileType" : 8192
     },
     "\/public\/levels\/forest backup\/images\/maps\/map-16.png" : {
@@ -1960,17 +1960,6 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/lib\/object-ast-ck.js",
       "fileType" : 64
     },
-    "\/public\/levels\/forest tmp\/images\/maps\/map-39.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-39.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-39.png",
-      "initialSize" : 13852,
-      "fileType" : 8192
-    },
     "\/public\/map-editor\/css\/ui-lightness\/images\/ui-bg_diagonals-thick_20_666666_40x40.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1980,6 +1969,17 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/public\/map-editor\/css\/ui-lightness\/images\/ui-bg_diagonals-thick_20_666666_40x40.png",
       "initialSize" : 312,
+      "fileType" : 8192
+    },
+    "\/public\/levels\/forest tmp\/images\/maps\/map-39.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-39.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-39.png",
+      "initialSize" : 13852,
       "fileType" : 8192
     },
     "\/public\/levels\/forest tmp\/images\/maps\/map-08.png" : {
@@ -2136,17 +2136,6 @@
       "initialSize" : 23623,
       "fileType" : 8192
     },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/scripts.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/scripts.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/scripts-ck.js",
-      "fileType" : 64
-    },
     "\/public\/levels\/forest\/images\/sprites\/gebouw-13.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -2157,6 +2146,17 @@
       "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-13.png",
       "initialSize" : 6954,
       "fileType" : 8192
+    },
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/scripts.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/scripts.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/scripts-ck.js",
+      "fileType" : 64
     },
     "\/public\/levels\/forest\/images\/maps\/map2-18.png" : {
       "ignoreWasSetByUser" : 0,
@@ -2334,17 +2334,6 @@
       "initialSize" : 4866,
       "fileType" : 8192
     },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/test\/autobahn.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/test\/autobahn.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/test\/autobahn-ck.js",
-      "fileType" : 64
-    },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue4.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -2354,6 +2343,17 @@
       "outputStyle" : 0,
       "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue4-ck.js",
+      "fileType" : 64
+    },
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/test\/autobahn.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/test\/autobahn.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/test\/autobahn-ck.js",
       "fileType" : 64
     },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/lib\/socket.js" : {
@@ -2409,17 +2409,6 @@
       "initialSize" : 120,
       "fileType" : 8192
     },
-    "\/public\/levels\/forest backup\/images\/maps\/map_plaats-55.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map_plaats-55.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map_plaats-55.png",
-      "initialSize" : 32793,
-      "fileType" : 8192
-    },
     "\/public\/map-editor\/development-bundle\/grunt.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -2430,6 +2419,17 @@
       "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/grunt-ck.js",
       "fileType" : 64
+    },
+    "\/public\/levels\/forest backup\/images\/maps\/map_plaats-55.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map_plaats-55.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map_plaats-55.png",
+      "initialSize" : 32793,
+      "fileType" : 8192
     },
     "\/public\/map-editor\/development-bundle\/themes\/ui-lightness\/images\/ui-bg_glass_100_fdf5ce_1x400.png" : {
       "ignoreWasSetByUser" : 0,
@@ -2486,17 +2486,6 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/const-ck.js",
       "fileType" : 64
     },
-    "\/public\/levels\/forest\/images\/sprites\/gebouw-01.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-01.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-01.png",
-      "initialSize" : 3106,
-      "fileType" : 8192
-    },
     "\/public\/levels\/forest backup\/images\/maps\/map-59.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -2506,6 +2495,17 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-59.png",
       "initialSize" : 19614,
+      "fileType" : 8192
+    },
+    "\/public\/levels\/forest\/images\/sprites\/gebouw-01.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-01.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-01.png",
+      "initialSize" : 3106,
       "fileType" : 8192
     },
     "\/node_modules\/socket.io\/lib\/index.js" : {
@@ -2585,16 +2585,16 @@
       "initialSize" : 1476,
       "fileType" : 8192
     },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/assignment.js" : {
+    "\/public\/map-editor\/img\/gebouwen\/gebouw-7.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/assignment.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/assignment-ck.js",
-      "fileType" : 64
+      "inputAbbreviatedPath" : "\/public\/map-editor\/img\/gebouwen\/gebouw-7.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/map-editor\/img\/gebouwen\/gebouw-7.png",
+      "initialSize" : 1791,
+      "fileType" : 8192
     },
     "\/public\/levels\/forest backup\/images\/maps\/map_plaats-33.png" : {
       "ignoreWasSetByUser" : 0,
@@ -2607,16 +2607,27 @@
       "initialSize" : 28092,
       "fileType" : 8192
     },
-    "\/public\/map-editor\/img\/gebouwen\/gebouw-7.png" : {
+    "\/public\/levels\/forest tmp\/images\/maps\/map-37.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/img\/gebouwen\/gebouw-7.png",
+      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-37.png",
       "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/map-editor\/img\/gebouwen\/gebouw-7.png",
-      "initialSize" : 1791,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-37.png",
+      "initialSize" : 14569,
       "fileType" : 8192
+    },
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/assignment.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/assignment.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/assignment-ck.js",
+      "fileType" : 64
     },
     "\/public\/map-editor\/img\/maps\/map-12.png" : {
       "ignoreWasSetByUser" : 0,
@@ -2627,17 +2638,6 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/public\/map-editor\/img\/maps\/map-12.png",
       "initialSize" : 4863,
-      "fileType" : 8192
-    },
-    "\/public\/levels\/forest tmp\/images\/maps\/map-37.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-37.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-37.png",
-      "initialSize" : 14569,
       "fileType" : 8192
     },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/test\/worker.js" : {
@@ -2662,17 +2662,6 @@
       "initialSize" : 111,
       "fileType" : 8192
     },
-    "\/public\/levels\/forest tmp\/images\/maps\/map-06.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-06.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-06.png",
-      "initialSize" : 29635,
-      "fileType" : 8192
-    },
     "\/public\/levels\/forest\/images\/maps\/map2-38.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -2694,6 +2683,17 @@
       "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/public\/static\/javascript\/viewer\/viewer-ck.js",
       "fileType" : 64
+    },
+    "\/public\/levels\/forest tmp\/images\/maps\/map-06.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-06.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-06.png",
+      "initialSize" : 29635,
+      "fileType" : 8192
     },
     "\/public\/map-editor\/development-bundle\/themes\/ui-lightness\/images\/ui-icons_228ef1_256x240.png" : {
       "ignoreWasSetByUser" : 0,
@@ -2968,15 +2968,6 @@
       "initialSize" : 20399,
       "fileType" : 8192
     },
-    "\/public\/map-editor\/development-bundle\/themes\/ui-lightness\/jquery-ui.css" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/ui-lightness\/jquery-ui.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
-    },
     "\/node_modules\/socket.io\/node_modules\/redis\/benches\/hiredis_parser.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -2987,6 +2978,15 @@
       "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/benches\/hiredis_parser-ck.js",
       "fileType" : 64
+    },
+    "\/public\/map-editor\/development-bundle\/themes\/ui-lightness\/jquery-ui.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/ui-lightness\/jquery-ui.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
     },
     "\/public\/map-editor\/img\/maps\/map-5.png" : {
       "ignoreWasSetByUser" : 0,
@@ -3131,17 +3131,6 @@
       "initialSize" : 16587,
       "fileType" : 8192
     },
-    "\/public\/map-editor\/development-bundle\/themes\/base\/images\/ui-bg_glass_65_ffffff_1x400.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/images\/ui-bg_glass_65_ffffff_1x400.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/images\/ui-bg_glass_65_ffffff_1x400.png",
-      "initialSize" : 105,
-      "fileType" : 8192
-    },
     "\/public\/levels\/forest\/images\/maps\/map2-58.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -3151,6 +3140,17 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-58.png",
       "initialSize" : 2938,
+      "fileType" : 8192
+    },
+    "\/public\/map-editor\/development-bundle\/themes\/base\/images\/ui-bg_glass_65_ffffff_1x400.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/images\/ui-bg_glass_65_ffffff_1x400.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/images\/ui-bg_glass_65_ffffff_1x400.png",
+      "initialSize" : 105,
       "fileType" : 8192
     },
     "\/public\/levels\/forest\/images\/maps\/map2-13.png" : {
@@ -3208,17 +3208,6 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/concatstring-ck.js",
       "fileType" : 64
     },
-    "\/public\/levels\/forest backup\/images\/maps\/map_plaats-12.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map_plaats-12.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map_plaats-12.png",
-      "initialSize" : 10793,
-      "fileType" : 8192
-    },
     "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-59.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -3228,6 +3217,17 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-59.png",
       "initialSize" : 22244,
+      "fileType" : 8192
+    },
+    "\/public\/levels\/forest backup\/images\/maps\/map_plaats-12.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map_plaats-12.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map_plaats-12.png",
+      "initialSize" : 10793,
       "fileType" : 8192
     },
     "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-01.png" : {
@@ -3274,17 +3274,6 @@
       "initialSize" : 277,
       "fileType" : 8192
     },
-    "\/node_modules\/socket.io\/node_modules\/redis\/test.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/test.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/test-ck.js",
-      "fileType" : 64
-    },
     "\/public\/map-editor\/development-bundle\/ui\/jquery.ui.widget.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -3294,6 +3283,17 @@
       "outputStyle" : 0,
       "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/ui\/jquery.ui.widget-ck.js",
+      "fileType" : 64
+    },
+    "\/node_modules\/socket.io\/node_modules\/redis\/test.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/test.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/test-ck.js",
       "fileType" : 64
     },
     "\/public\/levels\/forest\/images\/maps\/map2-41.png" : {
@@ -3384,17 +3384,6 @@
       "initialSize" : 4549,
       "fileType" : 8192
     },
-    "\/public\/map-editor\/development-bundle\/themes\/base\/minified\/images\/ui-icons_888888_256x240.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/minified\/images\/ui-icons_888888_256x240.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/minified\/images\/ui-icons_888888_256x240.png",
-      "initialSize" : 4369,
-      "fileType" : 8192
-    },
     "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-41.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -3404,6 +3393,17 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-41.png",
       "initialSize" : 19570,
+      "fileType" : 8192
+    },
+    "\/public\/map-editor\/development-bundle\/themes\/base\/minified\/images\/ui-icons_888888_256x240.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/minified\/images\/ui-icons_888888_256x240.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/minified\/images\/ui-icons_888888_256x240.png",
+      "initialSize" : 4369,
       "fileType" : 8192
     },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/concatstring.js" : {
@@ -3653,15 +3653,15 @@
       "initialSize" : 9988,
       "fileType" : 8192
     },
-    "\/public\/map-editor\/img\/gebouwen\/gebouw-19.png" : {
+    "\/public\/levels\/forest tmp\/images\/maps\/map-49.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/img\/gebouwen\/gebouw-19.png",
+      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-49.png",
       "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/map-editor\/img\/gebouwen\/gebouw-19.png",
-      "initialSize" : 2847,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-49.png",
+      "initialSize" : 56174,
       "fileType" : 8192
     },
     "\/public\/levels\/forest\/images\/sprites\/golf-03.png" : {
@@ -3686,15 +3686,15 @@
       "initialSize" : 20090,
       "fileType" : 8192
     },
-    "\/public\/levels\/forest tmp\/images\/maps\/map-49.png" : {
+    "\/public\/map-editor\/img\/gebouwen\/gebouw-19.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-49.png",
+      "inputAbbreviatedPath" : "\/public\/map-editor\/img\/gebouwen\/gebouw-19.png",
       "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-49.png",
-      "initialSize" : 56174,
+      "outputAbbreviatedPath" : "\/public\/map-editor\/img\/gebouwen\/gebouw-19.png",
+      "initialSize" : 2847,
       "fileType" : 8192
     },
     "\/public\/levels\/forest tmp\/images\/maps\/map-18.png" : {
@@ -3719,17 +3719,6 @@
       "initialSize" : 1041,
       "fileType" : 8192
     },
-    "\/public\/levels\/forest backup\/images\/maps\/map-14.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-14.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-14.png",
-      "initialSize" : 13191,
-      "fileType" : 8192
-    },
     "\/public\/levels\/forest tmp\/images\/maps\/map-50.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -3739,6 +3728,17 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-50.png",
       "initialSize" : 54254,
+      "fileType" : 8192
+    },
+    "\/public\/levels\/forest backup\/images\/maps\/map-14.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-14.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-14.png",
+      "initialSize" : 13191,
       "fileType" : 8192
     },
     "\/public\/levels\/forest backup\/images\/maps\/map_plaats-58.png" : {
@@ -3948,17 +3948,6 @@
       "initialSize" : 2721,
       "fileType" : 8192
     },
-    "\/public\/levels\/forest tmp\/images\/maps\/map-33.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-33.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-33.png",
-      "initialSize" : 25597,
-      "fileType" : 8192
-    },
     "\/public\/levels\/forest\/images\/sprites\/civilians-08.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -3968,6 +3957,17 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/civilians-08.png",
       "initialSize" : 403,
+      "fileType" : 8192
+    },
+    "\/public\/levels\/forest tmp\/images\/maps\/map-33.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-33.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-33.png",
+      "initialSize" : 25597,
       "fileType" : 8192
     },
     "\/public\/levels\/forest\/images\/sprites\/gebouw-16.png" : {
@@ -4047,16 +4047,16 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue28-ck.js",
       "fileType" : 64
     },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/forstatement.js" : {
+    "\/public\/levels\/forest\/images\/maps\/map2-53.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/forstatement.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/forstatement-ck.js",
-      "fileType" : 64
+      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-53.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-53.png",
+      "initialSize" : 9484,
+      "fileType" : 8192
     },
     "\/public\/map-editor\/development-bundle\/demos\/draggable\/scroll.html" : {
       "ignoreWasSetByUser" : 0,
@@ -4067,16 +4067,16 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/public\/levels\/forest backup\/images\/maps\/map_plaats-59.png" : {
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/forstatement.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map_plaats-59.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map_plaats-59.png",
-      "initialSize" : 22244,
-      "fileType" : 8192
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/forstatement.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/forstatement-ck.js",
+      "fileType" : 64
     },
     "\/public\/levels\/forest backup\/images\/sprites\/gebouw-09.png" : {
       "ignoreWasSetByUser" : 0,
@@ -4089,6 +4089,17 @@
       "initialSize" : 1738,
       "fileType" : 8192
     },
+    "\/public\/levels\/forest backup\/images\/maps\/map_plaats-59.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map_plaats-59.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map_plaats-59.png",
+      "initialSize" : 22244,
+      "fileType" : 8192
+    },
     "\/public\/levels\/forest tmp\/images\/sprites\/gebouw-10.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -4099,28 +4110,6 @@
       "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/sprites\/gebouw-10.png",
       "initialSize" : 1096,
       "fileType" : 8192
-    },
-    "\/public\/levels\/forest\/images\/maps\/map2-53.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-53.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-53.png",
-      "initialSize" : 9484,
-      "fileType" : 8192
-    },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/with.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/with.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/with-ck.js",
-      "fileType" : 64
     },
     "\/public\/levels\/forest backup\/images\/maps\/map-30.png" : {
       "ignoreWasSetByUser" : 0,
@@ -4144,15 +4133,15 @@
       "initialSize" : 3151,
       "fileType" : 8192
     },
-    "\/node_modules\/socket.io\/node_modules\/redis\/benches\/stress\/speed\/speed.js" : {
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/with.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/benches\/stress\/speed\/speed.js",
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/with.js",
       "outputStyle" : 0,
       "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/benches\/stress\/speed\/speed-ck.js",
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/with-ck.js",
       "fileType" : 64
     },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/test\/testserver.js" : {
@@ -4164,6 +4153,17 @@
       "outputStyle" : 0,
       "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/test\/testserver-ck.js",
+      "fileType" : 64
+    },
+    "\/node_modules\/socket.io\/node_modules\/redis\/benches\/stress\/speed\/speed.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/benches\/stress\/speed\/speed.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/benches\/stress\/speed\/speed-ck.js",
       "fileType" : 64
     },
     "\/node_modules\/socket.io\/node_modules\/redis\/benches\/stress\/speed\/size-rate.png" : {
@@ -4188,17 +4188,6 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/issue9-ck.js",
       "fileType" : 64
     },
-    "\/public\/map-editor\/img\/gebouwen\/gebouw-3.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/img\/gebouwen\/gebouw-3.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/map-editor\/img\/gebouwen\/gebouw-3.png",
-      "initialSize" : 1115,
-      "fileType" : 8192
-    },
     "\/public\/static\/javascript\/viewer.min.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -4209,6 +4198,17 @@
       "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/public\/static\/javascript\/viewer.min-ck.js",
       "fileType" : 64
+    },
+    "\/public\/levels\/forest\/images\/sprites\/gebouw-09.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-09.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-09.png",
+      "initialSize" : 5035,
+      "fileType" : 8192
     },
     "\/public\/levels\/forest tmp\/images\/sprites\/gebouw-08.png" : {
       "ignoreWasSetByUser" : 0,
@@ -4232,17 +4232,6 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/ifreturn2-ck.js",
       "fileType" : 64
     },
-    "\/public\/levels\/forest\/images\/sprites\/gebouw-09.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-09.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-09.png",
-      "initialSize" : 5035,
-      "fileType" : 8192
-    },
     "\/public\/map-editor\/development-bundle\/themes\/ui-lightness\/images\/ui-bg_diagonals-thick_18_b81900_40x40.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -4252,6 +4241,17 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/ui-lightness\/images\/ui-bg_diagonals-thick_18_b81900_40x40.png",
       "initialSize" : 418,
+      "fileType" : 8192
+    },
+    "\/public\/map-editor\/img\/gebouwen\/gebouw-3.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/map-editor\/img\/gebouwen\/gebouw-3.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/map-editor\/img\/gebouwen\/gebouw-3.png",
+      "initialSize" : 1115,
       "fileType" : 8192
     },
     "\/public\/map-editor\/development-bundle\/demos\/draggable\/index.html" : {
@@ -4274,17 +4274,6 @@
       "initialSize" : 2155,
       "fileType" : 8192
     },
-    "\/public\/levels\/forest backup\/images\/maps\/map-57.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-57.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-57.png",
-      "initialSize" : 10177,
-      "fileType" : 8192
-    },
     "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-08.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -4294,6 +4283,17 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-08.png",
       "initialSize" : 27117,
+      "fileType" : 8192
+    },
+    "\/public\/levels\/forest backup\/images\/maps\/map-57.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-57.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-57.png",
+      "initialSize" : 10177,
       "fileType" : 8192
     },
     "\/public\/levels\/forest backup\/images\/maps\/map_plaats-37.png" : {
@@ -4307,16 +4307,16 @@
       "initialSize" : 15585,
       "fileType" : 8192
     },
-    "\/node_modules\/socket.io\/node_modules\/redis\/benches\/stress\/rpushblpop\/pub.js" : {
+    "\/public\/map-editor\/development-bundle\/themes\/ui-lightness\/minified\/images\/ui-bg_flat_10_000000_40x100.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/benches\/stress\/rpushblpop\/pub.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/benches\/stress\/rpushblpop\/pub-ck.js",
-      "fileType" : 64
+      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/ui-lightness\/minified\/images\/ui-bg_flat_10_000000_40x100.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/ui-lightness\/minified\/images\/ui-bg_flat_10_000000_40x100.png",
+      "initialSize" : 205,
+      "fileType" : 8192
     },
     "\/public\/map-editor\/development-bundle\/ui\/minified\/jquery.ui.position.min.js" : {
       "ignoreWasSetByUser" : 0,
@@ -4362,16 +4362,16 @@
       "initialSize" : 13050,
       "fileType" : 8192
     },
-    "\/public\/map-editor\/development-bundle\/themes\/ui-lightness\/minified\/images\/ui-bg_flat_10_000000_40x100.png" : {
+    "\/node_modules\/socket.io\/node_modules\/redis\/benches\/stress\/rpushblpop\/pub.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/ui-lightness\/minified\/images\/ui-bg_flat_10_000000_40x100.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/ui-lightness\/minified\/images\/ui-bg_flat_10_000000_40x100.png",
-      "initialSize" : 205,
-      "fileType" : 8192
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/benches\/stress\/rpushblpop\/pub.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/benches\/stress\/rpushblpop\/pub-ck.js",
+      "fileType" : 64
     },
     "\/public\/levels\/forest tmp\/images\/maps\/map-47.png" : {
       "ignoreWasSetByUser" : 0,
@@ -4406,16 +4406,16 @@
       "initialSize" : 1336,
       "fileType" : 8192
     },
-    "\/public\/map-editor\/development-bundle\/ui\/minified\/jquery.ui.draggable.min.js" : {
+    "\/public\/levels\/forest\/images\/sprites\/golf-01.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/ui\/minified\/jquery.ui.draggable.min.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/ui\/minified\/jquery.ui.draggable.min-ck.js",
-      "fileType" : 64
+      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/golf-01.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/golf-01.png",
+      "initialSize" : 724,
+      "fileType" : 8192
     },
     "\/server.js" : {
       "ignoreWasSetByUser" : 0,
@@ -4439,17 +4439,6 @@
       "initialSize" : 328,
       "fileType" : 8192
     },
-    "\/public\/levels\/forest\/images\/sprites\/golf-01.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/golf-01.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/golf-01.png",
-      "initialSize" : 724,
-      "fileType" : 8192
-    },
     "\/public\/levels\/forest tmp\/images\/maps\/map-16.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -4460,6 +4449,17 @@
       "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-16.png",
       "initialSize" : 23980,
       "fileType" : 8192
+    },
+    "\/public\/map-editor\/development-bundle\/ui\/minified\/jquery.ui.draggable.min.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/ui\/minified\/jquery.ui.draggable.min.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/ui\/minified\/jquery.ui.draggable.min-ck.js",
+      "fileType" : 64
     },
     "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-48.png" : {
       "ignoreWasSetByUser" : 0,
@@ -4472,17 +4472,6 @@
       "initialSize" : 42705,
       "fileType" : 8192
     },
-    "\/node_modules\/socket.io\/lib\/stores\/memory.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/lib\/stores\/memory.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/lib\/stores\/memory-ck.js",
-      "fileType" : 64
-    },
     "\/public\/map-editor\/img\/maps\/map_plaatsen-14.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -4493,6 +4482,17 @@
       "outputAbbreviatedPath" : "\/public\/map-editor\/img\/maps\/map_plaatsen-14.png",
       "initialSize" : 6660,
       "fileType" : 8192
+    },
+    "\/node_modules\/socket.io\/lib\/stores\/memory.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/lib\/stores\/memory.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/lib\/stores\/memory-ck.js",
+      "fileType" : 64
     },
     "\/public\/levels\/forest backup\/images\/sprites\/gebouw-08.png" : {
       "ignoreWasSetByUser" : 0,
@@ -4626,15 +4626,15 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/lib\/WebSocket-ck.js",
       "fileType" : 64
     },
-    "\/public\/levels\/forest tmp\/images\/sprites\/gebouw-12.png" : {
+    "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-25.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/sprites\/gebouw-12.png",
+      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-25.png",
       "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/sprites\/gebouw-12.png",
-      "initialSize" : 1573,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-25.png",
+      "initialSize" : 56633,
       "fileType" : 8192
     },
     "\/public\/levels\/forest backup\/images\/maps\/map-13.png" : {
@@ -4648,15 +4648,15 @@
       "initialSize" : 18913,
       "fileType" : 8192
     },
-    "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-25.png" : {
+    "\/public\/levels\/forest tmp\/images\/sprites\/gebouw-12.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-25.png",
+      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/sprites\/gebouw-12.png",
       "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-25.png",
-      "initialSize" : 56633,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/sprites\/gebouw-12.png",
+      "initialSize" : 1573,
       "fileType" : 8192
     },
     "\/public\/map-editor\/img\/maps\/map-11.png" : {
@@ -4776,17 +4776,6 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/array4-ck.js",
       "fileType" : 64
     },
-    "\/public\/map-editor\/development-bundle\/ui\/jquery.ui.draggable.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/ui\/jquery.ui.draggable.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/ui\/jquery.ui.draggable-ck.js",
-      "fileType" : 64
-    },
     "\/public\/map-editor\/development-bundle\/themes\/ui-lightness\/images\/ui-bg_flat_10_000000_40x100.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -4797,6 +4786,17 @@
       "outputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/ui-lightness\/images\/ui-bg_flat_10_000000_40x100.png",
       "initialSize" : 205,
       "fileType" : 8192
+    },
+    "\/public\/map-editor\/development-bundle\/ui\/jquery.ui.draggable.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/ui\/jquery.ui.draggable.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/ui\/jquery.ui.draggable-ck.js",
+      "fileType" : 64
     },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/issue68.js" : {
       "ignoreWasSetByUser" : 0,
@@ -4897,6 +4897,17 @@
       "initialSize" : 312,
       "fileType" : 8192
     },
+    "\/node_modules\/socket.io\/node_modules\/redis\/examples\/unix_socket.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/examples\/unix_socket.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/examples\/unix_socket-ck.js",
+      "fileType" : 64
+    },
     "\/public\/levels\/forest backup\/images\/sprites\/gebouw-07.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -4918,17 +4929,6 @@
       "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-02.png",
       "initialSize" : 2720,
       "fileType" : 8192
-    },
-    "\/node_modules\/socket.io\/node_modules\/redis\/examples\/unix_socket.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/examples\/unix_socket.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/examples\/unix_socket-ck.js",
-      "fileType" : 64
     },
     "\/public\/levels\/forest\/images\/maps\/map2-37.png" : {
       "ignoreWasSetByUser" : 0,
@@ -5014,17 +5014,6 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/xmlhttprequest\/example\/demo-ck.js",
       "fileType" : 64
     },
-    "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-42.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-42.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-42.png",
-      "initialSize" : 24990,
-      "fileType" : 8192
-    },
     "\/public\/levels\/forest\/images\/sprites\/civilians-06.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -5034,6 +5023,17 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/civilians-06.png",
       "initialSize" : 429,
+      "fileType" : 8192
+    },
+    "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-42.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-42.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-42.png",
+      "initialSize" : 24990,
       "fileType" : 8192
     },
     "\/node_modules\/socket.io\/node_modules\/redis\/examples\/subquery.js" : {
@@ -5197,17 +5197,6 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/public\/levels\/forest tmp\/images\/maps\/map-45.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-45.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-45.png",
-      "initialSize" : 4457,
-      "fileType" : 8192
-    },
     "\/public\/levels\/forest tmp\/images\/sprites\/gebouw-14.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -5217,6 +5206,17 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/sprites\/gebouw-14.png",
       "initialSize" : 2642,
+      "fileType" : 8192
+    },
+    "\/public\/levels\/forest tmp\/images\/maps\/map-45.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-45.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-45.png",
+      "initialSize" : 4457,
       "fileType" : 8192
     },
     "\/public\/levels\/forest backup\/images\/maps\/map_plaats-61.png" : {
@@ -5329,17 +5329,6 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/policyfile\/index-ck.js",
       "fileType" : 64
     },
-    "\/public\/map-editor\/development-bundle\/themes\/base\/images\/ui-icons_888888_256x240.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/images\/ui-icons_888888_256x240.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/images\/ui-icons_888888_256x240.png",
-      "initialSize" : 4369,
-      "fileType" : 8192
-    },
     "\/public\/map-editor\/img\/maps\/map_plaatsen-3.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -5349,6 +5338,17 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/public\/map-editor\/img\/maps\/map_plaatsen-3.png",
       "initialSize" : 395,
+      "fileType" : 8192
+    },
+    "\/public\/map-editor\/development-bundle\/themes\/base\/images\/ui-icons_888888_256x240.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/images\/ui-icons_888888_256x240.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/images\/ui-icons_888888_256x240.png",
+      "initialSize" : 4369,
       "fileType" : 8192
     },
     "\/public\/levels\/forest backup\/images\/maps\/map-56.png" : {
@@ -5569,17 +5569,6 @@
       "initialSize" : 4494,
       "fileType" : 8192
     },
-    "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-31.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-31.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-31.png",
-      "initialSize" : 14861,
-      "fileType" : 8192
-    },
     "\/public\/levels\/forest backup\/images\/sprites\/gebouw-05.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -5602,17 +5591,6 @@
       "initialSize" : 26381,
       "fileType" : 8192
     },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue54.1.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue54.1.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue54.1-ck.js",
-      "fileType" : 64
-    },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/array1.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -5633,6 +5611,28 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-64.png",
       "initialSize" : 2721,
+      "fileType" : 8192
+    },
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue54.1.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue54.1.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue54.1-ck.js",
+      "fileType" : 64
+    },
+    "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-31.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-31.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-31.png",
+      "initialSize" : 14861,
       "fileType" : 8192
     },
     "\/public\/static\/javascript\/third-party\/howler.min.js" : {
@@ -5699,17 +5699,6 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/public\/static\/javascript\/Upon.config.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/static\/javascript\/Upon.config.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/public\/static\/javascript\/Upon.config-ck.js",
-      "fileType" : 64
-    },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/test\/io.test.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -5719,6 +5708,17 @@
       "outputStyle" : 0,
       "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/test\/io.test-ck.js",
+      "fileType" : 64
+    },
+    "\/public\/static\/javascript\/Upon.config.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/static\/javascript\/Upon.config.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/public\/static\/javascript\/Upon.config-ck.js",
       "fileType" : 64
     },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/issue11.js" : {
@@ -5906,17 +5906,6 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/public\/levels\/forest tmp\/images\/sprites\/gebouw-17.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/sprites\/gebouw-17.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/sprites\/gebouw-17.png",
-      "initialSize" : 3286,
-      "fileType" : 8192
-    },
     "\/public\/levels\/forest backup\/images\/maps\/map-20.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -5926,6 +5915,17 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-20.png",
       "initialSize" : 8207,
+      "fileType" : 8192
+    },
+    "\/public\/levels\/forest tmp\/images\/sprites\/gebouw-17.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/sprites\/gebouw-17.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/sprites\/gebouw-17.png",
+      "initialSize" : 3286,
       "fileType" : 8192
     },
     "\/public\/levels\/forest tmp\/images\/maps\/map-43.png" : {
@@ -5961,6 +5961,15 @@
       "initialSize" : 6132,
       "fileType" : 8192
     },
+    "\/public\/controller\/index.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/controller\/index.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
     "\/public\/map-editor\/css\/ui-lightness\/images\/ui-icons_228ef1_256x240.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -5971,15 +5980,6 @@
       "outputAbbreviatedPath" : "\/public\/map-editor\/css\/ui-lightness\/images\/ui-icons_228ef1_256x240.png",
       "initialSize" : 4549,
       "fileType" : 8192
-    },
-    "\/public\/viewer\/index.html" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/viewer\/index.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
     },
     "\/public\/map-editor\/img\/gebouwen\/gebouw-18.png" : {
       "ignoreWasSetByUser" : 0,
@@ -5992,15 +5992,6 @@
       "initialSize" : 1776,
       "fileType" : 8192
     },
-    "\/config.rb" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/config.rb",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 32768
-    },
     "\/public\/levels\/forest tmp\/images\/maps\/map-12.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -6012,6 +6003,26 @@
       "initialSize" : 10793,
       "fileType" : 8192
     },
+    "\/public\/levels\/forest\/images\/sprites\/wolk-01.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/wolk-01.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/wolk-01.png",
+      "initialSize" : 3127,
+      "fileType" : 8192
+    },
+    "\/config.rb" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/config.rb",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 32768
+    },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/array1.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -6021,6 +6032,17 @@
       "outputStyle" : 0,
       "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/array1-ck.js",
+      "fileType" : 64
+    },
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/active-x-obfuscator\/node_modules\/zeparser\/unicodecategories.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/active-x-obfuscator\/node_modules\/zeparser\/unicodecategories.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/active-x-obfuscator\/node_modules\/zeparser\/unicodecategories-ck.js",
       "fileType" : 64
     },
     "\/public\/levels\/forest backup\/images\/sprites\/gebouw-04.png" : {
@@ -6034,36 +6056,14 @@
       "initialSize" : 1083,
       "fileType" : 8192
     },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/active-x-obfuscator\/node_modules\/zeparser\/unicodecategories.js" : {
+    "\/public\/viewer\/index.html" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/active-x-obfuscator\/node_modules\/zeparser\/unicodecategories.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/active-x-obfuscator\/node_modules\/zeparser\/unicodecategories-ck.js",
-      "fileType" : 64
-    },
-    "\/public\/controller\/index.html" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/controller\/index.html",
+      "inputAbbreviatedPath" : "\/public\/viewer\/index.html",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
-    },
-    "\/public\/levels\/forest\/images\/sprites\/wolk-01.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/wolk-01.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/wolk-01.png",
-      "initialSize" : 3127,
-      "fileType" : 8192
     },
     "\/public\/map-editor\/js\/jquery-ui-1.10.1.custom.min.js" : {
       "ignoreWasSetByUser" : 0,
@@ -6098,6 +6098,15 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/issue13-ck.js",
       "fileType" : 64
     },
+    "\/public\/map-editor\/development-bundle\/demos\/widget\/default.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/demos\/widget\/default.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
     "\/public\/map-editor\/development-bundle\/ui\/jquery.ui.position.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -6108,15 +6117,6 @@
       "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/ui\/jquery.ui.position-ck.js",
       "fileType" : 64
-    },
-    "\/public\/map-editor\/development-bundle\/demos\/widget\/default.html" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/demos\/widget\/default.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
     },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/strict-equals.js" : {
       "ignoreWasSetByUser" : 0,
@@ -6184,17 +6184,6 @@
       "outputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/ui\/minified\/jquery.ui.core.min-ck.js",
       "fileType" : 64
     },
-    "\/public\/levels\/forest\/images\/sprites\/gebouw-19.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-19.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-19.png",
-      "initialSize" : 5040,
-      "fileType" : 8192
-    },
     "\/node_modules\/socket.io\/node_modules\/redis\/examples\/subqueries.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -6205,6 +6194,17 @@
       "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/examples\/subqueries-ck.js",
       "fileType" : 64
+    },
+    "\/public\/levels\/forest\/images\/sprites\/gebouw-19.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-19.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-19.png",
+      "initialSize" : 5040,
+      "fileType" : 8192
     },
     "\/public\/levels\/forest\/images\/sprites\/vlieg-01.png" : {
       "ignoreWasSetByUser" : 0,
@@ -6227,6 +6227,17 @@
       "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-49.png",
       "initialSize" : 57018,
       "fileType" : 8192
+    },
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/with.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/with.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/with-ck.js",
+      "fileType" : 64
     },
     "\/node_modules\/socket.io\/lib\/transports\/htmlfile.js" : {
       "ignoreWasSetByUser" : 0,
@@ -6260,17 +6271,6 @@
       "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/vlieg-08.png",
       "initialSize" : 6778,
       "fileType" : 8192
-    },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/with.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/with.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/with-ck.js",
-      "fileType" : 64
     },
     "\/public\/levels\/forest tmp\/images\/sprites\/gebouw-18.png" : {
       "ignoreWasSetByUser" : 0,
@@ -6327,17 +6327,6 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/lib\/process-ck.js",
       "fileType" : 64
     },
-    "\/public\/levels\/forest tmp\/images\/maps\/map-57.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-57.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-57.png",
-      "initialSize" : 10177,
-      "fileType" : 8192
-    },
     "\/public\/map-editor\/img\/maps\/map-3.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -6347,6 +6336,17 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/public\/map-editor\/img\/maps\/map-3.png",
       "initialSize" : 395,
+      "fileType" : 8192
+    },
+    "\/public\/levels\/forest tmp\/images\/maps\/map-57.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-57.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-57.png",
+      "initialSize" : 10177,
       "fileType" : 8192
     },
     "\/public\/levels\/forest backup\/images\/sprites\/gebouw-03.png" : {
@@ -6360,6 +6360,15 @@
       "initialSize" : 1115,
       "fileType" : 8192
     },
+    "\/public\/map-editor\/development-bundle\/demos\/widget\/index.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/demos\/widget\/index.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
     "\/node_modules\/socket.io\/node_modules\/policyfile\/lib\/server.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -6370,15 +6379,6 @@
       "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/policyfile\/lib\/server-ck.js",
       "fileType" : 64
-    },
-    "\/public\/map-editor\/development-bundle\/demos\/demos.css" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/demos\/demos.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
     },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue48.js" : {
       "ignoreWasSetByUser" : 0,
@@ -6446,25 +6446,14 @@
       "initialSize" : 42462,
       "fileType" : 8192
     },
-    "\/public\/map-editor\/development-bundle\/demos\/widget\/index.html" : {
+    "\/public\/map-editor\/development-bundle\/demos\/demos.css" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/demos\/widget\/index.html",
+      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/demos\/demos.css",
       "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
-    "\/public\/levels\/forest\/images\/sprites\/civilians-03.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/civilians-03.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/civilians-03.png",
-      "initialSize" : 452,
-      "fileType" : 8192
+      "fileType" : 16
     },
     "\/public\/map-editor\/development-bundle\/themes\/ui-lightness\/minified\/images\/ui-bg_glass_100_f6f6f6_1x400.png" : {
       "ignoreWasSetByUser" : 0,
@@ -6477,15 +6466,26 @@
       "initialSize" : 262,
       "fileType" : 8192
     },
-    "\/public\/map-editor\/css\/ui-lightness\/images\/ui-bg_glass_100_fdf5ce_1x400.png" : {
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/issue21.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/css\/ui-lightness\/images\/ui-bg_glass_100_fdf5ce_1x400.png",
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/issue21.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/issue21-ck.js",
+      "fileType" : 64
+    },
+    "\/public\/levels\/forest\/images\/sprites\/civilians-03.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/civilians-03.png",
       "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/map-editor\/css\/ui-lightness\/images\/ui-bg_glass_100_fdf5ce_1x400.png",
-      "initialSize" : 348,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/civilians-03.png",
+      "initialSize" : 452,
       "fileType" : 8192
     },
     "\/public\/tmp-facebook-icon-arjen.jpg" : {
@@ -6499,16 +6499,16 @@
       "initialSize" : 7420,
       "fileType" : 4096
     },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/issue21.js" : {
+    "\/public\/map-editor\/css\/ui-lightness\/images\/ui-bg_glass_100_fdf5ce_1x400.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/issue21.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/issue21-ck.js",
-      "fileType" : 64
+      "inputAbbreviatedPath" : "\/public\/map-editor\/css\/ui-lightness\/images\/ui-bg_glass_100_fdf5ce_1x400.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/map-editor\/css\/ui-lightness\/images\/ui-bg_glass_100_fdf5ce_1x400.png",
+      "initialSize" : 348,
+      "fileType" : 8192
     },
     "\/public\/static\/images\/controller_compaspijl.png" : {
       "ignoreWasSetByUser" : 0,
@@ -6554,15 +6554,6 @@
       "initialSize" : 2847,
       "fileType" : 8192
     },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/examples\/serverstats\/public\/index.html" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/examples\/serverstats\/public\/index.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/active-x-obfuscator\/node_modules\/zeparser\/test-parser.html" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -6593,6 +6584,15 @@
       "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/public\/static\/javascript\/viewer\/player-ck.js",
       "fileType" : 64
+    },
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/examples\/serverstats\/public\/index.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/examples\/serverstats\/public\/index.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/public\/levels\/forest\/images\/maps\/map2-52.png" : {
       "ignoreWasSetByUser" : 0,
@@ -6681,26 +6681,6 @@
       "initialSize" : 2720,
       "fileType" : 8192
     },
-    "\/public\/static\/images\/step1-bg.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/static\/images\/step1-bg.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/static\/images\/step1-bg.png",
-      "initialSize" : 3111,
-      "fileType" : 8192
-    },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/docstyle.css" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/docstyle.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
-    },
     "\/public\/map-editor\/img\/maps\/map-6.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -6712,15 +6692,35 @@
       "initialSize" : 14549,
       "fileType" : 8192
     },
-    "\/public\/map-editor\/img\/maps\/map-15.png" : {
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/docstyle.css" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/img\/maps\/map-15.png",
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/docstyle.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
+    },
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/var.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/var.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/var-ck.js",
+      "fileType" : 64
+    },
+    "\/public\/static\/images\/step1-bg.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/static\/images\/step1-bg.png",
       "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/map-editor\/img\/maps\/map-15.png",
-      "initialSize" : 1331,
+      "outputAbbreviatedPath" : "\/public\/static\/images\/step1-bg.png",
+      "initialSize" : 3111,
       "fileType" : 8192
     },
     "\/public\/levels\/forest\/images\/sprites\/boom-02.png" : {
@@ -6734,16 +6734,16 @@
       "initialSize" : 718,
       "fileType" : 8192
     },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/var.js" : {
+    "\/public\/map-editor\/img\/maps\/map-15.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/var.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/var-ck.js",
-      "fileType" : 64
+      "inputAbbreviatedPath" : "\/public\/map-editor\/img\/maps\/map-15.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/map-editor\/img\/maps\/map-15.png",
+      "initialSize" : 1331,
+      "fileType" : 8192
     },
     "\/public\/levels\/forest\/images\/sprites\/gebouw-02.png" : {
       "ignoreWasSetByUser" : 0,
@@ -6910,17 +6910,6 @@
       "initialSize" : 19831,
       "fileType" : 8192
     },
-    "\/public\/map-editor\/img\/errorIcon.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/img\/errorIcon.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/map-editor\/img\/errorIcon.png",
-      "initialSize" : 397,
-      "fileType" : 8192
-    },
     "\/public\/levels\/forest tmp\/images\/maps\/map-10.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -6932,15 +6921,15 @@
       "initialSize" : 31931,
       "fileType" : 8192
     },
-    "\/public\/static\/images\/controller_compasroos.png" : {
+    "\/public\/map-editor\/img\/errorIcon.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/static\/images\/controller_compasroos.png",
+      "inputAbbreviatedPath" : "\/public\/map-editor\/img\/errorIcon.png",
       "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/static\/images\/controller_compasroos.png",
-      "initialSize" : 2602,
+      "outputAbbreviatedPath" : "\/public\/map-editor\/img\/errorIcon.png",
+      "initialSize" : 397,
       "fileType" : 8192
     },
     "\/public\/static\/javascript\/Upon.min.js" : {
@@ -6953,6 +6942,17 @@
       "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/public\/static\/javascript\/Upon.min-ck.js",
       "fileType" : 64
+    },
+    "\/public\/static\/images\/controller_compasroos.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/static\/images\/controller_compasroos.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/static\/images\/controller_compasroos.png",
+      "initialSize" : 2602,
+      "fileType" : 8192
     },
     "\/public\/map-editor\/development-bundle\/themes\/ui-lightness\/minified\/images\/ui-icons_ef8c08_256x240.png" : {
       "ignoreWasSetByUser" : 0,
@@ -7009,15 +7009,6 @@
       "initialSize" : 377,
       "fileType" : 8192
     },
-    "\/public\/map-editor\/development-bundle\/themes\/ui-lightness\/minified\/jquery.ui.core.min.css" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/ui-lightness\/minified\/jquery.ui.core.min.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
-    },
     "\/public\/map-editor\/img\/maps\/map-9.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -7027,6 +7018,35 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/public\/map-editor\/img\/maps\/map-9.png",
       "initialSize" : 16931,
+      "fileType" : 8192
+    },
+    "\/public\/map-editor\/development-bundle\/themes\/ui-lightness\/minified\/jquery.ui.core.min.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/ui-lightness\/minified\/jquery.ui.core.min.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
+    },
+    "\/public\/map-editor\/development-bundle\/themes\/base\/jquery-ui.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/jquery-ui.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
+    },
+    "\/public\/levels\/forest\/images\/maps\/map2-44.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-44.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-44.png",
+      "initialSize" : 4974,
       "fileType" : 8192
     },
     "\/public\/map-editor\/development-bundle\/themes\/ui-lightness\/minified\/images\/ui-bg_highlight-soft_100_eeeeee_1x100.png" : {
@@ -7040,26 +7060,6 @@
       "initialSize" : 278,
       "fileType" : 8192
     },
-    "\/public\/levels\/forest\/images\/maps\/map2-44.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-44.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-44.png",
-      "initialSize" : 4974,
-      "fileType" : 8192
-    },
-    "\/public\/map-editor\/development-bundle\/themes\/base\/jquery-ui.css" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/jquery-ui.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
-    },
     "\/public\/map-editor\/img\/maps\/map-10.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -7069,26 +7069,6 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/public\/map-editor\/img\/maps\/map-10.png",
       "initialSize" : 15568,
-      "fileType" : 8192
-    },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/README.html" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/README.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
-    "\/public\/map-editor\/development-bundle\/themes\/base\/minified\/images\/ui-bg_flat_75_ffffff_40x100.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/minified\/images\/ui-bg_flat_75_ffffff_40x100.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/minified\/images\/ui-bg_flat_75_ffffff_40x100.png",
-      "initialSize" : 178,
       "fileType" : 8192
     },
     "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-20.png" : {
@@ -7102,6 +7082,26 @@
       "initialSize" : 10732,
       "fileType" : 8192
     },
+    "\/public\/map-editor\/development-bundle\/themes\/base\/minified\/images\/ui-bg_flat_75_ffffff_40x100.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/minified\/images\/ui-bg_flat_75_ffffff_40x100.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/minified\/images\/ui-bg_flat_75_ffffff_40x100.png",
+      "initialSize" : 178,
+      "fileType" : 8192
+    },
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/README.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/README.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
     "\/public\/map-editor\/development-bundle\/ui\/jquery.ui.mouse.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -7111,28 +7111,6 @@
       "outputStyle" : 0,
       "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/ui\/jquery.ui.mouse-ck.js",
-      "fileType" : 64
-    },
-    "\/node_modules\/socket.io\/node_modules\/redis\/benches\/stress\/rpushblpop\/server.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/benches\/stress\/rpushblpop\/server.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/benches\/stress\/rpushblpop\/server-ck.js",
-      "fileType" : 64
-    },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/lib\/namespace.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/lib\/namespace.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/lib\/namespace-ck.js",
       "fileType" : 64
     },
     "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-15.png" : {
@@ -7145,6 +7123,28 @@
       "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-15.png",
       "initialSize" : 5017,
       "fileType" : 8192
+    },
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/lib\/namespace.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/lib\/namespace.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/lib\/namespace-ck.js",
+      "fileType" : 64
+    },
+    "\/node_modules\/socket.io\/node_modules\/redis\/benches\/stress\/rpushblpop\/server.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/benches\/stress\/rpushblpop\/server.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/benches\/stress\/rpushblpop\/server-ck.js",
+      "fileType" : 64
     },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/test\/WebSocket.test.js" : {
       "ignoreWasSetByUser" : 0,
@@ -7179,15 +7179,6 @@
       "initialSize" : 2721,
       "fileType" : 8192
     },
-    "\/public\/map-editor\/development-bundle\/demos\/draggable\/cursor-style.html" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/demos\/draggable\/cursor-style.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/public\/levels\/forest backup\/images\/maps\/map_plaats-20.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -7198,6 +7189,15 @@
       "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map_plaats-20.png",
       "initialSize" : 10732,
       "fileType" : 8192
+    },
+    "\/public\/map-editor\/development-bundle\/demos\/draggable\/cursor-style.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/demos\/draggable\/cursor-style.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/lib\/parse-js.js" : {
       "ignoreWasSetByUser" : 0,
@@ -7232,6 +7232,17 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/issue25-ck.js",
       "fileType" : 64
     },
+    "\/public\/map-editor\/img\/gebouwen\/gebouw-13.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/map-editor\/img\/gebouwen\/gebouw-13.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/map-editor\/img\/gebouwen\/gebouw-13.png",
+      "initialSize" : 1967,
+      "fileType" : 8192
+    },
     "\/public\/levels\/forest backup\/images\/sprites\/gebouw-01.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -7253,17 +7264,6 @@
       "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue50-ck.js",
       "fileType" : 64
-    },
-    "\/public\/map-editor\/img\/gebouwen\/gebouw-13.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/img\/gebouwen\/gebouw-13.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/map-editor\/img\/gebouwen\/gebouw-13.png",
-      "initialSize" : 1967,
-      "fileType" : 8192
     },
     "\/node_modules\/socket.io\/node_modules\/redis\/examples\/backpressure_drain.js" : {
       "ignoreWasSetByUser" : 0,
@@ -7298,17 +7298,6 @@
       "initialSize" : 32793,
       "fileType" : 8192
     },
-    "\/public\/levels\/forest\/images\/maps\/map2-08.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-08.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-08.png",
-      "initialSize" : 21070,
-      "fileType" : 8192
-    },
     "\/public\/levels\/forest backup\/images\/maps\/map-46.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -7318,6 +7307,17 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-46.png",
       "initialSize" : 12912,
+      "fileType" : 8192
+    },
+    "\/public\/levels\/forest\/images\/maps\/map2-08.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-08.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-08.png",
+      "initialSize" : 21070,
       "fileType" : 8192
     },
     "\/public\/levels\/forest tmp\/images\/maps\/map-24.png" : {
@@ -7342,16 +7342,14 @@
       "initialSize" : 278,
       "fileType" : 8192
     },
-    "\/public\/levels\/forest\/images\/maps\/map2-00c.png" : {
+    "\/public\/map-editor\/development-bundle\/themes\/base\/jquery.ui.core.css" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-00c.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-00c.png",
-      "initialSize" : 1212,
-      "fileType" : 8192
+      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/jquery.ui.core.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
     },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/bin\/builder.js" : {
       "ignoreWasSetByUser" : 0,
@@ -7364,14 +7362,16 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/bin\/builder-ck.js",
       "fileType" : 64
     },
-    "\/public\/map-editor\/development-bundle\/themes\/base\/jquery.ui.core.css" : {
+    "\/public\/levels\/forest\/images\/maps\/map2-00c.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/jquery.ui.core.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
+      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-00c.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/maps\/map2-00c.png",
+      "initialSize" : 1212,
+      "fileType" : 8192
     },
     "\/public\/levels\/forest\/images\/maps\/map2-36.png" : {
       "ignoreWasSetByUser" : 0,
@@ -7624,17 +7624,6 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/bench\/sender.benchmark-ck.js",
       "fileType" : 64
     },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/empty-blocks.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/empty-blocks.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/empty-blocks-ck.js",
-      "fileType" : 64
-    },
     "\/node_modules\/socket.io\/node_modules\/redis\/lib\/commands.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -7644,6 +7633,17 @@
       "outputStyle" : 0,
       "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/lib\/commands-ck.js",
+      "fileType" : 64
+    },
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/empty-blocks.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/empty-blocks.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/empty-blocks-ck.js",
       "fileType" : 64
     },
     "\/node_modules\/socket.io\/benchmarks\/runner.js" : {
@@ -7785,17 +7785,6 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/diff_multi_bench_output-ck.js",
       "fileType" : 64
     },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/mangle.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/mangle.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/mangle-ck.js",
-      "fileType" : 64
-    },
     "\/node_modules\/socket.io\/node_modules\/redis\/benches\/stress\/pubsub\/server.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -7805,6 +7794,17 @@
       "outputStyle" : 0,
       "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/benches\/stress\/pubsub\/server-ck.js",
+      "fileType" : 64
+    },
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/issue29.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/issue29.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/issue29-ck.js",
       "fileType" : 64
     },
     "\/public\/levels\/forest\/images\/sprites\/vlieg-09.png" : {
@@ -7818,15 +7818,26 @@
       "initialSize" : 19687,
       "fileType" : 8192
     },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/issue29.js" : {
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/mangle.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/issue29.js",
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/mangle.js",
       "outputStyle" : 0,
       "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/issue29-ck.js",
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/mangle-ck.js",
+      "fileType" : 64
+    },
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/tmp\/hoist.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/tmp\/hoist.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/tmp\/hoist-ck.js",
       "fileType" : 64
     },
     "\/public\/levels\/forest backup\/images\/maps\/map_plaats-44.png" : {
@@ -7849,27 +7860,16 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
     },
-    "\/node_modules\/socket.io\/node_modules\/redis\/examples\/mget.js" : {
+    "\/public\/levels\/forest backup\/images\/maps\/map-01.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/examples\/mget.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/examples\/mget-ck.js",
-      "fileType" : 64
-    },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/lib\/browser.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/lib\/browser.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/lib\/browser-ck.js",
-      "fileType" : 64
+      "inputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-01.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-01.png",
+      "initialSize" : 2720,
+      "fileType" : 8192
     },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/forstatement.js" : {
       "ignoreWasSetByUser" : 0,
@@ -7882,16 +7882,16 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/forstatement-ck.js",
       "fileType" : 64
     },
-    "\/public\/levels\/forest backup\/images\/maps\/map-01.png" : {
+    "\/node_modules\/socket.io\/node_modules\/redis\/examples\/multi.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-01.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-01.png",
-      "initialSize" : 2720,
-      "fileType" : 8192
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/examples\/multi.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/examples\/multi-ck.js",
+      "fileType" : 64
     },
     "\/public\/levels\/forest\/images\/maps\/map2-56.png" : {
       "ignoreWasSetByUser" : 0,
@@ -7904,15 +7904,15 @@
       "initialSize" : 11626,
       "fileType" : 8192
     },
-    "\/node_modules\/socket.io\/node_modules\/redis\/examples\/multi.js" : {
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/lib\/browser.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/examples\/multi.js",
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/lib\/browser.js",
       "outputStyle" : 0,
       "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/examples\/multi-ck.js",
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/lib\/browser-ck.js",
       "fileType" : 64
     },
     "\/public\/levels\/forest\/images\/maps\/map2-11.png" : {
@@ -7926,15 +7926,15 @@
       "initialSize" : 19123,
       "fileType" : 8192
     },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/tmp\/hoist.js" : {
+    "\/node_modules\/socket.io\/node_modules\/redis\/examples\/mget.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/tmp\/hoist.js",
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/examples\/mget.js",
       "outputStyle" : 0,
       "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/tmp\/hoist-ck.js",
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/examples\/mget-ck.js",
       "fileType" : 64
     },
     "\/public\/map-editor\/development-bundle\/themes\/ui-lightness\/images\/ui-bg_glass_100_f6f6f6_1x400.png" : {
@@ -7970,17 +7970,6 @@
       "initialSize" : 10770,
       "fileType" : 8192
     },
-    "\/public\/levels\/forest\/images\/sprites\/extras-01.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/extras-01.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/extras-01.png",
-      "initialSize" : 5010,
-      "fileType" : 8192
-    },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/test\/node\/builder.test.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -7992,16 +7981,25 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/test\/node\/builder.test-ck.js",
       "fileType" : 64
     },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/lib\/transport.js" : {
+    "\/public\/levels\/forest\/images\/sprites\/extras-01.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/lib\/transport.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/lib\/transport-ck.js",
-      "fileType" : 64
+      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/extras-01.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/extras-01.png",
+      "initialSize" : 5010,
+      "fileType" : 8192
+    },
+    "\/public\/map-editor\/development-bundle\/themes\/base\/jquery.ui.base.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/jquery.ui.base.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
     },
     "\/public\/levels\/forest tmp\/images\/maps\/map-22.png" : {
       "ignoreWasSetByUser" : 0,
@@ -8025,24 +8023,15 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/node_modules\/tinycolor\/example-ck.js",
       "fileType" : 64
     },
-    "\/public\/map-editor\/development-bundle\/themes\/base\/jquery.ui.base.css" : {
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/lib\/transport.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/themes\/base\/jquery.ui.base.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
-    },
-    "\/public\/map-editor\/development-bundle\/external\/globalize.culture.de-DE.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/external\/globalize.culture.de-DE.js",
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/lib\/transport.js",
       "outputStyle" : 0,
       "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/external\/globalize.culture.de-DE-ck.js",
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/lib\/transport-ck.js",
       "fileType" : 64
     },
     "\/node_modules\/socket.io\/node_modules\/redis\/lib\/parser\/javascript.js" : {
@@ -8054,6 +8043,17 @@
       "outputStyle" : 0,
       "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/lib\/parser\/javascript-ck.js",
+      "fileType" : 64
+    },
+    "\/public\/map-editor\/development-bundle\/external\/globalize.culture.de-DE.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/external\/globalize.culture.de-DE.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/external\/globalize.culture.de-DE-ck.js",
       "fileType" : 64
     },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue278.js" : {
@@ -8275,15 +8275,26 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
     },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue16.js" : {
+    "\/public\/levels\/forest tmp\/images\/maps\/map-05.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue16.js",
+      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-05.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-05.png",
+      "initialSize" : 25415,
+      "fileType" : 8192
+    },
+    "\/node_modules\/socket.io\/node_modules\/redis\/examples\/extend.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/examples\/extend.js",
       "outputStyle" : 0,
       "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue16-ck.js",
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/examples\/extend-ck.js",
       "fileType" : 64
     },
     "\/public\/map-editor\/img\/gebouwen\/gebouw-6.png" : {
@@ -8297,6 +8308,17 @@
       "initialSize" : 1298,
       "fileType" : 8192
     },
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue16.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue16.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/issue16-ck.js",
+      "fileType" : 64
+    },
     "\/public\/static\/javascript\/third-party\/requestAnimationFrame.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -8307,28 +8329,6 @@
       "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/public\/static\/javascript\/third-party\/requestAnimationFrame-ck.js",
       "fileType" : 64
-    },
-    "\/node_modules\/socket.io\/node_modules\/redis\/examples\/extend.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/examples\/extend.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/redis\/examples\/extend-ck.js",
-      "fileType" : 64
-    },
-    "\/public\/levels\/forest tmp\/images\/maps\/map-05.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-05.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-05.png",
-      "initialSize" : 25415,
-      "fileType" : 8192
     },
     "\/public\/levels\/forest\/images\/maps\/map2-31.png" : {
       "ignoreWasSetByUser" : 0,
@@ -8374,17 +8374,6 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/test\/WebSocketServer.test-ck.js",
       "fileType" : 64
     },
-    "\/public\/levels\/forest backup\/images\/maps\/map-53.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-53.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-53.png",
-      "initialSize" : 10770,
-      "fileType" : 8192
-    },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/bench\/parser.benchmark.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -8395,6 +8384,17 @@
       "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/bench\/parser.benchmark-ck.js",
       "fileType" : 64
+    },
+    "\/public\/levels\/forest backup\/images\/maps\/map-53.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-53.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-53.png",
+      "initialSize" : 10770,
+      "fileType" : 8192
     },
     "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-44.png" : {
       "ignoreWasSetByUser" : 0,
@@ -8440,17 +8440,6 @@
       "initialSize" : 5956,
       "fileType" : 8192
     },
-    "\/node_modules\/socket.io\/node_modules\/policyfile\/examples\/basic.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/policyfile\/examples\/basic.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/policyfile\/examples\/basic-ck.js",
-      "fileType" : 64
-    },
     "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-39.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -8461,6 +8450,17 @@
       "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-39.png",
       "initialSize" : 19575,
       "fileType" : 8192
+    },
+    "\/node_modules\/socket.io\/node_modules\/policyfile\/examples\/basic.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/policyfile\/examples\/basic.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/policyfile\/examples\/basic-ck.js",
+      "fileType" : 64
     },
     "\/public\/map-editor\/development-bundle\/themes\/ui-lightness\/images\/ui-bg_glass_65_ffffff_1x400.png" : {
       "ignoreWasSetByUser" : 0,
@@ -8559,17 +8559,6 @@
       "initialSize" : 31202,
       "fileType" : 8192
     },
-    "\/public\/levels\/forest backup\/images\/maps\/map-28.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-28.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-28.png",
-      "initialSize" : 18222,
-      "fileType" : 8192
-    },
     "\/public\/levels\/forest\/images\/sprites\/golf-04.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -8579,6 +8568,17 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/golf-04.png",
       "initialSize" : 479,
+      "fileType" : 8192
+    },
+    "\/public\/levels\/forest backup\/images\/maps\/map-28.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-28.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-28.png",
+      "initialSize" : 18222,
       "fileType" : 8192
     },
     "\/public\/levels\/forest backup\/images\/maps\/map_plaats-01.png" : {
@@ -8636,6 +8636,26 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/lib\/transports\/websocket\/index-ck.js",
       "fileType" : 64
     },
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/active-x-obfuscator\/node_modules\/zeparser\/test-tokenizer.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/active-x-obfuscator\/node_modules\/zeparser\/test-tokenizer.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
+    "\/public\/levels\/forest\/images\/sprites\/gebouw-05.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-05.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-05.png",
+      "initialSize" : 3075,
+      "fileType" : 8192
+    },
     "\/public\/levels\/forest tmp\/images\/maps\/map-51.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -8656,26 +8676,6 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-19.png",
       "initialSize" : 13820,
-      "fileType" : 8192
-    },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/active-x-obfuscator\/node_modules\/zeparser\/test-tokenizer.html" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/active-x-obfuscator\/node_modules\/zeparser\/test-tokenizer.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
-    "\/public\/levels\/forest tmp\/images\/maps\/map-20.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-20.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-20.png",
-      "initialSize" : 8207,
       "fileType" : 8192
     },
     "\/public\/levels\/forest backup\/images\/maps\/map_plaats-46.png" : {
@@ -8700,15 +8700,15 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/test\/issue53-ck.js",
       "fileType" : 64
     },
-    "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-16.png" : {
+    "\/public\/levels\/forest tmp\/images\/maps\/map-20.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-16.png",
+      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-20.png",
       "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-16.png",
-      "initialSize" : 27744,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-20.png",
+      "initialSize" : 8207,
       "fileType" : 8192
     },
     "\/node_modules\/socket.io\/lib\/namespace.js" : {
@@ -8744,15 +8744,15 @@
       "initialSize" : 2721,
       "fileType" : 8192
     },
-    "\/public\/levels\/forest\/images\/sprites\/gebouw-05.png" : {
+    "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-16.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-05.png",
+      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-16.png",
       "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/gebouw-05.png",
-      "initialSize" : 3075,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-16.png",
+      "initialSize" : 27744,
       "fileType" : 8192
     },
     "\/public\/map-editor\/development-bundle\/external\/jshint.js" : {
@@ -8958,6 +8958,28 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/tmp\/uglify-hangs2-ck.js",
       "fileType" : 64
     },
+    "\/public\/map-editor\/img\/maps\/map_plaatsen-5.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/map-editor\/img\/maps\/map_plaatsen-5.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/map-editor\/img\/maps\/map_plaatsen-5.png",
+      "initialSize" : 12064,
+      "fileType" : 8192
+    },
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/array4.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/array4.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/array4-ck.js",
+      "fileType" : 64
+    },
     "\/public\/levels\/forest tmp\/images\/maps\/map-65.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -8978,28 +9000,6 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map_plaats-33.png",
       "initialSize" : 28092,
-      "fileType" : 8192
-    },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/array4.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/array4.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/unit\/compress\/expected\/array4-ck.js",
-      "fileType" : 64
-    },
-    "\/public\/map-editor\/img\/maps\/map_plaatsen-5.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/img\/maps\/map_plaatsen-5.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/map-editor\/img\/maps\/map_plaatsen-5.png",
-      "initialSize" : 12064,
       "fileType" : 8192
     },
     "\/public\/map-editor\/development-bundle\/themes\/ui-lightness\/images\/ui-bg_gloss-wave_35_f6a828_500x100.png" : {
@@ -9046,17 +9046,6 @@
       "outputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/ui\/minified\/jquery.ui.widget.min-ck.js",
       "fileType" : 64
     },
-    "\/public\/levels\/forest tmp\/images\/maps\/map-03.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-03.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-03.png",
-      "initialSize" : 2720,
-      "fileType" : 8192
-    },
     "\/public\/map-editor\/img\/img101.jpg" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -9067,6 +9056,17 @@
       "outputAbbreviatedPath" : "\/public\/map-editor\/img\/img101.jpg",
       "initialSize" : 323234,
       "fileType" : 4096
+    },
+    "\/public\/levels\/forest tmp\/images\/maps\/map-03.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-03.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest tmp\/images\/maps\/map-03.png",
+      "initialSize" : 2720,
+      "fileType" : 8192
     },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/active-x-obfuscator\/node_modules\/zeparser\/tests.js" : {
       "ignoreWasSetByUser" : 0,
@@ -9112,16 +9112,16 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/test\/BufferPool.test-ck.js",
       "fileType" : 64
     },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/testparser.js" : {
+    "\/public\/levels\/forest backup\/images\/maps\/map-44.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/testparser.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/testparser-ck.js",
-      "fileType" : 64
+      "inputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-44.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-44.png",
+      "initialSize" : 11168,
+      "fileType" : 8192
     },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/ws\/node_modules\/tinycolor\/tinycolor.js" : {
       "ignoreWasSetByUser" : 0,
@@ -9145,16 +9145,16 @@
       "initialSize" : 20137,
       "fileType" : 8192
     },
-    "\/public\/levels\/forest backup\/images\/maps\/map-44.png" : {
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/testparser.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-44.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map-44.png",
-      "initialSize" : 11168,
-      "fileType" : 8192
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/testparser.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/test\/testparser-ck.js",
+      "fileType" : 64
     },
     "\/public\/levels\/forest backup\/images\/maps\/map_plaats-47.png" : {
       "ignoreWasSetByUser" : 0,
@@ -9396,17 +9396,6 @@
       "initialSize" : 32986,
       "fileType" : 4096
     },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/lib\/vendor\/web-socket-js\/web_socket.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/lib\/vendor\/web-socket-js\/web_socket.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/lib\/vendor\/web-socket-js\/web_socket-ck.js",
-      "fileType" : 64
-    },
     "\/public\/levels\/forest backup\/images\/maps\/map_plaats-03.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -9417,6 +9406,17 @@
       "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map_plaats-03.png",
       "initialSize" : 2720,
       "fileType" : 8192
+    },
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/lib\/vendor\/web-socket-js\/web_socket.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/lib\/vendor\/web-socket-js\/web_socket.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/lib\/vendor\/web-socket-js\/web_socket-ck.js",
+      "fileType" : 64
     },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/active-x-obfuscator\/node_modules\/zeparser\/index.js" : {
       "ignoreWasSetByUser" : 0,
@@ -9429,17 +9429,6 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/active-x-obfuscator\/node_modules\/zeparser\/index-ck.js",
       "fileType" : 64
     },
-    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/active-x-obfuscator\/index.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/active-x-obfuscator\/index.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/active-x-obfuscator\/index-ck.js",
-      "fileType" : 64
-    },
     "\/public\/levels\/forest\/images\/sprites\/civilians-10.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -9450,6 +9439,17 @@
       "outputAbbreviatedPath" : "\/public\/levels\/forest\/images\/sprites\/civilians-10.png",
       "initialSize" : 499,
       "fileType" : 8192
+    },
+    "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/active-x-obfuscator\/index.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/active-x-obfuscator\/index.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/active-x-obfuscator\/index-ck.js",
+      "fileType" : 64
     },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/node_modules\/uglify-js\/tmp\/instrument.js" : {
       "ignoreWasSetByUser" : 0,
@@ -9485,6 +9485,17 @@
       "initialSize" : 11076,
       "fileType" : 8192
     },
+    "\/public\/levels\/forest backup\/images\/maps\/map_plaats-48.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map_plaats-48.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map_plaats-48.png",
+      "initialSize" : 42705,
+      "fileType" : 8192
+    },
     "\/public\/levels\/forest\/images\/maps\/map2-35.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -9506,17 +9517,6 @@
       "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/node_modules\/mime\/test-ck.js",
       "fileType" : 64
-    },
-    "\/public\/levels\/forest backup\/images\/maps\/map_plaats-48.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map_plaats-48.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/public\/levels\/forest backup\/images\/maps\/map_plaats-48.png",
-      "initialSize" : 42705,
-      "fileType" : 8192
     },
     "\/public\/levels\/forest backup\/images\/maps\/map-60.png" : {
       "ignoreWasSetByUser" : 0,
@@ -9866,15 +9866,6 @@
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/lib\/transports\/flashsocket-ck.js",
       "fileType" : 64
     },
-    "\/public\/map-editor\/development-bundle\/demos\/position\/index.html" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/demos\/position\/index.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/public\/tmp-facebook-icon-arjen.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -9885,6 +9876,15 @@
       "outputAbbreviatedPath" : "\/public\/tmp-facebook-icon-arjen.png",
       "initialSize" : 35254,
       "fileType" : 8192
+    },
+    "\/public\/map-editor\/development-bundle\/demos\/position\/index.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/map-editor\/development-bundle\/demos\/position\/index.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/public\/levels\/forest backup\/images\/maps\/map_plaats-04.png" : {
       "ignoreWasSetByUser" : 0,
@@ -10115,17 +10115,6 @@
       "initialSize" : 180,
       "fileType" : 8192
     },
-    "\/public\/map-editor\/js\/map-editor.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/public\/map-editor\/js\/map-editor.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/public\/map-editor\/js\/map-editor-ck.js",
-      "fileType" : 64
-    },
     "\/node_modules\/socket.io\/node_modules\/socket.io-client\/dist\/socket.io.min.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -10135,6 +10124,17 @@
       "outputStyle" : 0,
       "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/node_modules\/socket.io\/node_modules\/socket.io-client\/dist\/socket.io.min-ck.js",
+      "fileType" : 64
+    },
+    "\/public\/map-editor\/js\/map-editor.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/public\/map-editor\/js\/map-editor.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/public\/map-editor\/js\/map-editor-ck.js",
       "fileType" : 64
     },
     "\/public\/levels\/forest backup\/images\/maps\/map_plaats-27.png" : {
