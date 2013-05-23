@@ -25,7 +25,6 @@ $(document).ready(function(){
     sessionStorage.setItem('player-id', player.id);
 
     socket.on('disconnect', function(){
-        player.joined = false;
         document.location = '/controller/';
     });
 
@@ -106,6 +105,7 @@ $(document).ready(function(){
         $('#controller').show();
     });
 
+    
     var ppsCounter = 0;
     var previousTimer = new Date();
     setInterval(function(){
@@ -114,7 +114,7 @@ $(document).ready(function(){
         if (timePast > 1000) {
             previousTimer = time;
             var currentPps = Math.round(ppsCounter / (timePast / 1000), 2);
-            $('#message').html(currentPps + ' average PPS');
+            //$('#message').html(currentPps + ' average PPS');
             ppsCounter = 0;
         }
     }, 500);
@@ -232,9 +232,9 @@ $(document).ready(function(){
         });
     }
 
-    $('#join-game button').on('click', function(event){
+    $('#join-game').removeClass('disabled');
+    $('#join-game button').text('Join Game').on('click', function(event){
         event.preventDefault();
-
         var gameRoomInput = $('input[name=game-code]');
         var gameRoom = parseInt(gameRoomInput.val(), 10);
         if (isNaN(gameRoom) || gameRoom < 10000 || gameRoom > 99999) {

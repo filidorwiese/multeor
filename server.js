@@ -15,29 +15,32 @@ var previousTimer = new Date();
 var currentGames = {};
 var maxPlayers = 8;
 
+// PPS counter
+setInterval(function(){
+    var time = new Date();
+    var timePast = time - previousTimer;
+    if (timePast > 5000) {
+        previousTimer = time;
+        var currentPps = Math.round(ppsCounter / (timePast / 1000), 2);
+        var currentGameCounter = 0;
+        var currentPlayersCounter = 0;
+        for (var ii in currentGames) {
+            currentGameCounter++;
+            for (var oo in currentGames[ii].players) {
+                currentPlayersCounter++;
+            }
+        }
+        if (currentPlayersCounter && currentPps > 0) {
+            log('Stats: ' + currentGameCounter + ' games, ' + currentPlayersCounter + ' players, ' + currentPps + ' average PPS');
+        }
+
+        ppsCounter = 0;
+    }
+}, 1000);
+
 // Bind listeners
 io.sockets.on('connection', function(socket) {
-    setInterval(function(){
-        var time = new Date();
-        var timePast = time - previousTimer;
-        if (timePast > 5000) {
-            previousTimer = time;
-            var currentPps = Math.round(ppsCounter / (timePast / 1000), 2);
-            var currentGameCounter = 0;
-            var currentPlayersCounter = 0;
-            for (var ii in currentGames) {
-                currentGameCounter++;
-                for (var oo in currentGames[ii].players) {
-                    currentPlayersCounter++;
-                }
-            }
-            if (currentPlayersCounter) {
-                log('Stats: ' + currentGameCounter + ' games, ' + currentPlayersCounter + ' players, ' + currentPps + ' average PPS');
-            }
-
-            ppsCounter = 0;
-        }
-    }, 1000);
+    log('New connection from ' + socket.handshake.address.address + ' on socket ' + socket.id);
 
     socket.on('new-viewer', function(data){
         assignNewViewer(socket, data.viewerId, data.gameRoom);
@@ -197,7 +200,7 @@ io.sockets.on('connection', function(socket) {
         for (var ii in currentGames) {
             if (currentGames[ii].viewer == socket.id) {
                 isViewer = true;
-                log('Viewer: ' + socket.id + ' disconnected');
+                log('Viewer on socket ' + socket.id + ' disconnected');
                 socket.broadcast.to('room-' + ii).emit('game-invalid');
                 delete currentGames[ii];
             }
@@ -205,7 +208,7 @@ io.sockets.on('connection', function(socket) {
 
         // if player disconnects, delete player and emit game-reset
         if (!isViewer) {
-            log('Player: ' + socket.id + ' disconnected');
+            log('Player on socket ' + socket.id + ' disconnected');
 
             var gameRoom = false;
             for (var ii in currentGames) {
@@ -232,7 +235,7 @@ io.sockets.on('connection', function(socket) {
 });
 
 function assignNewPlayer(socket, playerId, gameRoom, playerIcon) {
-    log('New player entered game ' + socket.id + ' using playerId ' + playerId + ', gameRoom ' + gameRoom + ' and playerIcon ' + playerIcon);
+    log('New player entered game ' + socket.id + ' using playerId ' + playerId + ' and gameRoom ' + gameRoom);
 
     // Check if gameRoom exists
     if (!verifyGameRoom(gameRoom)) {
