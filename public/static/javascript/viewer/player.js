@@ -1,8 +1,9 @@
-var Player = function(context, playerId, playerIcon, playerColor, playerNumber) {
+'use strict';
 
+var Player = function(context, playerId, playerIcon, playerColor, playerNumber) {
     var self = this;
     self.props = {
-		playerId: playerId,
+        playerId: playerId,
         playerNumber: playerNumber,
         icon: false,
         score: 0,
@@ -18,7 +19,7 @@ var Player = function(context, playerId, playerIcon, playerColor, playerNumber) 
         maxZ: 150,
         color: playerColor,
         lastMoves: [],
-        meteorHeadAngle: 0,
+        meteorHeadAngle: (playerNumber * 45),
         locked: false,
         endX: 0,
         endY: 0,
@@ -26,12 +27,18 @@ var Player = function(context, playerId, playerIcon, playerColor, playerNumber) 
     };
 
     self.props.y = (playerNumber * (self.props.minZ + 18));
-    self.props.z = 150;
 
     if (playerIcon) {
-        self.loadIcon(playerIcon);
+        var image = new Image();
+        image.crossOrigin = 'Anonymous';
+        image.src = playerIcon;
+        image.onload = function() {
+            self.loadIcon(this);
+        };
+    } else {
+        self.loadIcon();
     }
-}
+};
 
 Player.prototype.draw = function(context) {
 	this.updatePosition();
@@ -48,10 +55,9 @@ Player.prototype.draw = function(context) {
         context.lineWidth = this.props.z;
 
         var lingrad2 = context.createLinearGradient(0,0, (headX - context.lineWidth / 2),0);
-        lingrad2.addColorStop(1, 'rgba(' + this.props.color + ',.8)');
+        lingrad2.addColorStop(1, 'rgba(' + this.props.color + ',1)');
         lingrad2.addColorStop(0, 'rgba(' + this.props.color + ',0)');
         context.strokeStyle = lingrad2;
-        //context.strokeStyle = 'rgba('+this.props.color[0]+','+this.props.color[1]+','+this.props.color[2]+', 1)';
         context.lineCap = 'round';
 
         context.beginPath();
@@ -60,31 +66,19 @@ Player.prototype.draw = function(context) {
         context.stroke();
 
         // Meteor head
-        context.save();
-        context.translate(headX, headY);
-        context.rotate((Math.PI / 180) * this.props.meteorHeadAngle);
-        this.props.meteorHeadAngle++;
-
         if (this.props.icon) {
-            var w = Math.floor(this.props.z * .4);
-            var h = Math.floor(this.props.z * .4);
-            var x = Math.floor((w / 2) * -1); //(0.5 + somenum) << 0;
+            context.save();
+            context.translate(headX, headY);
+            context.rotate((Math.PI / 180) * this.props.meteorHeadAngle);
+            this.props.meteorHeadAngle++;
+
+            var w = Math.floor(this.props.z * 0.6);
+            var h = Math.floor(this.props.z * 0.6);
+            var x = Math.floor((w / 2) * -1);
             var y = Math.floor((h / 2) * -1);
-            context.globalAlpha = 0.8;
-            context.drawImage(this.props.icon.image, x, y, w, h);
-        } else {
-            var playerYPadding = Math.floor(this.props.z * .2);
-            var playerXPadding = Math.floor(this.props.z * .2);
-            var playerRight = this.props.x - playerXPadding;
-            var playerLeft = this.props.x + playerXPadding;
-            var playerTop = this.props.y + playerYPadding;
-            var playerBottom = this.props.y - playerYPadding;
-
-            context.fillStyle = 'rgba(0,0,0,.8)';
-            context.fillRect(playerXPadding, playerYPadding, playerRight - playerLeft, playerBottom - playerTop);
+            context.drawImage(this.props.icon, x, y, w, h);
+            context.restore();
         }
-
-        context.restore();
     }
 };
 
@@ -92,19 +86,20 @@ Player.prototype.updatePosition = function() {
     if (this.props.locked) {
         // Adjust player to endX / endY / endZ
         var xyStep = 2;
-        var zStep = .5;
-        if (this.props.x + xyStep < this.props.endX) { this.props.x += xyStep; }
-        if (this.props.y + xyStep < this.props.endY) { this.props.y += xyStep; }
-        if (this.props.z + zStep < this.props.endZ) { this.props.z += zStep; }
+        var zStep = 1;
+        if (this.props.x < this.props.endX) { this.props.x += xyStep; }
+        if (this.props.y < this.props.endY) { this.props.y += xyStep; }
+        if (this.props.z < this.props.endZ) { this.props.z += zStep; }
 
-        if (this.props.x - xyStep > this.props.endX) { this.props.x -= xyStep; }
-        if (this.props.y - xyStep > this.props.endY) { this.props.y -= xyStep; }
-        if (this.props.z - zStep > this.props.endZ) { this.props.z -= zStep; }
+        if (this.props.x > this.props.endX) { this.props.x -= xyStep; }
+        if (this.props.y > this.props.endY) { this.props.y -= xyStep; }
+        if (this.props.z > this.props.endZ) { this.props.z -= zStep; }
         //Upon.log(this.props.playerId + ': ' + this.props.x + ', ' + this.props.y + ', ' + this.props.z);
 
     } else {
         // Adjust to player input
-        var xSpeed = ySpeed = .1;
+        var xSpeed = 0.1;
+        var ySpeed = 0.1;
     	var radians = this.props.vector[0] * (Math.PI / 180);
 
     	var zSpeed = 3;
@@ -129,26 +124,67 @@ Player.prototype.updatePosition = function() {
 
     this.props.lastMoves.push([this.props.x, this.props.y]); //, playerProps.z
     if (this.props.lastMoves.length > 10) { this.props.lastMoves.shift(); }
-}
+};
 
 Player.prototype.updateScore = function(points) {
     this.props.score += points;
 	socket.emit('update-score', {viewerId: viewerId, gameRoom: gameRoom, playerId: this.props.playerId, score: this.props.score});
-}
+};
 
 Player.prototype.lockPlayer = function() {
     this.props.locked = true;
-}
+};
 
-Player.prototype.loadIcon = function(playerIcon) {
+Player.prototype.loadIcon = function(image) {
     var self = this;
-    var image = new Image();
-    image.src = playerIcon;
-    image.onload = function() {
-        self.props.icon = {
-            width: this.width,
-            height: this.height,
-            image: this
+
+    var canvas = document.createElement('canvas');
+    var ctx = canvas.getContext('2d');
+    canvas.width = 100;
+    canvas.height = 100;
+    var r = canvas.width / 2;
+
+    if (image) {
+        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+    } else {
+        ctx.fillStyle = 'rgba(0,0,0,1)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+
+    // http://stackoverflow.com/questions/8778864/cropping-an-image-into-hexagon-shape-in-a-web-page
+    // http://jsfiddle.net/XnzP8/1/
+    // http://blog.riacode.in/2011/03/03/drawing-regular-polygons-in-html5-canvas/
+    ctx.globalCompositeOperation = 'destination-in';
+    //ctx.globalAlpha = .9;
+    self.drawPolygon(ctx, r, r, r, 8);
+
+    self.props.icon = canvas;
+};
+
+Player.prototype.drawPolygon = function(context, x, y, radius, numOfSides) {
+    var angChange = (360 / numOfSides) * (Math.PI / 180.0);
+    var prevX, prevY, firstX, firstY;
+
+    context.beginPath();
+    context.moveTo(Math.cos(angle) * radius, Math.cos(angle) * radius);
+
+    for(var i=0; i < numOfSides; i++) {
+        var angle = i * angChange;
+        prevX = x1;
+        prevY = y1;
+        var x1 = x + Math.cos(angle) * radius;
+        var y1 = y + Math.sin(angle) * radius;
+        if(i > 0) {
+            context.lineTo(x1,y1);
+        } else {
+            firstX = x1;
+            firstY = y1;
+        }
+        if(i == numOfSides-1) {
+            context.lineTo(firstX,firstY);
         }
     }
-}
+
+    context.closePath();
+    context.fill();
+};

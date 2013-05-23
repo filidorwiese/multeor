@@ -1,3 +1,5 @@
+'use strict';
+
 var socket = io.connect(window.location.hostname + ':843');
 
 $(document).ready(function(){
@@ -5,6 +7,7 @@ $(document).ready(function(){
     var viewportHeight = $(window).height();
     var player = {
 		id: sessionStorage.getItem('player-id') || Math.floor((Math.random() * 10000) + 10000),
+        gameRoom: parseInt(sessionStorage.getItem('game-room'), 10),
         angle: 0,
         length: 0,
         layer: 1,
@@ -16,22 +19,21 @@ $(document).ready(function(){
         joined: false,
         score: 0,
         color: '',
-        fresh: true
+        fresh: true,
+        facebookProfile: JSON.parse(sessionStorage.getItem('facebook-profile'))
     };
     sessionStorage.setItem('player-id', player.id);
-    var gameRoom = parseInt(sessionStorage.getItem('game-room'), 10);
-
-    // Verify gameRoom
-    socket.emit('verify-game-room', {gameRoom: gameRoom});
 
     socket.on('disconnect', function(){
-        document.location = '/';
+        player.joined = false;
+        document.location = '/controller/';
     });
 
     socket.on('game-invalid', function(data){
+        if (!player.joined) { return; }
         sessionStorage.setItem('player-id', '');
         sessionStorage.setItem('game-room', '');
-        document.location = '/';
+        document.location = '/controller/';
     });
 
 	socket.on('game-has-started', function(data){
@@ -49,7 +51,7 @@ $(document).ready(function(){
     });
 
     socket.on('game-reset', function(data){
-        playerWaitingtoJoin();
+        //document.location.reload();
     });
 
     socket.on('game-get-ready', function(data){
@@ -64,17 +66,33 @@ $(document).ready(function(){
 
     socket.on('game-end', function(data){
         Upon.log('game-end');
-
-        $('#score').html(player.score);
         player.joined = false;
+
+        $('#game-start, #controller').hide();
+        $('#game-end').show();
+
+        $('#game-end h1 span').html(player.score);
+        if (player.facebookProfile) {
+            $('#facebook-share').show().find('button').off('click').on('click', function(event){
+                event.preventDefault();
+                if ($(this).hasClass('disabled')) { return false; }
+                fbPublish(player.score, data.leaderboard, function(status){
+                    if (status) {
+                        $('#facebook-share').hide();
+                    }
+                });
+            });
+        } else {
+            $('#facebook-share').hide();
+        }
     });
 
     socket.on('update-score', function(data){
         Upon.log('update-score');
 
-        $('html,body').css({ backgroundColor: '#FFF' });
+        $('#controller').css({ backgroundColor: '#FFF' });
         setTimeout(function(){
-            $('html,body').css({ backgroundColor: 'rgba(' + player.color + ',.8)' });
+            $('#controller').css({ backgroundColor: 'rgba(' + player.color + ',1)' });
         }, 250);
 
 		player.score = data.score;
@@ -83,7 +101,9 @@ $(document).ready(function(){
 
     socket.on('update-player-color', function(data){
         player.color = data.playerColor;
-        $('html, body').css({ backgroundColor: 'rgba(' + player.color + ',.8)' });
+        $('#controller').css({ backgroundColor: 'rgba(' + player.color + ',1)' });
+        $('#game-start, #game-end').hide();
+        $('#controller').show();
     });
 
     var ppsCounter = 0;
@@ -99,23 +119,13 @@ $(document).ready(function(){
         }
     }, 500);
 
-    var playerWaitingtoJoin = function() {
-        player.joined = false;
-        $('#score').html('Click to join game');
-        $('body').on('click touchstart', function(){
-            $('body').off('click touchstart');
-            socket.emit('new-player', {playerId: player.id, gameRoom: gameRoom});
-        });
-    }
-    playerWaitingtoJoin();
-
     var emitPlayerUpdate = function() {
         if (!player.joined) { return false; }
 
         if (player.fresh) {
             socket.emit('player-update', {
     			pid: player.id,
-    			gr: gameRoom,
+    			gr: player.gameRoom,
     			v: [Math.floor(player.angle), Math.floor(player.length), player.layer]
     		});
             ppsCounter++;
@@ -126,15 +136,19 @@ $(document).ready(function(){
     };
 
     var updatePlayerXY = function(x, y) {
-        var radius = $('#leftControls').width() / 3;
-        var vector = toDegrees(x, y, radius);
+        var radius = $('#joystick').width() / 3;
+        var centerX = $('#leftControls').width() / 2;
+        var centerY = $('#leftControls').height() / 2;
+        var vector = toDegrees(x, y, centerX, centerY, radius);
+        var y = Math.sin(vector.rad) * vector.length;
+        var x = Math.cos(vector.rad) * vector.length;
 
         player.angle = vector.deg;
         player.length = vector.length;
 
-        $('#joystick').width(vector.length).css({
-            '-webkit-transform': 'rotate(' + vector.deg + 'deg)',
-            '-ms-transform': 'rotate(' + vector.deg + 'deg)'
+        $('#stick').css({
+            left: x,
+            top: y
         });
 
         player.fresh = true;
@@ -145,17 +159,20 @@ $(document).ready(function(){
         player.fresh = true;
     };
 
-    var toDegrees = function(x, y, radius) {
+    var toDegrees = function(x, y, centerX, centerY, radius) {
         var degrees = 0;
-        var overstaand = y - radius;
-        var aanliggend = x - radius;
+        var overstaand = y - centerY;
+        var aanliggend = x - centerX;
         var schuin = Math.sqrt(Math.pow(overstaand,2) + Math.pow(aanliggend,2));
         var sinJ = overstaand/schuin;
         var cosJ = aanliggend/schuin;
 
+        var radian = Math.asin(sinJ);
+
         degrees = Math.asin(sinJ)*180/Math.PI;
         if(aanliggend < 0) {
             degrees = 180 - degrees;
+            radian = Math.PI - radian;
         }
 
         if(schuin > radius) {
@@ -164,66 +181,85 @@ $(document).ready(function(){
             aanliggend = sinJ * radius;
         }
 
-        return {'deg': degrees, 'length': schuin};
+        return {'deg': degrees, 'rad': radian, 'length': schuin};
     };
-
 
     if (window.navigator.msPointerEnabled) {
         //http://blogs.msdn.com/b/ie/archive/2011/09/20/touch-input-for-ie10-and-metro-style-apps.aspx
-        /*$('#leftControls').on('MSPointerDown', function(event) {
-            event.preventDefault();
-        });*/
         $('#leftControls').on('MSPointerMove', function(event) {
             event.preventDefault();
-
-            //$('#message').html(event.originalEvent.clientX + '!');
             var x = (event.originalEvent.clientX.toFixed(0) - $(this).offset().left);
             var y = (event.originalEvent.clientY.toFixed(0) - $(this).offset().top);
             updatePlayerXY(x, y);
         });
         $('#leftControls').on('MSPointerUp', function(event) {
-            $('#joystick').animate({'width': 5}, 400);
+            $('#stick').animate({left:0, top: 0}, 250);
         });
-        $('#rightControls #button').on('MSPointerDown', function(event) {
+        $('#rightControls #boost').on('MSPointerDown', function(event) {
             event.preventDefault();
 
             updatePlayerZ(3);
             $(this).toggleClass('pressed');
         });
-        $('#rightControls #button').on('MSPointerUp', function(event) {
+        $('#rightControls #boost').on('MSPointerUp', function(event) {
             event.preventDefault();
 
             updatePlayerZ(1);
             $(this).toggleClass('pressed');
         });
     } else {
-        /*$('#leftControls').on('touchstart', function(event) {
-            event.preventDefault();
-        });*/
         $('#leftControls').on('touchmove', function(event) {
             event.preventDefault();
 
-            var x = (event.originalEvent.targetTouches[0].clientX - $(this).offset().left);
-            var y = (event.originalEvent.targetTouches[0].clientY - $(this).offset().top);
+            var x = (event.originalEvent.targetTouches[0].clientX);
+            var y = (event.originalEvent.targetTouches[0].clientY);
             updatePlayerXY(x, y);
         });
         $('#leftControls').on('touchend', function(event) {
-    		$('#joystick').animate({'width': 5}, 400);
+            $('#stick').animate({left:0, top: 0}, 250);
         });
-        $('#rightControls #button').on('touchstart', function(event) {
+        $('#rightControls').on('touchstart', function(event) {
             event.preventDefault();
 
             updatePlayerZ(3);
-            $(this).toggleClass('pressed');
+            $('#boostBg').addClass('pressed');
         });
-        $('#rightControls #button').on('touchend', function(event) {
+        $('#rightControls').on('touchend', function(event) {
             event.preventDefault();
 
             updatePlayerZ(1);
-            $(this).toggleClass('pressed');
+            $('#boostBg').removeClass('pressed');
         });
     }
+
+    $('#join-game button').on('click', function(event){
+        event.preventDefault();
+
+        var gameRoomInput = $('input[name=game-code]');
+        var gameRoom = parseInt(gameRoomInput.val(), 10);
+        if (isNaN(gameRoom) || gameRoom < 10000 || gameRoom > 99999) {
+            alert('Not a valid code');
+            gameRoomInput.val('').focus();
+        } else {
+            sessionStorage.setItem('game-room', gameRoom);
+            player.gameRoom = gameRoom;
+            var playerIcon = player.facebookProfile ? player.facebookProfile.picture.data.url : false;
+            socket.emit('new-player', {playerId: player.id, gameRoom: gameRoom, playerIcon: playerIcon});
+        }
+    });
+
+    $('#game-reset button').on('click', function(event){
+        event.preventDefault();
+        document.location.reload();
+    });
+
+    // Insert game-code if available in storage
+    if(player.gameRoom) { $('input[name=game-code]').val(player.gameRoom); }
+    $('input[name=game-code]').focus();
+
+    // Show Facebook icon if connected
+    if (player.facebookProfile) {
+        $('.buddy-icon').append('<img src="' + player.facebookProfile.picture.data.url + '" /><div>Playing as<br />' + player.facebookProfile.name + '</div>').show();
+    }
+
 });
-
-
-

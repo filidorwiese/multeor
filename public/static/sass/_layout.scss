@@ -1,0 +1,118 @@
+/*
+* 960 responsive grid using inline-block instead of floating
+*/
+
+.row {
+    width:960px;
+    margin: 0 auto;
+    max-width: 100%;
+    list-style: none;
+    letter-spacing: -.25em;  /* Fix inline-block weirdness */
+    //border-top:1px solid blue;
+    overflow-x:visible;
+
+    .row {
+        width: auto;
+        max-width: none;
+        min-width: 0;
+        margin: 0;
+       }
+
+    .columns {
+        $grid_column: 6.251%;
+        $grid_gutter: 1.03%;
+
+        display: inline-block;
+        vertical-align:top;
+        margin-left:$grid_gutter;
+        margin-right:$grid_gutter;
+        letter-spacing: 0; /* And restore our letter spacing. */
+        //border-top:1px solid orange;
+
+        &.one {
+            width: ($grid_column * 1);
+            }
+        &.two {
+            width: (($grid_column * 2) + $grid_gutter * 2);
+            }
+        &.three {
+            width: (($grid_column * 3) + $grid_gutter * 4);
+            }
+        &.four {
+            width: (($grid_column * 4) + $grid_gutter * 6);
+            }
+        &.five {
+            width: (($grid_column * 5) + $grid_gutter * 8);
+            }
+        &.six {
+            width: (($grid_column * 6) + $grid_gutter * 10);
+            }
+        &.seven {
+            width: (($grid_column * 7) + $grid_gutter * 12);
+            }
+        &.eight {
+            width: (($grid_column * 8) + $grid_gutter * 14);
+            }
+        &.nine {
+            width: (($grid_column * 9) + $grid_gutter * 16);
+            }
+        &.ten {
+            width: (($grid_column * 10) + $grid_gutter * 18);
+            }
+        &.eleven {
+            width: (($grid_column * 11) + $grid_gutter * 20);
+            }
+        &.twelve {
+            width: (($grid_column * 12) + $grid_gutter * 22);
+            }
+        }
+
+    .columns .columns {
+        $grid_column: 6.42%;
+        $grid_gutter: 1.03%;
+
+        margin-left:($grid_gutter * 2);
+        margin-right:0;
+
+        &:first-child {
+            margin-left:0;
+            }
+
+        &.one {
+            width: ($grid_column * 1);
+            }
+        &.two {
+            width: (($grid_column * 2) + $grid_gutter * 2);
+            }
+        &.three {
+            width: (($grid_column * 3) + $grid_gutter * 4);
+            }
+        &.four {
+            width: (($grid_column * 4) + $grid_gutter * 6);
+            }
+        &.five {
+            width: (($grid_column * 5) + $grid_gutter * 8);
+            }
+        &.six {
+            width: (($grid_column * 6) + $grid_gutter * 10);
+            }
+        &.seven {
+            width: (($grid_column * 7) + $grid_gutter * 12);
+            }
+        &.eight {
+            width: (($grid_column * 8) + $grid_gutter * 14);
+            }
+        &.nine {
+            width: (($grid_column * 9) + $grid_gutter * 16);
+            }
+        &.ten {
+            width: (($grid_column * 10) + $grid_gutter * 18);
+            }
+        &.eleven {
+            width: (($grid_column * 11) + $grid_gutter * 20);
+            }
+        &.twelve {
+            width: (($grid_column * 12) + $grid_gutter * 22);
+            }
+        }
+    }

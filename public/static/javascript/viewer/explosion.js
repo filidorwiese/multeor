@@ -1,3 +1,5 @@
+'use strict';
+
 // http://www.gameplaypassion.com/blog/explosion-effect-html5-canvas/
 var Explosion = function(x, y, zIndex, scale, color){
 	var minSize = 15;
@@ -9,7 +11,7 @@ var Explosion = function(x, y, zIndex, scale, color){
 	var maxScaleSpeed = 4.0;
 	var newParticles = [];
 
-	for (var angle=0; angle<360; angle += Math.round(360/count)) {
+	for (var angle=0; angle < 360; angle += Math.round(360/count)) {
 		var particle = new ExplosionParticle();
 
 		particle.x = x;
@@ -32,7 +34,7 @@ var Explosion = function(x, y, zIndex, scale, color){
 	}
 
 	return newParticles;
-}
+};
 
 function ExplosionParticle() {
 	this.scale = 1;
@@ -43,7 +45,6 @@ function ExplosionParticle() {
 	this.velocityX = 0;
 	this.velocityY = 0;
 	this.scaleSpeed = 0.5;
-	this.dead = false;
 	this.zIndex = 0;
 
 	this.update = function(ms) {
@@ -51,7 +52,6 @@ function ExplosionParticle() {
 
 		if (this.scale < 0) {
 			this.scale = 0;
-			//this.dead = true;
 		}
 
 		this.x += this.velocityX * ms/1000.0;

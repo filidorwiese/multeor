@@ -1,19 +1,28 @@
 $(document).ready(function(){
 
-    // tijdelijk voor debugging
-    $('form input[name=game]').val(sessionStorage.getItem('game-room'));
+    sessionStorage.clear();
 
-    // 
-    $('form').on('submit', function(event){
-        event.preventDefault();
-        var gameRoomInput = $(this).find('input');
-        var gameRoom = parseInt(gameRoomInput.val(), 10);
-        if (isNaN(gameRoom) || gameRoom < 10000 || gameRoom > 99999) {
-            alert('Not a valid code');
-            gameRoomInput.val('').focus();
+    $('#play-fb').on('click', function(event) {
+        if (fbLoggedIn()) {
+            fbGetProfile(function(){
+                document.location = '/controller/';
+            });
         } else {
-            sessionStorage.setItem('game-room', gameRoom);
-            document.location = '/controller/';
+            fbLogin(function(status){
+                if (status) {
+                    fbGetProfile(function(){
+                        document.location = '/controller/';
+                    });
+                } else {
+                    alert('Could not connect to Facebook');
+                }
+            });
         }
     });
+
+    $('#play-anon').on('click', function(event) {
+        event.preventDefault();
+        document.location = '/controller/';
+    });
+
 });

@@ -1,3 +1,5 @@
+'use strict';
+
 var Destroyable = function(sprite, image, x, y, z, destroyedColorIndex, currentSpriteFrame){
     this.props = {
         sprite: sprite,
@@ -10,26 +12,15 @@ var Destroyable = function(sprite, image, x, y, z, destroyedColorIndex, currentS
         destroyedColorIndex: destroyedColorIndex,
         currentSpriteFrame: currentSpriteFrame
     };
-}
+};
 
 Destroyable.prototype.draw = function(context, bgModulus) {
     // Don't draw when not in view
     if (this.props.x < (this.props.frameWidth * -1) || this.props.x > context.canvas.width) { return false; }
 
-    //drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
     if (this.props.destroyedColorIndex) {
         // When destroyed, show appropriate color
         context.drawImage(this.props.image, (this.props.frameWidth * (this.props.destroyedColorIndex - 1)), this.props.frameHeight, this.props.frameWidth, this.props.frameHeight, this.props.x, this.props.y, this.props.frameWidth, this.props.frameHeight);
-
-        // Draw points on object
-        /*
-        if (this.props.sprite.score > 0) {
-            context.save();
-            context.font = '20px ablas_altbold';
-            context.fillStyle = '#000000';
-            context.fillText(this.props.sprite.score.toString(), this.props.x + (this.props.frameWidth / 2), this.props.y);
-            context.restore();
-        }*/
     } else {
         // If not destroyed, draw sprite (with or without animation)
         if (this.props.sprite.animate) {
@@ -46,33 +37,33 @@ Destroyable.prototype.collides = function(players, bgModulus) {
     if (this.props.x < (this.props.frameWidth * -1) || this.props.x > canvas.width) { return false; }
 
     var weirdnessOffset = 100;
-    var houseLeft = this.props.x;
-    var houseRight = houseLeft + this.props.frameWidth;
-    var houseTop = this.props.y;
-    var houseBottom = houseTop + this.props.frameHeight;
-    var houseZmin = this.props.z - 20;
-    var houseZmax = this.props.z + 20;
+    var entityLeft = Math.floor(this.props.x);
+    var entityRight = Math.floor(this.props.x + this.props.frameWidth);
+    var entityTop = Math.floor(this.props.y);
+    var entityBottom = Math.floor(this.props.y + this.props.frameHeight);
+    var entityZmin = Math.floor(this.props.z - 20);
+    var entityZmax = Math.floor(this.props.z + 20);
 
     // Uncomment to debug collision detection
     //context.save();
     //context.fillStyle = 'rgba(255,0,0,1)';
-    //context.fillRect(houseLeft, houseTop, houseRight - houseLeft, houseBottom - houseTop);
+    //context.fillRect(entityLeft, entityTop, entityRight - entityLeft, entityBottom - entityTop);
 
-    for(player in players) {
-        var playerYPadding = players[player].props.z * .2;
-        var playerXPadding = players[player].props.z * .2;
-        var playerLeft = players[player].props.x + playerXPadding + weirdnessOffset;
-        var playerRight = players[player].props.x - playerXPadding + weirdnessOffset;
-        var playerTop = players[player].props.y + playerYPadding;
-        var playerBottom = players[player].props.y - playerYPadding;
-        var playerZ = players[player].props.z;
+    for(var player in players) {
+        var playerYPadding = Math.floor(players[player].props.z * 0.3);
+        var playerXPadding = Math.floor(players[player].props.z * 0.3);
+        var playerLeft = Math.floor(players[player].props.x + playerXPadding + weirdnessOffset);
+        var playerRight = Math.floor(players[player].props.x - playerXPadding + weirdnessOffset);
+        var playerTop = Math.floor(players[player].props.y + playerYPadding);
+        var playerBottom = Math.floor(players[player].props.y - playerYPadding);
+        var playerZ = Math.floor(players[player].props.z);
 
         // Uncomment to debug collision detection
         //context.fillRect(playerLeft, playerTop, playerRight - playerLeft, playerBottom - playerTop);
 
-        if (playerZ >= houseZmin && playerZ <= houseZmax) {
-            if (playerRight >= houseLeft && playerLeft <= houseRight) {
-                if (playerTop >= houseTop && playerBottom <= houseBottom) {
+        if (playerZ >= entityZmin && playerZ <= entityZmax) {
+            if (playerLeft >= entityLeft && playerRight <= entityRight) {
+                if (playerTop >= entityTop && playerBottom <= entityBottom) {
                     return player;
                 }
             }
@@ -82,4 +73,4 @@ Destroyable.prototype.collides = function(players, bgModulus) {
     //context.restore();
 
     return false;
-}
+};

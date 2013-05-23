@@ -5,10 +5,11 @@ Upon.require({
         'third-party/howler.min.js'
     ],
     'title-screen-production': [
-        'title-screen/title-screen.js'
+        'title-screen.min.js'
     ],
     'title-screen-development': [
-        'title-screen.min.js'
+        'title-screen/title-screen.js',
+        'controller/facebook.js'
     ],
     'viewer-production': [
         'viewer.min.js'
@@ -25,6 +26,7 @@ Upon.require({
         'controller.min.js'
     ],
     'controller-development': [
-        'controller/controller.js'
+        'controller/controller.js',
+        'controller/facebook.js'
     ]
 });

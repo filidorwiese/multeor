@@ -1,26 +1,43 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Multeor</title>
+    <title>Multeor - a multiplayer webgame</title>
     <meta charset="UTF-8" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1, initial-scale=1, user-scalable=0">
     <meta name="robots" content="noindex, follow" />
-    <!-- FIXME: ios home screen icons -->
-    <link rel='stylesheet' href='/multeor/public/static/css/controller.css' />
-    <script src="/multeor/public/static/javascript/Upon.min.js" data-debug="true" data-config="/multeor/public/static/javascript/Upon.config.js" data-set="third-party controller-development"></script>
+    <link rel="canonical" href="http://multeor.com/" />
+    <link rel="stylesheet" href="/static/css/controller.css" />
+    <script src="/static/javascript/Upon.min.js" data-debug="true" data-config="/static/javascript/Upon.config.js" data-set="third-party controller-development"></script>
 </head>
 
 <body>
 
+    <div id="fb-root"></div>
+
+    <div id="game-start">
+          <div class="buddy-icon clearfix"></div>
+          <p><label>Insert code: <input type="tel" name="game-code" value="" maxlength="5" placeholder="eg. 654321" /></label></p>
+          <p><span id="join-game" class="button"><button>Join Game</button></span></p>
+    </div>
+
+     <div id="game-end">
+          <h1>Your score: <span></span></h1>
+          <p><span id="facebook-share" class="button disabled"><button>Share score on facebook</button></span></p>
+          <p><span id="game-reset" class="button"><button>Play again</button></span></p>
+    </div>
+
     <div id="controller">
         <div id="message"></div>
-        <div id="score"><span></span></div>
+        <div id="score"><span>128</span></div>
         <div id="leftControls">
-            <div id="joystick"></div>
+            <div id="joystick">
+                <div id="stick"></div>
+            </div>
         </div>
         <div id="rightControls">
-            <div id="button"></div>
+            <div id="boost"></div>
+            <div id="boostBg"></div>
         </div>
     </div>
 
@@ -32,5 +49,6 @@
         ga('create', 'UA-40099645-1', 'multeor.com');
         ga('send', 'pageview');
     </script>
+
 </body>
 </html>

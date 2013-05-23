@@ -162,6 +162,8 @@ function addSprite(id, path, top, left, layer, destroyable, animate, score, audi
 		.data('score', score)
 		.data('audio', audio);
 
+	sprite.css({ zIndex: layer });
+
 	img.onload = function() {
 		sprite.data('orig-width', img.width).data('orig-height', img.height);
 		sprite.width(img.width).height(img.height)
@@ -374,8 +376,11 @@ function setSprites() {
 }
 
 $('body').on('keydown', function (event) {
+
 	if (event.which == 8) { // backspace, prevent going back on mac
-		event.preventDefault();
+		if (!$('input').is(':focus')) {
+			event.preventDefault();
+		}
 	}
 
 	var selectedSprite = $('.sprite--selected');
