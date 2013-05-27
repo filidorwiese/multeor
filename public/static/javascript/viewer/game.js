@@ -199,7 +199,7 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
             var x = (ii * 1000) - bgModulus + spriteObject.left;
             var y = spriteObject.top;
             var z = spriteObject.layer * 50;
-            var zIndex = entitiesOffset + (spriteObject.layer * 1000);
+            var spriteZindex = entitiesOffset + (spriteObject.layer * 1000);
             var spriteImage = this.getImage(spriteObject.path);
 
             // Only render/draw/collide sprites that are actually within view
@@ -209,11 +209,11 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
             spriteObject.left -= (spriteObject.layer - 1) * 1.25;
 
             // Draw entity
-            entities[zIndex] = new Destroyable(spriteObject, spriteImage, x, y, z, destroyedColorIndex, currentSpriteFrame);
+            entities[spriteZindex] = new Destroyable(spriteObject, spriteImage, x, y, z, destroyedColorIndex, currentSpriteFrame);
 
             // Do collision detection
             if (spriteObject.destroyable && !destroyedColorIndex) {
-                var playerCollidedId = entities[zIndex].collides(players, bgModulus);
+                var playerCollidedId = entities[spriteZindex].collides(players, bgModulus);
 
                 if (playerCollidedId > 0) {
                     // Remember destroyed state
@@ -226,10 +226,10 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
                         players[playerCollidedId].updateScore(spriteObject.score);
 
                         // Create explosion
-                        var zIndex = entitiesOffset + (spriteObject.layer * 1000) + 200;
+                        var explosionZindex = entitiesOffset + (spriteObject.layer * 1000) + 200;
                         var scale = 5 * parseInt(spriteObject.layer, 10);
                         var yOffset = y - (players[playerCollidedId].props.z / 2) * -1;
-                        var newParticles = Explosion(x - 50, yOffset, zIndex, scale, playerCollidedColor);
+                        var newParticles = Explosion(x - 50, yOffset, explosionZindex, scale, playerCollidedColor);
                         this.props.explosions = this.props.explosions.concat(newParticles);
                     }
 
@@ -245,9 +245,14 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
     }
 
     // Render Players
+    var playerZindex, shadowZindex;
     for (var player in players) {
-        var zIndex = (players[player].props.vector[2] * 1000) + 900 + players[player].props.playerNumber;
-        entities[zIndex] = players[player];
+        playerZindex = (players[player].props.vector[2] * 1000) + 900 + players[player].props.playerNumber;
+        entities[playerZindex] = players[player];
+
+        // Render Players shadows
+        shadowZindex = players[player].props.playerNumber + 1500;
+        entities[shadowZindex] = new Shadows(players[player]);
     }
 
     // Render explosions

@@ -101,6 +101,17 @@
             }
         }
 
+        .destroy-container {
+            display:none;
+            text-align: center;
+            position: absolute;
+            z-index: 1000;
+            width:100%;
+            overflow: hidden;
+            font-size:170px;
+            margin-top:215px;
+        }
+
         canvas {
             position: relative;
             top: 0;
@@ -116,7 +127,7 @@
             float:left;
             width:30px;
             height:30px;
-            background:url(/static/images/audio-toggle.png) right top no-repeat;
+            background:url(../images/audio-toggle.png) right top no-repeat;
 
             &.is-muted {
                 background-position:left top;
@@ -135,7 +146,21 @@
     }
 }
 
-
 #mobile-container {
     display:none;
+}
+
+#error {
+    display:none;
+    position: relative;
+    text-align: center;
+    border-top: 19px solid black;
+    height:300px;
+    padding-top:300px;
+    background:#272d33 url(../images/multeor_website-fout.png) center center no-repeat;
+    font-size:20px;
+
+    a {
+        color:#FFF;
+    }
 }

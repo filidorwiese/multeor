@@ -20,6 +20,7 @@ Upon.require({
         'viewer/player.js',
         'viewer/destroyable.js',
         'viewer/explosion.js',
+        'viewer/shadows.js',
         'viewer/viewer.js'
     ],
     'controller-production': [

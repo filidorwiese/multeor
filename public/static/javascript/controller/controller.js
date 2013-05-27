@@ -28,6 +28,16 @@ $(document).ready(function(){
         document.location = '/controller/';
     });
 
+    socket.on('game-has-started', function(data){
+        //alert('Game full');
+        $('#score').html('Game started');
+    });
+
+    socket.on('game-full', function(data){
+        //alert('Game full');
+        $('#score').html('Game full');
+    });
+
     socket.on('game-invalid', function(data){
         if (!player.joined) { return; }
         sessionStorage.setItem('player-id', '');
@@ -35,18 +45,10 @@ $(document).ready(function(){
         document.location = '/controller/';
     });
 
-	socket.on('game-has-started', function(data){
-        $('#score').html('Sorry, game already started');
-    });
-
-    socket.on('game-full', function(data){
-        $('#score').html('Too many players');
-    });
-
     socket.on('player-joined', function(data){
         player.joined = true;
         emitPlayerUpdate();
-        $('#score').html('Waiting for other players');
+        $('#score').html('Press start');
     });
 
     socket.on('game-reset', function(data){
@@ -105,7 +107,7 @@ $(document).ready(function(){
         $('#controller').show();
     });
 
-    
+
     var ppsCounter = 0;
     var previousTimer = new Date();
     setInterval(function(){
