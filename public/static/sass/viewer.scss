@@ -1,7 +1,7 @@
 @import "compass/reset";
 @import "compass/css3";
-@import "_font";
 @import "_vars";
+@import "_font";
 @import "_layout";
 @import "_base";
 
@@ -10,7 +10,7 @@
         border-top: 19px solid black;
         background: #272d33;
         position: relative;
-        height:600px;
+        height:619px;
 
         .instructions-container {
             text-align: center;
@@ -155,10 +155,10 @@
     position: relative;
     text-align: center;
     border-top: 19px solid black;
-    height:300px;
     padding-top:300px;
     background:#272d33 url(../images/multeor_website-fout.png) center center no-repeat;
     font-size:20px;
+    height:619px;
 
     a {
         color:#FFF;

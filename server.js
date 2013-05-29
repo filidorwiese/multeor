@@ -50,13 +50,6 @@ io.sockets.on('connection', function(socket) {
         assignNewPlayer(socket, data.playerId, data.gameRoom, data.playerIcon);
     });
 
-    socket.on('verify-game-room', function(data){
-        if (!verifyGameRoom(data.gameRoom)) {
-			log('Verify-game-room: kickPlayer');
-			kickClient(socket); return false;
-		}
-    });
-
     // Controller broadcasting user-input to viewer
     socket.on('player-update', function(data){
         //log('player-update: ' + JSON.stringify(data));
@@ -160,7 +153,7 @@ io.sockets.on('connection', function(socket) {
         var leaderboardImage = false;
         if (data.leaderboard) {
             var leaderboardPath = __dirname + '/public/leaderboards/';
-            var leaderboardImage = 'leaderboard_' + data.gameRoom + '_' + new Date().getTime() + '.png';
+            var leaderboardImage = 'leaderboard_' + new Date().getTime() + '_' + data.gameRoom + '.png';
             var image = data.leaderboard.replace(/^data:image\/\w+;base64,/, '');
             var buf = new Buffer(image, 'base64');
             fs.writeFile(leaderboardPath + leaderboardImage, buf);
@@ -239,8 +232,8 @@ function assignNewPlayer(socket, playerId, gameRoom, playerIcon) {
 
     // Check if gameRoom exists
     if (!verifyGameRoom(gameRoom)) {
-		log('AssignNewPlayer: kickPlayer');
-		kickClient(socket); return;
+        io.sockets.socket(socket.id).emit('game-not-available');
+        return false;
 	}
 
     // If player already exists, return
@@ -250,7 +243,6 @@ function assignNewPlayer(socket, playerId, gameRoom, playerIcon) {
 
     // Game already started
     if (currentGames[gameRoom].started) {
-		// FIXME
         io.sockets.socket(socket.id).emit('game-has-started');
         return false;
     }

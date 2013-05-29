@@ -1,0 +1,214 @@
+@import "compass/reset";
+@import "compass/css3";
+@import "_vars";
+@import "_font";
+@import "_layout";
+@import "_base";
+
+#header {
+    border-top: 19px solid black;
+    background: #272d33;
+
+    .heading {
+        font-size: 30px;
+        text-align: center;
+        padding-bottom:40px;
+
+        h1 {
+            font-size: 90px;
+            text-align: center;
+            margin: 30px 0;
+
+            @media screen and (min-width: $mobileMax) {
+                font-size: 200px;
+            }
+        }
+
+        h2 {
+            margin-bottom:35px;
+        }
+
+        .introduction {
+            width:90%;
+            margin:0 auto;
+        }
+    }
+}
+@media screen and (max-width: $mobileMax) {
+    #header {
+        .heading {
+            h1 {
+                font-size:60px;
+                margin-bottom:15px;
+            }
+
+            h2, .introduction {
+                font-size:20px;
+                margin-bottom:15px;
+            }
+        }
+    }
+}
+
+#about {
+    background-color:#3d454d;
+    font-size: 16px;
+    padding:50px 0;
+    font-size: 16px;
+    line-height:22px;
+
+    h3 {
+        font-size:30px;
+        margin-bottom:30px;
+    }
+
+    p {
+        margin-bottom:30px;
+    }
+
+    .inbetween-graphic {
+        display:none;
+        background: url(../images/about-inbetween-graphic.png) center top no-repeat;
+        height: 80px;
+        width:90%;
+        margin-bottom:10px;
+        background-size:contain;
+    }
+
+    ul.buddies {
+        width:360px;
+        margin:0 auto;
+        margin-bottom:200px;
+
+        li {
+            display:inline-block;
+
+            a {
+                display: inline-block;
+                text-indent:100%;
+                overflow:hidden;
+                white-space:nowrap;
+                width:85px;
+                height:88px;
+                margin-right: 45px;
+                background-image:url(../images/about-buddies.png);
+                background-repeat: no-repeat;
+
+                &.dasblitz-icon {
+                    background-position: 0px 0px;
+                }
+
+                &.fili-icon {
+                    background-position:-85px 0px;
+                }
+
+                &.avth-icon {
+                    background-position:-170px 0px;
+                    margin-right: 0px;
+                }
+            }
+        }
+    }
+
+    .info-graphic {
+        background: url(../images/sprite.png) center 5px no-repeat;
+        height:240px;
+    }
+}
+@media screen and (max-width: $mobileMax) {
+    #about {
+        padding:30px 0;
+
+        ul.buddies {
+            margin-bottom:0;
+            width:230px;
+
+            li a {
+                width:66px;
+                height:69px;
+                margin-right:10px;
+                background-image:url(../images/about-buddies-small.png) !important;
+
+                &.dasblitz-icon {
+                    background-position: 0px 0px;
+                }
+
+                &.fili-icon {
+                    background-position:-66px 0px;
+                }
+
+                &.avth-icon {
+                    background-position:-133px 0px;
+                }
+            }
+        }
+
+        .inbetween-graphic {
+            display:block;
+        }
+
+        .info-graphic {
+            display:none;
+        }
+    }
+}
+
+#requirements {
+    background-color:#272d33;
+    padding:60px 0;
+    font-size: 16px;
+    line-height:22px;
+
+    h3 {
+        font-size:30px;
+        margin-bottom:30px;
+    }
+
+    p {
+        margin-bottom:30px;
+    }
+
+    ul {
+        margin-bottom:30px;
+
+        li {
+            list-style-type: disc;
+            margin-left:20px;
+        }
+    }
+
+    .inbetween-graphic {
+        background: url(../images/about-inbetween-graphic.png) center top no-repeat;
+        height: 199px;
+        margin-bottom:65px;
+        background-size:contain;
+    }
+
+    #play-game {
+        margin-left:60px;
+        margin-top:60px;
+    }
+}
+@media screen and (max-width: $mobileMax) {
+    #requirements {
+        padding:30px 0;
+
+        .inbetween-graphic {
+            display:none;
+        }
+
+        #play-game {
+            margin:0 0 0 40px !important;
+        }
+
+        .button button {
+            font-size:20px;
+        }
+    }
+}
+
+.footer {
+    padding-top:100px;
+    height:216px;
+    background: #191f26;
+}

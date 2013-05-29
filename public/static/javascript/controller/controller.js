@@ -25,34 +25,34 @@ $(document).ready(function(){
     sessionStorage.setItem('player-id', player.id);
 
     socket.on('disconnect', function(){
-        document.location = '/controller/';
+        sessionStorage.setItem('player-id', '');
+        sessionStorage.setItem('game-room', '');
+        document.location.reload();
     });
 
     socket.on('game-has-started', function(data){
-        //alert('Game full');
-        $('#score').html('Game started');
+        $('#error-message').html('Unable to join, game already started');
     });
 
     socket.on('game-full', function(data){
-        //alert('Game full');
-        $('#score').html('Game full');
+        $('#error-message').html('Unable to join, game is full');
+    });
+
+    socket.on('game-not-available', function(data){
+        sessionStorage.setItem('game-room', '');
+        $('#error-message').html('Game code invalid (2)');
     });
 
     socket.on('game-invalid', function(data){
         if (!player.joined) { return; }
-        sessionStorage.setItem('player-id', '');
         sessionStorage.setItem('game-room', '');
-        document.location = '/controller/';
+        document.location.reload();
     });
 
     socket.on('player-joined', function(data){
         player.joined = true;
         emitPlayerUpdate();
-        $('#score').html('Press start');
-    });
-
-    socket.on('game-reset', function(data){
-        //document.location.reload();
+        $('#score').html('Press Start!');
     });
 
     socket.on('game-get-ready', function(data){
@@ -73,19 +73,14 @@ $(document).ready(function(){
         $('#game-end').show();
 
         $('#game-end h1 span').html(player.score);
-        if (player.facebookProfile) {
-            $('#facebook-share').show().find('button').off('click').on('click', function(event){
-                event.preventDefault();
-                if ($(this).hasClass('disabled')) { return false; }
-                fbPublish(player.score, data.leaderboard, function(status){
-                    if (status) {
-                        $('#facebook-share').hide();
-                    }
-                });
+        $('#facebook-share').find('button').off('click').on('click', function(event){
+            event.preventDefault();
+            fbPublish(player.score, 'http://game.multeor.com/static/images/opengraph-200x120.png', function(status){
+                if (status) {
+                    $('#facebook-share').hide();
+                }
             });
-        } else {
-            $('#facebook-share').hide();
-        }
+        });
     });
 
     socket.on('update-score', function(data){
@@ -106,7 +101,6 @@ $(document).ready(function(){
         $('#game-start, #game-end').hide();
         $('#controller').show();
     });
-
 
     var ppsCounter = 0;
     var previousTimer = new Date();
@@ -240,7 +234,7 @@ $(document).ready(function(){
         var gameRoomInput = $('input[name=game-code]');
         var gameRoom = parseInt(gameRoomInput.val(), 10);
         if (isNaN(gameRoom) || gameRoom < 10000 || gameRoom > 99999) {
-            alert('Not a valid code');
+            $('#error-message').html('Game code invalid (1)');
             gameRoomInput.val('').focus();
         } else {
             sessionStorage.setItem('game-room', gameRoom);

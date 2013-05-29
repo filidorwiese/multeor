@@ -116,3 +116,18 @@
             }
         }
     }
+
+
+@media screen and (max-width: $mobileMax) {
+    .row {
+        padding:10px;
+    }
+    .row .columns {
+        display: block;
+        width: auto !important;
+
+        .columns {
+            margin:0 !important;
+        }
+    }
+}

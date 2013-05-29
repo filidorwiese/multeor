@@ -1,4 +1,8 @@
 
+* {
+    @include box-sizing(border-box);
+    }
+
 html, body, #desktop-container {
     padding:0;
     margin:0;
@@ -17,13 +21,21 @@ p {
     margin-bottom:10px;
 }
 
+a {
+    color:#FFF;
+    text-decoration: underline;
+
+    &:hover {
+        color:#FFF;
+    }
+}
+
 .button {
     background: #b6a300;
     position: relative;
     border-bottom: 5px solid #b6a300;
     display: inline-block;
     @include border-radius(5px);
-
     button {
         background: #ffe400;
         border: none;
@@ -38,6 +50,7 @@ p {
         .button-sub {
             display: block;
             font-size: 14px;
+            line-height:1;
         }
     }
 
@@ -62,12 +75,6 @@ p {
         }
     }
 }
-@media screen and (max-width: 960px) {
-    .button button {
-        font-size:20px;
-        padding:10px 10px;
-    }
-}
 
 
 .wrapper {
@@ -86,7 +93,7 @@ p {
 
 .footer {
     position: relative;
-    height: 60px;
+    height: 99px;
     z-index: 1000;
     border-bottom: 19px solid black;
     padding-bottom: 20px;
@@ -108,13 +115,17 @@ p {
                 text-indent:100%;
                 overflow:hidden;
                 white-space:nowrap;
+                opacity: 0.2;
+
+                &:hover {
+                    opacity:1;
+                }
             }
 
             .avth-logo {
                 background: url(../images/sprite.png) 0px -217px no-repeat;
                 width: 49px;
                 height: 49px;
-                opacity: 0.2;
             }
 
             .dasblitz-logo {
@@ -122,7 +133,6 @@ p {
                 display: inline-block;
                 width: 88px;
                 height: 50px;
-                opacity: 0.2;
             }
 
             .fili-logo {
@@ -131,6 +141,16 @@ p {
                 width: 94px;
                 height: 50px;
             }
+        }
+    }
+}
+@media screen and (max-width: $mobileMax) {
+    .footer {
+        height: 0 !important;
+        padding:0 !important;
+
+        .developed-by {
+            display:none !important;
         }
     }
 }

@@ -1,5 +1,6 @@
 @import "compass/reset";
 @import "compass/css3";
+@import "_vars";
 @import "_font";
 @import "_base";
 
@@ -163,6 +164,10 @@ html, body {
     input {
         padding:10px;
     }
+
+    #error-message {
+        color:red;
+    }
 }
 
 #game-end {
@@ -172,9 +177,5 @@ html, body {
 
     h1 {
         margin-bottom:10px;
-    }
-
-    #facebook-share {
-        display:none;
     }
 }

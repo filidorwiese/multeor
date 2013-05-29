@@ -3,7 +3,7 @@ $(document).ready(function(){
     sessionStorage.clear();
 
     $('#play-game').on('click', function(event) {
-        document.location = '/viewer/';
+        document.location = '/game/';
     });
 
     $('#play-fb').on('click', function(event) {
