@@ -8,7 +8,7 @@ io.enable('browser client minification');
 io.enable('browser client etag');
 io.enable('browser client gzip');
 io.set('log level', 1);
-//io.set('transports', ['websocket', 'flashsocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
+io.set('transports', ['websocket']);//, 'flashsocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
 
 var ppsCounter = 0;
 var previousTimer = new Date();

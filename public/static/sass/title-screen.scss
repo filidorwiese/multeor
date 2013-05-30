@@ -65,11 +65,57 @@
 
 #mobile-container {
     display:none;
-    margin-top:10px;
+    background:#191f26;
+    margin-top:19px;
+    text-align:center;
+    border-bottom: 19px solid black;
+
+    .row {
+        padding:10px 0;
+
+        .columns {
+            margin:0;
+        }
+    }
 
     h1 {
-        font-size:30px;
-        margin-bottom:10px;
+        font-size: 60px;
+        margin-top:15px;
+        margin-bottom:25px;
+    }
+
+    p {
+        margin:0;
+
+        a {
+            display:block;
+            color:#79838c;
+            text-decoration:none;
+            padding:20px 0;
+        }
+    }
+
+
+    #play-fb {
+        background:#ffe400;
+
+        a {
+            color: #272d33;
+            font: 20px 'nevis';
+        }
+    }
+
+    #play-anon {
+        background:#ffae1a;
+
+        a {
+            color: #272d33;
+            font: 20px 'nevis';
+        }
+    }
+
+    #about-multeor {
+        background:#272d33;
     }
 }
 

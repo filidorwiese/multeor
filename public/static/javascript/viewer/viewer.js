@@ -1,7 +1,7 @@
 'use strict';
 
 // Support for canvas, socket.io, sessionstorage and websockets?
-if (typeof io === 'undefined' || !window.sessionStorage || !isCanvasSupported() || !'WebSocket' in window) {
+if (typeof io === 'undefined' || !Modernizr.sessionstorage || !Modernizr.canvas || !Modernizr.websockets) {
     $('.main').hide();
     $('#error').show();
 } else {
@@ -194,9 +194,4 @@ function logGAEvent(action, label, value) {
             _gaq.push(['_trackEvent', 'Viewer', action]);
         }
     }
-}
-
-function isCanvasSupported(){
-    var elem = document.createElement('canvas');
-    return !!(elem.getContext && elem.getContext('2d'));
 }

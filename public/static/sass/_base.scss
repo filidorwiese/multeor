@@ -31,21 +31,22 @@ a {
 }
 
 .button {
-    background: #b6a300;
+    background: #e6ce00;
     position: relative;
+    border:5px solid #e6ce00;
     border-bottom: 5px solid #b6a300;
     display: inline-block;
     @include border-radius(5px);
+
     button {
         background: #ffe400;
         border: none;
-        @include border-radius(5px);
         color: #272d33;
-        font-family: 'nevis';
-        font-size: 30px;
+        font: 30px 'nevis';
         margin: 0;
         padding: 15px 30px;
         cursor: pointer;
+        @include border-radius(3px);
 
         .button-sub {
             display: block;
@@ -98,6 +99,7 @@ a {
     border-bottom: 19px solid black;
     padding-bottom: 20px;
     text-align: center;
+    min-width:960px;
 
     .developed-by {
         list-style-type: none;
