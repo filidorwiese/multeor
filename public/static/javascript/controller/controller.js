@@ -45,6 +45,7 @@ if (typeof io === 'undefined' || !Modernizr.sessionstorage || !Modernizr.websock
 
         socket.on('game-not-available', function(data){
             sessionStorage.setItem('game-room', '');
+            $('input[name=game-code]').val('');
             $('#message').html('Unable to join, game not available<br />try again...');
         });
 
@@ -73,10 +74,8 @@ if (typeof io === 'undefined' || !Modernizr.sessionstorage || !Modernizr.websock
         socket.on('game-end', function(data){
             Upon.log('game-end');
             player.joined = false;
-
             $('#game-start, #controller').hide();
             $('#game-end').show();
-
             $('#game-end h1 span').html(player.score);
             $('#facebook-share a').on('click', function(event){
                 event.preventDefault();
@@ -233,22 +232,20 @@ if (typeof io === 'undefined' || !Modernizr.sessionstorage || !Modernizr.websock
             });
         }
 
-        $('input[name=game-code]').on('focus', function(){
-            $(this).val('');
-        }).on('blur', function(){
+        $('input[name=game-code]').on('blur', function(){
             $('#join-game button').trigger('click');
         });
         $('#join-game').removeClass('disabled');
         $('#join-game button').text('Join Game').on('click', function(event){
             event.preventDefault();
-            var gameRoomInput = $('input[name=game-code]').val();
-            if (gameRoomInput.length > 0) {
-                var gameRoom = parseInt(gameRoomInput, 10);
+            var gameRoomInput = $('input[name=game-code]');
+            if (gameRoomInput.val().length > 0) {
+                var gameRoom = parseInt(gameRoomInput.val(), 10);
                 if (isNaN(gameRoom) || gameRoom < 10000 || gameRoom > 99999) {
                     $('#message').html('Game code invalid<br />try again...');
+                    gameRoomInput.val('');
                 } else {
                     sessionStorage.setItem('game-room', gameRoom);
-
                     player.gameRoom = gameRoom;
                     var playerIcon = player.facebookProfile ? player.facebookProfile.picture.data.url : false;
                     socket.emit('new-player', {playerId: player.id, gameRoom: gameRoom, playerIcon: playerIcon});
@@ -272,6 +269,8 @@ if (typeof io === 'undefined' || !Modernizr.sessionstorage || !Modernizr.websock
         } else {
             $('#game-start, #game-end').addClass('anon');
         }
+
+        $('#game-start').show();
 
     });
 }

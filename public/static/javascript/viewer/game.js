@@ -1,5 +1,9 @@
 'use strict';
 
+/*IndexSizeError: Index or size is negative or greater than the allowed amount
+http://game.multeor.com/static/javascript/viewer/game.js
+Line 171*/
+
 var Game = function(levelPath, code) {
     var self = this;
     self.props = {
@@ -102,10 +106,15 @@ Game.prototype.loadAudio = function() {
 
         if ($(this).hasClass('is-muted')) {
            Howler.mute();
+           sessionStorage.setItem('audio-muted', true);
         } else {
            Howler.unmute();
+           sessionStorage.removeItem('audio-muted');
         }
     });
+    if (sessionStorage.getItem('audio-muted')) {
+        $('.audio-toggle').trigger('click');
+    }
 };
 
 Game.prototype.tick = function(context, delta) {
@@ -155,20 +164,20 @@ Game.prototype.renderBackgrounds = function(context, numberOfTiles, bgBase, bgMo
         var sx = 0;
         var sw = 1000;
 
-        if (x + 1000 > context.canvas.width) {
-            sw = context.canvas.width - x;
-        }
         if (x < 0) {
             x = 0;
             sx = bgModulus;
             sw = 1000 - bgModulus;
         }
 
-        // image, sx, sy, sw, sh, x, y, w, height
+        // image, sx, sy, sw, sh,  x,    y, w, height
         var bgImage = this.getImage(tile.background);
         if (bgImage) {
-            //Upon.log(tile.background + ', '+ sx + ', 0, ' + sw + ', ' + canvas.height + ', ' + x + ', 0, ' + sw + ', ' + canvas.height);
-            context.drawImage(bgImage, sx, 0, sw, context.canvas.height, x, 0, sw, context.canvas.height);
+            //try {
+                context.drawImage(bgImage, sx, 0, sw, context.canvas.height, x, 0, sw, context.canvas.height);
+            //} catch(err) {
+            //    Upon.log(tile.background + ', '+ sx + ', 0, ' + sw + ', ' + canvas.height + ', ' + x + ', 0, ' + sw + ', ' + canvas.height);
+            //}
         }
     }
 };
@@ -188,7 +197,8 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
     var currentSpriteFrame = Math.floor(this.props.spriteAnimationFrame);
 
     // Render destroyables
-    for (var ii = 0; ii <= numberOfTiles; ii++) {
+    // Note: it needs to look 2 sprites backwards in case of big sprites that don't fit in one screen
+    for (var ii = -2; ii <= numberOfTiles; ii++) {
         var tile = this.props.world[bgBase + ii];
         if (typeof tile == 'undefined') { continue; }
 
@@ -206,7 +216,9 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
             if (x < (spriteImage.width * -1) || x > canvas.width) { continue; }
 
             // Parallax fx
-            spriteObject.left -= (spriteObject.layer - 1) * 1.25;
+            if (this.props.state == 'STARTED') {
+                spriteObject.left -= (spriteObject.layer - 1) * 1.25;
+            }
 
             // Draw entity
             entities[spriteZindex] = new Destroyable(spriteObject, spriteImage, x, y, z, destroyedColorIndex, currentSpriteFrame);

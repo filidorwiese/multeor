@@ -16,9 +16,12 @@
     <div id="fb-root"></div>
 
     <div id="game-start" class="anon">
-        <div id="message">Go to multeor.com on your computer to generate your game code, then enter it below:</div>
+
+        <div id="message">
+            Go to multeor.com on your computer to generate your game code, then enter it below:
+        </div>
         <div id="enter-game-code">
-            <p><input type="number" name="game-code" value="" maxlength="5" placeholder="enter game code here" /></p>
+            <p><input type="number" name="game-code" value="" min="10000" max="99999" placeholder="enter game code here" /></p>
             <div id="connect-button" class="clearfix">
                 <div class="buddy-icon"><div class="mask"></div></div>
                 <span id="join-game" class="button disabled"><button>Connecting</button></span>

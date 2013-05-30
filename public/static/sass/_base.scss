@@ -33,10 +33,9 @@ a {
 .button {
     background: #e6ce00;
     position: relative;
-    border:5px solid #e6ce00;
     border-bottom: 5px solid #b6a300;
     display: inline-block;
-    @include border-radius(5px);
+    @include border-radius(2px);
 
     button {
         background: #ffe400;
@@ -46,17 +45,22 @@ a {
         margin: 0;
         padding: 15px 30px;
         cursor: pointer;
-        @include border-radius(3px);
+        @include border-radius(2px);
+        outline:0;
 
         .button-sub {
             display: block;
             font-size: 14px;
             line-height:1;
         }
+
+        &::-moz-focus-inner {
+          border: 0;
+        }
     }
 
     &:hover button {
-        background: #FCFF00;
+        color:#ffae1a;
     }
 
     &:active {
@@ -73,6 +77,7 @@ a {
         button {
             background:#ccc !important;
             cursor:default !important;
+            color: #272d33 !important;
         }
     }
 }

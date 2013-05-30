@@ -61,17 +61,15 @@
     }
 }
 
-
-
 #mobile-container {
     display:none;
-    background:#191f26;
+    background:#272d33;
     margin-top:19px;
     text-align:center;
     border-bottom: 19px solid black;
 
     .row {
-        padding:10px 0;
+        padding:10px 0 0 0;
 
         .columns {
             margin:0;
@@ -102,6 +100,14 @@
         a {
             color: #272d33;
             font: 20px 'nevis';
+            border-top:5px solid #ffe400;
+            border-bottom:5px solid #b6a300;
+
+            &:hover,
+            &:active {
+                border-top:10px solid #272d33;
+                border-bottom:0;
+            }
         }
     }
 
@@ -111,11 +117,45 @@
         a {
             color: #272d33;
             font: 20px 'nevis';
+            border-top:5px solid #ffae1a;
+            border-bottom:5px solid #ba7800;
+
+            &:hover,
+            &:active {
+                border-top:10px solid #b6a300;
+                border-bottom:0;
+            }
         }
     }
 
     #about-multeor {
         background:#272d33;
+
+        a {
+            border-top:5px solid #272d33;
+            border-bottom:5px solid #13171c;
+
+            &:hover,
+            &:active {
+                border-top:10px solid #ba7800;
+                border-bottom:0;
+            }
+        }
+    }
+
+    #use-as-viewer {
+        background:#191f26;
+
+        a {
+            border-top:5px solid #191f26;
+            border-bottom:5px solid #101316;
+
+            &:hover,
+            &:active {
+                border-top:10px solid #13171c;
+                border-bottom:0;
+            }
+        }
     }
 }
 

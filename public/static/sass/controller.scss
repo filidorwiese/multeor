@@ -34,7 +34,7 @@ html, body {
     }
 
 #game-start {
-    //display:none;
+    display:none;
     border:19px solid #000;
     min-height:100%;;
     background-color:#d6c000;
@@ -199,7 +199,6 @@ html, body {
     }
 }
 
-
 #controller {
     display:none;
     background-color: #FF0059;
@@ -321,5 +320,18 @@ html, body {
 
     a {
         color:#FFF;
+    }
+}
+
+html.no-svg #controller {
+    #leftControls {
+        #stick {
+            background-image: url(../images/controls2_stick.png);
+        }
+    }
+    #rightControls {
+        #boost {
+            background-image:url(../images/controls2_up.png);
+        }
     }
 }
