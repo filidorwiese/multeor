@@ -162,7 +162,7 @@ io.sockets.on('connection', function(socket) {
 
         // Emit Game-end to players
         for (var ii in currentGames[data.gameRoom].players) {
-            io.sockets.socket(ii).emit('game-end', { leaderboard: 'http://game.multeor.com/leaderboards/' + leaderboardImage });
+            io.sockets.socket(ii).emit('game-end', { leaderboard: 'http://multeor.com/leaderboards/' + leaderboardImage });
         }
     });
 

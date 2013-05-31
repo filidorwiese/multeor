@@ -79,7 +79,7 @@ if (typeof io === 'undefined' || !Modernizr.sessionstorage || !Modernizr.websock
             $('#game-end h1 span').html(player.score);
             $('#facebook-share a').on('click', function(event){
                 event.preventDefault();
-                fbPublish(player.score, 'http://game.multeor.com/static/images/opengraph-200x120.png', function(status){
+                fbPublish(player.score, 'http://multeor.com/static/images/opengraph-200x120.png', function(status){
                     if (status) {
                         $('#facebook-share').hide();
                     }
