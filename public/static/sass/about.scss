@@ -69,7 +69,6 @@
     }
 
     ul.buddies {
-	display:none;
         width:360px;
         margin:0 auto;
 
@@ -106,7 +105,8 @@
     .info-graphic {
         background: url(../images/sprite.png) center 5px no-repeat;
         height:240px;
-        margin-bottom:100px;
+        margin-top:75px;
+        margin-bottom:200px;
     }
 }
 @media screen and (max-width: $mobileMax) {

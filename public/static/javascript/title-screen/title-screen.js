@@ -2,10 +2,6 @@ $(document).ready(function(){
 
     sessionStorage.clear();
 
-    $('#play-game').on('click', function(event) {
-        document.location = '/game/';
-    });
-
     $('#play-fb a').on('click', function(event) {
         event.preventDefault();
         if (fbLoggedIn()) {
