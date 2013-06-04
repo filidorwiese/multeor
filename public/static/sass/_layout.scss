@@ -39,7 +39,7 @@
             width: (($grid_column * 3) + $grid_gutter * 4);
             }
         &.four {
-            width: (($grid_column * 4) + $grid_gutter * 6);
+            width: floor(($grid_column * 4) + $grid_gutter * 6);
             }
         &.five {
             width: (($grid_column * 5) + $grid_gutter * 8);
