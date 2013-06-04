@@ -11,7 +11,7 @@ Shadows.prototype.draw = function(context) {
     if (this.props.player.lastMoves.length > 9) {
         var offsetX = 0;
         var offsetZ = 60;
-        var offsetY = this.props.player.z - offsetZ;
+        var offsetY = this.props.player.z *1;
         if (offsetY < 10) { return; }
 
         var tailX = 0 + offsetX;

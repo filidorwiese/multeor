@@ -1,6 +1,6 @@
 'use strict';
 
-var socket = io.connect(window.location.hostname + ':843');
+var socket = io.connect('game.multeor.com:843'); //window.location.hostname + ':843'
 
 $(document).ready(function(){
     var viewportWidth = $(window).width();
