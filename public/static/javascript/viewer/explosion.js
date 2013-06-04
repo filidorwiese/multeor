@@ -54,14 +54,13 @@ function ExplosionParticle() {
 			this.scale = 0;
 		}
 
-		this.x += this.velocityX * ms/1000.0;
-		this.y += this.velocityY * ms/1000.0;
+		this.x += this.velocityX * ms / 1000.0;
+		this.y += this.velocityY * ms / 1000.0;
 	};
 
 	this.draw = function(context, bgModules, delta) {
-		if (this.scale <= 0) { return; }
-
         this.update(20);
+		if (this.scale < 1) { return; }
 
 		context.save();
 		context.translate(this.x, this.y);

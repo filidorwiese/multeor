@@ -1,4 +1,8 @@
 
+* {
+    @include box-sizing(border-box);
+    }
+
 html, body, #desktop-container {
     padding:0;
     margin:0;
@@ -8,7 +12,8 @@ html, body, #desktop-container {
 body {
     background: black;
     font-family: 'nevis';
-    font-size:12px;
+    font-size:18px;
+    line-height:1.3;
     padding: 0 19px;
     color: white;
 }
@@ -17,32 +22,46 @@ p {
     margin-bottom:10px;
 }
 
+a {
+    color:#FFF;
+    text-decoration: underline;
+
+    &:hover {
+        color:#FFF;
+    }
+}
+
 .button {
-    background: #b6a300;
+    background: #e6ce00;
     position: relative;
     border-bottom: 5px solid #b6a300;
     display: inline-block;
-    @include border-radius(5px);
+    @include border-radius(2px);
 
     button {
         background: #ffe400;
         border: none;
-        @include border-radius(5px);
         color: #272d33;
-        font-family: 'nevis';
-        font-size: 30px;
+        font: 30px 'nevis';
         margin: 0;
         padding: 15px 30px;
         cursor: pointer;
+        @include border-radius(2px);
+        outline:0;
 
         .button-sub {
             display: block;
             font-size: 14px;
+            line-height:1;
+        }
+
+        &::-moz-focus-inner {
+          border: 0;
         }
     }
 
     &:hover button {
-        background: #FCFF00;
+        color:#ffae1a;
     }
 
     &:active {
@@ -59,13 +78,8 @@ p {
         button {
             background:#ccc !important;
             cursor:default !important;
+            color: #272d33 !important;
         }
-    }
-}
-@media screen and (max-width: 960px) {
-    .button button {
-        font-size:20px;
-        padding:10px 10px;
     }
 }
 
@@ -86,11 +100,12 @@ p {
 
 .footer {
     position: relative;
-    height: 60px;
+    height: 99px;
     z-index: 1000;
     border-bottom: 19px solid black;
     padding-bottom: 20px;
     text-align: center;
+    min-width:960px;
 
     .developed-by {
         list-style-type: none;
@@ -108,13 +123,17 @@ p {
                 text-indent:100%;
                 overflow:hidden;
                 white-space:nowrap;
+                opacity: 0.2;
+
+                &:hover {
+                    opacity:1;
+                }
             }
 
             .avth-logo {
                 background: url(../images/sprite.png) 0px -217px no-repeat;
                 width: 49px;
                 height: 49px;
-                opacity: 0.2;
             }
 
             .dasblitz-logo {
@@ -122,7 +141,6 @@ p {
                 display: inline-block;
                 width: 88px;
                 height: 50px;
-                opacity: 0.2;
             }
 
             .fili-logo {
@@ -131,6 +149,16 @@ p {
                 width: 94px;
                 height: 50px;
             }
+        }
+    }
+}
+@media screen and (max-width: $mobileMax) {
+    .footer {
+        height: 0 !important;
+        padding:0 !important;
+
+        .developed-by {
+            display:none !important;
         }
     }
 }

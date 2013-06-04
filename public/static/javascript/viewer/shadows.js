@@ -9,10 +9,12 @@ var Shadows = function(player) {
 
 Shadows.prototype.draw = function(context) {
     if (this.props.player.lastMoves.length > 9) {
-        var offsetX = 0;
-        var offsetZ = 60;
-        var offsetY = this.props.player.z *1;
-        if (offsetY < 10) { return; }
+
+        var offsetX = -50 * (this.props.player.z - this.props.player.minZ) / (this.props.player.maxZ - this.props.player.minZ);
+        var offsetZ = this.props.player.minZ;
+        var offsetY = (this.props.player.z * 1.5) - (offsetZ * 1.5);
+        var alpha = .1;
+        if (offsetY < 5) { return; }
 
         var tailX = 0 + offsetX;
         var tailY = this.props.player.lastMoves[0][1] + offsetY;
@@ -25,7 +27,7 @@ Shadows.prototype.draw = function(context) {
         context.lineWidth = offsetZ;
 
         var lingrad2 = context.createLinearGradient(0,0, (headX - context.lineWidth / 2),0);
-        lingrad2.addColorStop(1, 'rgba(36,42,48,.3)');
+        lingrad2.addColorStop(1, 'rgba(36,42,48,' + alpha + ')');
         lingrad2.addColorStop(0, 'rgba(36,42,48,0)');
         context.strokeStyle = lingrad2;
         context.lineCap = 'round';

@@ -2,7 +2,9 @@ Upon.require({
     'third-party': [
         'http://game.multeor.com:843/socket.io/socket.io.js',
         'third-party/jquery-1.9.1.min.js',
-        'third-party/howler.min.js'
+        'third-party/requestAnimationFrame.js',
+        'third-party/howler.min.js',
+        'third-party/modernizr.custom.24408.js'
     ],
     'title-screen-production': [
         'title-screen.min.js'

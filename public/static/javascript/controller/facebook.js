@@ -59,7 +59,7 @@ function fbPublish(score, image, callback) {
         name: 'I played Multeor and scored ' + score + ' points!',
         href: 'http://multeor.com',
         caption: 'Multeor - a multiplayer webgame',
-        description: 'Use a mobile to pilot your meteor. Make sure you leave the biggest trail of destruction.',
+        description: 'Use your mobile to pilot a meteor leaving the biggest trail of destruction (up to 8 players)',
         link: 'http://multeor.com',
         //action_links: [{ text: 'Play', href: 'http://multeor.com' }],
         picture: image

@@ -2,11 +2,8 @@ $(document).ready(function(){
 
     sessionStorage.clear();
 
-    $('#play-game').on('click', function(event) {
-        document.location = '/viewer/';
-    });
-
-    $('#play-fb').on('click', function(event) {
+    $('#play-fb a').on('click', function(event) {
+        event.preventDefault();
         if (fbLoggedIn()) {
             fbGetProfile(function(){
                 document.location = '/controller/';
@@ -24,7 +21,7 @@ $(document).ready(function(){
         }
     });
 
-    $('#play-anon').on('click', function(event) {
+    $('#play-anon a').on('click', function(event) {
         event.preventDefault();
         document.location = '/controller/';
     });

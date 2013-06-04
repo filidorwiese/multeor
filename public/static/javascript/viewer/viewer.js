@@ -1,7 +1,7 @@
 'use strict';
 
 // Support for canvas, socket.io, sessionstorage and websockets?
-if (typeof io === 'undefined' || !window.sessionStorage || !isCanvasSupported() || !'WebSocket' in window) {
+if (typeof io === 'undefined' || !Modernizr.sessionstorage || !Modernizr.canvas || !Modernizr.websockets) {
     $('.main').hide();
     $('#error').show();
 } else {
@@ -51,7 +51,6 @@ if (typeof io === 'undefined' || !window.sessionStorage || !isCanvasSupported() 
         socket.on('game-invalid', function(data){
             sessionStorage.setItem('viewer-id', '');
             sessionStorage.setItem('game-room', '');
-            alert('Sorry, no game hijacking');
             document.location = '/';
             logGAEvent('Game hijacking?');
         });
@@ -67,21 +66,16 @@ if (typeof io === 'undefined' || !window.sessionStorage || !isCanvasSupported() 
             // Add player to players array
             var numberOfPlayers = 0;
 
-            //for (var oo=0; oo < 8; oo++) {
-
-                for (var ii in data.players) {
-                    //var playerId = data.players[ii] + oo;
-                    var playerId = data.players[ii].playerId;
-                    numberOfPlayers++;
-                    if (typeof players[playerId] == 'undefined') {
-                        var playerColor = playerColorsShuffled.splice(0, 1)[0];
-                        var playerIcon = data.players[ii].playerIcon;
-                        players[playerId] = new Player(context, playerId, playerIcon, playerColor, numberOfPlayers);
-                        //playerId++;
-                        socket.emit('update-player-color', {viewerId: viewerId, gameRoom: gameRoom, playerId: playerId, playerColor: playerColor});
-                    }
+            for (var ii in data.players) {
+                var playerId = data.players[ii].playerId;
+                numberOfPlayers++;
+                if (typeof players[playerId] == 'undefined') {
+                    var playerColor = playerColorsShuffled.splice(0, 1)[0];
+                    var playerIcon = data.players[ii].playerIcon;
+                    players[playerId] = new Player(context, playerId, playerIcon, playerColor, numberOfPlayers);
+                    socket.emit('update-player-color', {viewerId: viewerId, gameRoom: gameRoom, playerId: playerId, playerColor: playerColor});
                 }
-            //}
+            }
 
             // Check for deleted players
             for (var oo in players) {
@@ -200,9 +194,4 @@ function logGAEvent(action, label, value) {
             _gaq.push(['_trackEvent', 'Viewer', action]);
         }
     }
-}
-
-function isCanvasSupported(){
-    var elem = document.createElement('canvas');
-    return !!(elem.getContext && elem.getContext('2d'));
 }

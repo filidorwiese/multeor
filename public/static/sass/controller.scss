@@ -1,5 +1,6 @@
 @import "compass/reset";
 @import "compass/css3";
+@import "_vars";
 @import "_font";
 @import "_base";
 
@@ -7,7 +8,6 @@ html, body {
     background-color: #272d33;
     padding:0;
     margin:0;
-    overflow:hidden;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -21,6 +21,7 @@ html, body {
     user-drag: none;
     }
 
+
 @media screen and (orientation: portrait) {
     html, body {
         width:100%;
@@ -31,6 +32,172 @@ html, body {
         display:none !important;
         }
     }
+
+#game-start {
+    display:none;
+    border:19px solid #000;
+    min-height:100%;;
+    background-color:#d6c000;
+
+    #message {
+        text-align: center;
+        font: 18px 'nevis';
+        padding:20px;
+        background-color:#272D33;
+        min-height:90px;
+    }
+
+    #enter-game-code {
+        text-align: center;
+        padding:20px 10px;
+
+        input {
+            display:block;
+            padding:10px;
+            text-align: center;
+            border:5px solid #b6a300;
+            width:75%;
+            margin:0 auto;
+            font: 18px 'nevis';
+            color:#272d33;
+        }
+
+        div#connect-button {
+            width:200px;
+            margin:0 auto;
+
+            .buddy-icon {
+                float:left;
+                position:relative;
+                background-color:#000;
+                width:50px;
+                height:50px;
+                margin-right:10px;
+                margin-top:3px;
+
+                .mask {
+                    background-image:url(../images/avatar-clipdonkergeel.png);
+                    width:50px;
+                    height:50px;
+                }
+            }
+
+            #join-game {
+                float:left;
+
+                button {
+                    font-size: 20px;
+                    padding: 15px 20px;
+                }
+            }
+        }
+    }
+
+    &.anon {
+        background-color:#de8f00;
+
+        input {
+            border-color:#ba7800 !important;
+        }
+
+        .buddy-icon {
+            display:none !important;
+        }
+
+        .button {
+            border-color:#ba7800 !important;
+
+            button {
+                background:#ffae1a !important;
+                padding:15px 50px !important;
+            }
+        }
+    }
+}
+
+#game-end {
+    display:none;
+    border:19px solid #000;
+    min-height:100%;
+    background-color:#272d33;
+    text-align:center;
+    font-size:16px;
+
+    div#you-scored {
+        width:250px;
+        margin:0 auto;
+        padding:25px 0;
+
+        .buddy-icon {
+            float:left;
+            position:relative;
+            background-color:#000;
+            width:50px;
+            height:50px;
+            margin-right:10px;
+            margin-top:-5px;
+
+            .mask {
+                background-image:url(../images/avatar-clipdonkergrijs.png);
+                width:50px;
+                height:50px;
+            }
+        }
+
+        h1 {
+            float:left;
+            margin-bottom:10px;
+            font-size:20px;
+
+            span {
+                font-size:30px;
+            }
+        }
+    }
+
+    p {
+        margin:0;
+
+        a {
+            display:block;
+            color:#79838c;
+            text-decoration:none;
+            padding:20px 0;
+        }
+    }
+
+    #facebook-share {
+        background:#ffe400;
+
+        a {
+            color: #272d33;
+            font: 20px 'nevis';
+        }
+    }
+
+    #game-reset {
+        background:#ffae1a;
+
+        a {
+            color: #272d33;
+            font: 20px 'nevis';
+        }
+    }
+
+    #about-multeor {
+        background:#272d33;
+    }
+
+    &.anon {
+        .buddy-icon {
+            display:none !important;
+        }
+
+        h1 {
+            float:none !important;
+        }
+    }
+}
 
 #controller {
     display:none;
@@ -134,47 +301,37 @@ html, body {
         -o-user-select: none;
         user-select: none;
         }
-
-    #message {
-        display:none;
-        position:absolute;
-        top:10px;
-        left:10px;
-        width:90%;
-        height:20px;
-        text-align: left;
-        }
     }
 
-#game-start {
-    margin:10px;
 
-    .buddy-icon {
-        display:none;
-        margin-bottom:10px;
+#error {
+    display:none;
+    position: absolute;
+    top:0;
+    left:0;
+    z-index:1000;
+    text-align: center;
+    font-size:20px;
+    min-height:100%;
+    width:100%;
+    overflow:hidden;
+    background:#272d33 url(../images/icon_unsupporteddevice.png) center -10px no-repeat;
+    padding-top:75px;
 
-        img {
-            float:left;
-            border:2px solid #000;
-            margin-right:10px;
-        }
-    }
-
-    input {
-        padding:10px;
+    a {
+        color:#FFF;
     }
 }
 
-#game-end {
-    display:none;
-    text-align:center;
-    margin:50px;
-
-    h1 {
-        margin-bottom:10px;
+html.no-svg #controller {
+    #leftControls {
+        #stick {
+            background-image: url(../images/controls2_stick.png);
+        }
     }
-
-    #facebook-share {
-        display:none;
+    #rightControls {
+        #boost {
+            background-image:url(../images/controls2_up.png);
+        }
     }
 }

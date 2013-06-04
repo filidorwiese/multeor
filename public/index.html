@@ -4,16 +4,26 @@
     <title>Multeor - a multiplayer webgame</title>
     <meta charset="UTF-8" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1">
-    <meta name="description" content="Use a mobile to pilot your meteor. Make sure you leave the biggest trail of destruction.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Use your mobile to pilot a meteor leaving the biggest trail of destruction (up to 8 players)">
     <meta name="robots" content="index, nofollow" />
+    <meta http-equiv="imagetoolbar" content="no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta property="og:title" content="Multeor, a multiplayer webgame" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://multeor.com/" />
+    <meta property="og:image" content="http://multeor.com/static/images/opengraph-200x120.png" />
+    <meta property="og:site_name" content="Multeor" />
+    <meta property="og:description" content="Use your mobile to pilot a meteor leaving the biggest trail of destruction (up to 8 players)" />
+    <meta property="og:locale" content="en_US" />
     <link rel="canonical" href="http://multeor.com/" />
     <link rel="stylesheet" href="/static/css/title-screen.css" />
-    <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <script src="/static/javascript/Upon.min.js" data-config="/static/javascript/Upon.config.js" data-set="third-party title-screen-development"></script>
 </head>
 
 <body>
+
     <div id="fb-root"></div>
 
     <div id="desktop-container">
@@ -26,15 +36,15 @@
                     <div class="row">
                         <div class="content columns six" role="main">
                             <h2 class="tagline">a multiplayer webgame.</h2>
-                            <p class="introduction">Use a mobile to pilot your meteor. Make sure you leave the biggest trail of destruction.</p>
-                            <span id="play-game" class="button"><button>Play game!<span class="button-sub">(up to 8 players)</span></button></span>
+                            <p class="introduction">Use your mobile to pilot a meteor leaving the biggest trail of destruction.</p>
+                            <a href="/game/" id="play-game" class="button"><button>Play game!<span class="button-sub">(up to 8 players)</span></button></a>
                         </div>
                         <div class="info-graphic columns six"></div>
                     </div>
                 </div>
             </div>
             <div class="about">
-                <a href="#" target="_blank">About Multeor</a>
+                <a href="/about/">About Multeor</a>
             </div>
             <div class="push"></div>
         </div>
@@ -52,10 +62,17 @@
             <div class="row" role="header">
                 <div class="content columns twelve" role="main">
                   <h1>Multeor</h1>
-                  <p><span id="play-fb" class="button"><button>Play with Facebook</button></span></p>
-                  <p><span id="play-anon" class="button"><button>Play anonymously</button></span></p>
-                  <p>
-                      <a href="/viewer/">Use this device as a viewer instead</a>
+                  <p id="play-fb">
+                      <a href="#">Play with facebook</a>
+                  </p>
+                  <p id="play-anon">
+                      <a href="#">Play anonymously</a>
+                  </p>
+                  <p id="about-multeor">
+                      <a href="/about/">About Multeor</a>
+                  </p>
+                  <p id="use-as-viewer">
+                      <a href="/game/">Use this device as a viewer instead</a>
                   </p>
                 </div>
             </div>

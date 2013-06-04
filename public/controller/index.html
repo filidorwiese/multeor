@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Multeor - a multiplayer webgame</title>
+    <title>Multeor</title>
     <meta charset="UTF-8" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1, initial-scale=1, user-scalable=0">
@@ -15,21 +15,38 @@
 
     <div id="fb-root"></div>
 
-    <div id="game-start">
-          <div class="buddy-icon clearfix"></div>
-          <p><label>Insert code: <input type="tel" name="game-code" value="" maxlength="5" placeholder="eg. 654321" /></label></p>
-          <p><span id="join-game" class="button disabled"><button>Connecting</button></span></p>
+    <div id="game-start" class="anon">
+
+        <div id="message">
+            Go to multeor.com on your computer to generate your game code, then enter it below:
+        </div>
+        <div id="enter-game-code">
+            <p><input type="number" name="game-code" value="" min="10000" max="99999" placeholder="enter game code here" /></p>
+            <div id="connect-button" class="clearfix">
+                <div class="buddy-icon"><div class="mask"></div></div>
+                <span id="join-game" class="button disabled"><button>Connecting</button></span>
+            </div>
+        </div>
     </div>
 
-     <div id="game-end">
-          <h1>Your score: <span></span></h1>
-          <p><span id="facebook-share" class="button disabled"><button>Share score on facebook</button></span></p>
-          <p><span id="game-reset" class="button"><button>Play again</button></span></p>
+     <div id="game-end" class="anon">
+        <div id="you-scored" class="clearfix">
+            <div class="buddy-icon"><div class="mask"></div></div>
+            <h1>You scored: <span>0</span></h1>
+        </div>
+        <p id="facebook-share">
+          <a href="#">Share score on facebook</a>
+        </p>
+        <p id="game-reset">
+          <a href="#">Play again</a>
+        </p>
+        <p id="about-multeor">
+          <a href="/about/">About Multeor</a>
+        </p>
     </div>
 
     <div id="controller">
-        <div id="message"></div>
-        <div id="score"><span>128</span></div>
+        <div id="score"><span>0</span></div>
         <div id="leftControls">
             <div id="joystick">
                 <div id="stick"></div>
@@ -38,6 +55,16 @@
         <div id="rightControls">
             <div id="boost"></div>
             <div id="boostBg"></div>
+        </div>
+    </div>
+
+
+    <div id="error" class="container">
+        <div class="row">
+            <div class="columns twelve">
+                Device not supported<br />
+                (<a href="/about/#requirements">read more</a>)
+            </div>
         </div>
     </div>
 
