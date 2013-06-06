@@ -11,7 +11,6 @@
         background: #272d33;
         position: relative;
         height:619px;
-        font-size:16px;
 
         .instructions-container {
             text-align: center;
@@ -21,6 +20,7 @@
             z-index: 1000;
             height: 600px;
             overflow: hidden;
+            font-size:16px;
 
             .step-header{
                 font-size: 130px;

@@ -15,6 +15,22 @@ var previousTimer = new Date();
 var currentGames = {};
 var maxPlayers = 8;
 
+// Read high-score
+var highScorePrivateFile = __dirname + '/high-score-private.json';
+var highScorePublicFile = __dirname + '/public/high-score-public.json';
+var highestScore = false;
+fs.readFile(highScorePrivateFile, 'utf8', function (err, data) {
+    if (err) {
+        throw err;
+    } else {
+        highestScore = JSON.parse(data);
+        var tmpObject = {name: highestScore[0].name, score: highestScore[0].score};
+		fs.writeFile(highScorePublicFile, JSON.stringify(tmpObject), function(err) {
+			if(err) { log(err); } 
+		});
+    }
+});
+
 // PPS counter
 setInterval(function(){
     var time = new Date();
@@ -47,7 +63,7 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('new-player', function(data){
-        assignNewPlayer(socket, data.playerId, data.gameRoom, data.playerIcon);
+        assignNewPlayer(socket, data.playerId, data.gameRoom, data.playerIcon, data.playerName);
     });
 
     // Controller broadcasting user-input to viewer
@@ -86,6 +102,7 @@ io.sockets.on('connection', function(socket) {
         // Lookup player and emit update-score
         for (var ii in currentGames[data.gameRoom].players) {
 			if (currentGames[data.gameRoom].players[ii].playerId == data.playerId) {
+                currentGames[data.gameRoom].players[ii].score = data.score;
 				io.sockets.socket(ii).emit('update-score', data);
 			}
 		}
@@ -159,10 +176,33 @@ io.sockets.on('connection', function(socket) {
             fs.writeFile(leaderboardPath + leaderboardImage, buf);
             log('Game-end: Saving leaderboard to ' + leaderboardPath + leaderboardImage);
         }
-
-        // Emit Game-end to players
+        
         for (var ii in currentGames[data.gameRoom].players) {
-            io.sockets.socket(ii).emit('game-end', { leaderboard: 'http://multeor.com/leaderboards/' + leaderboardImage });
+            // High-score?
+            var highScore = false;
+            if (currentGames[data.gameRoom].players[ii].playerName && currentGames[data.gameRoom].players[ii].score > highestScore[0].score) {
+                highScore = true;
+				
+                // Update high-score and write to public and private file
+                var tmpObject = {name: currentGames[data.gameRoom].players[ii].playerName, score: currentGames[data.gameRoom].players[ii].score};
+                fs.writeFile(highScorePublicFile, JSON.stringify(tmpObject), function(err) {
+                    if(err) { log(err); } 
+                });
+                
+                tmpObject.ip = socket.handshake.address.address;
+				log('New highscore ' + tmpObject.score + ' by ' + tmpObject.name + ' from ip ' + tmpObject.ip);
+				
+                highestScore.unshift(tmpObject);
+                fs.writeFile(highScorePrivateFile, JSON.stringify(highestScore), function(err) {
+                    if(err) { log(err); } 
+                });
+            }
+
+            // Emit Game-end to players
+            io.sockets.socket(ii).emit('game-end', {
+                leaderboard: 'http://multeor.com/leaderboards/' + leaderboardImage,
+                highScore: highScore
+            });
         }
     });
 
@@ -227,7 +267,7 @@ io.sockets.on('connection', function(socket) {
     });
 });
 
-function assignNewPlayer(socket, playerId, gameRoom, playerIcon) {
+function assignNewPlayer(socket, playerId, gameRoom, playerIcon, playerName) {
     log('New player entered game ' + socket.id + ' using playerId ' + playerId + ' and gameRoom ' + gameRoom);
 
     // Check if gameRoom exists
@@ -259,7 +299,7 @@ function assignNewPlayer(socket, playerId, gameRoom, playerIcon) {
     socket.join('room-' + gameRoom);
 
     // Update gameState
-    currentGames[gameRoom].players[socket.id] = { playerId: playerId, playerIcon: playerIcon };
+    currentGames[gameRoom].players[socket.id] = { playerId: playerId, playerIcon: playerIcon, playerName: playerName, score: 0 };
 
     // Emit join succes to player
     io.sockets.socket(socket.id).emit('player-joined');

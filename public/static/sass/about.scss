@@ -106,7 +106,14 @@
         background: url(../images/sprite.png) center 5px no-repeat;
         height:240px;
         margin-top:75px;
-        margin-bottom:200px;
+        margin-bottom:30px;
+    }
+
+    #high-score {
+        text-align:center;
+        margin:0 auto;
+        width:85%;
+        margin-bottom:150px;
     }
 }
 @media screen and (max-width: $mobileMax) {

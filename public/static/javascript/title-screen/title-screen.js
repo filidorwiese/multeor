@@ -1,9 +1,11 @@
 $(document).ready(function(){
 
     sessionStorage.clear();
-
+    sessionStorage.setItem('came-from-title-screen', true);
+    
     $('#play-fb a').on('click', function(event) {
         event.preventDefault();
+
         if (fbLoggedIn()) {
             fbGetProfile(function(){
                 document.location = '/controller/';

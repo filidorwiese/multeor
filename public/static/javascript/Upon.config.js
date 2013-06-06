@@ -1,6 +1,6 @@
 Upon.require({
     'third-party': [
-        'http://game.multeor.com:843/socket.io/socket.io.js',
+        'http://multeor.com:843/socket.io/socket.io.js',
         'third-party/jquery-1.9.1.min.js',
         'third-party/requestAnimationFrame.js',
         'third-party/howler.min.js',
@@ -12,6 +12,12 @@ Upon.require({
     'title-screen-development': [
         'title-screen/title-screen.js',
         'controller/facebook.js'
+    ],
+    'about-production': [
+        'about/about.min.js'
+    ],
+    'about-development': [
+        'about/about.js'
     ],
     'viewer-production': [
         'viewer.min.js'

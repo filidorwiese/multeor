@@ -18,7 +18,7 @@
     <link rel="canonical" href="http://multeor.com/about.html" />
     <link rel="stylesheet" href="/static/css/about.css" />
     <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon" />
-    <script src="/static/javascript/Upon.min.js" data-config="/static/javascript/Upon.config.js" data-set="third-party title-screen-development"></script>
+    <script src="/static/javascript/Upon.min.js" data-config="/static/javascript/Upon.config.js" data-set="third-party about-development"></script>
 </head>
 
 <body>
@@ -29,7 +29,7 @@
             <div class="columns twelve">
                 <h1>Multeor</h1>
                 <p class="introduction">
-                    Multeor is a multiplayer webgame developed by Arjen de Vries, Filidor Wiese and Arthur van 't Hoog. You control a meteor crashing into earth and score points by leaving the biggest trail of destruction. The current high-score is …, try to beat it!
+                    Multeor is a multiplayer webgame developed by Arjen de Vries, Filidor Wiese and Arthur van 't Hoog. You control a meteor crashing into earth and score points by leaving the biggest trail of destruction.
                 </p>
             </div>
         </div>
@@ -45,15 +45,16 @@
                 </p>
                 <h3>How it started</h3>
                 <p>
-                    We are three friends from Groningen, the Netherlands, that build and design websites for a living. We've grown up with the web and think it's awesome! When we heard of a local <a href="http://www.indie-gameleon.org">indie game-jam marathon</a> (build a working game in 48 hours) that was about to take place, we figured it would be a great learning experience for us. As webdevelopers we looked at the challenge from a webperspective and decided to make it a webgame. After that weekend, we've worked on Multeor for several weeks as a side-project. In June 2013 the game was launched!
+                    We are three friends from Groningen, the Netherlands, that build and design websites for a living. We've grown up with the web and think it's awesome! When we heard of a <a href="http://www.indie-gameleon.org" target="_blank">local indie game-jam marathon</a> (goal: build a working game in 48 hours) that was about to take place, we figured it would be a great learning experience for us. As webdevelopers we looked at the challenge from a webperspective and decided to make a webgame. After that weekend, we've worked on Multeor for several weeks as a side-project. In June 2013 the game was launched!
                 </p>
                 <h3>Technique</h3>
                 <p>
-                    Freed from the need to be widely compatible, we wanted to experiment with some of the latest the web has to offer. The game is built from scratch in vanilla Javascript using Canvas as the rendering surface and backed with a NodeJS webserver to manage the communication between the desktop and the smartphones using WebSockets. A custom map-editor was created (high-five to Arjen Post) to be able to construct a level file in a drag-and drop fashion. Arthur's artwork, sprites and animations had to be placed meticulously and adjusted to produce the game world. After adding audio, shadows, hours of fine-tuning and testing, the working prototype was turned into a full fledged game.
+                    Freed from the need to be widely compatible, we wanted to experiment with some of the latest the web has to offer. The game is built from scratch in plain Javascript using Canvas as the rendering surface and backed with a NodeJS webserver to manage the communication between the desktop and the smartphones using WebSockets. A custom map-editor was created (high-five to Arjen Post) to be able to construct a level file in a drag-and drop fashion. Arthur's artwork, sprites and animations had to be placed meticulously and adjusted to produce the game world. After adding audio, shadows, hours of fine-tuning and testing, the working prototype was turned into a full fledged game.
                 </p>
             </div>
             <div class="columns six">
                 <div class="info-graphic"></div>
+                <div id="high-score"></div>
                 <ul class="buddies">
                     <li><a href="http://dasblitz.nl" title="webdevelopment" target="_blank" class="dasblitz-icon">Arjen de Vries</a></li>
                     <li><a href="http://galaxy.fili.nl" title="Front-end and back-end Webdeveloper" target="_blank" class="fili-icon">Filidor Wiese</a></li>
@@ -71,7 +72,7 @@
             <div class="columns six">
                 <h3>Requirements</h3>
                 <p>
-                    Multeor is a modern webgame using some of the latest techniques, like Canvas and Websockets. To enjoy the game to the fullest, please make sure your desktop computer and mobile devices meet the following criteria:
+                    Multeor is a modern webgame using some of the latest webtechniques, like Canvas and Websockets. To enjoy the game to the fullest, please make sure your desktop computer and mobile devices meet the following criteria:
                 </p>
                 <p>
                     Mobile device requirements
@@ -92,7 +93,7 @@
                 </ul>
             </div>
             <div class="columns six">
-                <span id="play-game" class="button-sub button"><button>Play game!<span class="button-sub">(up to 8 players)</span></button></span>
+                <a href="/game/" id="play-game" class="button-sub button"><button>Play game!<span class="button-sub">(up to 8 players)</span></button></a>
             </div>
         </div>
     </div>

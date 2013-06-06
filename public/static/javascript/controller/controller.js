@@ -5,6 +5,11 @@ if (typeof io === 'undefined' || !Modernizr.sessionstorage || !Modernizr.websock
     $('#game-start, #game-end, #controller').hide();
     $('#error').show();
 } else {
+    // If use didn't came from title-screen, redirect to give the option to log into facebook
+    if (!sessionStorage.getItem('came-from-title-screen')) {
+        document.location = '/';
+    }
+
     var socket = io.connect(window.location.hostname + ':843');
 
     $(document).ready(function(){
@@ -248,7 +253,8 @@ if (typeof io === 'undefined' || !Modernizr.sessionstorage || !Modernizr.websock
                     sessionStorage.setItem('game-room', gameRoom);
                     player.gameRoom = gameRoom;
                     var playerIcon = player.facebookProfile ? player.facebookProfile.picture.data.url : false;
-                    socket.emit('new-player', {playerId: player.id, gameRoom: gameRoom, playerIcon: playerIcon});
+                    var playerName = player.facebookProfile ? player.facebookProfile.name : false;
+                    socket.emit('new-player', {playerId: player.id, gameRoom: gameRoom, playerIcon: playerIcon, playerName: playerName});
                 }
             }
         });
