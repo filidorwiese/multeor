@@ -1,9 +1,16 @@
 'use strict';
 
 // Support for socket.io, sessionstorage, touch and websockets?
-if (typeof io === 'undefined' || !Modernizr.sessionstorage || !Modernizr.websockets) {// || !Modernizr.touch
+if (typeof io === 'undefined') {
     $('#game-start, #game-end, #controller').hide();
     $('#error').show();
+    $('#error-message').html('Can\'t connect to Multeor server');
+
+} else if (!Modernizr.sessionstorage || !Modernizr.websockets) {// || !Modernizr.touch
+    $('#game-start, #game-end, #controller').hide();
+    $('#error').show();
+    $('#error-message').html('Device not supported<br />(<a href="/about/#requirements">read more</a>)');
+
 } else {
     // If use didn't came from title-screen, redirect to give the option to log into facebook
     if (!sessionStorage.getItem('came-from-title-screen')) {
@@ -79,12 +86,20 @@ if (typeof io === 'undefined' || !Modernizr.sessionstorage || !Modernizr.websock
         socket.on('game-end', function(data){
             Upon.log('game-end');
             player.joined = false;
+            if (data.highScore) {
+                var fbText = 'Playing Multeor I scored a new highscore of ' + player.score + ' points!';
+                var scoreText = '<h1>Awesome, you scored a new highscore: <span>' + player.score + '</span></h1>';
+            } else {
+                var fbText = 'Playing Multeor I scored ' + player.score + ' points!';
+                var scoreText = '<h1>Good job, you scored: <span>' + player.score + '</span></h1>';
+            }
+
             $('#game-start, #controller').hide();
             $('#game-end').show();
-            $('#game-end h1 span').html(player.score);
+            $('#game-end .you-scored-text').html(scoreText);
             $('#facebook-share a').on('click', function(event){
                 event.preventDefault();
-                fbPublish(player.score, 'http://multeor.com/static/images/opengraph-200x120.png', function(status){
+                fbPublish(fbText, 'http://multeor.com/static/images/opengraph-200x120.png', function(status){
                     if (status) {
                         $('#facebook-share').hide();
                     }

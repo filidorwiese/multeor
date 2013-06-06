@@ -51,12 +51,12 @@ function fbLoggedIn() {
     return facebookConnected;
 }
 
-function fbPublish(score, image, callback) {
+function fbPublish(title, image, callback) {
     //https://developers.facebook.com/docs/guides/attachments/
     FB.ui({
         display: 'popup',
         method: 'feed',
-        name: 'I played Multeor and scored ' + score + ' points!',
+        name: title,
         href: 'http://multeor.com',
         caption: 'Multeor - a multiplayer webgame',
         description: 'Use your mobile to pilot a meteor leaving the biggest trail of destruction (up to 8 players)',
