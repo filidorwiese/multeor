@@ -7,7 +7,7 @@ var io = require('socket.io').listen(843);
 io.enable('browser client minification');
 io.enable('browser client etag');
 io.enable('browser client gzip');
-io.set('log level', 3);
+io.set('log level', 1);
 io.set('transports', ['websocket']);//, 'flashsocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
 
 var ppsCounter = 0;

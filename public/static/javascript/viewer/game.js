@@ -1,9 +1,5 @@
 'use strict';
 
-/*IndexSizeError: Index or size is negative or greater than the allowed amount
-http://game.multeor.com/static/javascript/viewer/game.js
-Line 171*/
-
 var Game = function(levelPath, code) {
     var self = this;
     self.props = {
@@ -14,7 +10,7 @@ var Game = function(levelPath, code) {
         images: {},
         audio: {},
         world: false,
-        worldX: 0,
+        worldX: 50000,
         worldSpeed: 10,
         destroyed: {},
         explosions: [],
@@ -197,14 +193,14 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
     var currentSpriteFrame = Math.floor(this.props.spriteAnimationFrame);
 
     // Render destroyables
-    // Note: it needs to look 2 sprites backwards in case of big sprites that don't fit in one screen
-    for (var ii = -2; ii <= numberOfTiles; ii++) {
+    // Note: it needs to look 3 sprites backwards in case of big sprites that don't fit in one screen
+    for (var ii = -3; ii <= numberOfTiles; ii++) {
         var tile = this.props.world[bgBase + ii];
         if (typeof tile == 'undefined') { continue; }
 
         for (var sprite in tile.sprites) {
+            entitiesOffset++;
             var spriteObject = tile.sprites[sprite];
-
             var destroyedColorIndex = this.props.destroyed[spriteObject.id] || false;
             var x = (ii * 1000) - bgModulus + spriteObject.left;
             var y = spriteObject.top;
@@ -251,8 +247,6 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
                     }
                 }
             }
-
-            entitiesOffset++;
         }
     }
 
@@ -278,6 +272,8 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
     }
 
     // Render all entities on canvas
+    // sorting http://stackoverflow.com/questions/5199901/how-to-sort-an-associative-array-by-its-values-in-javascript
+    //entities.sort(function(a, b) { return a[1] - b[1]; });
     for (var key in entities) {
         entities[key].draw(context, bgModulus);
     }

@@ -124,9 +124,10 @@ html, body {
     font-size:16px;
 
     div#you-scored {
-        width:250px;
+        width:310px;
         margin:0 auto;
         padding:25px 0;
+        margin-bottom:10px;
 
         .buddy-icon {
             float:left;
@@ -135,7 +136,6 @@ html, body {
             width:50px;
             height:50px;
             margin-right:10px;
-            margin-top:-5px;
 
             .mask {
                 background-image:url(../images/avatar-clipdonkergrijs.png);
@@ -146,11 +146,11 @@ html, body {
 
         h1 {
             float:left;
-            margin-bottom:10px;
             font-size:20px;
+            width:250px;
 
             span {
-                font-size:30px;
+                font-size:25px;
             }
         }
     }

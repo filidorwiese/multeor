@@ -1,9 +1,16 @@
 'use strict';
 
 // Support for canvas, socket.io, sessionstorage and websockets?
-if (typeof io === 'undefined' || !Modernizr.sessionstorage || !Modernizr.canvas || !Modernizr.websockets) {
+if (typeof io === 'undefined') {
     $('.main').hide();
     $('#error').show();
+    $('#error-message').html('Can\'t connect to Multeor server');
+
+} else if (!Modernizr.sessionstorage || !Modernizr.canvas || !Modernizr.websockets) {
+    $('.main').hide();
+    $('#error').show();
+    $('#error-message').html('Browser not supported<br />(<a href="/about/#requirements">read more</a>)');
+
 } else {
     // Setup canvas
     var canvas = document.getElementById('canvas');
