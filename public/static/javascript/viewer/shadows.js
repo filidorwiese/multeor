@@ -9,6 +9,7 @@ var Shadows = function(player) {
 
 Shadows.prototype.draw = function(context) {
     if (this.props.player.lastMoves.length > 9) {
+
         var offsetX = -50 * (this.props.player.z - this.props.player.minZ) / (this.props.player.maxZ - this.props.player.minZ);
         var offsetZ = this.props.player.minZ;
         var offsetY = (this.props.player.z * 1.5) - (offsetZ * 1.5);
