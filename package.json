@@ -4,6 +4,7 @@
     "description": "Multeor",
     "dependencies": {
         "socket.io": "~0.9.6",
-        "mime": "~1.2.7"
+        "mime": "~1.2.7",
+	"mkdirp": "~0.3.5"
     }
 }

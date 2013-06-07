@@ -4,7 +4,7 @@
 if (typeof io === 'undefined') {
     $('.main').hide();
     $('#error').show();
-    $('#error-message').html('Can\'t connect to Multeor server');
+    $('#error-message').html('Can\'t connect to Multeor server.<br />This could be caused by a blocking firewall or a problem at our end');
 
 } else if (!Modernizr.sessionstorage || !Modernizr.canvas || !Modernizr.websockets) {
     $('.main').hide();

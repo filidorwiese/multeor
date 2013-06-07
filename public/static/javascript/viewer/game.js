@@ -138,7 +138,7 @@ Game.prototype.tick = function(context, delta) {
     this.renderEntities(context, numberOfTiles, bgBase, bgModulus);
 
     // If near the end of the world, take over control and render to leaderboard positions
-    if (this.props.state == 'STARTED' && this.props.worldX > ((this.props.world.length * 1000) - 7000)) {
+    if (this.props.state == 'STARTED' && this.props.worldX > ((this.props.world.length * 1000) - 10000)) {
         this.props.state = 'LEADERBOARD';
         this.prepareLeaderboard();
     }
@@ -169,11 +169,7 @@ Game.prototype.renderBackgrounds = function(context, numberOfTiles, bgBase, bgMo
         // image, sx, sy, sw, sh,  x,    y, w, height
         var bgImage = this.getImage(tile.background);
         if (bgImage) {
-            //try {
-                context.drawImage(bgImage, sx, 0, sw, context.canvas.height, x, 0, sw, context.canvas.height);
-            //} catch(err) {
-            //    Upon.log(tile.background + ', '+ sx + ', 0, ' + sw + ', ' + canvas.height + ', ' + x + ', 0, ' + sw + ', ' + canvas.height);
-            //}
+            context.drawImage(bgImage, sx, 0, sw, context.canvas.height, x, 0, sw, context.canvas.height);
         }
     }
 };
@@ -194,7 +190,7 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
     var currentSpriteFrame = Math.floor(this.props.spriteAnimationFrame);
 
     // Render destroyables
-    // Note: it needs to some sprites forwards/backwards in case of big sprites that don't fit in one screen
+    // Note: it needs to look at some tiles ahead/backwards in case of bigger sprites that don't fit in one screen
     for (var ii = -3; ii <= numberOfTiles + 1; ii++) {
         var tile = this.props.world[bgBase + ii];
         if (typeof tile == 'undefined') { continue; }
@@ -245,7 +241,7 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
 
                     // Play audio effect
                     if (spriteObject.audio && spriteObject.audio != 'none') {
-                        this.props.audio[spriteObject.audio].volume(1).play();//.pos3d(x, y, z)
+                        this.props.audio[spriteObject.audio].volume(1).play();
                     }
                 }
             }

@@ -3,6 +3,7 @@
 // https://github.com/LearnBoost/Socket.IO/wiki/Configuring-Socket.IO
 var fs = require('fs');
 var sys = require('sys');
+var mkdirp = require('mkdirp');
 var io = require('socket.io').listen(843);
 io.enable('browser client minification');
 io.enable('browser client etag');
@@ -169,12 +170,19 @@ io.sockets.on('connection', function(socket) {
         // Store leaderboard image
         var leaderboardImage = false;
         if (data.leaderboard) {
-            var leaderboardPath = __dirname + '/public/leaderboards/';
-            var leaderboardImage = 'leaderboard_' + new Date().getTime() + '_' + data.gameRoom + '.png';
-            var image = data.leaderboard.replace(/^data:image\/\w+;base64,/, '');
-            var buf = new Buffer(image, 'base64');
-            fs.writeFile(leaderboardPath + leaderboardImage, buf);
-            log('Game-end: Saving leaderboard to ' + leaderboardPath + leaderboardImage);
+            var date = new Date();
+            var leaderboardPath = __dirname + '/public/leaderboards/' + date.getUTCFullYear() + '/' + (date.getUTCMonth()+1) + '/' + date.getUTCDate() + '/';
+            mkdirp(leaderboardPath, function (err) {
+                if (err) {
+                    log(err);
+                } else {
+                    var leaderboardImage = 'leaderboard_' + new Date().getTime() + '_' + data.gameRoom + '.png';
+                    var image = data.leaderboard.replace(/^data:image\/\w+;base64,/, '');
+                    var buf = new Buffer(image, 'base64');
+                    fs.writeFile(leaderboardPath + leaderboardImage, buf);
+                    log('Game-end: Saving leaderboard to ' + leaderboardPath + leaderboardImage);
+                }
+            });            
         }
         
         for (var ii in currentGames[data.gameRoom].players) {
