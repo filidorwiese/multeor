@@ -10,7 +10,7 @@ var Game = function(levelPath, code) {
         images: {},
         audio: {},
         world: false,
-        worldX: 50000,
+        worldX: 0,
         worldSpeed: 10,
         destroyed: {},
         explosions: [],
@@ -180,7 +180,8 @@ Game.prototype.renderBackgrounds = function(context, numberOfTiles, bgBase, bgMo
 
 Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModulus) {
     // Maintain entities array
-    var entities = [];
+    var entities = {};
+    var entitiesKeys = [];
     var entitiesOffset = 0;
 
     // Globally update destroyable spriteAnimationFrame
@@ -193,8 +194,8 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
     var currentSpriteFrame = Math.floor(this.props.spriteAnimationFrame);
 
     // Render destroyables
-    // Note: it needs to look 3 sprites backwards in case of big sprites that don't fit in one screen
-    for (var ii = -3; ii <= numberOfTiles; ii++) {
+    // Note: it needs to some sprites forwards/backwards in case of big sprites that don't fit in one screen
+    for (var ii = -3; ii <= numberOfTiles + 1; ii++) {
         var tile = this.props.world[bgBase + ii];
         if (typeof tile == 'undefined') { continue; }
 
@@ -218,6 +219,7 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
 
             // Draw entity
             entities[spriteZindex] = new Destroyable(spriteObject, spriteImage, x, y, z, destroyedColorIndex, currentSpriteFrame);
+            entitiesKeys.push(spriteZindex);
 
             // Do collision detection
             if (spriteObject.destroyable && !destroyedColorIndex) {
@@ -255,10 +257,12 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
     for (var player in players) {
         playerZindex = (players[player].props.vector[2] * 1000) + 900 + players[player].props.playerNumber;
         entities[playerZindex] = players[player];
+        entitiesKeys.push(playerZindex);
 
         // Render Players shadows
         shadowZindex = players[player].props.playerNumber + 1500;
         entities[shadowZindex] = new Shadows(players[player]);
+        entitiesKeys.push(shadowZindex);
     }
 
     // Render explosions
@@ -267,15 +271,17 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
             var particle = this.props.explosions[key];
             if (!particle.dead) {
                 entities[particle.zIndex] = particle;
+                entitiesKeys.push(particle.zIndex);
             }
         }
     }
 
+    // Sort entities by key
+    entitiesKeys.sort();
+    
     // Render all entities on canvas
-    // sorting http://stackoverflow.com/questions/5199901/how-to-sort-an-associative-array-by-its-values-in-javascript
-    //entities.sort(function(a, b) { return a[1] - b[1]; });
-    for (var key in entities) {
-        entities[key].draw(context, bgModulus);
+    for (var ii = 0; ii < entitiesKeys.length; ii++) {
+        entities[entitiesKeys[ii]].draw(context, bgModulus);
     }
 };
 
