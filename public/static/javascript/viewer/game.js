@@ -73,7 +73,7 @@ Game.prototype.loadAudio = function() {
     });
 
     $(window).off('game-audio-stop').on('game-audio-stop', function(e){
-        var audio = { volume: 1 };
+        var audio = { volume: 0.5 };
         $(audio).animate({
             volume: 0
         }, {
@@ -138,7 +138,7 @@ Game.prototype.tick = function(context, delta) {
     this.renderEntities(context, numberOfTiles, bgBase, bgModulus);
 
     // If near the end of the world, take over control and render to leaderboard positions
-    if (this.props.state == 'STARTED' && this.props.worldX > ((this.props.world.length * 1000) - 10000)) {
+    if (this.props.state == 'STARTED' && this.props.worldX > ((this.props.world.length * 1000) - 8000)) {
         this.props.state = 'LEADERBOARD';
         this.prepareLeaderboard();
     }
