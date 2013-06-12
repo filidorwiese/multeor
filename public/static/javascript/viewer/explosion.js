@@ -58,8 +58,8 @@ function ExplosionParticle() {
 		this.y += this.velocityY * ms / 1000.0;
 	};
 
-	this.draw = function(context, bgModules, delta) {
-        this.update(20);
+	this.draw = function(context) {
+        this.update(15);
 		if (this.scale < 1) { return; }
 
 		context.save();

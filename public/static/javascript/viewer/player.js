@@ -82,6 +82,37 @@ Player.prototype.draw = function(context) {
     }
 };
 
+Player.prototype.shadow = function(context) {
+    if (this.props.lastMoves.length > 9) {
+        var offsetX = -50 * (this.props.z - this.props.minZ) / (this.props.maxZ - this.props.minZ);
+        var offsetZ = this.props.minZ;
+        var offsetY = (this.props.z * 1.5) - (offsetZ * 1.5);
+        var alpha = .1;
+        if (offsetY < 5) { return; }
+
+        var tailX = 0 + offsetX;
+        var tailY = this.props.lastMoves[0][1] + offsetY;
+        var control1X = this.props.lastMoves[6][0] + offsetX;
+        var control1Y = this.props.lastMoves[6][1] + offsetY;
+        var control2X = this.props.lastMoves[7][0] + offsetX;
+        var control2Y = this.props.lastMoves[7][1] + offsetY;
+        var headX = 100 + this.props.lastMoves[9][0] + offsetX;
+        var headY = this.props.lastMoves[9][1] + offsetY;
+        context.lineWidth = offsetZ;
+
+        var lingrad2 = context.createLinearGradient(0,0, (headX - context.lineWidth / 2),0);
+        lingrad2.addColorStop(1, 'rgba(36,42,48,' + alpha + ')');
+        lingrad2.addColorStop(0, 'rgba(36,42,48,0)');
+        context.strokeStyle = lingrad2;
+        context.lineCap = 'round';
+
+        context.beginPath();
+        context.moveTo(tailX, tailY);
+        context.bezierCurveTo(control1X, control1Y, control2X, control2Y, headX, headY);
+        context.stroke();
+    }
+}
+
 Player.prototype.updatePosition = function() {
     if (this.props.locked) {
         // Adjust player to endX / endY / endZ
@@ -187,4 +218,44 @@ Player.prototype.drawPolygon = function(context, x, y, radius, numOfSides) {
 
     context.closePath();
     context.fill();
+};
+
+
+var PlayerShadow = function(player) {
+    var self = this;
+    self.props = {
+        player: player.props
+    };
+};
+
+PlayerShadow.prototype.draw = function(context) {
+    if (this.props.player.lastMoves.length > 9) {
+
+        var offsetX = -50 * (this.props.player.z - this.props.player.minZ) / (this.props.player.maxZ - this.props.player.minZ);
+        var offsetZ = this.props.player.minZ;
+        var offsetY = (this.props.player.z * 1.5) - (offsetZ * 1.5);
+        var alpha = .1;
+        if (offsetY < 5) { return; }
+
+        var tailX = 0 + offsetX;
+        var tailY = this.props.player.lastMoves[0][1] + offsetY;
+        var control1X = this.props.player.lastMoves[6][0] + offsetX;
+        var control1Y = this.props.player.lastMoves[6][1] + offsetY;
+        var control2X = this.props.player.lastMoves[7][0] + offsetX;
+        var control2Y = this.props.player.lastMoves[7][1] + offsetY;
+        var headX = 100 + this.props.player.lastMoves[9][0] + offsetX;
+        var headY = this.props.player.lastMoves[9][1] + offsetY;
+        context.lineWidth = offsetZ;
+
+        var lingrad2 = context.createLinearGradient(0,0, (headX - context.lineWidth / 2),0);
+        lingrad2.addColorStop(1, 'rgba(36,42,48,' + alpha + ')');
+        lingrad2.addColorStop(0, 'rgba(36,42,48,0)');
+        context.strokeStyle = lingrad2;
+        context.lineCap = 'round';
+
+        context.beginPath();
+        context.moveTo(tailX, tailY);
+        context.bezierCurveTo(control1X, control1Y, control2X, control2Y, headX, headY);
+        context.stroke();
+    }
 };

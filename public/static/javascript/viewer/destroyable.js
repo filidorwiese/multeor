@@ -14,7 +14,7 @@ var Destroyable = function(sprite, image, x, y, z, destroyedColorIndex, currentS
     };
 };
 
-Destroyable.prototype.draw = function(context, bgModulus) {
+Destroyable.prototype.draw = function(context) {
     // Don't draw when not in view
     if (this.props.x < (this.props.frameWidth * -1) || this.props.x > context.canvas.width) { return false; }
 

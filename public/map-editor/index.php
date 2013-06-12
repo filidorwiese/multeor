@@ -37,8 +37,9 @@
 	}
 
 	#grid-and-settings {
-		width:1220px;
+		min-width:1275px;
 	}
+
 	#grid {
 		height:600px;
 		position:relative;
@@ -52,8 +53,8 @@
 	}
 
 	#output {
-		height:300px;
-		width:200px;
+		height:280px;
+		width:274px;
 	}
 
 	#settings {
@@ -96,10 +97,8 @@
 
 	#prev-next-tile {
 		float:right;
-		margin-right:220px;
+		margin-right:564px;
 	}
-
-
 	</style>
 </head>
 
@@ -171,6 +170,10 @@
 					<span id="image"></span>
 				</div>
 				<div class="prop">
+					<label>Id:</label>
+					<span id="id"></span>
+				</div>
+				<div class="prop">
 					<label for="layer">Layer</label>
 					<select id="layer">
 						<option>1</option>
@@ -181,6 +184,10 @@
 				<div class="prop">
 					<label>Destroyable</label>
 					<input id="destroyable" type="checkbox" />
+				</div>
+				<div class="prop">
+					<label>Destroylink</label>
+					<input id="destroylink" type="text" />
 				</div>
 				<div class="prop">
 					<label>Animate</label>

@@ -190,7 +190,7 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
     var currentSpriteFrame = Math.floor(this.props.spriteAnimationFrame);
 
     // Render destroyables
-    // Note: it needs to look at some tiles ahead/backwards in case of bigger sprites that don't fit in one screen
+    // Note: it needs to look at some tiles backwards/ahead in case of bigger sprites that don't fit in one screen
     for (var ii = -3; ii <= numberOfTiles + 1; ii++) {
         var tile = this.props.world[bgBase + ii];
         if (typeof tile == 'undefined') { continue; }
@@ -219,13 +219,18 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
 
             // Do collision detection
             if (spriteObject.destroyable && !destroyedColorIndex) {
-                var playerCollidedId = entities[spriteZindex].collides(players, bgModulus);
+                var playerCollidedId = entities[spriteZindex].collides(players);
 
                 if (playerCollidedId > 0) {
                     // Remember destroyed state
                     var playerCollidedColor = players[playerCollidedId].props.color;
                     var playerCollidedColorIndex = $.inArray(playerCollidedColor, playerColors) + 1;
                     this.props.destroyed[spriteObject.id] = playerCollidedColorIndex;
+
+                    // If entity has a destroylink, then also destroy linked entity
+                    if (spriteObject.destroylink) {
+                        this.props.destroyed[spriteObject.destroylink] = playerCollidedColorIndex;                        
+                    }
 
                     // Update playerScore
                     if (spriteObject.score > 0) {
@@ -257,7 +262,7 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
 
         // Render Players shadows
         shadowZindex = players[player].props.playerNumber + 1500;
-        entities[shadowZindex] = new Shadows(players[player]);
+        entities[shadowZindex] = new PlayerShadow(players[player]);
         entitiesKeys.push(shadowZindex);
     }
 
@@ -271,13 +276,13 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
             }
         }
     }
-
+    
     // Sort entities by key
     entitiesKeys.sort();
     
     // Render all entities on canvas
     for (var ii = 0; ii < entitiesKeys.length; ii++) {
-        entities[entitiesKeys[ii]].draw(context, bgModulus);
+        entities[entitiesKeys[ii]].draw(context);
     }
 };
 

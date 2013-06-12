@@ -17,6 +17,7 @@ var spriteDefault = {
 	left: 0,
 	layer: 1,
 	destroyable: false,
+	destroylink: '',
 	animate: false,
 	score: 1,
 	audio: 'none'
@@ -43,6 +44,7 @@ function updateSprite() {
 		left: parseInt(sprite.css('left'), 10),
 		layer: sprite.data('layer'),
 		destroyable: sprite.data('destroyable'),
+		destroylink: (sprite.data('destroyable') ? sprite.data('destroylink') : spriteDefault.destroylink),
 		animate: sprite.data('animate'),
 		score: sprite.data('score'),
 		audio: sprite.data('audio')
@@ -80,10 +82,18 @@ function selectSprite(sprite) {
 	$('#spriteProps').addClass('selected');
 	$('#spriteProps #layer').val(sprite.data('layer'));
 	$('#spriteProps #destroyable').prop('checked', sprite.data('destroyable'));
+	$('#spriteProps #destroylink').val(sprite.data('destroylink'));
 	$('#spriteProps #animate').prop('checked', sprite.data('animate'));
 	$('#spriteProps #score').val(sprite.data('score'));
 	$('#spriteProps #audio').val(sprite.data('audio'));
 	$('#spriteProps #image').html(sprite.css('background-image').replace(/\\/g, '/').replace( /.*\//, '' ).replace(')', ''));
+	$('#spriteProps #id').text(sprite.data('id'));
+
+	if ($('#spriteProps #destroyable').is(':checked')) {
+		$('#spriteProps #destroylink').removeAttr('disabled');
+	} else {
+		$('#spriteProps #destroylink').attr('disabled', 'disabled');
+	}
 }
 
 function deselectSprite() {
@@ -104,19 +114,14 @@ function getOutput() {
 
 			for (sprite in tiles[tile].sprites) {
 				spriteCounter++;
-
-	            var id = 'xxxxxxxxxxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-	                var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-	                return v.toString(16);
-	            });
-
 				resultSprites.push({
-					id: id,
+					id: sprite,
 					path: tiles[tile].sprites[sprite].path,
 					top: parseInt(tiles[tile].sprites[sprite].top, 10),
 					left: parseInt(tiles[tile].sprites[sprite].left, 10),
 					layer: tiles[tile].sprites[sprite].layer,
 					destroyable: tiles[tile].sprites[sprite].destroyable,
+					destroylink: tiles[tile].sprites[sprite].destroylink,
 					animate: tiles[tile].sprites[sprite].animate,
 					score: tiles[tile].sprites[sprite].score,
 					audio: tiles[tile].sprites[sprite].audio
@@ -143,11 +148,12 @@ function removeSprite(sprite) {
 	Log('Sprite removed');
 }
 
-function addSprite(id, path, top, left, layer, destroyable, animate, score, audio) {
+function addSprite(id, path, top, left, layer, destroyable, destroylink, animate, score, audio) {
 	if (typeof top == 'undefined') top = spriteDefault.top;
 	if (typeof left == 'undefined') left = spriteDefault.left;
 	if (typeof layer == 'undefined') layer = spriteDefault.layer;
 	if (typeof destroyable == 'undefined') destroyable = spriteDefault.destroyable;
+	if (typeof destroylink == 'undefined') destroylink = spriteDefault.destroylink;
 	if (typeof animate == 'undefined') animate = spriteDefault.animate;
 	if (typeof score == 'undefined') score = spriteDefault.score;
 	if (typeof audio == 'undefined') audio = spriteDefault.audio;
@@ -158,6 +164,7 @@ function addSprite(id, path, top, left, layer, destroyable, animate, score, audi
 		.data('path', path)
 		.data('layer', layer)
 		.data('destroyable', destroyable)
+		.data('destroylink', destroylink)
 		.data('animate', animate)
 		.data('score', score)
 		.data('audio', audio);
@@ -191,10 +198,12 @@ function addSprite(id, path, top, left, layer, destroyable, animate, score, audi
 		left: left,
 		layer: layer,
 		destroyable: destroyable,
+		destroylink: destroylink,
 		animate: animate,
 		score: score,
 		audio: audio
 	};
+
 	// containment: 'parent',
 	sprite.draggable({ distance: 10, stop: updateSprite } ).appendTo($('#grid'));
 	return sprite;
@@ -235,16 +244,18 @@ $('#import').on('click', function(event) {
 			if (typeof resultTiles[tile].sprites[sprite].left == 'undefined') resultTiles[tile].sprites[sprite].left = spriteDefault.left;
 			if (typeof resultTiles[tile].sprites[sprite].layer == 'undefined') resultTiles[tile].sprites[sprite].layer = spriteDefault.layer;
 			if (typeof resultTiles[tile].sprites[sprite].destroyable == 'undefined') resultTiles[tile].sprites[sprite].destroyable = spriteDefault.destroyable;
+			if (typeof resultTiles[tile].sprites[sprite].destroylink == 'undefined') resultTiles[tile].sprites[sprite].destroylink = spriteDefault.destroylink;
 			if (typeof resultTiles[tile].sprites[sprite].animate == 'undefined') resultTiles[tile].sprites[sprite].animate = spriteDefault.animate;
 			if (typeof resultTiles[tile].sprites[sprite].score == 'undefined') resultTiles[tile].sprites[sprite].score = spriteDefault.score;
 			if (typeof resultTiles[tile].sprites[sprite].audio == 'undefined') resultTiles[tile].sprites[sprite].audio = spriteDefault.audio;
 
-			sprites[Math.random()] = {
+			sprites[resultTiles[tile].sprites[sprite].id] = {
 				path: resultTiles[tile].sprites[sprite].path,
 				top: resultTiles[tile].sprites[sprite].top,
 				left: resultTiles[tile].sprites[sprite].left,
 				layer: resultTiles[tile].sprites[sprite].layer,
 				destroyable: resultTiles[tile].sprites[sprite].destroyable,
+				destroylink: resultTiles[tile].sprites[sprite].destroylink,
 				animate: resultTiles[tile].sprites[sprite].animate,
 				score: resultTiles[tile].sprites[sprite].score,
 				audio: resultTiles[tile].sprites[sprite].audio
@@ -291,6 +302,7 @@ function renderTile(tile) {
 			tile.sprites[sprite].left,
 			tile.sprites[sprite].layer,
 			tile.sprites[sprite].destroyable,
+			tile.sprites[sprite].destroylink,
 			tile.sprites[sprite].animate,
 			tile.sprites[sprite].score,
 			tile.sprites[sprite].audio
@@ -343,7 +355,10 @@ $('#lastTile').on('click', function(event) {
 });
 
 $('#addSprite').on('click', function(event){
-	var id = Math.random();
+	var id = 'xxxxxxxxxxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+        return v.toString(16);
+    });
 	var path = $('#sprites').val();
 
 	sprite = addSprite(id, path);
@@ -368,6 +383,7 @@ function setSprites() {
 			left: sprite.position().left,
 			layer: sprite.data('layer'),
 			destroyable: sprite.data('destroyable'),
+			destroylink: sprite.data('destroylink'),
 			animate: sprite.data('animate'),
 			score: sprite.data('score'),
 			audio: sprite.data('audio')
@@ -466,9 +482,17 @@ $(document).ready(function() {
 	$('#spriteProps :input').on('change', function(){
 		$('.sprite--selected').data('layer', $('#spriteProps #layer').val())
 		.data('destroyable', ($('#spriteProps #destroyable').is(':checked') ? true : false))
+		.data('destroylink', $('#spriteProps #destroylink').val())
 		.data('animate', ($('#spriteProps #animate').is(':checked') ? true : false))
 		.data('score', parseInt($('#spriteProps #score').val(), 10) || 0)
 		.data('audio', $('#spriteProps #audio').val());
+
+		if ($('#spriteProps #destroyable').is(':checked')) {
+			$('#spriteProps #destroylink').removeAttr('disabled');
+		} else {
+			$('#spriteProps #destroylink').attr('disabled', 'disabled');
+		}
+
 		updateSprite();
 	});
 
