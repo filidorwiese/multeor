@@ -9,20 +9,20 @@ Upon.require({
     'title-screen': [
         'title-screen.min.js'
     ],
-    'title-screen-development': [
+    'title-screen-dev': [
         'title-screen/title-screen.js',
         'controller/facebook.js'
     ],
     'about': [
         'about.min.js'
     ],
-    'about-development': [
+    'about-dev': [
         'about/about.js'
     ],
     'viewer': [
         'viewer.min.js'
     ],
-    'viewer-development': [
+    'viewer-dev': [
         'viewer/profiler.js',
         'viewer/game.js',
         'viewer/player.js',
@@ -33,7 +33,7 @@ Upon.require({
     'controller': [
         'controller.min.js'
     ],
-    'controller-development': [
+    'controller-dev': [
         'controller/controller.js',
         'controller/facebook.js'
     ]
