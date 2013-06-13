@@ -6,20 +6,20 @@ Upon.require({
         'third-party/howler.min.js',
         'third-party/modernizr.custom.24408.js'
     ],
-    'title-screen-production': [
+    'title-screen': [
         'title-screen.min.js'
     ],
     'title-screen-development': [
         'title-screen/title-screen.js',
         'controller/facebook.js'
     ],
-    'about-production': [
-        'about/about.min.js'
+    'about': [
+        'about.min.js'
     ],
     'about-development': [
         'about/about.js'
     ],
-    'viewer-production': [
+    'viewer': [
         'viewer.min.js'
     ],
     'viewer-development': [
@@ -30,7 +30,7 @@ Upon.require({
         'viewer/explosion.js',
         'viewer/viewer.js'
     ],
-    'controller-production': [
+    'controller': [
         'controller.min.js'
     ],
     'controller-development': [

@@ -30,6 +30,7 @@ case "$1" in
         /usr/bin/java -jar $JSPATH/google-closure-javascript.jar --js $JSPATH/viewer/*.js --js_output_file=$JSPATH/viewer.min.js
         /usr/bin/java -jar $JSPATH/google-closure-javascript.jar --js $JSPATH/controller/*.js --js_output_file=$JSPATH/controller.min.js
         /usr/bin/java -jar $JSPATH/google-closure-javascript.jar --js $JSPATH/title-screen/*.js --js_output_file=$JSPATH/title-screen.min.js
+        /usr/bin/java -jar $JSPATH/google-closure-javascript.jar --js $JSPATH/about/*.js --js_output_file=$JSPATH/about.min.js
         /var/lib/gems/1.8/bin/compass compile $DIR
     ;;
     *)
