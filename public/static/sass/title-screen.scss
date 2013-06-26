@@ -11,6 +11,7 @@
         background: #272d33;
 
         h1 {
+            font-family: 'NevisBold';
             font-size: 90px;
             text-align: center;
             margin-top: 40px;
@@ -39,9 +40,8 @@
         }
 
         .info-graphic {
-            background: url(../images/sprite.png) center 5px no-repeat;
-            height: 240px;
-            margin-top: 30px;
+            background: url(../images/infographic_03_short.gif) center 5px no-repeat;
+            height: 380px;
         }
     }
 
@@ -99,7 +99,7 @@
 
         a {
             color: #272d33;
-            font: 20px 'nevis';
+            font: 20px 'NevisRegular';
             border-top:5px solid #ffe400;
             border-bottom:5px solid #b6a300;
 
@@ -116,7 +116,7 @@
 
         a {
             color: #272d33;
-            font: 20px 'nevis';
+            font: 20px 'NevisRegular';
             border-top:5px solid #ffae1a;
             border-bottom:5px solid #ba7800;
 
@@ -145,7 +145,7 @@
 
     #use-as-viewer {
         background:#191f26;
-	font-size:13px;
+	    font-size:13px;
 
         a {
             border-top:5px solid #191f26;
@@ -160,12 +160,11 @@
     }
 }
 
-@media screen and (max-device-width: 960px) {
-//@media screen and (max-width: 960px) {
-    #desktop-container {
+@media screen and (max-width: 960px) {
+    html.touch #desktop-container {
         display:none;
     }
-    #mobile-container {
+    html.touch #mobile-container {
         display:block;
     }
 }

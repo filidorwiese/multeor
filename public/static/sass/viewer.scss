@@ -6,6 +6,8 @@
 @import "_base";
 
 .wrapper {
+    min-width:960px;
+
     .main {
         border-top: 19px solid black;
         background: #272d33;
@@ -77,9 +79,8 @@
                 }
 
                 .step-third {
-
                     p {
-                        margin-bottom: 130px;
+                        margin-bottom: 137px;
                     }
                 }
             }
@@ -109,8 +110,12 @@
             z-index: 1000;
             width:100%;
             overflow: hidden;
-            font-size:170px;
             margin-top:215px;
+
+            span {
+                font-size:200px;
+                letter-spacing:-9px;
+            }
         }
 
         canvas {

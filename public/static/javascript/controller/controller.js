@@ -70,7 +70,7 @@ if (typeof io === 'undefined') {
         socket.on('player-joined', function(data){
             player.joined = true;
             emitPlayerUpdate();
-            $('#score').html('Press Start!');
+            $('#score').html('Synced');
         });
 
         socket.on('game-get-ready', function(data){
@@ -89,9 +89,11 @@ if (typeof io === 'undefined') {
             if (data.highScore) {
                 var fbText = 'Playing Multeor I scored a new highscore of ' + player.score + ' points!';
                 var scoreText = '<h1>Awesome, you scored a new highscore: <span>' + player.score + '</span></h1>';
+                var opengraphImage = 'http://multeor.com/static/images/opengraph-600x600-highscore.png';
             } else {
                 var fbText = 'Playing Multeor I scored ' + player.score + ' points!';
                 var scoreText = '<h1>Good job, you scored: <span>' + player.score + '</span></h1>';
+                var opengraphImage = 'http://multeor.com/static/images/opengraph-600x600.png';
             }
 
             $('#game-start, #controller').hide();
@@ -99,7 +101,7 @@ if (typeof io === 'undefined') {
             $('#game-end .you-scored-text').html(scoreText);
             $('#facebook-share a').on('click', function(event){
                 event.preventDefault();
-                fbPublish(fbText, 'http://multeor.com/static/images/opengraph-200x120.png', function(status){
+                fbPublish(fbText, 'http://multeor.com/static/images/opengraph-600x600.png', function(status){
                     if (status) {
                         $('#facebook-share').hide();
                     }

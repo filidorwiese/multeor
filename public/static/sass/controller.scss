@@ -41,7 +41,7 @@ html, body {
 
     #message {
         text-align: center;
-        font: 18px 'nevis';
+        font: 18px 'NevisRegular';
         padding:20px;
         background-color:#272D33;
         min-height:90px;
@@ -58,7 +58,7 @@ html, body {
             border:5px solid #b6a300;
             width:75%;
             margin:0 auto;
-            font: 18px 'nevis';
+            font: 18px 'NevisRegular';
             color:#272d33;
         }
 
@@ -171,7 +171,7 @@ html, body {
 
         a {
             color: #272d33;
-            font: 20px 'nevis';
+            font: 20px 'NevisRegular';
         }
     }
 
@@ -180,7 +180,7 @@ html, body {
 
         a {
             color: #272d33;
-            font: 20px 'nevis';
+            font: 20px 'NevisRegular';
         }
     }
 
@@ -218,26 +218,26 @@ html, body {
         left:0;
         width:60%;
         height:100%;
-        background:url(../images/controls2_stickholder.png) center center no-repeat;
+        background:url(../images/controls3_stickholder.png) center center no-repeat;
 
         #joystick {
             position: absolute;
             z-index:91;
             top:50%;
             left:50%;
-            margin-left:-119px;
-            margin-top:-119px;
-            width:238px;
-            height:238px;
+            margin-left:-138px;
+            margin-top:-138px;
+            width:277px;
+            height:277px;
 
             #stick {
                 position: absolute;
                 z-index:92;
-                width: 113px;
-                height: 113px;
-                margin-left:63px;
-                margin-top:62px;
-                background: url(../images/controls2_stick.svg) left top no-repeat;
+                width: 107px;
+                height: 107px;
+                margin-left:84px;
+                margin-top:84px;
+                background: url(../images/controls3_stick.png) left top no-repeat;
                 @include apply-origin(0 50%, 0);
                 @include transition(rotate(180deg));
             }
@@ -284,11 +284,11 @@ html, body {
 
     #score {
         position:absolute;
-        left:50%;
+        right:0;
         top:0;
         z-index:100;
         display: inline-block;
-        font-family: 'nevis';
+        font-family: 'NevisRegular';
         font-size: 33px;
         color: white;
         min-width:70px;
