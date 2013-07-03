@@ -12,7 +12,7 @@
     .heading {
         font-size: 30px;
         text-align: center;
-        padding-bottom:40px;
+        padding-bottom:57px;
 
         h1 {
             font-family: 'NevisBold';
@@ -51,6 +51,10 @@
     background-color:#3d454d;
     padding:50px 0;
 
+    .row {
+        padding-top: 42px;
+    }
+
     h3 {
         font-size:30px;
         margin-bottom:30px;
@@ -70,20 +74,34 @@
     }
 
     ul.buddies {
-        width:360px;
+        position: relative;
+        width:160px;
         margin:0 auto;
 
         li {
             display:inline-block;
+            position: absolute;
+
+            &.dasblitz-item {
+                
+            }
+
+            &.fili-item {
+                top: 97px;
+                left: 41px;
+            }
+
+            &.avth-item {
+                top: 194px;
+            }
 
             a {
                 display: inline-block;
                 text-indent:100%;
                 overflow:hidden;
                 white-space:nowrap;
-                width:85px;
-                height:88px;
-                margin-right: 45px;
+                width:114px;
+                height:114px;
                 background-image:url(../images/about-buddies.png);
                 background-repeat: no-repeat;
 
@@ -92,11 +110,11 @@
                 }
 
                 &.fili-icon {
-                    background-position:-85px 0px;
+                    background-position:-114px 0px;
                 }
 
                 &.avth-icon {
-                    background-position:-170px 0px;
+                    background-position:-228px 0px;
                     margin-right: 0px;
                 }
             }
@@ -104,10 +122,9 @@
     }
 
     .info-graphic {
-        background: url(../images/sprite.png) center 5px no-repeat;
-        height:240px;
-        margin-top:75px;
-        margin-bottom:30px;
+        background: url(../images/sprite.gif) center 5px no-repeat;
+        height:358px;
+        margin-top: -32px;
     }
 
     #high-score {
@@ -122,25 +139,38 @@
         padding:30px 0;
 
         ul.buddies {
-            margin-bottom:0;
+            margin-bottom: 10px;
             width:230px;
 
-            li a {
-                width:66px;
-                height:69px;
-                margin-right:10px;
-                background-image:url(../images/about-buddies-small.png) !important;
+            li {
+                position: relative;
 
-                &.dasblitz-icon {
-                    background-position: 0px 0px;
+                &.fili-item {
+                    top: auto;
+                    left: auto;
                 }
 
-                &.fili-icon {
-                    background-position:-66px 0px;
+                &.avth-item {
+                    top: auto;
                 }
+                
+                a {
+                    width:66px;
+                    height:69px;
+                    margin-right:10px;
+                    background-image:url(../images/about-buddies-small.png) !important;
 
-                &.avth-icon {
-                    background-position:-133px 0px;
+                    &.dasblitz-icon {
+                        background-position: 0px 0px;
+                    }
+
+                    &.fili-icon {
+                        background-position:-66px 0px;
+                    }
+
+                    &.avth-icon {
+                        background-position:-133px 0px;
+                    }
                 }
             }
         }
@@ -184,10 +214,14 @@
         background-size:contain;
     }
 
-    #play-game {
-        margin-left:60px;
-        margin-top:60px;
+    .button-row {
+        text-align: center;
+
+        #play-game {
+            margin: 0 auto;
+        }
     }
+
 }
 @media screen and (max-width: $mobileMax) {
     #requirements {
@@ -208,7 +242,18 @@
 }
 
 .footer {
-    padding-top:100px;
+
+    .footer-nav {
+        text-align: right;
+        padding-bottom: 50px;
+
+        a{
+            color: #616467;
+            display: inline-block;
+            margin: 30px;
+        }
+    }
+
     height:216px;
     background: #191f26;
 }
