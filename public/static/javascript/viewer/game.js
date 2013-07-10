@@ -10,7 +10,7 @@ var Game = function(levelPath, code) {
         images: {},
         audio: {},
         world: false,
-        worldX: 0,
+        worldX: 55000,
         worldSpeed: 10,
         destroyed: {},
         explosions: [],
@@ -334,6 +334,10 @@ Game.prototype.renderLeaderboard = function(context) {
             }
         }
     }
+
+    // Emit game-end
+    var leaderboardImage = false;
+    socket.emit('game-end', {viewerId: viewerId, gameRoom: gameRoom, leaderboard: leaderboardImage});
 };
 
 Game.prototype.message = function(message) {
@@ -410,10 +414,8 @@ Game.prototype.endGame = function(){
         bufferCtx.fillStyle = '#FFFFFF';
         bufferCtx.fillText('Multeor', 650, 550);
         var leaderboardImage = buffer.toDataURL();
-
-        // Emit game-end
-        socket.emit('game-end', {viewerId: viewerId, gameRoom: gameRoom, leaderboard: leaderboardImage});
-
+        socket.emit('store-leaderboard', {viewerId: viewerId, gameRoom: gameRoom, leaderboard: leaderboardImage});
+        
         $('.leaderboard-container').fadeIn(1000);
     }, 1000);
 };

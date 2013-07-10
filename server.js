@@ -157,16 +157,14 @@ io.sockets.on('connection', function(socket) {
         socket.broadcast.to('room-' + data.gameRoom).emit('game-get-ready');
     });
 
-    socket.on('game-end', function(data){
-        //log('Game-end: ' + JSON.stringify(data));
-
+    socket.on('store-leaderboard', function(data){
         // Verify if this viewer is authorative for this gameRoom and that is exists
         if (!(verifyGameRoom(data.gameRoom, data.viewerId))) {
-			log('Game-end: kickPlayer');
+            log('Game-end: kickPlayer');
             kickClient(socket);
             return false;
         }
-
+        
         // Store leaderboard image
         var leaderboardImage = false;
         if (data.leaderboard) {
@@ -183,6 +181,17 @@ io.sockets.on('connection', function(socket) {
                     log('Game-end: Saving leaderboard to ' + leaderboardPath + leaderboardImage);
                 }
             });            
+        }
+    });
+
+    socket.on('game-end', function(data){
+        //log('Game-end: ' + JSON.stringify(data));
+
+        // Verify if this viewer is authorative for this gameRoom and that is exists
+        if (!(verifyGameRoom(data.gameRoom, data.viewerId))) {
+			log('Game-end: kickPlayer');
+            kickClient(socket);
+            return false;
         }
         
         for (var ii in currentGames[data.gameRoom].players) {
@@ -208,7 +217,6 @@ io.sockets.on('connection', function(socket) {
 
             // Emit Game-end to players
             io.sockets.socket(ii).emit('game-end', {
-                leaderboard: 'http://multeor.com/leaderboards/' + leaderboardImage,
                 highScore: highScore
             });
         }

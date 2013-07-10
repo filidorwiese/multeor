@@ -97,7 +97,7 @@ if (typeof io === 'undefined') {
             }
 
             $('#game-start, #controller').hide();
-            $('#game-end').show();
+            $('#game-end').fadeIn(1000);
             $('#game-end .you-scored-text').html(scoreText);
             $('#facebook-share a').on('click', function(event){
                 event.preventDefault();

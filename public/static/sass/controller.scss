@@ -36,7 +36,7 @@ html, body {
 #game-start {
     display:none;
     border:19px solid #000;
-    min-height:100%;;
+    min-height:100%;
     background-color:#d6c000;
 
     #message {
@@ -268,9 +268,9 @@ html, body {
 
             &.pressed {
                 background-image:url(../images/controls4_up-down.svg);           
-                }
             }
         }
+    }
 
     #score {
         position:absolute;
@@ -284,6 +284,7 @@ html, body {
         width:35%;
         text-align:center;
         padding:8px 10px;
+        white-space:nowrap;
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
@@ -312,7 +313,13 @@ html, body {
     }
 }
 
-/*
+@media screen and (max-height: 300px) {
+    #controller #rightControls #boost {
+        top:60%;
+    }
+}
+
+
 html.no-svg #controller {
     #leftControls {
         background-image: url(../images/controls4_stickholder.png);
@@ -327,7 +334,7 @@ html.no-svg #controller {
 
             &.pressed {
                 background-image:url(../images/controls4_up-down.svg);                
-                }
+            }
         }
     }
-}*/
+}
