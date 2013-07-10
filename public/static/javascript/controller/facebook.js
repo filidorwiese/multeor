@@ -39,7 +39,6 @@ function fbGetProfile(callback) {
     if (!sessionStorage.getItem('facebook-profile')) {
         FB.api('/me?fields=id,name,picture', function(response) {
             sessionStorage.setItem('facebook-profile', JSON.stringify(response));
-            console.log(response);
             callback();
         });
     } else {

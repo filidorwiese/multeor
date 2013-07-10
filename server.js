@@ -1,10 +1,10 @@
-// Start websocket on port 843
+// Start websocket on port 443
 // https://github.com/LearnBoost/socket.io/wiki/Socket.IO-and-firewall-software
 // https://github.com/LearnBoost/Socket.IO/wiki/Configuring-Socket.IO
 var fs = require('fs');
 var sys = require('sys');
 var mkdirp = require('mkdirp');
-var io = require('socket.io').listen(843);
+var io = require('socket.io').listen(443);
 io.enable('browser client minification');
 io.enable('browser client etag');
 io.enable('browser client gzip');
@@ -199,15 +199,23 @@ io.sockets.on('connection', function(socket) {
             var highScore = false;
             if (currentGames[data.gameRoom].players[ii].playerName && currentGames[data.gameRoom].players[ii].score > highestScore[0].score) {
                 highScore = true;
-				
+
+                // Store playerIcon to file
+                var httpGet = require('http-get');
+                var options = {url: currentGames[data.gameRoom].players[ii].playerIcon};
+                var randomName = '/leaderboards/avatars/' + (+new Date()).toString(36) + '.jpg';
+                httpGet.get(options, __dirname + '/public/' + data.gameRoom + '_' + randomName, function (err, result) {
+                    if(err) { log(err); }
+                });
+
                 // Update high-score and write to public and private file
-                var tmpObject = {name: currentGames[data.gameRoom].players[ii].playerName, score: currentGames[data.gameRoom].players[ii].score};
+                var tmpObject = {name: currentGames[data.gameRoom].players[ii].playerName, score: currentGames[data.gameRoom].players[ii].score, icon: randomName};
                 fs.writeFile(highScorePublicFile, JSON.stringify(tmpObject), function(err) {
                     if(err) { log(err); } 
                 });
                 
                 tmpObject.ip = socket.handshake.address.address;
-				log('New highscore ' + tmpObject.score + ' by ' + tmpObject.name + ' from ip ' + tmpObject.ip);
+				log('New highscore ' + tmpObject.score + ' by ' + tmpObject.name + ' from ip ' + tmpObject.ip + ' using icon ' + randomName);
 				
                 highestScore.unshift(tmpObject);
                 fs.writeFile(highScorePrivateFile, JSON.stringify(highestScore), function(err) {

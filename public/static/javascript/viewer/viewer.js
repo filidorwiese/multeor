@@ -20,7 +20,7 @@ if (typeof io === 'undefined') {
         context.globalAlpha = 0.5;
 
     // Setup socket.io
-    var socket = io.connect(window.location.hostname + ':843');
+    var socket = io.connect(window.location.hostname + ':443');
 
     // Setup game globals
     var players = {};

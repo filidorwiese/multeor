@@ -6,7 +6,7 @@ if (typeof io === 'undefined') {
     $('#error').show();
     $('#error-message').html('Can\'t connect to Multeor server');
 
-} else if (!Modernizr.sessionstorage || !Modernizr.websockets) {// || !Modernizr.touch
+} else if (!Modernizr.sessionstorage || !Modernizr.websockets || !Modernizr.touch) {
     $('#game-start, #game-end, #controller').hide();
     $('#error').show();
     $('#error-message').html('Device not supported<br />(<a href="/about/#requirements">read more</a>)');
@@ -17,7 +17,7 @@ if (typeof io === 'undefined') {
         document.location = '/';
     }
 
-    var socket = io.connect(window.location.hostname + ':843');
+    var socket = io.connect(window.location.hostname + ':443');
 
     $(document).ready(function(){
         var viewportWidth = $(window).width();
@@ -84,7 +84,9 @@ if (typeof io === 'undefined') {
         });
 
         socket.on('game-end', function(data){
+            if (!player.joined) { return false; }
             Upon.log('game-end');
+            
             player.joined = false;
             if (data.highScore) {
                 var fbText = 'Playing Multeor I scored a new highscore of ' + player.score + ' points!';

@@ -10,7 +10,7 @@ var Game = function(levelPath, code) {
         images: {},
         audio: {},
         world: false,
-        worldX: 55000,
+        worldX: 0,
         worldSpeed: 10,
         destroyed: {},
         explosions: [],
@@ -322,6 +322,9 @@ Game.prototype.prepareLeaderboard = function() {
         thePlayer.props.endX = Math.floor((thePlayerPercent * leaderboardWidth) + leaderboardLeft);
         thePlayer.props.endY = Math.floor((numberOfPlayer * thePlayer.props.endZ) - (thePlayer.props.endZ / 2) + headerHeight);
     }
+
+    // Emit game-end
+    socket.emit('game-end', {viewerId: viewerId, gameRoom: gameRoom});
 };
 
 Game.prototype.renderLeaderboard = function(context) {
@@ -334,10 +337,6 @@ Game.prototype.renderLeaderboard = function(context) {
             }
         }
     }
-
-    // Emit game-end
-    var leaderboardImage = false;
-    socket.emit('game-end', {viewerId: viewerId, gameRoom: gameRoom, leaderboard: leaderboardImage});
 };
 
 Game.prototype.message = function(message) {
