@@ -244,13 +244,13 @@ if (typeof io === 'undefined') {
                 event.preventDefault();
 
                 updatePlayerZ(3);
-                $('#boostBg').addClass('pressed');
+                $('#boost').addClass('pressed');
             });
             $('#rightControls').on('touchend', function(event) {
                 event.preventDefault();
 
                 updatePlayerZ(1);
-                $('#boostBg').removeClass('pressed');
+                $('#boost').removeClass('pressed');
             });
         }
 

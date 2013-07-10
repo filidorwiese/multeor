@@ -406,7 +406,7 @@ Game.prototype.endGame = function(){
         buffer.width = 1000;
         buffer.height = 600;
         bufferCtx.putImageData(image, 0, 0);
-        bufferCtx.font = '80px nevis';
+        bufferCtx.font = '80px NevisRegular';
         bufferCtx.fillStyle = '#FFFFFF';
         bufferCtx.fillText('Multeor', 650, 550);
         var leaderboardImage = buffer.toDataURL();
@@ -452,7 +452,7 @@ Game.prototype.startGame = function(){
 
 Game.prototype.drawMessage = function(context, text, x, y, maxWidth, lineHeight, center) {
     context.save();
-    context.font = '30px nevis';
+    context.font = '30px NevisRegular';
     context.fillStyle = '#FFFFFF';
 
     var words = text.toString().split(' ');

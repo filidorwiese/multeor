@@ -122,8 +122,9 @@
     }
 
     .info-graphic {
-        background: url(../images/sprite.gif) center 5px no-repeat;
-        height:358px;
+        background: url(../images/infographic_03_licht.gif) center 5px no-repeat;
+        min-height:380px;
+        width:auto;
         margin-top: -32px;
     }
 
@@ -214,6 +215,10 @@
         background-size:contain;
     }
 
+    #play-game-mobile {
+        display:none;
+    }
+
     .button-row {
         text-align: center;
 
@@ -232,7 +237,11 @@
         }
 
         #play-game {
-            margin:0 0 0 40px !important;
+            display: none;
+        }
+
+        #play-game-mobile {
+            display:inline-block;
         }
 
         .button button {

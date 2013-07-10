@@ -216,9 +216,9 @@ html, body {
         z-index:90;
         top:0;
         left:0;
-        width:60%;
+        width:65%;
         height:100%;
-        background:url(../images/controls3_stickholder.png) center center no-repeat;
+        background:url(../images/controls4_stickholder.svg) center center no-repeat;
 
         #joystick {
             position: absolute;
@@ -233,11 +233,11 @@ html, body {
             #stick {
                 position: absolute;
                 z-index:92;
-                width: 107px;
-                height: 107px;
-                margin-left:84px;
-                margin-top:84px;
-                background: url(../images/controls3_stick.png) left top no-repeat;
+                width: 136px;
+                height: 136px;
+                margin-left:70px;
+                margin-top:70px;
+                background: url(../images/controls4_stick.svg) left top no-repeat;
                 @include apply-origin(0 50%, 0);
                 @include transition(rotate(180deg));
             }
@@ -249,7 +249,7 @@ html, body {
         z-index:90;
         top:0;
         right:0;
-        width:40%;
+        width:35%;
         height:100%;
         background-color:rgba(39,45,51,.2);
 
@@ -258,29 +258,19 @@ html, body {
             z-index:92;
             top:50%;
             left:50%;
-            width:152px;
-            height:152px;
-            margin-left:-76px;
+            width:141px;
+            height:151px;
+            margin-left:-70px;
             margin-top:-76px;
-            background-image:url(../images/controls2_up.svg);
-            }
-
-        #boostBg {
-            position:absolute;
-            z-index:91;
-            top:50%;
-            left:50%;
-            width:100px;
-            height:110px;
-            margin-left:-50px;
-            margin-top:-55px;
+            background-image:url(../images/controls4_up-down.svg); /* Making sure it's loaded before used */
+            background-image:url(../images/controls4_up-up.svg);
+            background-repeat:no-repeat;
 
             &.pressed {
-                background-color:#FFF;
+                background-image:url(../images/controls4_up-down.svg);           
+                }
             }
         }
-
-    }
 
     #score {
         position:absolute;
@@ -291,9 +281,8 @@ html, body {
         font-family: 'NevisRegular';
         font-size: 33px;
         color: white;
-        min-width:70px;
+        width:35%;
         text-align:center;
-        background-color:#272D33;
         padding:8px 10px;
         -webkit-user-select: none;
         -moz-user-select: none;
@@ -323,15 +312,22 @@ html, body {
     }
 }
 
+/*
 html.no-svg #controller {
     #leftControls {
+        background-image: url(../images/controls4_stickholder.png);
+
         #stick {
-            background-image: url(../images/controls2_stick.png);
+            background-image: url(../images/controls4_stick.png);
         }
     }
     #rightControls {
         #boost {
-            background-image:url(../images/controls2_up.png);
+            background-image:url(../images/controls4_up-up.svg);
+
+            &.pressed {
+                background-image:url(../images/controls4_up-down.svg);                
+                }
         }
     }
-}
+}*/
