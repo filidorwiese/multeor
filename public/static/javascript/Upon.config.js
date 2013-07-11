@@ -4,14 +4,14 @@ Upon.require({
         'third-party/jquery-1.9.1.min.js',
         'third-party/requestAnimationFrame.js',
         'third-party/howler.min.js',
-        'third-party/modernizr.custom.24408.js'
+        'third-party/modernizr.custom.24408.js',
+        'third-party/facebook.js'
     ],
     'title-screen': [
         'title-screen.min.js'
     ],
     'title-screen-dev': [
-        'title-screen/title-screen.js',
-        'controller/facebook.js'
+        'title-screen/title-screen.js'
     ],
     'about': [
         'about.min.js'
@@ -34,7 +34,6 @@ Upon.require({
         'controller.min.js'
     ],
     'controller-dev': [
-        'controller/controller.js',
-        'controller/facebook.js'
+        'controller/controller.js'
     ]
 });

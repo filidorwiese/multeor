@@ -1,0 +1,7 @@
+1. cd to /home/multeor
+2. switch to master branch (git checkout master)
+3. update master branch (git pull)
+4. merge live branch (git merge live)
+5. edit necessary files by hand
+6. remove live branch (git branch -D live)
+7. create a new live branch (git checkout -b live)
