@@ -17,8 +17,9 @@ if (typeof io === 'undefined') {
         document.location = '/';
     }
 
-    //var socket = io.connect(window.location.hostname + ':443');
-    var socket = io.connect('http://dev.multeor.com:443');
+    var socket = io.connect(window.location.hostname + ':443');
+    // local
+    //var socket = io.connect('http://dev.multeor.com:443');
 
     $(document).ready(function(){
         var viewportWidth = $(window).width();
@@ -315,8 +316,8 @@ if (typeof io === 'undefined') {
             volume.connect(myAudioContext.destination);
             //mySource.connect(volume);
             request = new XMLHttpRequest();
-            //request.open('GET', 'http://dev.multeor.com/levels/forest/audio/sprites/bonus.mp3', true);
-            request.open('GET', 'http://10.0.1.104/levels/forest/audio/sprites/bonus.mp3', true);
+            request.open('GET', 'http://dev.multeor.com/levels/forest/audio/sprites/bonus.mp3', true);
+            //request.open('GET', 'http://10.0.1.104/levels/forest/audio/sprites/bonus.mp3', true);
             request.responseType = 'arraybuffer';
             request.addEventListener('load', bufferSound, false);
             request.send();
