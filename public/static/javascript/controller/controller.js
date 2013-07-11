@@ -6,7 +6,7 @@ if (typeof io === 'undefined') {
     $('#error').show();
     $('#error-message').html('Can\'t connect to Multeor server');
 
-} else if (!Modernizr.sessionstorage || !Modernizr.websockets || !Modernizr.touch) {
+} else if (!Modernizr.sessionstorage || !Modernizr.websockets) { //|| !Modernizr.touch) {
     $('#game-start, #game-end, #controller').hide();
     $('#error').show();
     $('#error-message').html('Device not supported<br />(<a href="/about/#requirements">read more</a>)');
