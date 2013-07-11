@@ -17,7 +17,8 @@ if (typeof io === 'undefined') {
         document.location = '/';
     }
 
-    var socket = io.connect(window.location.hostname + ':443');
+    //var socket = io.connect(window.location.hostname + ':443');
+    var socket = io.connect('http://dev.multeor.com:443');
 
     $(document).ready(function(){
         var viewportWidth = $(window).width();
@@ -121,6 +122,10 @@ if (typeof io === 'undefined') {
 
     		player.score = data.score;
             $('#score').html(player.score);
+
+            // play different sounds for normal and bonus hits
+            // play bonus sound
+            play(1);
         });
 
         socket.on('update-player-color', function(data){
@@ -232,6 +237,12 @@ if (typeof io === 'undefined') {
                 $(this).toggleClass('pressed');
             });
         } else {
+
+            //fix to get audio running on iOS first audio has to be initiated by user action
+            // this plays the audio with gain parameter set to 0 
+            $('#leftControls').on('touchstart', function(event) {
+                play(0);
+            });
             $('#leftControls').on('touchmove', function(event) {
                 event.preventDefault();
 
@@ -244,7 +255,6 @@ if (typeof io === 'undefined') {
             });
             $('#rightControls').on('touchstart', function(event) {
                 event.preventDefault();
-
                 updatePlayerZ(3);
                 $('#boost').addClass('pressed');
             });
@@ -297,5 +307,41 @@ if (typeof io === 'undefined') {
 
         $('#game-start').show();
 
+        // setup audio for ios/Iphone
+        if('webkitAudioContext' in window) {
+            myAudioContext = new webkitAudioContext();
+            volume = myAudioContext.createGainNode();
+            volume.gain.value = 1; // values 0.00 - 1
+            volume.connect(myAudioContext.destination);
+            //mySource.connect(volume);
+            request = new XMLHttpRequest();
+            //request.open('GET', 'http://dev.multeor.com/levels/forest/audio/sprites/bonus.mp3', true);
+            request.open('GET', 'http://10.0.1.104/levels/forest/audio/sprites/bonus.mp3', true);
+            request.responseType = 'arraybuffer';
+            request.addEventListener('load', bufferSound, false);
+            request.send();
+        }
+
     });
 }
+
+// continue setup audio and play
+    var myAudioContext;
+    var mySource;
+    var volume;
+    var request;
+    var buffer;
+
+    function bufferSound(event) {
+        var request = event.target;
+        buffer = myAudioContext.createBuffer(request.response, false);
+    }    
+    
+    function play(gain){
+        console.log('play audio');
+        mySource = myAudioContext.createBufferSource();
+        mySource.buffer = buffer;
+        volume.gain.value = gain; 
+        mySource.connect(volume);
+        mySource.noteOn(0);
+    }
