@@ -154,6 +154,10 @@ a {
     }
 }
 @media screen and (max-width: $mobileMax) {
+    .wrapper {
+        margin-bottom:0;
+    }
+
     .footer {
         height: 0 !important;
         padding:0 !important;
