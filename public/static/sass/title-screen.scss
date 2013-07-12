@@ -161,7 +161,7 @@
     }
 }
 
-@media screen and (max-width: 960px) {
+@media only screen and (max-device-width: 768px) {
     html.touch #desktop-container {
         display:none;
     }
