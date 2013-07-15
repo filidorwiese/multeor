@@ -105,7 +105,7 @@ if (typeof io === 'undefined') {
             $('#game-end .you-scored-text').html(scoreText);
             $('#facebook-share a').on('click', function(event){
                 event.preventDefault();
-                fbPublish(fbText, 'http://multeor.com/static/images/opengraph-600x600.png', function(status){
+                fbPublish(fbText, opengraphImage, function(status){
                     if (status) {
                         $('#facebook-share').hide();
                     }

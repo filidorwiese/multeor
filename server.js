@@ -203,8 +203,8 @@ io.sockets.on('connection', function(socket) {
                 // Store playerIcon to file
                 var httpGet = require('http-get');
                 var options = {url: currentGames[data.gameRoom].players[ii].playerIcon};
-                var randomName = '/leaderboards/avatars/' + (+new Date()).toString(36) + '.jpg';
-                httpGet.get(options, __dirname + '/public/' + data.gameRoom + '_' + randomName, function (err, result) {
+                var randomName = '/leaderboards/avatars/' + data.gameRoom + '_' + (+new Date()).toString(36) + '.jpg';
+                httpGet.get(options, __dirname + '/public/' + randomName, function (err, result) {
                     if(err) { log(err); }
                 });
 

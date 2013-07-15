@@ -2,5 +2,4 @@
 codekit-config.json
 .DS_Store
 /public/leaderboards/
-high-score-private.json
-high-score-public.json
+high-score-*.json
