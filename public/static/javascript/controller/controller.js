@@ -126,7 +126,7 @@ if (typeof io === 'undefined') {
 
             // play different sounds for normal and bonus hits
             // play bonus sound
-            play(1);
+            //play(1);
         });
 
         socket.on('update-player-color', function(data){
@@ -239,14 +239,13 @@ if (typeof io === 'undefined') {
             });
         } else {
 
-            //fix to get audio running on iOS first audio has to be initiated by user action
+            // fix to get audio running on iOS first audio has to be initiated by user action
             // this plays the audio with gain parameter set to 0 
-            $('#leftControls').on('touchstart', function(event) {
-                play(0);
-            });
+            // $('#leftControls').on('touchstart', function(event) {
+            //     play(0);
+            // });
             $('#leftControls').on('touchmove', function(event) {
                 event.preventDefault();
-
                 var x = (event.originalEvent.targetTouches[0].clientX);
                 var y = (event.originalEvent.targetTouches[0].clientY);
                 updatePlayerXY(x, y);
@@ -301,13 +300,14 @@ if (typeof io === 'undefined') {
         // Show Facebook icon if connected
         if (player.facebookProfile) {
             $('#game-start, #game-end').removeClass('anon');
-            $('.buddy-icon').css({ backgroundImage: 'url(' + player.facebookProfile.picture.data.url + ')' }); //<div>Playing as<br />' + player.facebookProfile.name + '</div>
+            $('.buddy-icon').css({ backgroundImage: 'url(' + player.facebookProfile.picture.data.url + ')' });
         } else {
             $('#game-start, #game-end').addClass('anon');
         }
 
         $('#game-start').show();
 
+        /*
         // setup audio for ios/Iphone
         if('webkitAudioContext' in window) {
             myAudioContext = new webkitAudioContext();
@@ -322,10 +322,12 @@ if (typeof io === 'undefined') {
             request.addEventListener('load', bufferSound, false);
             request.send();
         }
+        */
 
     });
 }
 
+/*
 // continue setup audio and play
     var myAudioContext;
     var mySource;
@@ -346,3 +348,4 @@ if (typeof io === 'undefined') {
         mySource.connect(volume);
         mySource.noteOn(0);
     }
+*/
