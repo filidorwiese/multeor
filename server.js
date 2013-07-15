@@ -91,7 +91,7 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('update-score', function(data){
-        log('Update-score: ' + JSON.stringify(data));
+        //log('Update-score: ' + JSON.stringify(data));
 
         // Verify if this viewer is authorative for this gameRoom and that is exists
         if (!(verifyGameRoom(data.gameRoom, data.viewerId))) {
@@ -110,7 +110,7 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('update-player-color', function(data){
-        log('Update-player-color: ' + JSON.stringify(data));
+        //log('Update-player-color: ' + JSON.stringify(data));
 
         // Verify if this viewer is authorative for this gameRoom and that is exists
         if (!(verifyGameRoom(data.gameRoom, data.viewerId))) {
@@ -185,7 +185,7 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('game-end', function(data){
-        //log('Game-end: ' + JSON.stringify(data));
+        log('Game-end: ' + JSON.stringify(data));
 
         // Verify if this viewer is authorative for this gameRoom and that is exists
         if (!(verifyGameRoom(data.gameRoom, data.viewerId))) {
