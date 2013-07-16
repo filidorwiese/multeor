@@ -1,9 +1,6 @@
 1. cd to /home/multeor
-2. switch to master branch (git checkout master)
-3. reset master branch (git reset --hard HEAD)
-4. update master branch (git pull)
-5. merge live branch (git merge live)
-6. edit necessary files by hand
-7. remove live branch (git branch -D live)
-8. create a new live branch (git checkout -b live)
-9. reset unix-rights (chown -R multeor:multeor *)
+2. save local changes (git stash)
+3. update master brand (git pull)
+4. put local changes back (git stash pop)
+5. verify!!
+6. reset unix-rights (chown -R multeor:multeor *)

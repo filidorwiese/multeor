@@ -6,11 +6,19 @@ if (typeof io === 'undefined') {
     $('#error').show();
     $('#error-message').html('Can\'t connect to Multeor server');
 
+// Detecting Facebook builtin browser
+} else if (navigator.userAgent.indexOf("FBAN") > 0 && navigator.userAgent.indexOf("FBAV") > 0) {
+    $('#game-start, #game-end, #controller').hide();
+    $('#error').show();
+    $('#error-message').html('Sadly the Facebook in-app browser isn\'t supported. Go to ' + window.location.hostname + ' with a different mobile browser to play');
+
+// Some basic feature detection
 } else if (!Modernizr.sessionstorage || !Modernizr.websockets) { //|| !Modernizr.touch) {
     $('#game-start, #game-end, #controller').hide();
     $('#error').show();
     $('#error-message').html('Device not supported<br />(<a href="/about/#requirements">read more</a>)');
 
+// Everything looks good
 } else {
     // If use didn't came from title-screen, redirect to give the option to log into facebook
     if (!sessionStorage.getItem('came-from-title-screen')) {
@@ -106,7 +114,7 @@ if (typeof io === 'undefined') {
             $('#game-end .you-scored-text').html(scoreText);
             $('#facebook-share a').on('click', function(event){
                 event.preventDefault();
-                fbPublish(fbText, 'http://multeor.com/static/images/opengraph-600x600.png', function(status){
+                fbPublish(fbText, opengraphImage, function(status){
                     if (status) {
                         $('#facebook-share').hide();
                     }
@@ -129,6 +137,7 @@ if (typeof io === 'undefined') {
             // play bonus sound
             var audio = data.audio;
             play(1, audio);
+
         });
 
         socket.on('update-player-color', function(data){
@@ -241,14 +250,13 @@ if (typeof io === 'undefined') {
             });
         } else {
 
-            //fix to get audio running on iOS first audio has to be initiated by user action
+            // fix to get audio running on iOS first audio has to be initiated by user action
             // this plays the audio with gain parameter set to 0 
             $('#leftControls').on('touchstart', function(event) {
                 play(0);
             });
             $('#leftControls').on('touchmove', function(event) {
                 event.preventDefault();
-
                 var x = (event.originalEvent.targetTouches[0].clientX);
                 var y = (event.originalEvent.targetTouches[0].clientY);
                 updatePlayerXY(x, y);
@@ -303,13 +311,14 @@ if (typeof io === 'undefined') {
         // Show Facebook icon if connected
         if (player.facebookProfile) {
             $('#game-start, #game-end').removeClass('anon');
-            $('.buddy-icon').css({ backgroundImage: 'url(' + player.facebookProfile.picture.data.url + ')' }); //<div>Playing as<br />' + player.facebookProfile.name + '</div>
+            $('.buddy-icon').css({ backgroundImage: 'url(' + player.facebookProfile.picture.data.url + ')' });
         } else {
             $('#game-start, #game-end').addClass('anon');
         }
 
         $('#game-start').show();
 
+        
         // setup audio for ios/Iphone
         if('webkitAudioContext' in window) {
             player.webAudioSupported;
@@ -333,6 +342,7 @@ if (typeof io === 'undefined') {
             request.addEventListener('load', bufferSound, false);
             request.send();
         }
+        
 
     });
 }
@@ -357,3 +367,4 @@ function play(gain, audio){
     mySource.connect(volume);
     mySource.noteOn(0);
 }
+

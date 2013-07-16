@@ -21,7 +21,6 @@ html, body {
     user-drag: none;
     }
 
-
 @media screen and (orientation: portrait) {
     html, body {
         width:100%;
@@ -31,7 +30,17 @@ html, body {
     #controller, #game-start, #game-end {
         display:none !important;
         }
-    }
+    /*
+    body {
+        -webkit-transform:rotate(90deg);
+	-webkit-transform-origin: 160px 160px;
+
+#game-start, #game-end, #controller {
+min-height:0;
+min-width:480px;
+}
+    }*/
+}
 
 #game-start {
     display:none;
@@ -42,7 +51,7 @@ html, body {
     #message {
         text-align: center;
         font: 18px 'NevisRegular';
-        padding:20px;
+        padding:20px 40px;
         background-color:#272D33;
         min-height:90px;
     }

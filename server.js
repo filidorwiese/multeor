@@ -17,6 +17,7 @@ var currentGames = {};
 var maxPlayers = 8;
 
 // Read high-score
+log('Working directory: ' + __dirname);
 var highScorePrivateFile = __dirname + '/high-score-private.json';
 var highScorePublicFile = __dirname + '/public/high-score-public.json';
 var highestScore = false;
@@ -69,7 +70,7 @@ io.sockets.on('connection', function(socket) {
 
     // Controller broadcasting user-input to viewer
     socket.on('player-update', function(data){
-        //log('player-update: ' + JSON.stringify(data));
+        //log('Player-update: ' + JSON.stringify(data));
 
         // Verify if gameRoom exists
         if (!(verifyGameRoom(data.gr))) {
@@ -91,7 +92,7 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('update-score', function(data){
-        log('Update-score: ' + JSON.stringify(data));
+        //log('Update-score: ' + JSON.stringify(data));
 
         // Verify if this viewer is authorative for this gameRoom and that is exists
         if (!(verifyGameRoom(data.gameRoom, data.viewerId))) {
@@ -110,7 +111,7 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('update-player-color', function(data){
-        log('Update-player-color: ' + JSON.stringify(data));
+        //log('Update-player-color: ' + JSON.stringify(data));
 
         // Verify if this viewer is authorative for this gameRoom and that is exists
         if (!(verifyGameRoom(data.gameRoom, data.viewerId))) {
@@ -185,7 +186,7 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('game-end', function(data){
-        //log('Game-end: ' + JSON.stringify(data));
+        log('Game-end: ' + JSON.stringify(data));
 
         // Verify if this viewer is authorative for this gameRoom and that is exists
         if (!(verifyGameRoom(data.gameRoom, data.viewerId))) {
@@ -203,8 +204,8 @@ io.sockets.on('connection', function(socket) {
                 // Store playerIcon to file
                 var httpGet = require('http-get');
                 var options = {url: currentGames[data.gameRoom].players[ii].playerIcon};
-                var randomName = '/leaderboards/avatars/' + (+new Date()).toString(36) + '.jpg';
-                httpGet.get(options, __dirname + '/public/' + data.gameRoom + '_' + randomName, function (err, result) {
+                var randomName = '/leaderboards/avatars/' + data.gameRoom + '_' + (+new Date()).toString(36) + '.jpg';
+                httpGet.get(options, __dirname + '/public/' + randomName, function (err, result) {
                     if(err) { log(err); }
                 });
 
