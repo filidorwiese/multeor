@@ -1,10 +1,11 @@
 'use strict';
 
-var Player = function(context, playerId, playerIcon, playerColor, playerNumber) {
+var Player = function(context, playerId, playerIcon, playerColor, playerNumber, webAudioSupported) {
     var self = this;
     self.props = {
         playerId: playerId,
         playerNumber: playerNumber,
+        webAudioSupported: webAudioSupported,
         icon: false,
         score: 0,
         x: 0,
@@ -157,9 +158,9 @@ Player.prototype.updatePosition = function() {
     if (this.props.lastMoves.length > 10) { this.props.lastMoves.shift(); }
 };
 
-Player.prototype.updateScore = function(points) {
+Player.prototype.updateScore = function(points, audio) {
     this.props.score += points;
-	socket.emit('update-score', {viewerId: viewerId, gameRoom: gameRoom, playerId: this.props.playerId, score: this.props.score});
+	socket.emit('update-score', {viewerId: viewerId, gameRoom: gameRoom, playerId: this.props.playerId, score: this.props.score, audio: audio});
 };
 
 Player.prototype.lockPlayer = function() {

@@ -80,7 +80,8 @@ if (typeof io === 'undefined') {
                 if (typeof players[playerId] == 'undefined') {
                     var playerColor = playerColorsShuffled.splice(0, 1)[0];
                     var playerIcon = data.players[ii].playerIcon;
-                    players[playerId] = new Player(context, playerId, playerIcon, playerColor, numberOfPlayers);
+                    var webAudioSupported = data.players[ii].webAudioSupported;
+                    players[playerId] = new Player(context, playerId, playerIcon, playerColor, numberOfPlayers, webAudioSupported);
                     socket.emit('update-player-color', {viewerId: viewerId, gameRoom: gameRoom, playerId: playerId, playerColor: playerColor});
                 }
             }

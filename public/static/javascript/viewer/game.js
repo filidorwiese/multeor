@@ -234,7 +234,7 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
 
                     // Update playerScore
                     if (spriteObject.score > 0) {
-                        players[playerCollidedId].updateScore(spriteObject.score);
+                        players[playerCollidedId].updateScore(spriteObject.score, spriteObject.audio);
 
                         // Create explosion
                         var explosionZindex = entitiesOffset + (spriteObject.layer * 1000) + 200;
@@ -246,7 +246,10 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
 
                     // Play audio effect
                     if (spriteObject.audio && spriteObject.audio != 'none') {
-                        this.props.audio[spriteObject.audio].volume(1).play();
+                        // only play audio effect in viewer if player controller doesn't support web audio api
+                        if(!players[playerCollidedId].webAudioSupported) {
+                            this.props.audio[spriteObject.audio].volume(0.7).play();    
+                        }
                     }
                 }
             }

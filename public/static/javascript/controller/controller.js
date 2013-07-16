@@ -39,6 +39,7 @@ if (typeof io === 'undefined') {
             score: 0,
             color: '',
             fresh: true,
+            webAudioSupported: false,
             facebookProfile: JSON.parse(sessionStorage.getItem('facebook-profile'))
         };
         sessionStorage.setItem('player-id', player.id);
@@ -126,7 +127,8 @@ if (typeof io === 'undefined') {
 
             // play different sounds for normal and bonus hits
             // play bonus sound
-            play(1);
+            var audio = data.audio;
+            play(1, audio);
         });
 
         socket.on('update-player-color', function(data){
@@ -284,7 +286,7 @@ if (typeof io === 'undefined') {
                     player.gameRoom = gameRoom;
                     var playerIcon = player.facebookProfile ? player.facebookProfile.picture.data.url : false;
                     var playerName = player.facebookProfile ? player.facebookProfile.name : false;
-                    socket.emit('new-player', {playerId: player.id, gameRoom: gameRoom, playerIcon: playerIcon, playerName: playerName});
+                    socket.emit('new-player', {playerId: player.id, gameRoom: gameRoom, playerIcon: playerIcon, playerName: playerName, webAudioSupported: player.webAudioSupported});
                 }
             }
         });
@@ -310,14 +312,23 @@ if (typeof io === 'undefined') {
 
         // setup audio for ios/Iphone
         if('webkitAudioContext' in window) {
+            player.webAudioSupported;
             myAudioContext = new webkitAudioContext();
             volume = myAudioContext.createGainNode();
             volume.gain.value = 1; // values 0.00 - 1
             volume.connect(myAudioContext.destination);
-            //mySource.connect(volume);
+            
+            // FIX: Preload audio files from level.json
             request = new XMLHttpRequest();
+            request._fileName = 'bonus';
             request.open('GET', 'http://dev.multeor.com/levels/forest/audio/sprites/bonus.mp3', true);
-            //request.open('GET', 'http://10.0.1.104/levels/forest/audio/sprites/bonus.mp3', true);
+            request.responseType = 'arraybuffer';
+            request.addEventListener('load', bufferSound, false);
+            request.send();
+
+            request = new XMLHttpRequest();
+            request._fileName = 'explosion';
+            request.open('GET', 'http://dev.multeor.com/levels/forest/audio/sprites/explosion.mp3', true);
             request.responseType = 'arraybuffer';
             request.addEventListener('load', bufferSound, false);
             request.send();
@@ -326,23 +337,23 @@ if (typeof io === 'undefined') {
     });
 }
 
-// continue setup audio and play
-    var myAudioContext;
-    var mySource;
-    var volume;
-    var request;
-    var buffer;
+// continue audio setup and play code
+var myAudioContext;
+var mySource;
+var volume;
+var request;
+var buffers = [];
 
-    function bufferSound(event) {
-        var request = event.target;
-        buffer = myAudioContext.createBuffer(request.response, false);
-    }    
-    
-    function play(gain){
-        console.log('play audio');
-        mySource = myAudioContext.createBufferSource();
-        mySource.buffer = buffer;
-        volume.gain.value = gain; 
-        mySource.connect(volume);
-        mySource.noteOn(0);
-    }
+function bufferSound(event) {
+    var request = event.target;
+    buffers[request._fileName] = myAudioContext.createBuffer(request.response, false);
+}    
+
+function play(gain, audio){
+    console.log('play audio: ' +audio);
+    mySource = myAudioContext.createBufferSource();
+    mySource.buffer = buffers[audio];
+    volume.gain.value = gain; 
+    mySource.connect(volume);
+    mySource.noteOn(0);
+}
