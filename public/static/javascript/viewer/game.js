@@ -17,6 +17,17 @@ var Game = function(levelPath, code) {
         spriteAnimationFrame: 1
     };
 
+    // Get highest score from server
+    $.ajaxSetup({ cache: false });
+    $.getJSON('/high-score-public.json', function(highscore){
+        $('#highestScoreEver').empty()
+            .html('<p>Highest score ever:</p>' +
+                  '<div class="buddy-icon"><div class="mask"></div></div>' +
+                  '<div class="hero-score">' + highscore.score + '</div><div class="hero-name">' + highscore.name + '</div>');
+        $('#highestScoreEver .buddy-icon').css({ backgroundImage: 'url(' + highscore.icon + ')' });
+        $('#highestScoreEver').fadeIn(1000);
+    });
+
     $.ajaxSetup({ cache: true });
     $.getJSON(self.props.levelPath + '/level.json', function(world){
         self.props.world = world;
@@ -414,7 +425,17 @@ Game.prototype.endGame = function(){
         bufferCtx.fillText('Multeor', 650, 550);
         var leaderboardImage = buffer.toDataURL();
         socket.emit('store-leaderboard', {viewerId: viewerId, gameRoom: gameRoom, leaderboard: leaderboardImage});
-        
+
+        // Get highest score from server
+        $.ajaxSetup({ cache: false });
+        $.getJSON('/high-score-public.json', function(highscore){
+            $('#highestScoreEver').empty()
+                .html('<p>Highest<br />score ever:<br /><span class="hero-score">' + highscore.score + '</span>' +
+                      '<div class="hero-avatar"><img src="' + highscore.icon + '" /></div>' +
+                      '<span class="hero-name">' + highscore.name + '</span></p>');
+            $('#highestScoreEver').fadeIn(1000);
+        });
+
         $('.leaderboard-container').fadeIn(1000);
     }, 1000);
 };
