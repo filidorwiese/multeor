@@ -15,6 +15,7 @@
         height:619px;
 
         .instructions-container {
+            display:none;
             text-align: center;
             position: absolute;
             left:50%;
@@ -87,7 +88,7 @@
         }
 
         .leaderboard-container {
-            display:none;
+            /*display:none;*/
             text-align: center;
             position: absolute;
             left:50%;
@@ -95,6 +96,30 @@
             z-index: 1000;
             height: 600px;
             overflow: hidden;
+
+            #highestScoreEver {
+                background-color: #272d33;
+                height: 600px;
+                background:url(../images/multeor_website-highscoretrophy.png) center 100px no-repeat;
+                padding:200px 30px 0 30px;
+                text-align:center;
+                font-size:28px;
+                line-height:1.2em;
+
+                .hero-score {
+                }
+                .hero-avatar {
+                    margin-top:30px;
+                    margin-bottom:20px;
+
+                    img {
+                        width:90px;
+                    }
+                }
+                .hero-name {
+
+                }
+            }
 
             #gameReset {
                 position:absolute;

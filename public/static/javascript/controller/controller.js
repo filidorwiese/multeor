@@ -6,11 +6,19 @@ if (typeof io === 'undefined') {
     $('#error').show();
     $('#error-message').html('Can\'t connect to Multeor server');
 
+// Detecting Facebook builtin browser
+} else if (navigator.userAgent.indexOf("FBAN") > 0 && navigator.userAgent.indexOf("FBAV") > 0) {
+    $('#game-start, #game-end, #controller').hide();
+    $('#error').show();
+    $('#error-message').html('Sadly the Facebook in-app browser isn\'t supported. Go to ' + window.location.hostname + ' with a different mobile browser to play');
+
+// Some basic feature detection
 } else if (!Modernizr.sessionstorage || !Modernizr.websockets) { //|| !Modernizr.touch) {
     $('#game-start, #game-end, #controller').hide();
     $('#error').show();
     $('#error-message').html('Device not supported<br />(<a href="/about/#requirements">read more</a>)');
 
+// Everything looks good
 } else {
     // If use didn't came from title-screen, redirect to give the option to log into facebook
     if (!sessionStorage.getItem('came-from-title-screen')) {

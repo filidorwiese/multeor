@@ -17,6 +17,7 @@ var currentGames = {};
 var maxPlayers = 8;
 
 // Read high-score
+log('Working directory: ' + __dirname);
 var highScorePrivateFile = __dirname + '/high-score-private.json';
 var highScorePublicFile = __dirname + '/public/high-score-public.json';
 var highestScore = false;
@@ -69,7 +70,7 @@ io.sockets.on('connection', function(socket) {
 
     // Controller broadcasting user-input to viewer
     socket.on('player-update', function(data){
-        //log('player-update: ' + JSON.stringify(data));
+        //log('Player-update: ' + JSON.stringify(data));
 
         // Verify if gameRoom exists
         if (!(verifyGameRoom(data.gr))) {
