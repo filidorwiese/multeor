@@ -20,8 +20,11 @@ if (typeof io === 'undefined') {
         context.globalAlpha = 0.5;
 
     // Setup socket.io
-    var socket = io.connect(window.location.hostname + ':443');
-    //var socket = io.connect('http://dev.multeor.com:443');
+    //var socket = io.connect(window.location.hostname + ':443');
+    // dev
+    var socket = io.connect('http://dev.multeor.com:443');
+    // local arjen
+    // var socket = io.connect('10.0.1.104:443');
 
     // Setup game globals
     var players = {};

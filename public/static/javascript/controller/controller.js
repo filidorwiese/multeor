@@ -25,9 +25,12 @@ if (typeof io === 'undefined') {
         document.location = '/';
     }
 
-    var socket = io.connect(window.location.hostname + ':443');
+    //var socket = io.connect(window.location.hostname + ':443');
+    // development
+    var socket = io.connect('http://dev.multeor.com:443');
     // local
-    //var socket = io.connect('http://dev.multeor.com:443');
+    //var socket = io.connect('10.0.1.104:443');
+    
 
     $(document).ready(function(){
         var viewportWidth = $(window).width();
@@ -254,6 +257,7 @@ if (typeof io === 'undefined') {
             // this plays the audio with gain parameter set to 0 
             $('#leftControls').on('touchstart', function(event) {
                 play(0);
+                $('#leftControls').off('touchstart');
             });
             $('#leftControls').on('touchmove', function(event) {
                 event.preventDefault();
@@ -321,23 +325,34 @@ if (typeof io === 'undefined') {
         
         // setup audio for ios/Iphone
         if('webkitAudioContext' in window) {
-            player.webAudioSupported;
+            player.webAudioSupported = true;
             myAudioContext = new webkitAudioContext();
             volume = myAudioContext.createGainNode();
             volume.gain.value = 1; // values 0.00 - 1
             volume.connect(myAudioContext.destination);
             
+            var audioElem = document.createElement('audio');
+            var fileType = "mp3";
+            
+            // returns 'probably', 'maybe' or ''. Only when it's probably we'll use ogg.
+            var isSupported = audioElem.canPlayType('audio/ogg; codecs="vorbis"');
+
+            if(isSupported == "probably"){
+                fileType = "ogg";
+            }
+            
+
             // FIX: Preload audio files from level.json
             request = new XMLHttpRequest();
             request._fileName = 'bonus';
-            request.open('GET', 'http://dev.multeor.com/levels/forest/audio/sprites/bonus.mp3', true);
+            request.open('GET', '/levels/forest/audio/sprites/bonus.'+fileType, true);
             request.responseType = 'arraybuffer';
             request.addEventListener('load', bufferSound, false);
             request.send();
 
             request = new XMLHttpRequest();
             request._fileName = 'explosion';
-            request.open('GET', 'http://dev.multeor.com/levels/forest/audio/sprites/explosion.mp3', true);
+            request.open('GET', '/levels/forest/audio/sprites/explosion.'+fileType, true);
             request.responseType = 'arraybuffer';
             request.addEventListener('load', bufferSound, false);
             request.send();
@@ -352,18 +367,27 @@ var myAudioContext;
 var mySource;
 var volume;
 var request;
-var buffers = [];
+var buffers = {};
 
 function bufferSound(event) {
     var request = event.target;
-    buffers[request._fileName] = myAudioContext.createBuffer(request.response, false);
+    var buffer = myAudioContext.createBuffer(request.response, false);
+    console.log(buffer);
+    buffers[request._fileName] = buffer;
+    console.log(buffers);
 }    
 
 function play(gain, audio){
-    console.log('play audio: ' +audio);
+    
+    // this happens on the 'touchstart' event of the left controller,
+    // needed to trigger audio in iOS, it wont play audio unless first initiated by user interaction
+    if(typeof audio === 'undefined') {
+        audio = 'bonus';
+    }
+    
     mySource = myAudioContext.createBufferSource();
     mySource.buffer = buffers[audio];
-    volume.gain.value = gain; 
+    volume.gain.value = gain;
     mySource.connect(volume);
     mySource.noteOn(0);
 }

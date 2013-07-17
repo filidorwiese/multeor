@@ -246,10 +246,12 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
 
                     // Play audio effect
                     if (spriteObject.audio && spriteObject.audio != 'none') {
-                        // only play audio effect in viewer if player controller doesn't support web audio api
-                        if(!players[playerCollidedId].webAudioSupported) {
-                            this.props.audio[spriteObject.audio].volume(0.7).play();    
-                        }
+                        // uncomment below to only play audio effect in viewer if player controller doesn't support web audio api
+                        /*if(players[playerCollidedId].webAudioSupported === false) {
+                            this.props.audio[spriteObject.audio].volume(0.7).play();
+                        }*/
+                        // comment below to only play audio effect in viewer if player controller doesn't support web audio api
+                        this.props.audio[spriteObject.audio].volume(0.7).play();
                     }
                 }
             }
