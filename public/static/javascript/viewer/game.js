@@ -419,7 +419,18 @@ Game.prototype.endGame = function(){
         bufferCtx.fillText('Multeor', 650, 550);
         var leaderboardImage = buffer.toDataURL();
         socket.emit('store-leaderboard', {viewerId: viewerId, gameRoom: gameRoom, leaderboard: leaderboardImage});
-        
+
+        // Get highest score from server
+        $.ajaxSetup({ cache: false });
+        $.getJSON('/high-score-public.json', function(highscore){
+            $('#highestScoreEver').empty()
+                .html('<p>Highest score ever: <span class="hero-score">' + highscore.score + '</span></p>' +
+                      '<div class="buddy-icon"><div class="mask"></div></div>' +
+                      '<div class="hero-name">' + highscore.name + '</div>');
+            $('#highestScoreEver .buddy-icon').css({ backgroundImage: 'url(' + highscore.icon + ')' });
+            $('#highestScoreEver').fadeIn(1000);
+        });
+
         $('.leaderboard-container').fadeIn(1000);
     }, 1000);
 };

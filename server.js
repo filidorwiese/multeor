@@ -209,19 +209,22 @@ io.sockets.on('connection', function(socket) {
                     if(err) { log(err); }
                 });
 
-                // Update high-score and write to public and private file
+                // Update high-score
                 var tmpObject = {name: currentGames[data.gameRoom].players[ii].playerName, score: currentGames[data.gameRoom].players[ii].score, icon: randomName};
+
+                // Write to private file
                 fs.writeFile(highScorePublicFile, JSON.stringify(tmpObject), function(err) {
                     if(err) { log(err); } 
                 });
                 
+                // Write to public file (with ipaddress added)
                 tmpObject.ip = socket.handshake.address.address;
-				log('New highscore ' + tmpObject.score + ' by ' + tmpObject.name + ' from ip ' + tmpObject.ip + ' using icon ' + randomName);
-				
                 highestScore.unshift(tmpObject);
                 fs.writeFile(highScorePrivateFile, JSON.stringify(highestScore), function(err) {
                     if(err) { log(err); } 
                 });
+
+                log('New highscore ' + tmpObject.score + ' by ' + tmpObject.name + ' from ip ' + tmpObject.ip + ' using icon ' + randomName);
             }
 
             // Emit Game-end to players
