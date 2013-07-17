@@ -15,7 +15,6 @@
         height:619px;
 
         .instructions-container {
-            opacity:0;
             text-align: center;
             position: absolute;
             left:50%;
@@ -88,7 +87,7 @@
         }
 
         .leaderboard-container {
-            /*display:none;*/
+            display:none;
             text-align: center;
             position: absolute;
             left:50%;
@@ -99,7 +98,7 @@
 
             #highestScoreEver {
                 background:#1f252b url(../images/multeor_website-highscoretrophy.png) 20px 20px no-repeat;
-                padding:20px 20px 40px 110px;
+                padding:20px 20px 30px 110px;
                 font-size:18px;
                 line-height:1.2em;
                 opacity:1;
@@ -110,7 +109,7 @@
                     position:relative;
                     width:49px;
                     height:49px;
-                    margin-right:10px;
+                    margin-right:15px;
 
                     .mask {
                         background-image:url(../images/multeor_website-highscoreavatarmask.png);
@@ -120,11 +119,13 @@
                 }
 
                 .hero-score {
-                    padding-top:2px;
                 }
                 
                 .hero-name {
-                    font-size:16px;
+                    line-height:47px;
+                    text-overflow:ellipsis;
+                    overflow:hidden;
+                    white-space:nowrap;
                 }
             }
 
