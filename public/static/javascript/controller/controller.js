@@ -372,9 +372,7 @@ var buffers = {};
 function bufferSound(event) {
     var request = event.target;
     var buffer = myAudioContext.createBuffer(request.response, false);
-    console.log(buffer);
     buffers[request._fileName] = buffer;
-    console.log(buffers);
 }    
 
 function play(gain, audio){
