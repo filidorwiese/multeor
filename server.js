@@ -26,7 +26,7 @@ fs.readFile(highScorePrivateFile, 'utf8', function (err, data) {
         throw err;
     } else {
         highestScore = JSON.parse(data);
-        var tmpObject = {name: highestScore[0].name, score: highestScore[0].score};
+        var tmpObject = {name: highestScore[0].name, score: highestScore[0].score, icon: highestScore[0].icon};
 		fs.writeFile(highScorePublicFile, JSON.stringify(tmpObject), function(err) {
 			if(err) { log(err); } 
 		});

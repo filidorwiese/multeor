@@ -37,7 +37,7 @@
 	}
 
 	#grid-and-settings {
-		min-width:1275px;
+		width:1275px;
 	}
 
 	#grid {
@@ -54,7 +54,7 @@
 
 	#output {
 		height:280px;
-		width:274px;
+		width:256px;
 	}
 
 	#settings {
@@ -97,7 +97,7 @@
 
 	#prev-next-tile {
 		float:right;
-		margin-right:564px;
+		margin-right:270px;
 	}
 	</style>
 </head>

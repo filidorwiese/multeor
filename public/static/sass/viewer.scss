@@ -14,6 +14,42 @@
         position: relative;
         height:619px;
 
+	.highestScoreEver {
+                display:none;
+		position:absolute;
+		right: 0;
+                background:#1f252b url(../images/multeor_website-highscoretrophy.png) 20px 20px no-repeat;
+                padding:20px 20px 20px 110px;
+                font-size:18px;
+                line-height:1.2em;
+                opacity:1;
+                text-align:left;
+
+                .buddy-icon {
+                    float:left;
+                    position:relative;
+                    width:49px;
+                    height:49px;
+                    margin-right:15px;
+
+                    .mask {
+                        background-image:url(../images/multeor_website-highscoreavatarmask.png);
+                        width:50px;
+                        height:50px;
+                    }
+                }
+
+                .hero-score {
+                }
+                
+                .hero-name {
+                    line-height:47px;
+                    text-overflow:ellipsis;
+                    overflow:hidden;
+                    white-space:nowrap;
+                }
+            }
+        
         .instructions-container {
             text-align: center;
             position: absolute;
@@ -25,8 +61,8 @@
             font-size:16px;
 
             .step-header{
-                font-size: 130px;
-                margin-top: 98px;
+                font-size: 100px;
+                margin-top: 104px;
             }
 
             .step-header-first {
@@ -42,7 +78,7 @@
             }
 
             .step-row {
-                margin-top: 26px;
+                /*margin-top: 26px;*/
 
                 .step {
                     font-size: 30px;
@@ -95,39 +131,6 @@
             z-index: 1000;
             height: 600px;
             overflow: hidden;
-
-            #highestScoreEver {
-                background:#1f252b url(../images/multeor_website-highscoretrophy.png) 20px 20px no-repeat;
-                padding:20px 20px 30px 110px;
-                font-size:18px;
-                line-height:1.2em;
-                opacity:1;
-                text-align:left;
-
-                .buddy-icon {
-                    float:left;
-                    position:relative;
-                    width:49px;
-                    height:49px;
-                    margin-right:15px;
-
-                    .mask {
-                        background-image:url(../images/multeor_website-highscoreavatarmask.png);
-                        width:50px;
-                        height:50px;
-                    }
-                }
-
-                .hero-score {
-                }
-                
-                .hero-name {
-                    line-height:47px;
-                    text-overflow:ellipsis;
-                    overflow:hidden;
-                    white-space:nowrap;
-                }
-            }
 
             #gameReset {
                 position:absolute;

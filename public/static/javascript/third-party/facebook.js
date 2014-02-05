@@ -12,7 +12,7 @@ var facebookConnected = false;
 
 window.fbAsyncInit = function() {
     FB.init({
-        appId      : '312039092260353', // App ID
+        appId      : '530700506998289', // App ID
         status     : true, // check login status
         cookie     : true, // enable cookies to allow the server to access the session
         xfbml      : true  // parse XFBML
