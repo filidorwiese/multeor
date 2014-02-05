@@ -49,14 +49,15 @@ Destroyable.prototype.collides = function(players, bgModulus) {
     //context.fillStyle = 'rgba(255,0,0,1)';
     //context.fillRect(entityLeft, entityTop, entityRight - entityLeft, entityBottom - entityTop);
 
+    var playerYPadding, playerXPadding, playerLeft, playerRight, playerTop, playerBottom, playerZ;
     for(var player in players) {
-        var playerYPadding = Math.floor(players[player].props.z * 0.3);
-        var playerXPadding = Math.floor(players[player].props.z * 0.3);
-        var playerLeft = Math.floor(players[player].props.x + playerXPadding + weirdnessOffset);
-        var playerRight = Math.floor(players[player].props.x - playerXPadding + weirdnessOffset);
-        var playerTop = Math.floor(players[player].props.y + playerYPadding);
-        var playerBottom = Math.floor(players[player].props.y - playerYPadding);
-        var playerZ = Math.floor(players[player].props.z);
+        playerYPadding = Math.floor(players[player].props.z * 0.3);
+        playerXPadding = Math.floor(players[player].props.z * 0.3);
+        playerLeft = Math.floor(players[player].props.x + playerXPadding + weirdnessOffset);
+        playerRight = Math.floor(players[player].props.x - playerXPadding + weirdnessOffset);
+        playerTop = Math.floor(players[player].props.y + playerYPadding);
+        playerBottom = Math.floor(players[player].props.y - playerYPadding);
+        playerZ = Math.floor(players[player].props.z);
 
         // Uncomment to debug collision detection
         //context.fillRect(playerLeft, playerTop, playerRight - playerLeft, playerBottom - playerTop);

@@ -200,12 +200,13 @@ Player.prototype.drawPolygon = function(context, x, y, radius, numOfSides) {
     context.beginPath();
     context.moveTo(Math.cos(angle) * radius, Math.cos(angle) * radius);
 
+    var angle, x1, y1;
     for(var i=0; i < numOfSides; i++) {
-        var angle = i * angChange;
+        angle = i * angChange;
         prevX = x1;
         prevY = y1;
-        var x1 = x + Math.cos(angle) * radius;
-        var y1 = y + Math.sin(angle) * radius;
+        x1 = x + Math.cos(angle) * radius;
+        y1 = y + Math.sin(angle) * radius;
         if(i > 0) {
             context.lineTo(x1,y1);
         } else {

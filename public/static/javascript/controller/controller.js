@@ -30,7 +30,6 @@ if (typeof io === 'undefined') {
     var socket = io.connect('http://dev.multeor.com:443');
     // local
     //var socket = io.connect('10.0.1.104:443');
-    
 
     $(document).ready(function(){
         var viewportWidth = $(window).width();
@@ -358,7 +357,10 @@ if (typeof io === 'undefined') {
             request.send();
         }
         
-
+        // Scroll to 0 to make some mobile browser go into fullscreen mode
+        setTimeout(function(){
+            window.scrollTo(0, 1);
+        }, 0);
     });
 }
 

@@ -12,6 +12,9 @@ var Game = function(levelPath, code) {
         world: false,
         worldX: 0,
         worldSpeed: 10,
+        numberOfTiles: 0,
+        bgBase: 0,
+        bgModulus: 0,
         destroyed: {},
         explosions: [],
         spriteAnimationFrame: 1
@@ -130,15 +133,15 @@ Game.prototype.tick = function(context, delta) {
         }
     }
 
-    var numberOfTiles = Math.ceil(context.canvas.width / 1000);
-    var bgBase = Math.floor(this.props.worldX / 1000);
-    var bgModulus = Math.floor(this.props.worldX % 1000);
+    this.props.numberOfTiles = Math.ceil(context.canvas.width / 1000);
+    this.props.bgBase = Math.floor(this.props.worldX / 1000);
+    this.props.bgModulus = Math.floor(this.props.worldX % 1000);
 
 	// Draw background tiles
-    this.renderBackgrounds(context, numberOfTiles, bgBase, bgModulus);
+    this.renderBackgrounds(context, this.props.numberOfTiles, this.props.bgBase, this.props.bgModulus);
 
     // Draw entities, destroyables and players
-    this.renderEntities(context, numberOfTiles, bgBase, bgModulus);
+    this.renderEntities(context, this.props.numberOfTiles, this.props.bgBase, this.props.bgModulus);
 
     // If near the end of the world, take over control and render to leaderboard positions
     if (this.props.state == 'STARTED' && this.props.worldX > ((this.props.world.length * 1000) - 8000)) {
@@ -153,15 +156,16 @@ Game.prototype.tick = function(context, delta) {
 };
 
 Game.prototype.renderBackgrounds = function(context, numberOfTiles, bgBase, bgModulus) {
-    for (var ii = 0; ii <= numberOfTiles; ii++) {
-        var tile = this.props.world[bgBase + ii];
+    var ii, tile, x, sx, sw, bgImage;
+    for (ii = 0; ii <= numberOfTiles; ii++) {
+        tile = this.props.world[bgBase + ii];
         if (typeof tile == 'undefined') { continue; }
 
-        var x = (ii * 1000) - bgModulus;
+        x = (ii * 1000) - bgModulus;
         if (x > context.canvas.width) { continue; }
 
-        var sx = 0;
-        var sw = 1000;
+        sx = 0;
+        sw = 1000;
 
         if (x < 0) {
             x = 0;
@@ -170,7 +174,7 @@ Game.prototype.renderBackgrounds = function(context, numberOfTiles, bgBase, bgMo
         }
 
         // image, sx, sy, sw, sh,  x,    y, w, height
-        var bgImage = this.getImage(tile.background);
+        bgImage = this.getImage(tile.background);
         if (bgImage) {
             context.drawImage(bgImage, sx, 0, sw, context.canvas.height, x, 0, sw, context.canvas.height);
         }
@@ -178,35 +182,38 @@ Game.prototype.renderBackgrounds = function(context, numberOfTiles, bgBase, bgMo
 };
 
 Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModulus) {
-    // Maintain entities array
-    var entities = {};
-    var entitiesKeys = [];
-    var entitiesOffset = 0;
+    // Clear entities array
+    this.props.entities = {};
+    this.props.entitiesKeys = [];
+    this.props.entitiesOffset = 0;
 
     // Globally update destroyable spriteAnimationFrame
-    var spriteAnimationStep = 0.1;
-    if (this.props.spriteAnimationFrame < 9 - spriteAnimationStep) {
-        this.props.spriteAnimationFrame += spriteAnimationStep;
+    if (this.props.spriteAnimationFrame < 9 - this.props.spriteAnimationStep) {
+        this.props.spriteAnimationFrame += this.props.spriteAnimationStep;
     } else {
         this.props.spriteAnimationFrame = 1;
     }
-    var currentSpriteFrame = Math.floor(this.props.spriteAnimationFrame);
+    this.props.currentSpriteFrame = Math.floor(this.props.spriteAnimationFrame);
 
     // Render destroyables
     // Note: it needs to look at some tiles backwards/ahead in case of bigger sprites that don't fit in one screen
-    for (var ii = -3; ii <= numberOfTiles + 1; ii++) {
-        var tile = this.props.world[bgBase + ii];
+    var ii, tile, sprite, spriteObject, destroyedColorIndex, x, y, z, spriteZindex, spriteImage, playerCollidedId,
+        playerCollidedColor, playerCollidedColorIndex, explosionZindex, scale, yOffset, newParticles,
+        player, playerZindex, shadowZindex, key, particle;
+        
+    for (ii = -3; ii <= numberOfTiles + 1; ii++) {
+        tile = this.props.world[bgBase + ii];
         if (typeof tile == 'undefined') { continue; }
 
-        for (var sprite in tile.sprites) {
-            entitiesOffset++;
-            var spriteObject = tile.sprites[sprite];
-            var destroyedColorIndex = this.props.destroyed[spriteObject.id] || false;
-            var x = (ii * 1000) - bgModulus + spriteObject.left;
-            var y = spriteObject.top;
-            var z = spriteObject.layer * 50;
-            var spriteZindex = entitiesOffset + (spriteObject.layer * 1000);
-            var spriteImage = this.getImage(spriteObject.path);
+        for (sprite in tile.sprites) {
+            this.props.entitiesOffset++;
+            spriteObject = tile.sprites[sprite];
+            destroyedColorIndex = this.props.destroyed[spriteObject.id] || false;
+            x = (ii * 1000) - bgModulus + spriteObject.left;
+            y = spriteObject.top;
+            z = spriteObject.layer * 50;
+            spriteZindex = this.props.entitiesOffset + (spriteObject.layer * 1000);
+            spriteImage = this.getImage(spriteObject.path);
 
             // Only render/draw/collide sprites that are actually within view
             if (x < (spriteImage.width * -1) || x > canvas.width) { continue; }
@@ -217,17 +224,17 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
             }
 
             // Draw entity
-            entities[spriteZindex] = new Destroyable(spriteObject, spriteImage, x, y, z, destroyedColorIndex, currentSpriteFrame);
-            entitiesKeys.push(spriteZindex);
+            this.props.entities[spriteZindex] = new Destroyable(spriteObject, spriteImage, x, y, z, destroyedColorIndex, this.props.currentSpriteFrame);
+            this.props.entitiesKeys.push(spriteZindex);
 
             // Do collision detection
             if (spriteObject.destroyable && !destroyedColorIndex) {
-                var playerCollidedId = entities[spriteZindex].collides(players);
+                playerCollidedId = this.props.entities[spriteZindex].collides(players);
 
                 if (playerCollidedId > 0) {
                     // Remember destroyed state
-                    var playerCollidedColor = players[playerCollidedId].props.color;
-                    var playerCollidedColorIndex = $.inArray(playerCollidedColor, playerColors) + 1;
+                    playerCollidedColor = players[playerCollidedId].props.color;
+                    playerCollidedColorIndex = $.inArray(playerCollidedColor, playerColors) + 1;
                     this.props.destroyed[spriteObject.id] = playerCollidedColorIndex;
 
                     // If entity has a destroylink, then also destroy linked entity
@@ -240,10 +247,10 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
                         players[playerCollidedId].updateScore(spriteObject.score);
 
                         // Create explosion
-                        var explosionZindex = entitiesOffset + (spriteObject.layer * 1000) + 200;
-                        var scale = 5 * parseInt(spriteObject.layer, 10);
-                        var yOffset = y - (players[playerCollidedId].props.z / 2) * -1;
-                        var newParticles = Explosion(x - 50, yOffset, explosionZindex, scale, playerCollidedColor);
+                        explosionZindex = this.props.entitiesOffset + (spriteObject.layer * 1000) + 200;
+                        scale = 5 * parseInt(spriteObject.layer, 10);
+                        yOffset = y - (players[playerCollidedId].props.z / 2) * -1;
+                        newParticles = Explosion(x - 50, yOffset, explosionZindex, scale, playerCollidedColor);
                         this.props.explosions = this.props.explosions.concat(newParticles);
                     }
 
@@ -257,37 +264,37 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
     }
 
     // Render Players
-    var playerZindex, shadowZindex;
-    for (var player in players) {
+    for (player in players) {
         playerZindex = (players[player].props.vector[2] * 1000) + 900 + players[player].props.playerNumber;
-        entities[playerZindex] = players[player];
-        entitiesKeys.push(playerZindex);
+        this.props.entities[playerZindex] = players[player];
+        this.props.entitiesKeys.push(playerZindex);
 
         // Render Players shadows
         shadowZindex = players[player].props.playerNumber + 1500;
-        entities[shadowZindex] = new PlayerShadow(players[player]);
-        entitiesKeys.push(shadowZindex);
+        this.props.entities[shadowZindex] = new PlayerShadow(players[player]);
+        this.props.entitiesKeys.push(shadowZindex);
     }
 
     // Render explosions
     if (this.props.explosions.length) {
-        for (var key in this.props.explosions) {
-            var particle = this.props.explosions[key];
+        for (key in this.props.explosions) {
+            particle = this.props.explosions[key];
             if (!particle.dead) {
-                entities[particle.zIndex] = particle;
-                entitiesKeys.push(particle.zIndex);
+                this.props.entities[particle.zIndex] = particle;
+                this.props.entitiesKeys.push(particle.zIndex);
             }
         }
     }
     
     // Sort entities by key
-    entitiesKeys.sort();
+    this.props.entitiesKeys.sort();
     
     // Render all entities on canvas
-    for (var ii = 0; ii < entitiesKeys.length; ii++) {
-        entities[entitiesKeys[ii]].draw(context);
+    for (ii = 0; ii < this.props.entitiesKeys.length; ii++) {
+        this.props.entities[this.props.entitiesKeys[ii]].draw(context);
     }
 };
+
 
 Game.prototype.renderText = function(context) {
     var maxWidth = context.canvas.width / 2;

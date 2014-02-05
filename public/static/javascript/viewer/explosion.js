@@ -10,9 +10,10 @@ var Explosion = function(x, y, zIndex, scale, color){
 	var minScaleSpeed = 2.0;
 	var maxScaleSpeed = 4.0;
 	var newParticles = [];
+	var speed, particle;
 
 	for (var angle=0; angle < 360; angle += Math.round(360/count)) {
-		var particle = new ExplosionParticle();
+		particle = new ExplosionParticle();
 
 		particle.x = x;
 		particle.y = y;
@@ -25,7 +26,7 @@ var Explosion = function(x, y, zIndex, scale, color){
 
 		particle.scaleSpeed = randomFloat(minScaleSpeed, maxScaleSpeed) * scale;
 
-		var speed = randomFloat(minSpeed, maxSpeed);
+		speed = randomFloat(minSpeed, maxSpeed);
 
 		particle.velocityX = speed * Math.cos(angle * Math.PI / 180.0);
 		particle.velocityY = speed * Math.sin(angle * Math.PI / 180.0);

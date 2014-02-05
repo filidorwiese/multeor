@@ -26,6 +26,7 @@ if (typeof io === 'undefined') {
     // local arjen
     // var socket = io.connect('10.0.1.104:443');
 
+   
     // Setup game globals
     var players = {};
     var game = false;
@@ -40,6 +41,7 @@ if (typeof io === 'undefined') {
                         '255,0,36'
                         ];
     var playerColorsShuffled = shuffleArray(playerColors.slice(0)); // Clone it and shuffle
+    var profilerOn = location.search.match(/profile/) ? true : false;
 
     // Set gameRoom
     var gameRoom = sessionStorage.getItem('game-room') || Math.floor((Math.random() * 10000) + 10000);
@@ -110,15 +112,18 @@ if (typeof io === 'undefined') {
             players[data.pid].props.vector = data.v;
         });
 
-        //profiler.start(context, 12, 245, 120, 1);
+        if (profilerOn) {
+            profiler.start(context, 12, 245, 120, 1);
+        }
 
         var now;
         var delta;
         var then = new Date().getTime();
         var interval = 1000 / 60;
 
-        (function gameLoop(time){
 
+        (function gameLoop(time){
+            
             requestAnimationFrame(gameLoop);
 
             now = new Date().getTime();
@@ -128,20 +133,16 @@ if (typeof io === 'undefined') {
                 then = now - (delta % interval);
 
                 if (game) {
-                    //console.log(delta);
                     game.tick(context, delta);
                 }
             }
 
-            //if (delta > interval) {
-                //mainContext.drawImage(offscreenCanvas, 0, 0);
-                //then = time;
-            //}
-
-            //profiler.tick();
-
+            if (profilerOn) {
+                context.drawImage(canvas, 0, 0);
+                profiler.tick();
+            }
+            
         })();
-
 
         $('.gamecode-container').html(gameRoom);
 
