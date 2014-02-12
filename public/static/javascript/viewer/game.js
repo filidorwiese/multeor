@@ -412,6 +412,8 @@ Game.prototype.endGame = function(){
     $(window).trigger('game-audio-stop');
 
     setTimeout(function(){
+        $('.leaderboard-container').fadeIn(1000);
+        
         // Save Leaderboard image-data
         var image = context.getImageData(((canvas.width - 1000) / 2), 0, 1000, 600);
         var buffer = document.createElement('canvas');
@@ -426,9 +428,8 @@ Game.prototype.endGame = function(){
         socket.emit('store-leaderboard', {viewerId: viewerId, gameRoom: gameRoom, leaderboard: leaderboardImage});
 
         // Update highest score from server
-        this.updateHighestScore();
+        self.updateHighestScore();
 
-        $('.leaderboard-container').fadeIn(1000);
     }, 1000);
 };
 

@@ -162,7 +162,7 @@ if (typeof io === 'undefined') {
 
 
 function hideInstructions(){
-    $('.higestScoreEver').fadeOut(1000);
+    $('.highestScoreEver').fadeOut(250);
     $.each($('.step'), function(key, val){
         $(val).delay(key*200).animate({top: '+='+346}, function(){
             if(key == $('.step').length-1 ) {
@@ -184,7 +184,7 @@ function hideInstructions(){
 }
 
 function showInstructions(){
-    $('.higestScoreEver').hide();
+    $('.highestScoreEver').show();
     $('.leaderboard-container').hide();
     $('.instructions-container').show();
     $('.step').css({top: 0, opacity: 0}).animate({opacity: 1}, 300);
