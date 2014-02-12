@@ -1,6 +1,0 @@
-1. cd to /home/multeor
-2. save local changes (git stash)
-3. update master brand (git pull)
-4. put local changes back (git stash pop)
-5. verify!!
-6. reset unix-rights (chown -R multeor:multeor *)
