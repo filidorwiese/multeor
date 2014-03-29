@@ -3,19 +3,20 @@ CWD=`dirname $0`
 TS=$(date +%d-%m-%Y_%H:%M)
 TITLE="Multeor"
 LOG=/var/log/multeor/multeor.log
+ERRLOG=/var/log/multeor/multeor.error
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 JSPATH="$DIR/public/static/javascript"
 
 if [[ $EUID -eq 0 ]]; then
-    sudo -u multeor $0 $1
+    su -l multeor $0 $1
     exit
 fi
 
 case "$1" in
     start)
         echo "Starting $TITLE..."
-	/usr/local/bin/node $CWD/server.js >> $LOG &
+	/usr/local/bin/forever start -o $LOG -e $ERRLOG $CWD/server.js
     ;;
     stop)
         echo "Stopping $TITLE..."

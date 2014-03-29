@@ -3,3 +3,4 @@ codekit-config.json
 .DS_Store
 /public/leaderboards/
 high-score-*.json
+.forever
