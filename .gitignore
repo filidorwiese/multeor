@@ -3,5 +3,8 @@ codekit-config.json
 .DS_Store
 /public/leaderboards/
 high-score-*.json
-.forever
+.forever/
 node_modules/
+.bash_history
+.npm/
+.node-gyp/
