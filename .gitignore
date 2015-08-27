@@ -4,3 +4,4 @@ codekit-config.json
 /public/leaderboards/
 high-score-*.json
 .forever
+node_modules/

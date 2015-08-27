@@ -1,0 +1,12 @@
+[Unit]
+Description=Multeor game server
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/home/multeor/multeor.sh start
+ExecStop=/home/multeor/multeor.sh stop
+User=multeor
+
+[Install]
+WantedBy=multi-user.target
