@@ -1,11 +1,11 @@
 {
-    "name": "Multeor",
-    "version": "1.0.0",
-    "description": "Multeor",
-    "dependencies": {
-        "socket.io": "~0.9.6",
-        "mime": "~1.2.7",
-	"mkdirp": "~0.3.5",
-	"http-get": "~0.5.10"
-    }
+  "name": "Multeor",
+  "version": "1.0.0",
+  "description": "Multeor",
+  "dependencies": {
+    "http-request": "^0.7.0",
+    "mime": "~1.2.7",
+    "mkdirp": "~0.3.5",
+    "socket.io": "~0.9.6"
+  }
 }

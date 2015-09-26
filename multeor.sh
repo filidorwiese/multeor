@@ -16,7 +16,7 @@ fi
 case "$1" in
     start)
         echo "Starting $TITLE..."
-	/usr/local/bin/forever start -o $LOG -e $ERRLOG $CWD/server.js
+        /usr/local/bin/forever start -o $LOG -e $ERRLOG $CWD/server.js
     ;;
     stop)
         echo "Stopping $TITLE..."

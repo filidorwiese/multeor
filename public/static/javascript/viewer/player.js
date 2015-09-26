@@ -1,6 +1,6 @@
 'use strict';
 
-var Player = function(context, playerId, playerIcon, playerColor, playerNumber, webAudioSupported) {
+var Player = function (context, playerId, playerIcon, playerColor, playerNumber, webAudioSupported) {
     var self = this;
     self.props = {
         playerId: playerId,
@@ -33,7 +33,7 @@ var Player = function(context, playerId, playerIcon, playerColor, playerNumber, 
         var image = new Image();
         image.crossOrigin = 'Anonymous';
         image.src = playerIcon;
-        image.onload = function() {
+        image.onload = function () {
             self.loadIcon(this);
         };
     } else {
@@ -41,8 +41,8 @@ var Player = function(context, playerId, playerIcon, playerColor, playerNumber, 
     }
 };
 
-Player.prototype.draw = function(context) {
-	this.updatePosition();
+Player.prototype.draw = function (context) {
+    this.updatePosition();
 
     if (this.props.lastMoves.length > 9) {
         var tailX = 0;
@@ -55,7 +55,7 @@ Player.prototype.draw = function(context) {
         var headY = this.props.lastMoves[9][1];
         context.lineWidth = this.props.z;
 
-        var lingrad2 = context.createLinearGradient(0,0, (headX - context.lineWidth / 2),0);
+        var lingrad2 = context.createLinearGradient(0, 0, (headX - context.lineWidth / 2), 0);
         lingrad2.addColorStop(1, 'rgba(' + this.props.color + ',1)');
         lingrad2.addColorStop(0, 'rgba(' + this.props.color + ',0)');
         context.strokeStyle = lingrad2;
@@ -83,13 +83,15 @@ Player.prototype.draw = function(context) {
     }
 };
 
-Player.prototype.shadow = function(context) {
+Player.prototype.shadow = function (context) {
     if (this.props.lastMoves.length > 9) {
         var offsetX = -50 * (this.props.z - this.props.minZ) / (this.props.maxZ - this.props.minZ);
         var offsetZ = this.props.minZ;
         var offsetY = (this.props.z * 1.5) - (offsetZ * 1.5);
         var alpha = .1;
-        if (offsetY < 5) { return; }
+        if (offsetY < 5) {
+            return;
+        }
 
         var tailX = 0 + offsetX;
         var tailY = this.props.lastMoves[0][1] + offsetY;
@@ -101,7 +103,7 @@ Player.prototype.shadow = function(context) {
         var headY = this.props.lastMoves[9][1] + offsetY;
         context.lineWidth = offsetZ;
 
-        var lingrad2 = context.createLinearGradient(0,0, (headX - context.lineWidth / 2),0);
+        var lingrad2 = context.createLinearGradient(0, 0, (headX - context.lineWidth / 2), 0);
         lingrad2.addColorStop(1, 'rgba(36,42,48,' + alpha + ')');
         lingrad2.addColorStop(0, 'rgba(36,42,48,0)');
         context.strokeStyle = lingrad2;
@@ -114,60 +116,94 @@ Player.prototype.shadow = function(context) {
     }
 }
 
-Player.prototype.updatePosition = function() {
+Player.prototype.updatePosition = function () {
     if (this.props.locked) {
         // Adjust player to endX / endY / endZ
         var xyStep = 2;
         var zStep = 1;
-        if (this.props.x < this.props.endX) { this.props.x += xyStep; }
-        if (this.props.y < this.props.endY) { this.props.y += xyStep; }
-        if (this.props.z < this.props.endZ) { this.props.z += zStep; }
+        if (this.props.x < this.props.endX) {
+            this.props.x += xyStep;
+        }
+        if (this.props.y < this.props.endY) {
+            this.props.y += xyStep;
+        }
+        if (this.props.z < this.props.endZ) {
+            this.props.z += zStep;
+        }
 
-        if (this.props.x > this.props.endX) { this.props.x -= xyStep; }
-        if (this.props.y > this.props.endY) { this.props.y -= xyStep; }
-        if (this.props.z > this.props.endZ) { this.props.z -= zStep; }
+        if (this.props.x > this.props.endX) {
+            this.props.x -= xyStep;
+        }
+        if (this.props.y > this.props.endY) {
+            this.props.y -= xyStep;
+        }
+        if (this.props.z > this.props.endZ) {
+            this.props.z -= zStep;
+        }
         //Upon.log(this.props.playerId + ': ' + this.props.x + ', ' + this.props.y + ', ' + this.props.z);
 
     } else {
         // Adjust to player input
         var xSpeed = 0.1;
         var ySpeed = 0.1;
-    	var radians = this.props.vector[0] * (Math.PI / 180);
+        var radians = this.props.vector[0] * (Math.PI / 180);
 
-    	var zSpeed = 3;
-    	if (this.props.z - zSpeed > (this.props.vector[2] * 50)) {
-    		this.props.z -= zSpeed;
-    	} else if (this.props.z + zSpeed < (this.props.vector[2] * 50)) {
-    		this.props.z += zSpeed;
-    	}
-    	if (this.props.z > this.props.maxZ) { this.props.z = this.props.maxZ; }
-    	if (this.props.z < this.props.minZ) { this.props.z = this.props.minZ; }
+        var zSpeed = 3;
+        if (this.props.z - zSpeed > (this.props.vector[2] * 50)) {
+            this.props.z -= zSpeed;
+        } else if (this.props.z + zSpeed < (this.props.vector[2] * 50)) {
+            this.props.z += zSpeed;
+        }
+        if (this.props.z > this.props.maxZ) {
+            this.props.z = this.props.maxZ;
+        }
+        if (this.props.z < this.props.minZ) {
+            this.props.z = this.props.minZ;
+        }
 
-        if (this.props.vector[0] > 90 && this.props.vector[0] < 270) { xSpeed *= 2; } // If direction is backwards, double speed
+        if (this.props.vector[0] > 90 && this.props.vector[0] < 270) {
+            xSpeed *= 2;
+        } // If direction is backwards, double speed
         this.props.x += ((Math.cos(radians) * this.props.vector[1]) * xSpeed);
-        if (this.props.x > this.props.maxX) { this.props.x = this.props.maxX; }
-        if (this.props.x < this.props.minX) { this.props.x = this.props.minX; }
+        if (this.props.x > this.props.maxX) {
+            this.props.x = this.props.maxX;
+        }
+        if (this.props.x < this.props.minX) {
+            this.props.x = this.props.minX;
+        }
 
         var halfHeight = this.props.z / 2;
         this.props.y += ((Math.sin(radians) * this.props.vector[1]) * ySpeed);
-        if (this.props.y > this.props.maxY - halfHeight) { this.props.y = this.props.maxY - halfHeight; }
-        if (this.props.y < this.props.minY + halfHeight) { this.props.y = this.props.minY + halfHeight; }
+        if (this.props.y > this.props.maxY - halfHeight) {
+            this.props.y = this.props.maxY - halfHeight;
+        }
+        if (this.props.y < this.props.minY + halfHeight) {
+            this.props.y = this.props.minY + halfHeight;
+        }
     }
 
     this.props.lastMoves.push([this.props.x, this.props.y]); //, playerProps.z
-    if (this.props.lastMoves.length > 10) { this.props.lastMoves.shift(); }
+    if (this.props.lastMoves.length > 10) {
+        this.props.lastMoves.shift();
+    }
 };
 
-Player.prototype.updateScore = function(points, audio) {
+Player.prototype.updateScore = function (points, audio) {
     this.props.score += points;
-	socket.emit('update-score', {viewerId: viewerId, gameRoom: gameRoom, playerId: this.props.playerId, score: this.props.score, audio: audio});
+    socket.emit('update-score', {
+        viewerId: viewerId,
+        gameRoom: gameRoom,
+        playerId: this.props.playerId,
+        score: this.props.score,
+        audio: audio
+    });
 };
 
-Player.prototype.lockPlayer = function() {
+Player.prototype.lockPlayer = function () {
     this.props.locked = true;
 };
 
-Player.prototype.loadIcon = function(image) {
+Player.prototype.loadIcon = function (image) {
     var self = this;
 
     var canvas = document.createElement('canvas');
@@ -193,7 +229,7 @@ Player.prototype.loadIcon = function(image) {
     self.props.icon = canvas;
 };
 
-Player.prototype.drawPolygon = function(context, x, y, radius, numOfSides) {
+Player.prototype.drawPolygon = function (context, x, y, radius, numOfSides) {
     var angChange = (360 / numOfSides) * (Math.PI / 180.0);
     var prevX, prevY, firstX, firstY;
 
@@ -201,20 +237,20 @@ Player.prototype.drawPolygon = function(context, x, y, radius, numOfSides) {
     context.moveTo(Math.cos(angle) * radius, Math.cos(angle) * radius);
 
     var angle, x1, y1;
-    for(var i=0; i < numOfSides; i++) {
+    for (var i = 0; i < numOfSides; i++) {
         angle = i * angChange;
         prevX = x1;
         prevY = y1;
         x1 = x + Math.cos(angle) * radius;
         y1 = y + Math.sin(angle) * radius;
-        if(i > 0) {
-            context.lineTo(x1,y1);
+        if (i > 0) {
+            context.lineTo(x1, y1);
         } else {
             firstX = x1;
             firstY = y1;
         }
-        if(i == numOfSides-1) {
-            context.lineTo(firstX,firstY);
+        if (i == numOfSides - 1) {
+            context.lineTo(firstX, firstY);
         }
     }
 
@@ -223,21 +259,23 @@ Player.prototype.drawPolygon = function(context, x, y, radius, numOfSides) {
 };
 
 
-var PlayerShadow = function(player) {
+var PlayerShadow = function (player) {
     var self = this;
     self.props = {
         player: player.props
     };
 };
 
-PlayerShadow.prototype.draw = function(context) {
+PlayerShadow.prototype.draw = function (context) {
     if (this.props.player.lastMoves.length > 9) {
 
         var offsetX = -50 * (this.props.player.z - this.props.player.minZ) / (this.props.player.maxZ - this.props.player.minZ);
         var offsetZ = this.props.player.minZ;
         var offsetY = (this.props.player.z * 1.5) - (offsetZ * 1.5);
         var alpha = .1;
-        if (offsetY < 5) { return; }
+        if (offsetY < 5) {
+            return;
+        }
 
         var tailX = 0 + offsetX;
         var tailY = this.props.player.lastMoves[0][1] + offsetY;
@@ -249,7 +287,7 @@ PlayerShadow.prototype.draw = function(context) {
         var headY = this.props.player.lastMoves[9][1] + offsetY;
         context.lineWidth = offsetZ;
 
-        var lingrad2 = context.createLinearGradient(0,0, (headX - context.lineWidth / 2),0);
+        var lingrad2 = context.createLinearGradient(0, 0, (headX - context.lineWidth / 2), 0);
         lingrad2.addColorStop(1, 'rgba(36,42,48,' + alpha + ')');
         lingrad2.addColorStop(0, 'rgba(36,42,48,0)');
         context.strokeStyle = lingrad2;
