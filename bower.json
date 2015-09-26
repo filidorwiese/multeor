@@ -1,0 +1,28 @@
+{
+  "name": "Multeor",
+  "version": "0.0.0",
+  "authors": [
+    "Filidor Wiese <fili@fili.nl>",
+    "Arjen de Vries <arjen@dasblitz.nl>",
+    "Arthur van 't Hoog <arthur@avth.nl>"
+  ],
+  "description": "Multiplayer webgame",
+  "main": "server.js",
+  "license": "CC BY-NC 4.0",
+  "homepage": "http://www.multeor.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bourbon": "~4.2.5",
+    "howler.js": "~1.1.26",
+    "jquery": "1.9",
+    "modernizr": "~3.0.0",
+    "requestAnimationFrame": "~0.0.23",
+    "sass-meyer-reset": "*"
+  }
+}

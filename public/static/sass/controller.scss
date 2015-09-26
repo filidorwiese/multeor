@@ -1,5 +1,5 @@
-@import "compass/reset";
-@import "compass/css3";
+@import "../bower_components/sass-meyer-reset/_sass-meyer-reset";
+@import "../bower_components/bourbon/app/assets/stylesheets/_bourbon";
 @import "_vars";
 @import "_font";
 @import "_base";
@@ -238,7 +238,8 @@ html, body {
         margin-left: 70px;
         margin-top: 70px;
         background: url(../images/controls4_stick.svg) left top no-repeat;
-        @include apply-origin(0 50%, 0);
+        //@include apply-origin(0 50%, 0);
+        @include transform-origin(0 50%);
         @include transition(rotate(180deg));
       }
     }

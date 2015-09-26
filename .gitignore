@@ -1,6 +1,7 @@
 .sass-cache/
 .forever/
 node_modules/
+bower_components/
 logs/*
 .bash_history
 .npm/
@@ -11,4 +12,5 @@ codekit-config.json
 /public/leaderboards/
 high-score-*.json
 /public/static/javascript/*.min.js
-/public/static/css/*.css
+*.css
+*.css.map

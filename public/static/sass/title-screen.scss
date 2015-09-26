@@ -1,5 +1,5 @@
-@import "compass/reset";
-@import "compass/css3";
+@import "../bower_components/sass-meyer-reset/_sass-meyer-reset";
+@import "../bower_components/bourbon/app/assets/stylesheets/_bourbon";
 @import "_font";
 @import "_vars";
 @import "_layout";
