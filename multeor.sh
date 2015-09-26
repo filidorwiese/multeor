@@ -2,8 +2,8 @@
 CWD=`dirname $0`
 TS=$(date +%d-%m-%Y_%H:%M)
 TITLE="Multeor"
-LOG=/var/log/multeor/multeor.log
-ERRLOG=/var/log/multeor/multeor.error
+LOG=$CWD/logs/multeor.log
+ERRLOG=$CWD/logs/multeor.error
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 JSPATH="$DIR/public/static/javascript"
@@ -20,11 +20,11 @@ case "$1" in
     ;;
     start-forever)
         echo "Forever starting $TITLE..."
-        /usr/bin/env forever start -o $LOG -e $ERRLOG $CWD/server.js
+        $CWD/node_modules/forever/bin/forever start -o $LOG -e $ERRLOG $CWD/server.js
     ;;
     stop)
         echo "Stopping $TITLE..."
-        killall -q node forever
+        killall -q node nodejs forever
     ;;
     restart)
        	$0 stop

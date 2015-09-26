@@ -1,6 +1,7 @@
 .sass-cache/
 .forever/
 node_modules/
+logs/*
 .bash_history
 .npm/
 .node-gyp/

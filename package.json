@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Multeor",
   "dependencies": {
+    "forever": "^0.15.1",
     "http-request": "^0.7.0",
     "mime": "~1.2.7",
     "mkdirp": "~0.3.5",
