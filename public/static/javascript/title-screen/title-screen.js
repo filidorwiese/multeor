@@ -1,19 +1,19 @@
-$(document).ready(function(){
+$(document).ready(function () {
 
     sessionStorage.clear();
     sessionStorage.setItem('came-from-title-screen', true);
-    
-    $('#play-fb a').on('click', function(event) {
+
+    $('#play-fb a').on('click', function (event) {
         event.preventDefault();
 
         if (fbLoggedIn()) {
-            fbGetProfile(function(){
+            fbGetProfile(function () {
                 document.location = '/controller/';
             });
         } else {
-            fbLogin(function(status){
+            fbLogin(function (status) {
                 if (status) {
-                    fbGetProfile(function(){
+                    fbGetProfile(function () {
                         document.location = '/controller/';
                     });
                 } else {
@@ -23,7 +23,7 @@ $(document).ready(function(){
         }
     });
 
-    $('#play-anon a').on('click', function(event) {
+    $('#play-anon a').on('click', function (event) {
         event.preventDefault();
         document.location = '/controller/';
     });

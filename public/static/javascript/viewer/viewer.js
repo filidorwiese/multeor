@@ -15,9 +15,9 @@ if (typeof io === 'undefined') {
     // Setup canvas
     var canvas = document.getElementById('canvas');
     var context = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = 600;
-        context.globalAlpha = 0.5;
+    canvas.width = window.innerWidth;
+    canvas.height = 600;
+    context.globalAlpha = 0.5;
 
     // Setup socket.io
     //var socket = io.connect(window.location.hostname + ':443');
@@ -26,20 +26,20 @@ if (typeof io === 'undefined') {
     // local arjen
     // var socket = io.connect('10.0.1.104:443');
 
-   
+
     // Setup game globals
     var players = {};
     var game = false;
     var playerColors = [
-                        '110,8,157',
-                        '0,255,247',
-                        '16,230,34',
-                        '255,174,26',
-                        '255,255,0',
-                        '255,110,221',
-                        '8,103,255',
-                        '255,0,36'
-                        ];
+        '110,8,157',
+        '0,255,247',
+        '16,230,34',
+        '255,174,26',
+        '255,255,0',
+        '255,110,221',
+        '8,103,255',
+        '255,0,36'
+    ];
     var playerColorsShuffled = shuffleArray(playerColors.slice(0)); // Clone it and shuffle
     var profilerOn = location.search.match(/profile/) ? true : false;
 
@@ -51,27 +51,29 @@ if (typeof io === 'undefined') {
     var viewerId = sessionStorage.getItem('viewer-id') || Math.floor((Math.random() * 10000) + 10000);
     sessionStorage.setItem('viewer-id', viewerId);
 
-    $(document).ready(function(){
+    $(document).ready(function () {
 
         var game = new Game('/levels/forest', gameRoom);
 
         socket.emit('new-viewer', {viewerId: viewerId, gameRoom: gameRoom});
 
-        socket.on('game-end', function(data){
+        socket.on('game-end', function (data) {
             game.abortGame();
         });
 
-        socket.on('game-invalid', function(data){
+        socket.on('game-invalid', function (data) {
             sessionStorage.setItem('viewer-id', '');
             sessionStorage.setItem('game-room', '');
             document.location = '/';
             logGAEvent('Game hijacking?');
         });
 
-        socket.on('update-game-state', function(data){
+        socket.on('update-game-state', function (data) {
             // Enable button on first joined player
             var playerCount = 0;
-            for (var ii in data.players) { playerCount++; }
+            for (var ii in data.players) {
+                playerCount++;
+            }
             if (playerCount) {
                 $('#gameStart').removeClass('disabled');
             }
@@ -87,7 +89,12 @@ if (typeof io === 'undefined') {
                     var playerIcon = data.players[ii].playerIcon;
                     var webAudioSupported = data.players[ii].webAudioSupported;
                     players[playerId] = new Player(context, playerId, playerIcon, playerColor, numberOfPlayers, webAudioSupported);
-                    socket.emit('update-player-color', {viewerId: viewerId, gameRoom: gameRoom, playerId: playerId, playerColor: playerColor});
+                    socket.emit('update-player-color', {
+                        viewerId: viewerId,
+                        gameRoom: gameRoom,
+                        playerId: playerId,
+                        playerColor: playerColor
+                    });
                 }
             }
 
@@ -105,7 +112,7 @@ if (typeof io === 'undefined') {
             }
         });
 
-        socket.on('player-update', function(data){
+        socket.on('player-update', function (data) {
             if (typeof players[data.pid] == 'undefined') {
                 return false;
             }
@@ -122,8 +129,8 @@ if (typeof io === 'undefined') {
         var interval = 1000 / 60;
 
 
-        (function gameLoop(time){
-            
+        (function gameLoop(time) {
+
             requestAnimationFrame(gameLoop);
 
             now = new Date().getTime();
@@ -141,19 +148,21 @@ if (typeof io === 'undefined') {
                 context.drawImage(canvas, 0, 0);
                 profiler.tick();
             }
-            
+
         })();
 
         $('.gamecode-container').html(gameRoom);
 
-        $('#gameStart').off('click').on('click', function(event){
+        $('#gameStart').off('click').on('click', function (event) {
             event.preventDefault();
-            if ($(this).hasClass('disabled')) { return false; }
+            if ($(this).hasClass('disabled')) {
+                return false;
+            }
             hideInstructions();
             game.getReady();
         });
 
-        $('#gameReset button').off('click').on('click', function(event){
+        $('#gameReset button').off('click').on('click', function (event) {
             event.preventDefault();
             game.resetGame();
         });
@@ -161,29 +170,29 @@ if (typeof io === 'undefined') {
 }
 
 
-function hideInstructions(){
+function hideInstructions() {
     $('.highestScoreEver').fadeOut(250);
-    $.each($('.step'), function(key, val){
-        $(val).delay(key*200).animate({top: '+='+346}, function(){
-            if(key == $('.step').length-1 ) {
+    $.each($('.step'), function (key, val) {
+        $(val).delay(key * 200).animate({top: '+=' + 346}, function () {
+            if (key == $('.step').length - 1) {
                 var delay = 200;
-                for(var i=$('.step-header').length-1; i >= 0; i--){
+                for (var i = $('.step-header').length - 1; i >= 0; i--) {
                     $('.step-header').eq(i).delay(delay).animate({opacity: 0});
                     delay += 750;
                 }
             }
         });
     });
-    setTimeout(function(){
+    setTimeout(function () {
         $('.destroy-container').show();
-        setTimeout(function(){
+        setTimeout(function () {
             $('.destroy-container').fadeOut(750);
         }, 1000);
         $('.instructions-container').hide();
     }, 3650);
 }
 
-function showInstructions(){
+function showInstructions() {
     $('.highestScoreEver').show();
     $('.leaderboard-container').hide();
     $('.instructions-container').show();
@@ -191,13 +200,15 @@ function showInstructions(){
     $('.step-header').animate({opacity: 1}, 300);
 }
 
-function shuffleArray(o){
-    for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x) {};
+function shuffleArray(o) {
+    for (var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x) {
+    }
+    ;
     return o;
 }
 
-function randomFloat (min, max) {
-    return min + Math.random()*(max-min);
+function randomFloat(min, max) {
+    return min + Math.random() * (max - min);
 }
 
 function logGAEvent(action, label, value) {

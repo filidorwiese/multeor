@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 CWD=`dirname $0`
 TS=$(date +%d-%m-%Y_%H:%M)
 TITLE="Multeor"
@@ -16,11 +16,15 @@ fi
 case "$1" in
     start)
         echo "Starting $TITLE..."
-        /usr/local/bin/forever start -o $LOG -e $ERRLOG $CWD/server.js
+        /usr/bin/env node $CWD/server.js
+    ;;
+    start-forever)
+        echo "Forever starting $TITLE..."
+        /usr/bin/env forever start -o $LOG -e $ERRLOG $CWD/server.js
     ;;
     stop)
         echo "Stopping $TITLE..."
-        killall -q node
+        killall -q node forever
     ;;
     restart)
        	$0 stop
@@ -28,14 +32,14 @@ case "$1" in
     ;;
     build)
         echo "Building $TITLE..."
-        /usr/bin/java -jar $JSPATH/google-closure-javascript.jar --js $JSPATH/viewer/*.js --js_output_file=$JSPATH/viewer.min.js
-        /usr/bin/java -jar $JSPATH/google-closure-javascript.jar --js $JSPATH/controller/*.js --js_output_file=$JSPATH/controller.min.js
-        /usr/bin/java -jar $JSPATH/google-closure-javascript.jar --js $JSPATH/title-screen/*.js --js_output_file=$JSPATH/title-screen.min.js
-        /usr/bin/java -jar $JSPATH/google-closure-javascript.jar --js $JSPATH/about/*.js --js_output_file=$JSPATH/about.min.js
-        /var/lib/gems/1.8/bin/compass compile $DIR
+        /usr/bin/env java -jar $JSPATH/google-closure-javascript.jar --js $JSPATH/viewer/*.js --js_output_file=$JSPATH/viewer.min.js
+        /usr/bin/env java -jar $JSPATH/google-closure-javascript.jar --js $JSPATH/controller/*.js --js_output_file=$JSPATH/controller.min.js
+        /usr/bin/env java -jar $JSPATH/google-closure-javascript.jar --js $JSPATH/title-screen/*.js --js_output_file=$JSPATH/title-screen.min.js
+        /usr/bin/env java -jar $JSPATH/google-closure-javascript.jar --js $JSPATH/about/*.js --js_output_file=$JSPATH/about.min.js
+        /usr/bin/env compass compile $DIR
     ;;
     *)
-        echo "Usage: $0 {start|stop|restart|build}"
+        echo "Usage: $0 {start|start-forever|stop|restart|build}"
     ;;
 esac
 

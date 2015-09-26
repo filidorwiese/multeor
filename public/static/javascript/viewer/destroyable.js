@@ -1,6 +1,6 @@
 'use strict';
 
-var Destroyable = function(sprite, image, x, y, z, destroyedColorIndex, currentSpriteFrame){
+var Destroyable = function (sprite, image, x, y, z, destroyedColorIndex, currentSpriteFrame) {
     this.props = {
         sprite: sprite,
         image: image,
@@ -14,9 +14,11 @@ var Destroyable = function(sprite, image, x, y, z, destroyedColorIndex, currentS
     };
 };
 
-Destroyable.prototype.draw = function(context) {
+Destroyable.prototype.draw = function (context) {
     // Don't draw when not in view
-    if (this.props.x < (this.props.frameWidth * -1) || this.props.x > context.canvas.width) { return false; }
+    if (this.props.x < (this.props.frameWidth * -1) || this.props.x > context.canvas.width) {
+        return false;
+    }
 
     if (this.props.destroyedColorIndex) {
         // When destroyed, show appropriate color
@@ -31,10 +33,14 @@ Destroyable.prototype.draw = function(context) {
     }
 };
 
-Destroyable.prototype.collides = function(players, bgModulus) {
+Destroyable.prototype.collides = function (players, bgModulus) {
     // No collision detection if sprite isn't a destroyable, is already destroyed or isn't in view
-    if (!this.props.sprite.destroyable || this.props.destroyedColorIndex) { return false; }
-    if (this.props.x < (this.props.frameWidth * -1) || this.props.x > canvas.width) { return false; }
+    if (!this.props.sprite.destroyable || this.props.destroyedColorIndex) {
+        return false;
+    }
+    if (this.props.x < (this.props.frameWidth * -1) || this.props.x > canvas.width) {
+        return false;
+    }
 
     var weirdnessOffset = 100;
     var entityLeft = Math.floor(this.props.x);
@@ -50,7 +56,7 @@ Destroyable.prototype.collides = function(players, bgModulus) {
     //context.fillRect(entityLeft, entityTop, entityRight - entityLeft, entityBottom - entityTop);
 
     var playerYPadding, playerXPadding, playerLeft, playerRight, playerTop, playerBottom, playerZ;
-    for(var player in players) {
+    for (var player in players) {
         playerYPadding = Math.floor(players[player].props.z * 0.3);
         playerXPadding = Math.floor(players[player].props.z * 0.3);
         playerLeft = Math.floor(players[player].props.x + playerXPadding + weirdnessOffset);

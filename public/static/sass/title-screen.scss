@@ -6,166 +6,165 @@
 @import "_base";
 
 .wrapper {
-    .main {
-        border-top: 19px solid black;
-        background: #272d33;
+  .main {
+    border-top: 19px solid black;
+    background: #272d33;
 
-        h1 {
-            font-family: 'NevisBold';
-            font-size: 90px;
-            text-align: center;
-            margin-top: 40px;
-            @media screen and (min-width: $mobileMax) {
-                font-size: 200px;
-            }
-        }
-
-        .content {
-            margin-top: 30px;
-            font-size: 30px;
-            line-height: 34px;
-            text-align: center;
-            @media screen and (min-width: $mobileMax) {
-                text-align: right;
-            }
-            padding-bottom: 40px;
-
-            h2 {
-                font-size: 30px;
-            }
-
-            .introduction {
-                margin: 30px 0 36px;
-            }
-        }
-
-        .info-graphic {
-            background: url(../images/infographic_03_short.gif) center 5px no-repeat;
-            height: 380px;
-        }
+    h1 {
+      font-family: 'NevisBold';
+      font-size: 90px;
+      text-align: center;
+      margin-top: 40px;
+      @media screen and (min-width: $mobileMax) {
+        font-size: 200px;
+      }
     }
 
-    .about {
+    .content {
+      margin-top: 30px;
+      font-size: 30px;
+      line-height: 34px;
+      text-align: center;
+      @media screen and (min-width: $mobileMax) {
         text-align: right;
-        font-size:16px;
+      }
+      padding-bottom: 40px;
 
-        a {
-            color:#616467;
-            display: inline-block;
-            margin: 30px;
+      h2 {
+        font-size: 30px;
+      }
 
-            &:hover {
-                color: #FFF;
-            }
-        }
+      .introduction {
+        margin: 30px 0 36px;
+      }
     }
+
+    .info-graphic {
+      background: url(../images/infographic_03_short.gif) center 5px no-repeat;
+      height: 380px;
+    }
+  }
+
+  .about {
+    text-align: right;
+    font-size: 16px;
+
+    a {
+      color: #616467;
+      display: inline-block;
+      margin: 30px;
+
+      &:hover {
+        color: #FFF;
+      }
+    }
+  }
 }
 
 #mobile-container {
-    display:none;
-    background:#272d33;
-    margin-top:19px;
-    text-align:center;
-    border-bottom: 19px solid black;
+  display: none;
+  background: #272d33;
+  margin-top: 19px;
+  text-align: center;
+  border-bottom: 19px solid black;
 
-    .row {
-        padding:10px 0 0 0;
+  .row {
+    padding: 10px 0 0 0;
 
-        .columns {
-            margin:0;
-        }
+    .columns {
+      margin: 0;
     }
+  }
 
-    h1 {
-        font-family: 'NevisBold';
-        font-size: 60px;
-        margin-top:15px;
-        margin-bottom:25px;
+  h1 {
+    font-family: 'NevisBold';
+    font-size: 60px;
+    margin-top: 15px;
+    margin-bottom: 25px;
+  }
+
+  p {
+    margin: 0;
+
+    a {
+      display: block;
+      color: #79838c;
+      text-decoration: none;
+      padding: 20px 0;
     }
+  }
 
-    p {
-        margin:0;
+  #play-fb {
+    background: #ffe400;
 
-        a {
-            display:block;
-            color:#79838c;
-            text-decoration:none;
-            padding:20px 0;
-        }
+    a {
+      color: #272d33;
+      font: 20px 'NevisRegular';
+      border-top: 5px solid #ffe400;
+      border-bottom: 5px solid #b6a300;
+
+      &:hover,
+      &:active {
+        border-top: 10px solid #272d33;
+        border-bottom: 0;
+      }
     }
+  }
 
+  #play-anon {
+    background: #ffae1a;
 
-    #play-fb {
-        background:#ffe400;
+    a {
+      color: #272d33;
+      font: 20px 'NevisRegular';
+      border-top: 5px solid #ffae1a;
+      border-bottom: 5px solid #ba7800;
 
-        a {
-            color: #272d33;
-            font: 20px 'NevisRegular';
-            border-top:5px solid #ffe400;
-            border-bottom:5px solid #b6a300;
-
-            &:hover,
-            &:active {
-                border-top:10px solid #272d33;
-                border-bottom:0;
-            }
-        }
+      &:hover,
+      &:active {
+        border-top: 10px solid #b6a300;
+        border-bottom: 0;
+      }
     }
+  }
 
-    #play-anon {
-        background:#ffae1a;
+  #about-multeor {
+    background: #272d33;
 
-        a {
-            color: #272d33;
-            font: 20px 'NevisRegular';
-            border-top:5px solid #ffae1a;
-            border-bottom:5px solid #ba7800;
+    a {
+      border-top: 5px solid #272d33;
+      border-bottom: 5px solid #13171c;
 
-            &:hover,
-            &:active {
-                border-top:10px solid #b6a300;
-                border-bottom:0;
-            }
-        }
+      &:hover,
+      &:active {
+        border-top: 10px solid #ba7800;
+        border-bottom: 0;
+      }
     }
+  }
 
-    #about-multeor {
-        background:#272d33;
+  #use-as-viewer {
+    background: #191f26;
+    font-size: 13px;
 
-        a {
-            border-top:5px solid #272d33;
-            border-bottom:5px solid #13171c;
+    a {
+      border-top: 5px solid #191f26;
+      border-bottom: 5px solid #101316;
 
-            &:hover,
-            &:active {
-                border-top:10px solid #ba7800;
-                border-bottom:0;
-            }
-        }
+      &:hover,
+      &:active {
+        border-top: 10px solid #13171c;
+        border-bottom: 0;
+      }
     }
-
-    #use-as-viewer {
-        background:#191f26;
-	    font-size:13px;
-
-        a {
-            border-top:5px solid #191f26;
-            border-bottom:5px solid #101316;
-
-            &:hover,
-            &:active {
-                border-top:10px solid #13171c;
-                border-bottom:0;
-            }
-        }
-    }
+  }
 }
 
 @media only screen and (max-device-width: 768px) {
-    html.touch #desktop-container {
-        display:none;
-    }
-    html.touch #mobile-container {
-        display:block;
-    }
+  html.touch #desktop-container {
+    display: none;
+  }
+  html.touch #mobile-container {
+    display: block;
+  }
 }

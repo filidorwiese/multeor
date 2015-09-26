@@ -6,259 +6,262 @@
 @import "_base";
 
 #header {
-    border-top: 19px solid black;
-    background: #272d33;
+  border-top: 19px solid black;
+  background: #272d33;
 
-    .heading {
-        font-size: 30px;
-        text-align: center;
-        padding-bottom:57px;
+  .heading {
+    font-size: 30px;
+    text-align: center;
+    padding-bottom: 57px;
 
-        h1 {
-            font-family: 'NevisBold';
-            font-size: 90px;
-            text-align: center;
-            margin: 30px 0;
+    h1 {
+      font-family: 'NevisBold';
+      font-size: 90px;
+      text-align: center;
+      margin: 30px 0;
 
-            @media screen and (min-width: $mobileMax) {
-                font-size: 200px;
-            }
-        }
-
-        .introduction {
-            margin-bottom:35px;
-	        line-height:1.3;
-        }
+      @media screen and (min-width: $mobileMax) {
+        font-size: 200px;
+      }
     }
+
+    .introduction {
+      margin-bottom: 35px;
+      line-height: 1.3;
+    }
+  }
 }
-@media screen and (max-width: $mobileMax) {
-    #header {
-        .heading {
-            h1 {
-                font-size:60px;
-                margin-bottom:15px;
-            }
 
-            h2, .introduction {
-                font-size:20px;
-            	margin-bottom:15px;
-            }
-        }
+@media screen and (max-width: $mobileMax) {
+  #header {
+    .heading {
+      h1 {
+        font-size: 60px;
+        margin-bottom: 15px;
+      }
+
+      h2, .introduction {
+        font-size: 20px;
+        margin-bottom: 15px;
+      }
     }
+  }
 }
 
 #about {
-    background-color:#3d454d;
-    padding:50px 0;
+  background-color: #3d454d;
+  padding: 50px 0;
 
-    .row {
-        padding-top: 42px;
+  .row {
+    padding-top: 42px;
+  }
+
+  h3 {
+    font-size: 30px;
+    margin-bottom: 30px;
+  }
+
+  p {
+    margin-bottom: 30px;
+  }
+
+  .inbetween-graphic {
+    display: none;
+    background: url(../images/about-inbetween-graphic.png) center top no-repeat;
+    height: 80px;
+    width: 90%;
+    margin-bottom: 10px;
+    background-size: contain;
+  }
+
+  ul.buddies {
+    position: relative;
+    width: 160px;
+    margin: 0 auto;
+
+    li {
+      display: inline-block;
+      position: absolute;
+
+      &.dasblitz-item {
+
+      }
+
+      &.fili-item {
+        top: 97px;
+        left: 41px;
+      }
+
+      &.avth-item {
+        top: 194px;
+      }
+
+      a {
+        display: inline-block;
+        text-indent: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 114px;
+        height: 114px;
+        background-image: url(../images/about-buddies.png);
+        background-repeat: no-repeat;
+
+        &.dasblitz-icon {
+          background-position: 0px 0px;
+        }
+
+        &.fili-icon {
+          background-position: -114px 0px;
+        }
+
+        &.avth-icon {
+          background-position: -228px 0px;
+          margin-right: 0px;
+        }
+      }
     }
+  }
 
-    h3 {
-        font-size:30px;
-        margin-bottom:30px;
-    }
+  .info-graphic {
+    background: url(../images/infographic_03_licht.gif) center 5px no-repeat;
+    min-height: 380px;
+    width: auto;
+    margin-top: -32px;
+  }
 
-    p {
-        margin-bottom:30px;
+  #high-score {
+    text-align: center;
+    margin: 0 auto;
+    width: 85%;
+    margin-bottom: 150px;
+  }
+}
+
+@media screen and (max-width: $mobileMax) {
+  #about {
+    padding: 30px 0;
+
+    ul.buddies {
+      margin-bottom: 10px;
+      width: 230px;
+
+      li {
+        position: relative;
+
+        &.fili-item {
+          top: auto;
+          left: auto;
+        }
+
+        &.avth-item {
+          top: auto;
+        }
+
+        a {
+          width: 66px;
+          height: 69px;
+          margin-right: 10px;
+          background-image: url(../images/about-buddies-small.png) !important;
+
+          &.dasblitz-icon {
+            background-position: 0px 0px;
+          }
+
+          &.fili-icon {
+            background-position: -66px 0px;
+          }
+
+          &.avth-icon {
+            background-position: -133px 0px;
+          }
+        }
+      }
     }
 
     .inbetween-graphic {
-        display:none;
-        background: url(../images/about-inbetween-graphic.png) center top no-repeat;
-        height: 80px;
-        width:90%;
-        margin-bottom:10px;
-        background-size:contain;
-    }
-
-    ul.buddies {
-        position: relative;
-        width:160px;
-        margin:0 auto;
-
-        li {
-            display:inline-block;
-            position: absolute;
-
-            &.dasblitz-item {
-                
-            }
-
-            &.fili-item {
-                top: 97px;
-                left: 41px;
-            }
-
-            &.avth-item {
-                top: 194px;
-            }
-
-            a {
-                display: inline-block;
-                text-indent:100%;
-                overflow:hidden;
-                white-space:nowrap;
-                width:114px;
-                height:114px;
-                background-image:url(../images/about-buddies.png);
-                background-repeat: no-repeat;
-
-                &.dasblitz-icon {
-                    background-position: 0px 0px;
-                }
-
-                &.fili-icon {
-                    background-position:-114px 0px;
-                }
-
-                &.avth-icon {
-                    background-position:-228px 0px;
-                    margin-right: 0px;
-                }
-            }
-        }
+      display: block;
     }
 
     .info-graphic {
-        background: url(../images/infographic_03_licht.gif) center 5px no-repeat;
-        min-height:380px;
-        width:auto;
-        margin-top: -32px;
+      display: none;
     }
-
-    #high-score {
-        text-align:center;
-        margin:0 auto;
-        width:85%;
-        margin-bottom:150px;
-    }
-}
-@media screen and (max-width: $mobileMax) {
-    #about {
-        padding:30px 0;
-
-        ul.buddies {
-            margin-bottom: 10px;
-            width:230px;
-
-            li {
-                position: relative;
-
-                &.fili-item {
-                    top: auto;
-                    left: auto;
-                }
-
-                &.avth-item {
-                    top: auto;
-                }
-                
-                a {
-                    width:66px;
-                    height:69px;
-                    margin-right:10px;
-                    background-image:url(../images/about-buddies-small.png) !important;
-
-                    &.dasblitz-icon {
-                        background-position: 0px 0px;
-                    }
-
-                    &.fili-icon {
-                        background-position:-66px 0px;
-                    }
-
-                    &.avth-icon {
-                        background-position:-133px 0px;
-                    }
-                }
-            }
-        }
-
-        .inbetween-graphic {
-            display:block;
-        }
-
-        .info-graphic {
-            display:none;
-        }
-    }
+  }
 }
 
 #requirements {
-    background-color:#272d33;
-    padding:60px 0;
+  background-color: #272d33;
+  padding: 60px 0;
 
-    h3 {
-        font-size:30px;
-        margin-bottom:30px;
+  h3 {
+    font-size: 30px;
+    margin-bottom: 30px;
+  }
+
+  p {
+    margin-bottom: 30px;
+  }
+
+  ul {
+    margin-bottom: 30px;
+
+    li {
+      list-style-type: disc;
+      margin-left: 20px;
     }
+  }
 
-    p {
-        margin-bottom:30px;
-    }
+  .inbetween-graphic {
+    background: url(../images/about-inbetween-graphic.png) center top no-repeat;
+    height: 199px;
+    margin-bottom: 65px;
+    background-size: contain;
+  }
 
-    ul {
-        margin-bottom:30px;
+  #play-game-mobile {
+    display: none;
+  }
 
-        li {
-            list-style-type: disc;
-            margin-left:20px;
-        }
-    }
+  .button-row {
+    text-align: center;
+  }
+
+}
+
+@media screen and (max-width: $mobileMax) {
+  #requirements {
+    padding: 30px 0;
 
     .inbetween-graphic {
-        background: url(../images/about-inbetween-graphic.png) center top no-repeat;
-        height: 199px;
-        margin-bottom:65px;
-        background-size:contain;
+      display: none;
+    }
+
+    #play-game {
+      display: none;
     }
 
     #play-game-mobile {
-        display:none;
+      display: inline-block;
     }
 
-    .button-row {
-        text-align: center;
+    .button button {
+      font-size: 20px;
     }
-
-}
-@media screen and (max-width: $mobileMax) {
-    #requirements {
-        padding:30px 0;
-
-        .inbetween-graphic {
-            display:none;
-        }
-
-        #play-game {
-            display: none;
-        }
-
-        #play-game-mobile {
-            display:inline-block;
-        }
-
-        .button button {
-            font-size:20px;
-        }
-    }
+  }
 }
 
 .footer {
 
-    .footer-nav {
-        text-align: right;
-        padding-bottom: 50px;
+  .footer-nav {
+    text-align: right;
+    padding-bottom: 50px;
 
-        a{
-            color: #616467;
-            display: inline-block;
-            margin: 30px;
-        }
+    a {
+      color: #616467;
+      display: inline-block;
+      margin: 30px;
     }
+  }
 
-    height:216px;
-    background: #191f26;
+  height: 216px;
+  background: #191f26;
 }

@@ -1,24 +1,28 @@
 'use strict';
 
-(function(d){
+(function (d) {
     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-    if (d.getElementById(id)) {return;}
-    js = d.createElement('script'); js.id = id; js.async = true;
+    if (d.getElementById(id)) {
+        return;
+    }
+    js = d.createElement('script');
+    js.id = id;
+    js.async = true;
     js.src = "//connect.facebook.net/en_US/all.js";
     ref.parentNode.insertBefore(js, ref);
 }(document));
 
 var facebookConnected = false;
 
-window.fbAsyncInit = function() {
+window.fbAsyncInit = function () {
     FB.init({
-        appId      : '530700506998289', // App ID
-        status     : true, // check login status
-        cookie     : true, // enable cookies to allow the server to access the session
-        xfbml      : true  // parse XFBML
+        appId: '530700506998289', // App ID
+        status: true, // check login status
+        cookie: true, // enable cookies to allow the server to access the session
+        xfbml: true  // parse XFBML
     });
 
-    FB.Event.subscribe('auth.authResponseChange', function(response) {
+    FB.Event.subscribe('auth.authResponseChange', function (response) {
         if (response.status === 'connected') {
             facebookConnected = true;
         }
@@ -26,7 +30,7 @@ window.fbAsyncInit = function() {
 };
 
 function fbLogin(callback) {
-    FB.login(function(response){
+    FB.login(function (response) {
         if (response.status === 'connected') {
             callback(true);
         } else {
@@ -37,7 +41,7 @@ function fbLogin(callback) {
 
 function fbGetProfile(callback) {
     if (!sessionStorage.getItem('facebook-profile')) {
-        FB.api('/me?fields=id,name,picture', function(response) {
+        FB.api('/me?fields=id,name,picture', function (response) {
             sessionStorage.setItem('facebook-profile', JSON.stringify(response));
             callback();
         });
@@ -62,7 +66,7 @@ function fbPublish(title, image, callback) {
         link: 'http://multeor.com',
         //action_links: [{ text: 'Play', href: 'http://multeor.com' }],
         picture: image
-    }, function(response) {
+    }, function (response) {
         if (response && response.post_id) {
             callback(true);
         } else {

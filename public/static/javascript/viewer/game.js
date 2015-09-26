@@ -1,6 +1,6 @@
 'use strict';
 
-var Game = function(levelPath, code) {
+var Game = function (levelPath, code) {
     var self = this;
     self.props = {
         state: 'LOADING', // LOADING, WAITING, GETREADY, STARTED, LEADERBOARD, ENDED, ABORTED
@@ -20,10 +20,10 @@ var Game = function(levelPath, code) {
         spriteAnimationFrame: 1
     };
 
-    $.ajaxSetup({ cache: true });
-    $.getJSON(self.props.levelPath + '/level.json', function(world){
+    $.ajaxSetup({cache: true});
+    $.getJSON(self.props.levelPath + '/level.json', function (world) {
         self.props.world = world;
-        for (var ii=0; ii < world.length; ii++) {
+        for (var ii = 0; ii < world.length; ii++) {
             if (typeof world[ii].background !== 'undefined') {
                 if ($.inArray(world[ii].background, self.props.preloadImages) === -1) {
                     self.props.preloadImages.push(world[ii].background);
@@ -31,7 +31,7 @@ var Game = function(levelPath, code) {
             }
 
             if (world[ii].sprites.length) {
-                for (var jj=0; jj< world[ii].sprites.length; jj++) {
+                for (var jj = 0; jj < world[ii].sprites.length; jj++) {
                     var spriteObject = world[ii].sprites[jj];
                     world[ii].sprites[jj].origLeft = spriteObject.left; // needed for parallax reset
                     if (typeof spriteObject.path != 'undefined') {
@@ -50,14 +50,14 @@ var Game = function(levelPath, code) {
 
         // Preload images
         Upon.log('Preloading: ' + self.props.preloadImages);
-        for (var tt=0; tt < self.props.preloadImages.length; tt++) {
+        for (var tt = 0; tt < self.props.preloadImages.length; tt++) {
             self.loadImage(self.props.preloadImages[tt]);
         }
 
         // Attach audio
         self.loadAudio();
 
-    }).fail(function(jqxhr, settings, exception){
+    }).fail(function (jqxhr, settings, exception) {
         throw exception;
     });
 
@@ -65,7 +65,7 @@ var Game = function(levelPath, code) {
     this.updateHighestScore();
 };
 
-Game.prototype.loadAudio = function() {
+Game.prototype.loadAudio = function () {
     var self = this;
 
     // Load soundtrack
@@ -73,22 +73,22 @@ Game.prototype.loadAudio = function() {
         urls: [self.props.levelPath + '/audio/level.mp3', self.props.levelPath + '/audio/level.ogg'],
         loop: true
     });
-    $(window).off('game-audio-start').on('game-audio-start', function(e){
+    $(window).off('game-audio-start').on('game-audio-start', function (e) {
         soundtrack.volume(0.5);
         soundtrack.play();
     });
 
-    $(window).off('game-audio-stop').on('game-audio-stop', function(e){
-        var audio = { volume: 0.5 };
+    $(window).off('game-audio-stop').on('game-audio-stop', function (e) {
+        var audio = {volume: 0.5};
         $(audio).animate({
             volume: 0
         }, {
             easing: 'linear',
             duration: 5000,
-            step: function(now, tween){
+            step: function (now, tween) {
                 soundtrack.volume(now);
             },
-            complete:function(){
+            complete: function () {
                 soundtrack.stop();
             }
         });
@@ -102,16 +102,16 @@ Game.prototype.loadAudio = function() {
     }
 
     // Enable audio-toggle
-    $('.audio-toggle').off('click').on('click', function(event){
+    $('.audio-toggle').off('click').on('click', function (event) {
         event.preventDefault();
         $(this).toggleClass('is-muted');
 
         if ($(this).hasClass('is-muted')) {
-           Howler.mute();
-           sessionStorage.setItem('audio-muted', true);
+            Howler.mute();
+            sessionStorage.setItem('audio-muted', true);
         } else {
-           Howler.unmute();
-           sessionStorage.removeItem('audio-muted');
+            Howler.unmute();
+            sessionStorage.removeItem('audio-muted');
         }
     });
     if (sessionStorage.getItem('audio-muted')) {
@@ -119,7 +119,7 @@ Game.prototype.loadAudio = function() {
     }
 };
 
-Game.prototype.tick = function(context, delta) {
+Game.prototype.tick = function (context, delta) {
     if (this.props.state == 'LOADING') {
         return false;
     }
@@ -137,7 +137,7 @@ Game.prototype.tick = function(context, delta) {
     this.props.bgBase = Math.floor(this.props.worldX / 1000);
     this.props.bgModulus = Math.floor(this.props.worldX % 1000);
 
-	// Draw background tiles
+    // Draw background tiles
     this.renderBackgrounds(context, this.props.numberOfTiles, this.props.bgBase, this.props.bgModulus);
 
     // Draw entities, destroyables and players
@@ -155,14 +155,18 @@ Game.prototype.tick = function(context, delta) {
     }
 };
 
-Game.prototype.renderBackgrounds = function(context, numberOfTiles, bgBase, bgModulus) {
+Game.prototype.renderBackgrounds = function (context, numberOfTiles, bgBase, bgModulus) {
     var ii, tile, x, sx, sw, bgImage;
     for (ii = 0; ii <= numberOfTiles; ii++) {
         tile = this.props.world[bgBase + ii];
-        if (typeof tile == 'undefined') { continue; }
+        if (typeof tile == 'undefined') {
+            continue;
+        }
 
         x = (ii * 1000) - bgModulus;
-        if (x > context.canvas.width) { continue; }
+        if (x > context.canvas.width) {
+            continue;
+        }
 
         sx = 0;
         sw = 1000;
@@ -181,7 +185,7 @@ Game.prototype.renderBackgrounds = function(context, numberOfTiles, bgBase, bgMo
     }
 };
 
-Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModulus) {
+Game.prototype.renderEntities = function (context, numberOfTiles, bgBase, bgModulus) {
     // Clear entities array
     this.props.entities = {};
     this.props.entitiesKeys = [];
@@ -200,10 +204,12 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
     var ii, tile, sprite, spriteObject, destroyedColorIndex, x, y, z, spriteZindex, spriteImage, playerCollidedId,
         playerCollidedColor, playerCollidedColorIndex, explosionZindex, scale, yOffset, newParticles,
         player, playerZindex, shadowZindex, key, particle;
-        
+
     for (ii = -3; ii <= numberOfTiles + 1; ii++) {
         tile = this.props.world[bgBase + ii];
-        if (typeof tile == 'undefined') { continue; }
+        if (typeof tile == 'undefined') {
+            continue;
+        }
 
         for (sprite in tile.sprites) {
             this.props.entitiesOffset++;
@@ -216,7 +222,9 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
             spriteImage = this.getImage(spriteObject.path);
 
             // Only render/draw/collide sprites that are actually within view
-            if (x < (spriteImage.width * -1) || x > canvas.width) { continue; }
+            if (x < (spriteImage.width * -1) || x > canvas.width) {
+                continue;
+            }
 
             // Parallax fx
             if (this.props.state == 'STARTED') {
@@ -239,7 +247,7 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
 
                     // If entity has a destroylink, then also destroy linked entity
                     if (spriteObject.destroylink) {
-                        this.props.destroyed[spriteObject.destroylink] = playerCollidedColorIndex;                        
+                        this.props.destroyed[spriteObject.destroylink] = playerCollidedColorIndex;
                     }
 
                     // Update playerScore
@@ -285,10 +293,10 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
             }
         }
     }
-    
+
     // Sort entities by key
     this.props.entitiesKeys.sort();
-    
+
     // Render all entities on canvas
     for (ii = 0; ii < this.props.entitiesKeys.length; ii++) {
         this.props.entities[this.props.entitiesKeys[ii]].draw(context);
@@ -296,30 +304,38 @@ Game.prototype.renderEntities = function(context, numberOfTiles, bgBase, bgModul
 };
 
 
-Game.prototype.renderText = function(context) {
+Game.prototype.renderText = function (context) {
     var maxWidth = context.canvas.width / 2;
     var x = (context.canvas.width - maxWidth) / 2;
     var y = (context.canvas.height / 2.2);
     this.drawMessage(context, this.props.message, x, y, maxWidth, 35, true);
 };
 
-Game.prototype.prepareLeaderboard = function() {
+Game.prototype.prepareLeaderboard = function () {
     // Prevent player input and determine leaderboard position
     var highestScore = 0;
     var lowestScore = 10000;
     var leaderboardPositions = [];
     for (var player in players) {
         players[player].lockPlayer();
-        if (players[player].props.score > highestScore) { highestScore = players[player].props.score; }
-        if (players[player].props.score < lowestScore) { lowestScore = players[player].props.score; }
+        if (players[player].props.score > highestScore) {
+            highestScore = players[player].props.score;
+        }
+        if (players[player].props.score < lowestScore) {
+            lowestScore = players[player].props.score;
+        }
         leaderboardPositions.push([players[player], players[player].props.score]);
     }
-    leaderboardPositions.sort(function(a, b) {return b[1] - a[1] });
+    leaderboardPositions.sort(function (a, b) {
+        return b[1] - a[1]
+    });
     logGAEvent('Ended', 'Highest score', highestScore);
 
     // Calculate player leaderboard position
     var numberOfPlayers = 0;
-    for (var ii in players) { numberOfPlayers++; }
+    for (var ii in players) {
+        numberOfPlayers++;
+    }
 
     var headerHeight = ((600 - (numberOfPlayers * 60)) / 2);
     var leaderboardWidth = 800;
@@ -337,7 +353,7 @@ Game.prototype.prepareLeaderboard = function() {
     socket.emit('game-end', {viewerId: viewerId, gameRoom: gameRoom});
 };
 
-Game.prototype.renderLeaderboard = function(context) {
+Game.prototype.renderLeaderboard = function (context) {
     var maxWidth = canvas.width / 2;
     var fuzzyNumber = 10;
     for (var player in players) {
@@ -349,16 +365,16 @@ Game.prototype.renderLeaderboard = function(context) {
     }
 };
 
-Game.prototype.message = function(message) {
+Game.prototype.message = function (message) {
     this.props.message = message;
 };
 
-Game.prototype.loadImage = function(imageSrc) {
+Game.prototype.loadImage = function (imageSrc) {
     if (typeof this.props.images[imageSrc] == 'undefined') {
         var self = this;
         var image = new Image();
         image.src = this.props.levelPath + imageSrc;
-        image.onload = function() {
+        image.onload = function () {
             self.props.images[imageSrc] = {
                 width: this.width,
                 height: this.height,
@@ -366,32 +382,34 @@ Game.prototype.loadImage = function(imageSrc) {
             }
 
             var imagesLoaded = 0;
-            for (var ii in self.props.images) { imagesLoaded++; }
+            for (var ii in self.props.images) {
+                imagesLoaded++;
+            }
             var progress = Math.floor((100 / self.props.preloadImages.length) * imagesLoaded);
             if (progress >= 100) {
                 self.props.state = 'WAITING';
             }
         }
-        image.onerror = function() {
+        image.onerror = function () {
             throw 'image ' + imageSrc + ' not found';
         }
     }
 };
 
-Game.prototype.getImage = function(imageSrc) {
+Game.prototype.getImage = function (imageSrc) {
     if (typeof this.props.images[imageSrc] !== 'undefined') {
         return this.props.images[imageSrc].image;
     }
     return false;
 };
 
-Game.prototype.resetGame = function() {
+Game.prototype.resetGame = function () {
     socket.emit('game-reset', {viewerId: viewerId, gameRoom: gameRoom});
     document.location.reload();
     return;
 };
 
-Game.prototype.abortGame = function() {
+Game.prototype.abortGame = function () {
     var self = this;
     socket.emit('game-end', {viewerId: viewerId, gameRoom: gameRoom});
 
@@ -400,20 +418,20 @@ Game.prototype.abortGame = function() {
 
     logGAEvent('Aborted');
 
-    setTimeout(function(){
+    setTimeout(function () {
         self.resetGame();
     }, 2000);
 };
 
-Game.prototype.endGame = function(){
+Game.prototype.endGame = function () {
     var self = this;
 
     self.props.state = 'ENDED';
     $(window).trigger('game-audio-stop');
 
-    setTimeout(function(){
+    setTimeout(function () {
         $('.leaderboard-container').fadeIn(1000);
-        
+
         // Save Leaderboard image-data
         var image = context.getImageData(((canvas.width - 1000) / 2), 0, 1000, 600);
         var buffer = document.createElement('canvas');
@@ -433,52 +451,60 @@ Game.prototype.endGame = function(){
     }, 1000);
 };
 
-Game.prototype.getReady = function(){
+Game.prototype.getReady = function () {
     var self = this;
-    if (self.props.state != 'WAITING') { return false; }
+    if (self.props.state != 'WAITING') {
+        return false;
+    }
 
     $(window).trigger('game-audio-start');
 
     self.props.state = 'GETREADY';
     socket.emit('game-get-ready', {viewerId: viewerId, gameRoom: gameRoom});
-    setTimeout(function(){
+    setTimeout(function () {
         self.startGame();
     }, 4000);
 };
 
-Game.prototype.startGame = function(){
+Game.prototype.startGame = function () {
     var self = this;
-    if (self.props.state != 'GETREADY') { return false; }
+    if (self.props.state != 'GETREADY') {
+        return false;
+    }
 
     self.props.state = 'STARTED';
     socket.emit('game-start', {viewerId: viewerId, gameRoom: gameRoom});
 
     var numberOfPlayers = 0;
-    for (var ii in players) { numberOfPlayers++; }
+    for (var ii in players) {
+        numberOfPlayers++;
+    }
     logGAEvent('Started', 'Players', numberOfPlayers);
 
     // Fade in canvas
-    var from = {i:.5};
-    var to = {i:1};
-    $(from).animate(to, {duration: 2000, step: function(step){
-        context.globalAlpha = step;
-    }});
+    var from = {i: .5};
+    var to = {i: 1};
+    $(from).animate(to, {
+        duration: 2000, step: function (step) {
+            context.globalAlpha = step;
+        }
+    });
 };
 
-Game.prototype.updateHighestScore = function() {
+Game.prototype.updateHighestScore = function () {
     // Get highest score from server
-    $.ajaxSetup({ cache: false });
-    $.getJSON('/high-score-public.json', function(highscore){
+    $.ajaxSetup({cache: false});
+    $.getJSON('/high-score-public.json', function (highscore) {
         $('.highestScoreEver').empty()
             .html('<p>Highest score ever: <span class="hero-score">' + highscore.score + '</span></p>' +
-                  '<div class="buddy-icon"><div class="mask"></div></div>' +
-                  '<div class="hero-name">' + highscore.name + '</div>');
-        $('.highestScoreEver .buddy-icon').css({ backgroundImage: 'url(' + highscore.icon + ')' });
+            '<div class="buddy-icon"><div class="mask"></div></div>' +
+            '<div class="hero-name">' + highscore.name + '</div>');
+        $('.highestScoreEver .buddy-icon').css({backgroundImage: 'url(' + highscore.icon + ')'});
         $('.highestScoreEver').fadeIn(1000);
     });
 };
 
-Game.prototype.drawMessage = function(context, text, x, y, maxWidth, lineHeight, center) {
+Game.prototype.drawMessage = function (context, text, x, y, maxWidth, lineHeight, center) {
     context.save();
     context.font = '30px NevisRegular';
     context.fillStyle = '#FFFFFF';
@@ -486,20 +512,20 @@ Game.prototype.drawMessage = function(context, text, x, y, maxWidth, lineHeight,
     var words = text.toString().split(' ');
     var line = '';
 
-    for(var n = 0; n < words.length; n++) {
-      var testLine = line + words[n] + ' ';
-      var metrics = context.measureText(testLine);
-      var testWidth = metrics.width;
-      if (testWidth > maxWidth) {
-        context.fillText(line, x, y);
-        line = words[n] + ' ';
-        y += lineHeight;
-      } else {
-        if (center) {
-            x = (context.canvas.width / 2) - (testWidth / 2);
+    for (var n = 0; n < words.length; n++) {
+        var testLine = line + words[n] + ' ';
+        var metrics = context.measureText(testLine);
+        var testWidth = metrics.width;
+        if (testWidth > maxWidth) {
+            context.fillText(line, x, y);
+            line = words[n] + ' ';
+            y += lineHeight;
+        } else {
+            if (center) {
+                x = (context.canvas.width / 2) - (testWidth / 2);
+            }
+            line = testLine;
         }
-        line = testLine;
-      }
     }
     context.fillText(line, x, y);
     context.restore();

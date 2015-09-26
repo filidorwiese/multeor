@@ -258,7 +258,6 @@ Player.prototype.drawPolygon = function (context, x, y, radius, numOfSides) {
     context.fill();
 };
 
-
 var PlayerShadow = function (player) {
     var self = this;
     self.props = {
