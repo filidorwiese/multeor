@@ -20,11 +20,12 @@ case "$1" in
     ;;
     start-forever)
         echo "Forever starting $TITLE..."
+	mkdir -p $CWD/logs
         $CWD/node_modules/forever/bin/forever start -o $LOG -e $ERRLOG $CWD/server.js
     ;;
     stop)
         echo "Stopping $TITLE..."
-        killall -q node nodejs forever
+	$CWD/node_modules/forever/bin/forever stop $CWD/server.js
     ;;
     restart)
        	$0 stop
