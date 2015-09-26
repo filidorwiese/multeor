@@ -1,11 +1,13 @@
 .sass-cache/
-codekit-config.json
-.DS_Store
-/public/leaderboards/
-high-score-*.json
 .forever/
 node_modules/
 .bash_history
 .npm/
 .node-gyp/
 .idea/
+codekit-config.json
+.DS_Store
+/public/leaderboards/
+high-score-*.json
+/public/static/javascript/*.min.js
+/public/static/css/*.css
