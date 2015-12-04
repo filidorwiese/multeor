@@ -6,6 +6,7 @@ Multeor is a multiplayer webgame developed by [Arjen de Vries](http://www.dasbli
 
 The game can be played at: http://multeor.com/
 
+
 ## Smartphone as the controller ##
 
 The game is viewed on a desktop computer but controlled by using smartphones. Up to eight players can connect to a single game at the same time. Players can personalize their Multeor by first logging into Facebook on their controller. Multeor is great fun playing solo, but it works even better in a group. We recommend challenging friends and colleagues at the office or at a party. The more players, the more destruction, colors and chaos!
