@@ -25,15 +25,16 @@ fs.readFile(highScorePrivateFile, 'utf8', function (err, data) {
     if (!err) {
         highestScore = JSON.parse(data);
     }
+
+    // Store the highestscore in a public file (without ip)
+    var tmpObject = {name: highestScore[0].name, score: highestScore[0].score, icon: highestScore[0].icon};
+    fs.writeFile(highScorePublicFile, JSON.stringify(tmpObject), function (err) {
+        if (err) {
+            log(err);
+        }
+    });
 });
 
-// Store the highestscore in a public file (without ip)
-var tmpObject = {name: highestScore[0].name, score: highestScore[0].score, icon: highestScore[0].icon};
-fs.writeFile(highScorePublicFile, JSON.stringify(tmpObject), function (err) {
-    if (err) {
-        log(err);
-    }
-});
 
 // PPS counter
 setInterval(function () {

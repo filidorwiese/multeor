@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=forking
-ExecStart=/home/multeor/multeor.sh start
+ExecStart=/home/multeor/multeor.sh start-forever
 ExecStop=/home/multeor/multeor.sh stop
 User=multeor
 

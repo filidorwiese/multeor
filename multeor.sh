@@ -20,16 +20,16 @@ case "$1" in
     ;;
     start-forever)
         echo "Forever starting $TITLE..."
-	mkdir -p $CWD/logs
+        mkdir -p $CWD/logs
         $CWD/node_modules/forever/bin/forever start -o $LOG -e $ERRLOG $CWD/server.js
     ;;
     stop)
         echo "Stopping $TITLE..."
-	$CWD/node_modules/forever/bin/forever stop $CWD/server.js
+        $CWD/node_modules/forever/bin/forever stop $CWD/server.js
     ;;
     restart)
-       	$0 stop
-       	$0 start
+        $0 stop
+        $0 start
     ;;
     build)
         echo "Building $TITLE..."
