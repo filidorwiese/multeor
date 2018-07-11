@@ -286,6 +286,33 @@ if (typeof io === 'undefined') {
             });
         }
 
+        // Tested in Android Chrome
+        var sensorsMode = false;
+        $(window).on("deviceorientation", function (event) {
+            if (sensorsMode) {
+                var x = (event.originalEvent.gamma*-1 + 60) * 2.3 + 50;
+                var y = (event.originalEvent.beta + 60) * 2.3;
+                updatePlayerXY(x, y);
+            }
+        });
+        $(window).on("devicemotion", function (a) {
+            if (sensorsMode) {
+                var acc = a.originalEvent.acceleration;
+                if (acc.z < -2){
+                    updatePlayerZ(3);
+                    $("#boost").addClass("pressed")
+                } else if (acc.z > 1) {
+                    updatePlayerZ(1);
+                    $("#boost").removeClass("pressed")
+                }
+            }
+        });
+        $("#sensors").on("touchstart", function(event) {
+            event.preventDefault();
+            sensorsMode = !sensorsMode;
+            $("#sensors").text(sensorsMode ? "Disable sensors" : "Enable sensors");
+        });
+
         $('input[name=game-code]').on('blur', function () {
             $('#join-game button').trigger('click');
         });
