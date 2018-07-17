@@ -310,7 +310,10 @@ if (typeof io === 'undefined') {
         $("#sensors").on("touchstart", function(event) {
             event.preventDefault();
             sensorsMode = !sensorsMode;
-            $("#sensors").text(sensorsMode ? "Disable sensors" : "Enable sensors");
+            if (sensorsMode)
+                $("#sensors").addClass("enabled");
+            else
+                $("#sensors").removeClass("enabled");
         });
 
         $('input[name=game-code]').on('blur', function () {

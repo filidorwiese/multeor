@@ -272,7 +272,26 @@ html, body {
     }
   }
 
-  #score, #sensors {
+  #sensors {
+    position: absolute;
+    z-index: 93;
+    bottom: 19px;
+    right: 15px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    box-shadow: 0 7px 0 0 hsla(0, 0%, 39%, 0.56);
+    background: #272d33 url(../images/controller_sensors.png) no-repeat center center;
+    opacity: 0.6;
+
+    &.enabled  {
+      bottom: 13px;
+      box-shadow: none;
+      opacity: 1;
+    }
+  }
+
+  #score {
     position: absolute;
     right: 0;
     top: 0;
@@ -290,11 +309,6 @@ html, body {
     -ms-user-select: none;
     -o-user-select: none;
     user-select: none;
-  }
-  #sensors {
-    top: initial;
-    bottom: 0;
-    font-size: 26px;
   }
 }
 
