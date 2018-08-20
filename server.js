@@ -1,10 +1,10 @@
-// Start websocket on port 443
+// Start websocket on port 1443
 // https://github.com/LearnBoost/socket.io/wiki/Socket.IO-and-firewall-software
 // https://github.com/LearnBoost/Socket.IO/wiki/Configuring-Socket.IO
 var fs = require('fs');
 var sys = require('sys');
 var mkdirp = require('mkdirp');
-var io = require('socket.io').listen(443);
+var io = require('socket.io').listen(1443);
 io.enable('browser client minification');
 io.enable('browser client etag');
 io.enable('browser client gzip');
