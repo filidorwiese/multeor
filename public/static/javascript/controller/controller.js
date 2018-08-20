@@ -290,8 +290,8 @@ if (typeof io === 'undefined') {
         var sensorsMode = false;
         $(window).on("deviceorientation", function (event) {
             if (sensorsMode) {
-                var x = (event.originalEvent.gamma*-1 + 60) * 2.3 + 50;
-                var y = (event.originalEvent.beta + 60) * 2.3;
+                var x = (event.originalEvent.beta + 70) * 2.3;
+                var y = (event.originalEvent.gamma*-1 + 60) * 2.3 + 50;
                 updatePlayerXY(x, y);
             }
         });
