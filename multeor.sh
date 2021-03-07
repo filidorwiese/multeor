@@ -8,20 +8,10 @@ ERRLOG=$CWD/logs/multeor.error
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 JSPATH="$DIR/public/static/javascript"
 
-if [[ $EUID -eq 0 ]]; then
-    su -l multeor $0 $1
-    exit
-fi
-
 case "$1" in
     start)
         echo "Starting $TITLE..."
         /usr/bin/env node $CWD/server.js
-    ;;
-    start-forever)
-        echo "Forever starting $TITLE..."
-        mkdir -p $CWD/logs
-        $CWD/node_modules/forever/bin/forever start -o $LOG -e $ERRLOG $CWD/server.js
     ;;
     stop)
         echo "Stopping $TITLE..."
@@ -40,7 +30,7 @@ case "$1" in
         /usr/bin/env compass compile $DIR
     ;;
     *)
-        echo "Usage: $0 {start|start-forever|stop|restart|build}"
+        echo "Usage: $0 {start|stop|restart|build}"
     ;;
 esac
 

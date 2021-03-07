@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "Multeor",
   "dependencies": {
-    "forever": "^0.15.3",
     "http-request": "^0.7.0",
     "mime": "^1.4.1",
     "mkdirp": "~0.3.5",
     "socket.io": "^0.9.19"
+  },
+  "scripts": {
+    "start": "./multeor.sh start",
+    "build": "./multeor.sh build"
   }
 }
