@@ -1,0 +1,29 @@
+version: '3.6'
+
+services:
+  www:
+    image: php:7-apache
+    ports:
+      - "80:80"
+    volumes:
+      - ${PWD}/public/:/var/www/html/
+    restart: always
+
+  multeor:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+    ports:
+      - "443:1443"
+    volumes:
+      - type: bind
+        source: .
+        target: /app
+      - type: volume
+        source: node-modules
+        target: /app/node_modules
+        read_only: true
+    restart: always
+
+volumes:
+  node-modules: {}

@@ -12,3 +12,4 @@ codekit-config.json
 high-score-*.json
 /public/static/javascript/*.min.js
 /public/static/css/*.css
+php_errors.log

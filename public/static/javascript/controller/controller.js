@@ -25,9 +25,9 @@ if (typeof io === 'undefined') {
         document.location = '/';
     }
 
-    //var socket = io.connect(window.location.hostname + ':443');
+    var socket = io.connect(window.location.hostname + ':443');
     // development
-    var socket = io.connect('http://dev.multeor.com:443');
+    // var socket = io.connect('http://dev.multeor.com:443');
     // local
     //var socket = io.connect('10.0.1.104:443');
 
